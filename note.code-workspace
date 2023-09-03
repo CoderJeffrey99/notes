@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "donew-frontend-vue"
+		},
+		{
+			"path": "flutter_donew"
+		},
+		{
+			"path": "../document"
+		},
+		{
+			"path": "../../SVN/develop/client/pc"
+		}
+	],
+	"settings": {
+		"java.compile.nullAnalysis.mode": "automatic",
+		"java.configuration.updateBuildConfiguration": "interactive"
+	}
+}
