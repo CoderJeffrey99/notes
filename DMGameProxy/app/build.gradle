@@ -1,38 +1,67 @@
+// AS通过Gradle构建项目：先进的项目构建工具
 plugins {
+    // 应用程序模式：可以直接运行
     id 'com.android.application'
+//    // 库模块：必须依赖于别的应用程序模块
+//    id "com.android.library"
 }
 
 android {
     namespace 'com.lrgame.goc.cn'
+    // 编译版本
     compileSdk 33
 
+    // 项目细节配置
     defaultConfig {
+        // 包名
         applicationId "com.lrgame.goc.cn"
+        // 最低兼容Android版本
         minSdk 24
+        // 目标版本：在这个版本做过充分测试，系统会在该版本启动新功能
         targetSdk 33
+        // 项目版本号
         versionCode 1
+        // 项目版本名
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    // 生成安装文件的相关配置
     buildTypes {
+        // 指定生成测试版安装文件的配置：可以省略
+        // >>通过AS直接运行项目生成的都是测试版安装文件
+        debug {
+            // 指定是否对项目的代码进行混淆
+            minifyEnabled false
+        }
+        // 指定生成正式版安装文件的配置
+        // >>如何生成正式版安装文件
         release {
             minifyEnabled false
+            // 指定混淆时使用的规则文件
+            // >>proguard-android-optimize.txt位于Android SDK目录下：所有项目通用的混淆规则
+            // >>proguard-rules.pro当前项目的根目录下：可以编写当前项目特有的混淆规则
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
+// 指定当前项目所有的依赖关系
 dependencies {
-
+    // 本地依赖：对本地的jar包或目录添加依赖关系
+    implementation fileTree(dir: 'libs', includes: ['*.jar'])
+    // 远程依赖
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+//    // 库依赖
+//    implementation project(':app')
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'

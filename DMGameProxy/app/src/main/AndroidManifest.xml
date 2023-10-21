@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!--
+    App设置
+    @param android:icon App的icon
+    @param android:label App的名称
+    -->
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,13 +17,34 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DMGameProxy"
         tools:targetApi="31">
+
         <activity
-            android:name=".DonewActivity"
-            android:exported="false" />
+            android:name=".HomeActivity"
+            android:launchMode="standard"
+            android:exported="false">
+            <intent-filter>
+                <!--
+                >>只能指定一个action：可以自定义：包名.ACTION_类名大写
+                >>可以指定多个category：可以自定义：包名.category.HOME
+                -->
+                <action android:name="com.lrgame.goc.cn.ACTION_HOME"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="com.lrgame.goc.cn.category.HOME"/>
+            </intent-filter>
+        </activity>
+        <!--
+        activity注册：不注册的activity不能使用
+        @param android:name activity的名称
+        @param android:launchMode  activity的启动模式
+        -->
         <activity
             android:name=".MainActivity"
+            android:launchMode="standard"
             android:exported="true">
             <intent-filter>
+                <!--
+                表示项目主活动：打开App首先启动该活动
+                -->
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />

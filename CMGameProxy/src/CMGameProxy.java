@@ -1,30 +1,38 @@
 // package语句位于源文件的首行
 
 // import语句位于package语句和类定义之间
+// 同一个包下的xxx.java文件不需要import
+import com.sun.security.jgss.GSSUtil;
+
+import javax.swing.text.html.HTMLDocument;
 import java.io.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.sql.SQLOutput;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-// 一个源文件最多只能有一个public类：源文件名和public类名保持一致
-// 一个源文件可以有多个非public类
+// 一个源文件最多只能有一个public类：也可以没有
+// 一个源文件可以有多个非public类：一个class的定义对应一个xxx.class文件
+// public类的className必须与源文件名一致
 // Java所有的类默认继承根类Object
-public class CMGameProxy {
+public class CMGameProxy { // 类名尽量不要相同
     /**
-     * 6.main函数
+     * 6.main函数：程序的入口（凡是需要加载的类全部加载到JVM中才会执行main方法ƒ）
      * public - 被JVM调用，权限需要足够大
      * static - 被JVM调用，不需要创建对象
      * void - 被JVM调用，不需要任何的返回值
      * main - 默认规定的（只有这样写才能被JVM识别）
-     * String[] args - 接收键盘录入的数据
+     * String[] args - 接收键盘录入的数据：args参数名可以修改
      */
     public static void main(String[] args) {
         CMGameProxy c1 = new CMGameProxy(); // 创建类
         c1.showPackageBase(); // 调用方法
         System.out.println(c1); // 输出的是d1的地址
+        // 可以将“java对象”转换成“字符串形式”
         System.out.println(c1.toString()); // 与上面的方法等价：我们可以通过重写toString{}方法
     }
 
@@ -38,22 +46,30 @@ public class CMGameProxy {
          * 图形化界面：简单直观
          * 3>.DOS命令
          * cd + 文件夹 - 进入指定文件夹
-         * md + 文件名称 - 创建文件夹
-         * rd + 文件名称 - 删除文件夹
+         * ls - 查看当前目录下的文件夹/文件
+         * mkdir + 文件名称 - 创建文件夹
+         * rmdir + 文件名称 - 删除文件夹
          * touch + 文件 - 创建文件
          * exit - 退出dos命令行
+         * 4>.相对路径和绝对路径
+         * >>相对路径：从“文件自身”出发
+         * $/ - 进入下一个文件夹
+         * $../ - 返回上一个文件夹
+         * >>绝对路径：从”我的电脑“出发（基本不使用）
+         * 5>.计算机的组成：硬件（cpu、内存、硬盘、主板）、软件（系统软件、应用软件）
+         * 6>.计算机语言发展史：机器语言 -> 汇编语言 -> 高级语言
          */
 
         /**
-         * 2.Java简介
+         * 2.Java简介：底层是C++
          * 1>.特征：简单性、面向对象、分布式处理、解释性、健壮性、跨平台、安全性、可移植性、高性能、多线程、动态性、开源、强类型语言
          * 2>.诞生：1995年Sun公司正式推出
          * 3>.分类
          * JavaSE标准版（为开发普通桌面和商务应用程序提供的解决方案）- 基础/Java标准平台
          * JavaME小型版（为开发电子消费产品和嵌入式设备提供的解决方案）- 安卓/嵌入式产品开发平台
          * JavaEE企业版（为开发企业环境下的应用程序提供的一套解决方案）- 后台/企业级应用开发平台
-         * 4>.平台：Java虚拟机 + JavaAPI
-         * 5>.跨平台：JVM不是跨平台
+         * 4>.平台：Java虚拟机（C++编写） + JavaAPI
+         * 5>.跨平台：JVM不是跨平台、JVM没有独立安装包
          * 什么是跨平台：通过java语言编写的应用程序在不同的系统平台上都可以运行
          * 原理：在运行java应用程序的OS上安装一个JVM，由JVM负责java应用程序在该系统中的运行
          * 6>.JRE和JDK
@@ -76,8 +92,8 @@ public class CMGameProxy {
          * 3>.JDK的目录
          * JDK
          *  bin......JDK工具程序
-         *      javac.exe
-         *      java.exe
+         *      javac.exe......负责编译
+         *      java.exe......负责运行
          *      appletviewer.exe
          * demo......Java自带的演示程序
          * include......用于编译本地方法的c++头文件
@@ -88,6 +104,11 @@ public class CMGameProxy {
          */
         // 4>.java核心机制和JVM运行原理
         // xxx
+        // 5>.java的加载和执行：一个xxx.java可以编译生成多个xxx.class文件
+        // 编译阶段：java源代码xxx.java必须经过编译变成字节码文件xxx.class才可以被JVM识别
+        // 运行阶段：源代码不参与程序的执行过程（编译成字节码文件xxx.class以后可以直接删除java源代码xxx.java）
+        // 6>.配置环境变量path
+        // 桌面计算机 -> 点击右键 -> 属性 -> 高级系统设置 -> 环境变量
 
         /**
          * 4.进制转换
@@ -131,9 +152,14 @@ public class CMGameProxy {
          * 1        00000001  00000001   00000001
          * -1       10000001  11111110   11111111
          */
+        // 150是int类型：00000000 00000000 00000000 10010110
+        // 强制转换为byte类型：10010110
+        // 计算机以补码的形式存储：11101010...-106
+        byte s1 = (byte)150; // 分析一波
 
         // 7.第一个Java程序
         // java的执行原理：xxx
+        // 快速生成sout
         System.out.println("Hello World");
 
         /**
@@ -146,11 +172,12 @@ public class CMGameProxy {
          * b.类/接口：每个单词首字母大写（驼峰命名）/CMGameProxy
          * c.方法/变量：从第二个单词开始首字母大写/playGame
          * d.常量：所有字母大写，以'_'隔开/MAX_VALUE
+         * e.文件：文件命名可以使用数字开头的名称，比如：123.java
          */
 
         /**
          * 9.关键字
-         * 1>.概念：被Java语言赋予特定含义的单词
+         * 1>.概念：被Java语言赋予特定含义的单词（区别于JDK的内置类String、Scanner、System...）
          * 2>.特点：关键字全部小写、关键字不能做为标识符
          * 3>.保留关键字：goto/const（保留关键字也不能做为标识符）
          */
@@ -175,7 +202,7 @@ public class CMGameProxy {
          */
         // 4>.注释是一个程序猿必须要具备的编程习惯
         // 5>.初学者可以先写注释再写代码
-        // 6>.注释可以帮助我们排查错误：初级排错方式/有一定效果
+        // 6>.注释可以帮助我们排查错误：初级排错方式（有一定效果）
     }
 
     // 11.常量和变量
@@ -183,11 +210,11 @@ public class CMGameProxy {
         // 1>.常量：程序运行过程中其值始终不能改变的量
         /**
          * final可以修饰成员变量、成员方法、类
-         * 1>.修饰成员变量：表示该成员变量是常量：一般配合static修饰，保存在常量区
-         * 2>.修饰成员方法：表示该成员方法是最终方法：无法被子类重写，但是可以被继承
+         * 1>.修饰成员变量：表示该成员变量是常量（一般配合static修饰，保存在常量区）、系统不会默认赋值（需要程序员手动赋值：可以声明变量以后赋值、也可以在构造方法中赋值）
+         * 2>.修饰成员方法：表示该成员方法是最终方法（无法被子类重写，但是可以被继承）
          * 3>.修饰类：表示该类是最终类：不能被继承
          */
-        final int MAX = 100;
+        final int MAX = 100; // final修饰的变量只能赋值一次：final修饰的引用一旦指向某个对象，无法再指向其它对象（对象属性可以修改）
         // 字符串常量：用""括起来
         String a1 = "abc";
         System.out.println(a1);
@@ -202,14 +229,18 @@ public class CMGameProxy {
         System.out.println(a4); // 对
 //        System.out.println('10'); // 错：''必须放单个字符，10不表示单个字符
 //        System.out.println(''); // 错：任何字符都不放也不行，因为无法代表任何字符
+        System.out.println('中'); // 属于char
+        System.out.println("中"); // 属于String
         System.out.println(' ');  // 对：可以放空格
+        // 转义字符：\t、\"、\'...
+        System.out.println("我爱\"你\"...垃圾\n");
         // 布尔常量：true/false
         boolean a5 = true;
         System.out.println(a5 ? "YES" : "NO");
         // 空常量
         String a6 = null;
         System.out.println(a6);
-        // 2>.变量：在程序执行过程中可以发生改变的量（必须先声明在使用）
+        // 2>.变量：在程序执行过程中可以发生改变的量（必须声明 -> 初始化 -> 使用）
         int a7 = 10;
         String a8 = "hello world";
         // 成员变量系统默认初始化
@@ -230,7 +261,7 @@ public class CMGameProxy {
     }
 
     // 12.数据类型
-    // 1>.概念：java语言是强类型语言，每个数据都有明确的数据类型，在内存中都分配了不同大小的内存空间
+    // 1>.概念：java语言是强类型语言，每个数据都有明确的数据类型（决定每个数据在内存中分配的空间大小）
     /**
      * 2>.基本数据类型
      *  整型
@@ -255,7 +286,7 @@ public class CMGameProxy {
         byte a1 = 10; // 取值范围：-128 - 127
         short a2 = 20;
         int a3 = 15;
-        long a4 = 8888888888888L; // 超过int范围/Integer number too large（必须末尾加一个"l/L"表示这是一个long类型）
+        long a4 = 8888888888888L; // 超过int范围：Integer number too large（必须末尾加一个"l/L"表示这是一个long类型）、不加L会被当做int看待
         // 4>.浮点型：默认为double
 //        float a5 = 12.3; // 报错：因为float是单精度，'12.3'默认是double，不能直接赋值
         float a6 = 12.3f; // ！！！必须末尾加一个"f/F"表示这是一个float类型！！！
@@ -264,7 +295,7 @@ public class CMGameProxy {
         // 5>.字符char：取值范围：0 ~ 65535
         char a8 = 'a'; // 没有负数
 //        char a9 = '12'; // 不能放置两个字符
-        char a10 = '我'; // 可以存在中文（因为java是unicode编码）/单个中文占2个字节
+        char a10 = '我'; // 可以存在中文（因为java是unicode编码）、单个中文占2个字节
         // 字符和字符串参与运算
         System.out.println('a' + 1); // 98 - 因为有ASCII码表, 'a'字符对应97
         System.out.println('a' + 1 + "hello"); // 98hello - 任何数据类型用"+"与字符串相连接都会产生新的字符串
@@ -299,6 +330,8 @@ public class CMGameProxy {
          * 3.byte/short在定义的时候接收的实际上是一个int类型（如果不在它们的范围就会报错）
          * 4.关于自动类型提升 - byte/short/char -> int -> long -> float -> double
          */
+        // m1没有init
+        int m1, n1 = 10;
     }
     /**
      * 面试题
@@ -307,10 +340,10 @@ public class CMGameProxy {
      * 2>.以下程序是否有问题？如果有问题请指出问题？
      * byte a1 = 3;
      * byte a2 = 4;
-     * // 1.byte与任何数据类型（char/int/short/byte）进行运算会提升为int，两个int类型相加结果也是int
-     * // 2.a1和a2是两个变量，变量存储的值是变化的，在编译的时候无法判断具体的值，相加有可能会超出byte取值范围
+     * >>1.byte与任何数据类型（char/int/short/byte）进行运算会提升为int，两个int类型相加结果也是int
+     * >>2.a1和a2是两个变量，变量存储的值是变化的，在编译的时候无法判断具体的值，相加有可能会超出byte取值范围
      * byte a3 = a1 + a2; // 报错
-     * // Java编译器有常量优化机制（编译的时候直接将常量相加的结果算出来赋值）
+     * >>Java编译器有常量优化机制（编译的时候直接将常量相加的结果算出来赋值）
      * byte a4 = 3 + 4;
      */
 
@@ -354,11 +387,15 @@ public class CMGameProxy {
         boolean a22 = a13 < a12;
         boolean a23 = a13 >= a12;
         boolean a24 = a13 <= a12;
-        // 4>.逻辑运算符
-        // 短路与：只要a19为假则不再计算a20
-        boolean a25 = a19 && a20;
-        // 短路或：只要a19为真则不再计算a20
-        boolean a26 = a19 || a20;
+        // 4>.逻辑运算符：操作数必须是布尔类型
+        // 逻辑与
+        boolean a25 = a19 & a20;
+        // 短路与：只要a19为假则不再计算a20（会发生短路现象）
+        a25 = a19 && a20;
+        // 逻辑或
+        boolean a26 = a19 | a20;
+        // 短路或：只要a19为真则不再计算a20（会发生短路现象）
+        a26 = a19 || a20;
         // a19真结果为假，a19假结果为真
         boolean a27 = !a19;
         // 5>.位运算符：先把操作数化成二进制再操作
@@ -416,7 +453,7 @@ public class CMGameProxy {
          * // 4>.封装成方法
          * xxx
          */
-        // 6>.赋值运算符
+        // 6>.赋值运算符：先执行右边再执行左边
         // a33 = a33 + a34
         a33 += a34;
         // a33 = a33 - a34
@@ -444,6 +481,7 @@ public class CMGameProxy {
         // 8>.对象运算符
         if (cmGameProxy instanceof CMGameProxy) {
             // 一个对象是否是某一个指定类（其子类）的实例
+            // >>运行阶段动态判断引用指向的对象的类型
         }
     }
 
@@ -484,7 +522,7 @@ public class CMGameProxy {
             }
         }
         // 2>.switch语句：判断固定值使用（枚举）/理论上比"if语句"效率高
-        // a、可以是byte/short/char/int（自动类型提升为int类型的数据都可以/long不可以作为switch的表达式）
+        // a、可以是byte/short/char/int（自动类型提升为int类型的数据都可以、long不可以作为switch的表达式）
         // b、"表达式"可以接收：基本数据类型（byte，short，char，int）
         // c、>=jdk1.5可以接收枚举
         // d、>=jdk1.7可以接收字符串String
@@ -567,22 +605,25 @@ public class CMGameProxy {
             for (int j = 0; j < 5; j++) {
 //                System.out.println("*"); // 输出自动换行
                 System.out.print("*"); // 输出不自动换行
-//                break inner; // 跳出内部循环（与break;效果一样）
+//                break inner; // 跳出内部循环（与break效果一样：总是终止离它最近的那个循环语句）
 //                break outer; // 跳出外部循环
             }
             // 转义字符
             System.out.print("\n");
         }
         // 6>.死循环
-//        // ！！！java对于永远无法执行到的语句会报错！！！
-//        while (true) {
-//        }
-//
-//        do {
-//        } while (true);
-//
-//        for (;;) {
-//        }
+        // ！！！java对于永远无法执行到的语句会报错！！！
+        while (true) {
+            // 对于有明确循环结束条件，但是并不清楚具体需要循环多少次的时候可以使用：死循环 + break、递归
+            break;
+        }
+        do {
+            break;
+        } while (true);
+
+        for (;;) {
+            break;
+        }
         /**
          * 面试题
          * 1>.下面的代码是否能够执行?
@@ -592,9 +633,9 @@ public class CMGameProxy {
          */
     }
 
-    // 16>.数组
+    // 16.数组
     // 1>.为什么需要数组：可以存储相同数据类型的集合（这点与js不一样）
-    // 2>.数组（引用数据类型）可以存储基本数据类型、也可以存储引用数据类型（这点与Objective-C不一样）
+    // 2>.数组（引用数据类型...父类是Object...存储在堆内存）可以存储基本数据类型、也可以存储引用数据类型（这点与Objective-C不一样）
     private void showPackageArray() {
         // 3>.一维数组：相同类型变量的列表（可以存在基本数据类型，也可以存在类对象）
         // a>.声明数组：还没有分配内存
@@ -626,9 +667,13 @@ public class CMGameProxy {
 //        // 1>.java.lang.ArrayIndexOutOfBoundsException数组索引越界异常（访问了数组中不存在的索引）
 //        System.out.println(array_03[10]);
 //        // 2>.java.lang.NullPointerException空指针异常（数组已经不再指向堆内存，还继续使用数组名访问元素）
-//        // oc没有空指针异常
+//        // OC没有空指针异常、空指针访问实例相关的都会出现空指针异常
 //        array_03 = null;
 //        System.out.println(array_03[0]);
+//        // 3>.java.lang.ClassCastException类型转换异常
+//        Animal a1 = new Dog();
+//        Cat cat = (Cat)a1; // 编译不报错、运行报错
+//        cat.catchMouse();
         // e>.遍历
         // 数组的最大索引：array_04.length - 1
         int[] array_04 = {1, 2, 3, 4, 5};
@@ -645,6 +690,7 @@ public class CMGameProxy {
         // f>.可以合并（重点）
         int array2[] = {1, 2, 3, 4};
         int[] array3 = new int[5]; // 推荐写法
+        // f.数组的扩容：在java开发中，数组长度一旦确定就不可以改变，当数组count满了以后需要扩容：先新建一个大容量的数组，然后将小容量数组中的数据一个一个拷贝到大数组中（效率很低）
 
         // 4>.多维数组
         // a>.概述
@@ -655,13 +701,15 @@ public class CMGameProxy {
         int array_08[][] = new int[3][2];
         System.out.println(array_06); // 二维数组
         System.out.println(array_06[0]); // 二维数组中的第一个一维数组
-        System.out.println(array_06[0][0]); // 二维数组中的第一个一维数组的第一个元素
-        // b>.初始化：这是一个二维数组
+        System.out.println(array_06[0][1]); // 二维数组中的第一个一维数组的第二个元素
+        // b>.静态初始化：这是一个二维数组
         int[][] array_09 = {
-                {1, 2, 3},
+                {0, 1, 2, 3},
                 {4, 5},
                 {6, 7, 8}
         };
+        System.out.println(array_09.length); // 3
+        System.out.println(array_09[0].length); // 4
         // c>.遍历
         for (int i = 0; i < array_09.length; i++) {
             for (int j = 0; j < array_09[i].length; j++) {
@@ -705,14 +753,15 @@ public class CMGameProxy {
     // 1>.为什么引入基本数据类型包装类：把基本数据类型对象化，为基本数据类型的操作提供必要的方法
     // 2>.包装类的特点：所有的包装类都是final类型，无法派生子类
     // 3>.基本数据类型与包装类的对应关系
-    // byte        Byte
-    // short       Short
-    // int         Integer
-    // long        Long
-    // float       Float
-    // double      Double
-    // char        Character：没有parseXxx()
-    // boolean     Boolean
+    // 基本数据类型  包装类                           父类
+    // byte        Byte                            Number
+    // short       Short                           Number
+    // int         Integer                         Number
+    // long        Long                            Number
+    // float       Float                           Number
+    // double      Double                          Number
+    // char        Character：没有parseXxx()        Object
+    // boolean     Boolean                         Object
     private void showPackageGroup() {
         // a>.Integer
 //        // int -> Integer
@@ -725,6 +774,10 @@ public class CMGameProxy {
         // int可以表示的最大值和最小值
         System.out.println(Integer.MAX_VALUE); // int可以表示的最大值/2^31 - 1
         System.out.println(Integer.MIN_VALUE); // int可以表示的最小值/-2^31
+        // 自动装箱：基本数据类型 -> 包装类
+        Integer integer2 = 10;
+        // 自动拆箱：包装类 -> 基本数据类型
+        int x1 = integer2;
 
         // String -> int
         // 第一种方式
@@ -793,6 +846,7 @@ public class CMGameProxy {
     // 18.Object
     public void showPackageObject() {
         // 1>.概念：Java类层次结构的根类，所有类都直接或间接继承该类
+        // JDK源码中的native表示调用C++方法
         Object obj1 = new Object();
         Object obj2 = new Object();
         if (obj1.equals(obj2)) {
@@ -814,7 +868,7 @@ public class CMGameProxy {
         // 获取对象的真实类的全名称（类名）
         obj1.getClass().getName();
         /**
-         * // 没有意义，一般要重写
+         * // 没有意义，一般要重写：返回内存地址经过"哈希算法"得出的十六进制结果
          * public String toString() {
          *  return getClass().getName() + "@" + Integer.toHexString(hashCode());
          * }
@@ -822,33 +876,62 @@ public class CMGameProxy {
         obj1.toString();
     }
     /**
+     *     @Override
+     *     public boolean equals(Object o) {
+     *         if (this == o) return true;
+     *         if (o == null || getClass() != o.getClass()) return false;
+     *         Donew donew = (Donew) o;
+     *         return age == donew.age && Objects.equals(name, donew.name);
+     *     }
+     *
+     *     @Override
+     *     public int hashCode() {
+     *         return Objects.hash(age, name);
+     *     }
+     *
+     *     @Override
+     *     public String toString() {
+     *         return "Donew{" +
+     *                 "age=" + age +
+     *                 ", name='" + name + '\'' +
+     *                 '}';
+     *     }
+     */
+    /**
      * 面试题：
      * 1>."==和equals()"有什么区别？
      * 1."=="是比较运算符（既可以比较基本数据类型，也可以比较引用数据类型）
      * 2."==和equals()"没有重写之前是一样的（比较地址值）
+     * 2>.Java开发中无论new什么对象：最后都会执行Object类的无参构造方法...而且是最先执行
      */
 
-    // 19>.String：Java中把String当作对象处理（不可变字符串）
+    // 19.String：Java中把String当作对象处理（不可变字符串）
     private void showPackageString() {
         // 字符串是常量，一旦被赋值就不能被改变
-        // s0存储在常量区
+        // s0存储在常量区...常量区不会有重复的数据
         String s0 = "hello world";
         // 当把"abc"赋值给s0，原来的"hello world"就变成了垃圾
         s0 = "abc";
         s0.toString();
         // s1和s2存储在堆区
-        String s1 = new String();
+        byte[] bytes = {95, 94, 93};
+        String s1 = new String(bytes);
         String s2 = new String("hello world");
         // 字符串提取
         char c1 = s1.charAt(3); // 返回字符串中指定位置的字符
-        String s3 = s1.substring(1, 4); // 返回字符串中指定位置"1 - (4 - 1)"中的子串/字符串中的字符位置序号从0开始
+        String s3 = s1.substring(1, 4); // 返回字符串中指定位置"1 - (4 - 1)"中的子串：[1, 4)、字符串中的字符位置序号从0开始
         s3 = s1.substring(2); // 从指定位置开始截取字符串，默认到末尾
         int c2 = s1.indexOf('w'); // 返回字符w第一次出现的位置，找不到返回-1
         int c3 = s1.indexOf("wu"); // 返回字符串wu第一次出现的位置，找不到返回-1
         int c4 = s1.lastIndexOf('a'); // 从后往前查找：指定'字符、字符串'第一次出现的索引
         // 字符串比较大小
         int c5 = s1.compareTo(s2); // 比较字符串大小，返回结果">0、=0、<0"
-        boolean c6 = s1.equals(s2); // ！！！判断字符串内容是否相同（区分大小写）！！！
+        // 基本数据类型比较大小使用==
+        // 引用数据类型比较大小使用equals()
+//        // 防止空指针异常
+//        s1.equals("admin"); // 不推荐
+//        "admin".equals(s1); // 推荐
+        boolean c6 = s1.equals(s2); // ！！！判断字符串内容是否相同（区分大小写：已经重写）！！！
         boolean c7 = s1 == s2; // 用于判断两个字符串引用是否指向同一个字符串对象（判断字符串地址是否相同）
         boolean c8 = s1.equalsIgnoreCase(s2); // 判断字符串内容是否相同（不区分大小写）
         // 其它类型转换为字符串
@@ -859,9 +942,10 @@ public class CMGameProxy {
         String s7 = s1.replaceAll("wu", "ju"); // 把"wu"替换成"ju"（全部替换）
         // 其它方法
         String s8 = s1.concat(s2); // 字符串拼接（返回一个新字符串）
-        String s9 = s1 + s2;
+        String s9 = s1 + s2; // +操作符两边只要有一个是字符串就是连接符：返回一个字符串
         String s10 = s1.trim(); // 移除字符串首尾空格（返回一个新字符串）
         int c9 = s1.length(); // 返回当前字符串的长度
+        System.out.println(s1.toString());
         // 常用判断方法
         System.out.println(s1.contains(s2)); // 判断s1中是否包含s2
         System.out.println(s1.startsWith("abc")); // 判断s1是否以"abc"开头
@@ -885,13 +969,19 @@ public class CMGameProxy {
         for (int i = 0; i < s1.length(); i++) {
             char c10 = s1.charAt(i);
             System.out.println(c10);
+            // 把字符串中的http替换成https
+            String newString = "http://www.baidu.com".replace("http", "https");
+            String[] strings = newString.split("."); // String -> Array
         }
+        // 字符串 -> char数组
         for (int i = 0; i < s1.toCharArray().length; i++) {
-
+            // 字符串 -> 字节数组
+            byte[] bytes1 = s1.getBytes();
         }
     }
 
-    // 20>.StringBuffer：用于创建可变字符串类、字符串缓冲区类、线程安全的可变字符序列
+    // 20.StringBuffer：用于创建可变字符串类、字符串缓冲区类、线程安全的可变字符序列、底层是byte[]
+    // 注意：因为String是不可变的，频繁的修改String会导致内存暴增...建议使用StringBuffer
     private void showPackageStringBuffer() {
         // StringBuffer是字符缓冲区，当new的时候是在堆内存中创建一个对象（底层是一个长度为16的字符数组）
         StringBuffer sb3 = new StringBuffer();
@@ -959,13 +1049,14 @@ public class CMGameProxy {
          */
     }
 
-    // 21>.其他类
+    // 21.其他类
     private void showPackageOtherClass() {
         // a>.Date类
         // 获取一个日期的字符串
         Date date = new Date();
         // 获取时间戳：自"1970-01-01 00:00:00 GMT"起以毫秒为单位的时间
         date.getTime();
+        System.currentTimeMillis(); // 获取时间戳
         if (date.before(date)) {
             // 是否比指定日期早
         }
@@ -975,6 +1066,8 @@ public class CMGameProxy {
         if (date.equals(date)) {
             // 比较两个日期的相等性
         }
+        // 昨天这个时候
+        Date yesterdayDate = new Date(System.currentTimeMillis() - 24 * 60 * 60 * 1000);
 
         // b>.SimpleDateFormat类：DateFormat类的子类
 //        G - 年代标识（表示公元前还是公元后）
@@ -1060,7 +1153,7 @@ public class CMGameProxy {
         bigInteger_01.divide(bigInteger_02); // /
         BigInteger[] array_10 = bigInteger_01.divideAndRemainder(bigInteger_02); // 取除数和余数
 
-        // f>.BigDecimal：精确的表示小数
+        // f>.BigDecimal：精确的表示小数...财务系统中使用
 //        // 开发中不推荐使用（不够精确）
 //        BigDecimal bigDecimal_01 = new BigDecimal(2.0);
 //        BigDecimal bigDecimal_02 = new BigDecimal(1.1);
@@ -1085,9 +1178,10 @@ public class CMGameProxy {
         System.gc(); // 运行垃圾回收器：调用finalize()方法
         System.exit(0); // 退出JVM：非0状态属于异常终止
         System.currentTimeMillis(); // 时间戳：当前时间与1970年1月1日之间的毫秒数
+        System.getProperties(); // 获取当前OS的属性
     }
 
-    // 22>.正则表达式
+    // 22.正则表达式
     // 1>.概念：一个用来描述或者匹配一系列符合某个语法规则的字符串的单个字符串
     // 2>.规则：参考百度
     private void showPackageRegex() {
@@ -1104,17 +1198,18 @@ public class CMGameProxy {
         // xxx
     }
 
-    // 23>.Scanner
+    // 23.Scanner键盘接收数据
     private void showPackageScanner() {
         Scanner scanner = new Scanner(System.in); // 键盘录入
         // 输入是否为整数（可能会抛出异常）
         if (scanner.hasNextInt()) {
+            // 程序停止：等待用户输入
             // 键盘录入一个整数，存储在i中
-            int i = scanner.nextInt();
+            int i = scanner.nextInt(); // 接收一个整数
         } else {
             System.out.println("输入类型错误");
         }
-        String s = scanner.nextLine(); // 键盘录入什么都可以
+        String s = scanner.nextLine(); // 接收一个字符串
         scanner.close(); // 关闭扫描器
         /**
          * 面试题
@@ -1124,7 +1219,7 @@ public class CMGameProxy {
          */
     }
 
-    // 24>.异常处理
+    // 24.异常处理
     // 1>.什么是异常：程序在运行过程中发生的错误、一定发生在运行时
     // 2>.Throwable类是所有Exception异常和Error错误的父类
     // 3>.作用：提供一种面向对象的异常处理机制来处理程序运行时产生的各种不正常情况，加强程序的健壮性
@@ -1135,12 +1230,14 @@ public class CMGameProxy {
      * 异常的处理机制
      * 1.在出现异常的方法中主动调用"try...catch..."处理异常
      * 2.如果该方法中没有做出任何异常处理，把异常抛给调用该方法的上一层方法：上一层方法主动调用"try...catch..."处理异常
-     * 3.如果异常抛给程序顶层的main方法还没有被处理，程序停止运行：main方法发出错误信息
+     * 3.如果异常抛给程序顶层main方法还没有被处理，就会抛给JVM，JVM就会终止程序运行：main方法发出错误信息
      */
     private void showPackageException() {
         try {
             // 一旦代码运行出现异常则停止执行后续代码，开始寻找catch语句中异常类型相匹配的异常处理，处理完毕程序继续执行后续代码
             // 可能发生异常的代码（可能产生N个异常，并伴随N个catch语句捕获异常）
+            showException();
+            System.out.println("这里的代码可能不会执行");
         } catch (NullPointerException e) {
             // 捕获异常并进行处理（先处理范围小的异常）
         } catch (Exception e) {
@@ -1152,11 +1249,33 @@ public class CMGameProxy {
             // FontFormatException字体异常类
             // ArithmeticException算术运算异常
             // 打印出“从方法调用处到抛出异常处”的方法调用序列
-            e.printStackTrace();
+            e.printStackTrace(); // 打印异常的堆栈
+            e.getMessage(); // 获取异常简单的描述信息
         } finally {
             // 必须执行的代码：最多只能有一个（一般进行资源的释放：关闭文件、关闭数据库）
             // 无论是否发生异常都需要执行的代码（提供统一出口）
         }
+//        // try不能单独使用
+//        // >>"try...catch..."可以使用
+//        // >>"try...finally..."也可以使用
+//        try {
+//            // 先输出
+//            System.out.println("123");
+//            // 最后结束
+//            return;
+//        } finally {
+//            // 无论是否发生异常都需要执行的代码（提供统一出口）
+//            // 再输出
+//            System.out.println("456");
+//        }
+//        try {
+//            // 先输出
+//            System.out.println("123");
+//            System.exit(0);
+//        } finally {
+//            // 不再执行
+//            System.out.println("456");
+//        }
         // 非检查型异常和检查型异常的区别
         // 非检查型异常处理
         // 1>.概述：系统定义的运行异常，由系统自动检测并做出默认处理，用户不需要做任何操作
@@ -1164,9 +1283,16 @@ public class CMGameProxy {
         // 检查型异常
         // 1>.概述：用户必须进行处理的异常：捕获异常（主动调用"try...catch..."处理异常）、声明抛出异常（抛给调用方法处理）
     }
+    // 自定义异常
+    // 1>.编写一个类继承Exception或者RuntimeException...Exception和RuntimeException的区别？
     class MyException extends Exception {
-        void msgError() {
-            System.out.println("这是自定义异常");
+        // 2>.编写两个构造方法
+        public MyException() {
+
+        }
+
+        public MyException(String s) {
+            super(s);
         }
     }
     // 抛出异常：不主动调用"try...catch..."处理异常
@@ -1176,12 +1302,13 @@ public class CMGameProxy {
         // 抛出异常
         // throws和throw的区别？？？
         // 1>.throw关键字用于在代码中抛出异常
-        // 2>.throws关键字用于在方法声明中指定可能会抛出的异常类型
-        throw new MyException();
+        // 2>.throws关键字用于在方法声明中指定可能会抛出的异常类型：谁调用这个方法exception就抛给谁
+        throw new MyException("这是自定义异常"); // 必须抛出异常才会中断程序：光new不会
     }
+    // 写出方法供其他人调用的时候（对于sdk编写特别有用）：如果别人传入无效的数据我们可以直接抛出异常...不要动不动就return
 
-    // 25>.面向对象
-    // 枚举的定义：从0开始
+    // 25.面向对象
+    // 1>.枚举的定义：从0开始
     enum SexType {
         male, female, unknown
     }
@@ -1191,7 +1318,13 @@ public class CMGameProxy {
     }
     */
     class PackageObject {
-        // 1>.类：描述了一组有相同特征（属性）和相同行为（方法）的对象
+        // 2>.概念
+        // >>面向过程和面向对象的区别：xxx
+        // >>OOA - 面向对象分析
+        // >>OOD - 面向对象设计
+        // >>OOP - 面向对象编程
+        // >>类：描述了一组有相同特征（属性）和相同行为（方法）的对象（实例）
+        // >>实例化：创建对象也叫实例化
 
         /**
          * 2>.三大特征
@@ -1217,11 +1350,17 @@ public class CMGameProxy {
          * public公共的：能被本类访问、能为子类访问、能被外部访问
          * protected受保护的：默认权限、可以被本类访问、也能为子类访问、不能被外部访问
          * private私有的：只能被本类访问、不能被子类访问、不能被外部访问
+         * 访问控制修饰符        本类        同一个包下        子类        任意位置        修饰属性        修饰方法        修饰类        修饰接口
+         * public              ✔          ✔               ✔          ✔             ✔             ✔             ✔             ✔
+         * protected           ✔          ✔               ✔          ✘             ✔             ✔             ✘             ✘
+         * private             ✔          ✘               ✘          ✘             ✔             ✔              ✘             ✘
+         * 默认                 ✔          ✔              ✘           ✘             ✔             ✔             ✔             ✔
+         *
          */
         /**
          * // 在Java中所有的变量在使用之前必须声明
          * 局部变量：定义在方法、语句块中的变量/作用域：当前方法、语句块/位于栈内存，随着方法的调用而存在，随着方法的调用完毕而消失/必须在访问前声明（不可以使用访问修饰符修饰、必须init以后才可以使用）
-         * 成员变量：定义在类中、方法外的变量/作用域：当前类/位于堆内存，随着对象的创建而存在，随着对象的销毁而消失/可以使用访问修饰符修饰（有默认值：0、false、null）
+         * 成员变量：定义在类中、方法外的变量/作用域：当前类/位于堆内存，随着对象的创建而存在，随着对象的销毁而消失/可以使用访问修饰符修饰（调用构造方法的时候赋默认值：0、false、null）
          * 静态变量：定义在类中、方法外的变量/作用域：当前类/生命周期：类加载时被创建，直到程序结束才会被销毁/使用static修饰，程序运行期间只有一份内存，可以使用访问修饰符修饰
          */
         String name;
@@ -1231,7 +1370,7 @@ public class CMGameProxy {
 //        // a>.静态变量：static修饰成员变量
 //        // 随着类的加载而加载，先于对象存在
 //        // 被类的所有对象共享（被static修饰的成员位于方法区）
-//        // 可以通过类名调用（也可以通过对象名调用）
+//        // 通过类名调用：也可以通过对象名调用，但是不会发生空指针异常（c1.country底层运行还是Chinese.country）
 //        // 系统加载类的时候进行一次空间分配和初始化（与对象无关）
 //        private static String height;
 //        // b>.静态方法：static修饰成员方法（与对象无关）
@@ -1258,6 +1397,9 @@ public class CMGameProxy {
 //         * 7>.静态变量可以通过类名调用（也可以通过对象调用），成员变量只能通过对象名调用
 //         */
 
+        private final static String lastName = "谢"; // 成员变量使用final修饰一般配合static一起使用，称为常量：存放在方法区，类加载的时候初始化
+
+        // FIXME：IDEA怎么自动生成setter/getter方法
         public void setName(String name) {
             // this可以调用"成员方法"和"成员变量"，代表"当前对象（调用者）的引用"
             this.name = name;
@@ -1275,33 +1417,38 @@ public class CMGameProxy {
             return sex;
         }
 
-        // 4>.构造函数
-        // 作用：给类的成员变量赋初值
+        // 4>.构造函数：无法被继承
+        // 作用：给类的成员变量赋初值...默认值初始化
         // 构造方法名和类名一致
         // 构造方法没有返回值（连void都没有）、可以有多个构造方法
         // 构造方法不能由用户直接调用：创建一个对象的时候系统会自动调用该类的构造方法
+        // 构造方法不能被继承：所以也不能被override...私有方法亦然
         public PackageObject() {
             // 缺省构造方法：没有参数、方法体为空、使用各种数据类型的默认值来自动init对象的成员变量
             // a>.系统为没有定义构造方法的类自动添加的一种特殊的构造方法
             // b>.一旦类中已经定义构造方法则系统不会再添加"缺省构造方法"（这时候调用无参构造方法会报错）
             /**
-             * // super关键字
-             * 实现对父类成员变量和成员方法的访问；是谁在调用父类的方法？？？
              * // this关键字
-             * 1>.指向当前对象本身，用于类的非静态方法和构造方法中，不能用于静态方法
+             * 1>.指向当前对象本身，用于类的非静态方法和构造方法中，不能用于静态方法中
              * 2>.代表当前对象的引用（谁调用代表谁）
              * 3>.既可以调用本类，也可以调用父类
+             * 4>.this();只能出现在构造方法的第一行：调用本类中的其它构造方法
+             * 5>>this();和super();不能共存：因为它们都要位于构造方法的第一行
              */
             // 访问父类的空参构造方法：因为子类会继承父类中的数据（可能还会使用父类数据），所以子类初始化之前必须完成父类的初始化
             // 必须放在第一条语句
-            super(); // 调用父类的构造方法：如果不写系统默认加上
+            super(); // 调用父类的无参构造方法：如果不写系统默认加上（当构造方法第一行没有this()也没有super()的时候会默认加上super();表示调用父类的无参构造方法）
+//            super(xx, yy); // 用户初始化父类中的private属性
         }
 
         // 构造方法的重载：在同一个类中，方法名相同，参数列表不同，与返回值无关
         // 如果我们没有给出构造方法，系统会自动提供一个无参构造方法
         // 如果我们给出了构造方法，系统不会再提供默认的无参构造方法（如果需要使用有参构造方法必须自定义 - ！！！建议永远自定义无参构造方法！！！）
         public PackageObject(String name, SexType sex) {
-
+            this.name = name;
+            this.sex = sex;
+//            // 给类的成员变量赋初值...默认值初始化：就算不写代码也是这样
+//            this.score = 0;
         }
 
         // 5>.成员方法
@@ -1326,9 +1473,13 @@ public class CMGameProxy {
                 // 返回指定字符串值的枚举常量：不存在会报错IllegalArgumentException
                 System.out.println(SexType.valueOf("male"));
             }
-
             return this.name + "：" + this.sex;
         }
+        // 方法重载：在同一个类中、方法名相同、参数列表不同（参数个数不同 || 参数类型不同 || 参数顺序不同）、与返回值无关
+        public String getDetails(String name) {
+            return "";
+        }
+        // 方法递归：方法自己调用自己（必须有明确的结束条件、递归太深容易发生栈内存溢出错误：推荐使用循环替代递归）
 
         // 6>.代码块
         // a.概念：在java中，使用{}括起来的代码被称为代码块
@@ -1341,7 +1492,8 @@ public class CMGameProxy {
         {
             System.out.println("构造代码块");
         }
-//        // 静态代码块：出现在类中方法外，static修饰，用于给类进行初始化，类加载的时候执行（优先于方法执行、只执行一次）
+//        // 静态代码块：出现在类中方法外，static修饰，用于给类进行初始化，类加载的时候执行（优先于main方法执行、只执行一次）
+//        // 作用：不常用、提供一种可能性（记录类加载的log）
 //        static {
 //            System.out.println("静态代码块");
 //        }
@@ -1361,6 +1513,7 @@ public class CMGameProxy {
         @Override
         protected void finalize() throws Throwable {
             super.finalize();
+            // 对象被垃圾回收器回收的时候调用
         }
         // 5>.内存空间划分
         // 栈：存储"局部变量（定义在方法声明和方法中的变量）"
@@ -1424,7 +1577,6 @@ public class CMGameProxy {
         // d>.构造方法压栈（初始化对象属性）
         // e>.构造方法弹栈
         // f>.将对象的地址值赋值给"xxx类型对象"
-
     }
     /**
      * class ArrayTool {
@@ -1447,7 +1599,7 @@ public class CMGameProxy {
      * }
      */
 
-    // 26>.内部类
+    // 26.内部类
     // 1>.概念：在一个类或一个方法中定义的类，也称为嵌套类（声明这个内部类的类称为外部类）
     // 2>.作用
     // a.实现了类的重用功能：直接使用类，不需要使用对象
@@ -1501,12 +1653,15 @@ public class CMGameProxy {
             Inner i = new Inner();
             i.print();
         }
-        // 8>.匿名内部类（局部内部类的一种/内部类的简化写法）
+        // 8>.匿名内部类（局部内部类的一种、内部类的简化写法）
         // 1>.前提：存在一个类或者接口（具体类、抽象类）
         // 2>.本质："继承该类/实现该接口的子类"匿名对象
         // 3>.应用：匿名内部类可以当做参数传递（将匿名内部类看作一个对象）
         public void showLog() {
             // ！！！匿名内部类调用多次方法的时候不使用，太麻烦！！！
+            // 1.把接口interface做为参数传入方法：我们不能直接new interface（没有这个语法）
+            // 2.我们需要把class类实现接口interface：直接new class传入方法中
+            // 3.或者直接使用匿名内部类：new interface() { // 接口中的方法 }
         }
     }
     /**
@@ -1519,7 +1674,7 @@ public class CMGameProxy {
      * MethodInner mi = new MethodInner();
      */
 
-    // 27>.抽象类
+    // 27.抽象类：可以配合多态一起使用（降低程序的耦合度，提高程序的扩展力）
     // 1.抽象类和抽象方法必须使用abstract修饰
     // 2.抽象类中不一定有抽象方法：可以有抽象方法，也可以有非抽象方法，有抽象方法的类一定是抽象类或者接口
     // 3.抽象类不能实例化：必须使用子类实例化（只能作为其他类的父类）
@@ -1558,9 +1713,11 @@ public class CMGameProxy {
      * // 有什么作用？
      * a>.用于类型隐藏：xxx
      * b>.用于拓展对象的行为功能：xxx
+     * // Java语言中凡是没有方法体的方法都是抽象方法？
+     * 不对：public native int hashCode();没有方法体，但是不是抽象方法（有一个native表示调用JVM本地程序）
      */
 
-    // 28>.接口：静态常量和抽象方法的集合、对外提供规则
+    // 28.接口：静态常量和抽象方法的集合、对外提供规则
     // 1.特点：仅仅描述了能够实现什么样的功能，具体实现则由实现该接口的类决定、一个类可以实现多个接口、一个接口可以被多个类实现
     // 2.功能：接口是java提供的一个用于实现多继承功能的机制
     // abstract默认省略：编译器自动添加
@@ -1635,26 +1792,40 @@ public class CMGameProxy {
 
         // 成员方法重写：此处不同于成员变量的重写，父类的成员方法将不复存在
         // a>.子类方法名和参数列表必须与父类相同（方法名相同，参数列表不同不是重写而是重载）
-        // b>.返回值必须与父类中原方法的值类型相同或原类型的子类
+        // b>.返回值必须与父类中原方法的原值类型相同或原引用类型的子类
         // c>.访问权限可以扩大不能缩小，否则原来可以访问该方法的类可能就无法访问了
         // d>.不能重写被final修饰的方法
-        // e>.静态方法不能被重写，但是可以在子类中定义相同的静态方法将父类的方法隐藏
+//        // e>.静态方法不能被重写（不存在方法覆盖），但是可以在子类中定义相同的静态方法将父类的方法隐藏
+//        Animal a1 = new Cat();
+//        a1.doSome(); // 如果doSome()是static方法则依旧会调用Animal类的实现
         // f>.应用：子类需要父类的功能，也需要子类特有的功能，可以重写父类的方法
         // g>.注意事项：a.父类的私有方法不能被重写；b.子类重写父类方法访问权限不能更低（最好一致）；c.父类静态方法，子类也必须通过静态方法重写（不算重写）
         // h>.子类调用方法的顺序：先找子类本身 -> 再找父类
         @Override
         public String getDetails() {
             // super关键字：指向当前对象的父类（此处想要访问父类的方法必须使用super）
-            // a>.用于在子类的构造方法中调用父类的构造方法
+            // a>.用于在子类的构造方法中调用父类的构造方法：只能出现在构造方法中的第一行
             // b>.用于在子类中显式的引用被隐藏的继承自父类的同名变量
             // c>.子类重写成员方法时，用super引用父类的相应方法实现对原有功能的扩充
-            super.getDetails(); // 调用父类的成员方法
-            super.score = 10; // 调用父类的数据成员
+            // d>.super不能使用在static方法中
+            // “this.”表示访问当前类的成员方法和成员变量
+            super.getDetails(); // 调用父类的成员方法：不能省略super.
+            super.score = 10; // 调用父类的数据成员：不能省略super.
             return this.name + "：" + this.age;
+            /**
+             * super.属性; // 访问父类属性
+             * super.方法名(); // 访问父类方法
+             * super(); // 访问父类构造方法
+             */
         }
+//        // 接口interface和多态一起使用
+//        PackageObjectCallback packageObjectCallback = new PackageObjectLess(); // 接口不能new：但是接口实现的类可以new
+//        packageObjectCallback.getGame();
+//        // 接口之间没有继承关系的时候进行强制类型转换：编译不报错、运行报错
+//        PackageObjectListener packageObjectListener = (PackageObjectListener)packageObjectCallback;
 
         // 多态
-        // 前提：a.有继承关系、b.有方法重写、c.父类引用指向子类对象
+        // 前提：a.有继承关系、b.有方法重写（私有方法不能被重写、静态方法不谈被重写）、c.父类引用指向子类对象
         // 成员变量：编译看左边（父类），运行看左边（父类）
         // 成员方法：编译看左边（父类），运行看右边（子类）
         // 静态方法（与类相关，算不上重写）：编译看左边（父类），运行看左边（父类）
@@ -1662,8 +1833,13 @@ public class CMGameProxy {
             PackageObjectLess p = (PackageObjectLess) new PackageObject(); // 父类引用指向子类对象（向上转型）
             System.out.println(p.name); // John
             p.getDetails();
+            // 调用子类特有方法：需要向下转型，因为不知道外部可以传入什么子类型，所以必须要判断（iOS亦然）
             if (p instanceof PackageObject) {
-                PackageObject sm = (PackageObject) p; // 向下转型
+                // java.lang.ClassCastException类型转换异常
+                // Animal a1 = new Dog();
+                // Cat cat = (Cat)a1; // 编译不报错、运行报错
+                // cat.catchMouse();
+                PackageObject sm = (PackageObject) p; // 向下转型：必须使用instanceof进行判断，可以避免java.lang.ClassCastException类型转换异常
                 sm.getDetails();
             }
         }
@@ -1693,7 +1869,7 @@ public class CMGameProxy {
              *  成员方法：可以是抽象方法，也可以非抽象方法
              * 接口
              *  成员变量：只可以是常量
-             *  构造方法：有
+             *  构造方法：无
              *  成员方法：只可以是抽象方法
              */
         }
@@ -1703,10 +1879,10 @@ public class CMGameProxy {
         }
     }
 
-    // 29>.包：为了更好地组织类，Java提供了包机制，用于区别类名的命名空间
+    // 29.包：为了更好地组织类，Java提供了包机制，用于区别类名的命名空间
     // 1.概念：一组相关类和接口的集合（就是文件夹）
     // 2.特征：同一个包中的类不能同名，不同包中的类可以同名，这样就有效解决了命名冲突问题
-    // 3.包声明：package 包名1.包名2.包名3
+    // 3.包声明：package 包名1.包名2.包名3...真正的类名：包名1.包名2.包名3.CMGameProxy
     // 4.包引用：import 包名1.包名2.包名3
     // 5.注意事项
     // package语句必须是可执行程序的第一行
@@ -1741,32 +1917,86 @@ public class CMGameProxy {
      *      FindStudent
      */
 
-    // 30>.数据结构
-    public void showPackageDataStructure() {
-        // a>.Enumeration接口/Vector动态数组
-        Vector<String> dayNames = new Vector<>();
-        dayNames.add("Sunday");
-        dayNames.add("Monday");
-        dayNames.add("Tuesday");
-        dayNames.add("Wednesday");
-        dayNames.add("Thursday");
-        dayNames.add("Friday");
-        dayNames.add("Saturday");
-        while (dayNames.elements().hasMoreElements()) {
-            System.out.println(dayNames.elements().nextElement());
+    // 30>.集合框架：不能直接存储基本数据类型
+    // >>在java中每个不同的集合底层都对应不同的数据结构：往不同集合存储数据 == 将数据放在不同的数据结构中
+    /**
+     * Iterable----------可迭代的interface
+     *  Collection----------集合interface：只能存储Object子类型、Iterator迭代器interface
+     *      List----------数组interface：有序可重复
+     *          *ArrayList----------class：底层是数组：适合检索、不适合增删、非线程安全
+     *          *LinkedList----------class：底层是双向链表：适合增删、不适合检索
+     *          Vector----------class：底层是数组、线程安全（使用synchronized修饰：效率低，控制线程安全目前有更好办法）
+     *      Set----------集合interface：无序不可重复
+     *          *HashSet----------class：底层是哈希表（创建HashMap）
+     *          SortedSet----------interface
+     *              *TreeSet----------class：底层是二叉树（创建TreeMap）
+     *  Map----------集合interface：以key/value键值对的形式存储元素、key无序不可重复
+     *      *HashMap----------class：底层是哈希表、非线程安全
+     *      Hashtable----------class：底层是哈希表、线程安全（使用synchronized修饰：效率低，控制线程安全目前有更好办法）
+     *          *Properties----------class：存储的key/value必须是String
+     *      SortedMap----------interface
+     *          *TreeMap----------class：底层是二叉树（key可以自动按照大小顺序排序）
+     */
+    public void showCollectionMap() {
+        // 1>.Collection
+        Collection c1 = new ArrayList();
+        c1.add(1200); // 集合不能存放基本数据类型：这里可以存是因为“自动装箱”
+        c1.size(); // 获取集合元素个数
+        c1.clear(); // 清空集合
+        if (c1.contains("xwj")) {
+            // 集合是否包含某个元素：学会重写equals()...contains()和remove("")方法都是通过equals()进行比较的
         }
-        // b>.Stack栈：Vector的一个子类
-        Stack<String> stack = new Stack<>();
-        // 把对象压入堆栈顶部
-        stack.push("Sunday");
-        // 移除堆栈顶部对象
-        String s = stack.pop();
-    }
+        c1.add("xwj");
+        c1.remove("xwj"); // 删除集合中的某个元素
+        if (c1.isEmpty()) {
+            // 集合是否为空
+        }
+        Object[] objs = c1.toArray(); // 集合转换成数组
+        // 遍历集合
+        Iterator iterator = c1.iterator(); // 刚创建Iterator没有指向第一个元素：集合结构只要发生改变就必须重新创建Iterator
+        while (iterator.hasNext()) { // 如果还有元素可以迭代返回true
+//             c1.remove(iterator.next()); // 报错：集合结构只要发生改变就必须重新创建Iterator
+            iterator.remove(); // 不会报错：删除Iterator当前指向的元素
+            System.out.println(iterator.next()); // 让迭代器前进一步：返回迭代器指向的元素
+        }
 
-    // 31>.集合框架
-    public void showPackageSet() {
-        // a>.ArrayList：可以动态修改的数组
-        ArrayList<String> siteNames = new ArrayList<>();
+        // 2>.List
+        // >>有序可重复：下标从0开始
+        List list = new ArrayList();
+        list.add("淘宝");
+        list.add(1, "字节");
+        Iterator iterator1 = list.iterator();
+        while (iterator1.hasNext()) {
+            System.out.println(iterator1.next());
+        }
+        for (int i = 0; i < list.size(); i++) {
+            String s1 = list.get(i).toString();
+        }
+        if (list.size() > 0) {
+            String s2 = list.get(0).toString();
+        }
+        list.indexOf("淘宝"); // 第一次出现索引：没有返回-1
+        list.lastIndexOf("小玩具"); // 最后一次出现索引：没有返回-1
+        list.remove(0); // 删除指定位置的元素
+        list.set(0, "xwj"); // 修改指定位置的元素
+        /**
+         * 增删改查的常见单词
+         * 增 - add/save/new
+         * 删 - delete/remove/drop
+         * 改 - update/set/modify
+         * 查 - find/get/query/select
+         */
+
+        // 3>.ArrayList：可以动态修改的数组
+//         ArrayList<String> siteNames = new ArrayList<>(20); // 指定集合容量是20
+        // >>底层先创建一个length = 0的数组，当添加第一个元素的时候，初始化集合容量是10
+        // >>1.5倍扩容（10 -> 15...）
+        ArrayList<String> siteNames = new ArrayList<>(); // 初始化集合容量是10：泛型紧紧跟在类名的后面
+        Collections.synchronizedList(siteNames); // 转换成线程安全
+//         // 通过HashSet创建List
+//         Collection c2 = new HashSet();
+//         c1.add("xwj");
+//         List siteNames = new ArrayList(c1);
         // 添加元素
         siteNames.add("Google");
         siteNames.add("Taobao");
@@ -1775,9 +2005,9 @@ public class CMGameProxy {
         // 访问元素
         if (siteNames.size() > 1) {
             System.out.println(siteNames.get(1));
+            // 修改元素
+            siteNames.set(1, "Tencent");
         }
-        // 修改元素
-        siteNames.set(1, "Tencent");
         // 删除元素
         siteNames.remove(1);
         siteNames.remove("Google");
@@ -1792,16 +2022,16 @@ public class CMGameProxy {
         for (int index = 0; index < siteNames.size(); index++) {
 
         }
-        // 迭代器
-        // 获取迭代器
-        Iterator<String> iterator = siteNames.iterator();
-        while (iterator.hasNext()) {
-            System.out.println(iterator.next());
-        }
+//        // 迭代器
+//        // 获取迭代器
+//        Iterator<String> iterator = siteNames.iterator();
+//        while (iterator.hasNext()) {
+//            System.out.println(iterator.next());
+//        }
 
-        // b>.LinkedList：链表
-        // 相比ArrayList：LinkedList的“添加、删除”操作效率更高；“查找、修改”操作效率更低
-        LinkedList<String> siteNames1 = new LinkedList<>();
+        // 4>.LinkedList链表
+        // >>相比ArrayList：LinkedList的“添加、删除”操作效率更高；“查找、修改”操作效率更低
+        LinkedList<String> siteNames1 = new LinkedList<>(); // 没有初始化容量
         // 添加元素
         siteNames1.add("Google");
         siteNames1.add("Taobao");
@@ -1825,10 +2055,32 @@ public class CMGameProxy {
             System.out.println(siteNames1.get(index));
         }
 
-        // c>.HashSet：不允许有重复元素的集合
-        // 1>.特点：无序、允许有null值、线程不安全
-        HashSet<String> siteNames2 = new HashSet<>();
-        // 添加元素
+        // 5>.Vector动态数组：线程安全、效率低
+        // >>因为目前我们有更好的方案可以保证线程安全，所以Vector使用较少
+        Vector<String> dayNames = new Vector<>(); // 初始化集合容量是10：两倍扩容（10 -> 20 -> 40...）
+        // 方法全部带synchronized
+        dayNames.add("Sunday");
+        dayNames.add("Monday");
+        dayNames.add("Tuesday");
+        dayNames.add("Wednesday");
+        dayNames.add("Thursday");
+        dayNames.add("Friday");
+        dayNames.add("Saturday");
+        while (dayNames.elements().hasMoreElements()) {
+            System.out.println(dayNames.elements().nextElement());
+        }
+        // >>Stack栈：Vector的一个子类
+        Stack<String> stack = new Stack<>();
+        // 把对象压入堆栈顶部
+        stack.push("Sunday");
+        // 移除堆栈顶部对象
+        String s = stack.pop();
+
+        // 6>.HashSet：不允许有重复元素的集合
+        // >>特点：无序、允许有null值、线程不安全
+        // >>底层：哈希表（创建HashMap）
+        Set<String> siteNames2 = new HashSet<>();
+        // 添加元素：添加到HashSet集合中的元素实际上是放在HashMap集合的key
         siteNames2.add("Google");
         siteNames2.add("Taobao");
         // 重复的元素不会被添加
@@ -1843,68 +2095,368 @@ public class CMGameProxy {
         // 遍历HashSet
         for (String siteName:
                 siteNames2) {
-
         }
 
-        // d>.HashMap：散列表，存储的内容是key-value映射
-        // 1>.特点：无序、key-value的类型可以是String，也可以是Integer
-        HashMap<String, String> map = new HashMap<>();
-        HashMap<Integer, String> map1 = new HashMap<>();
-        // 添加键值对
-        map1.put(1, "Google");
-        map1.put(2, "Taobao");
-        map1.put(3, "Runoob");
-        map1.put(4, "Weibo");
-        map1.put(5, "Tencent");
-        // 获取元素
-        map1.get(3);
-        // 删除元素
-        map1.remove(1);
-        // 清空
-        map1.clear();
-        // 遍历HashMap
-        for (Integer index:
-                map1.keySet()) {
-            System.out.println(map1.get(index));
+        // 7>.TreeSet
+        // >>特点：无序、不可重复...可排序集合：可以按照元素的大小顺序自动排序（无法对自定义类型排序）
+        // >>底层：二叉树（创建TreeMap）
+        Set treeSet = new TreeSet();
+        treeSet.add("淘宝"); // 添加到TreeSet集合中的元素实际上是放在TreeMap集合的key
+
+        // 8>.Map
+        // >>Map和Collection之间没有继承关系
+        // >>Map集合以key/value的形式存储数据：无序
+        // >>HashMap的key可以null、Hashtable的key不能null
+        Map<Integer, String> map = new HashMap<>();
+        // 添加key/value
+        map.put(1, "Google"); // key/value都必须是引用类型：这里使用自动装箱
+        map.put(2, "Taobao");
+        String value = map.get(2); // 通过key获取value
+        System.out.println(map.size()); // 获取key/value的数量
+        map.remove(1); // 删除
+        if (map.containsKey(1) && map.containsValue("xwj")) {
+            // 是否包含key和value
+            Collection<String> c2 = map.values(); // 获取所有的values
+            Set<Integer> set = map.keySet(); // 获取所有的keys
         }
-        for (String value:
-                map1.values()) {
-            System.out.println(value);
+        map.clear(); // 清空集合
+        // 等于map.size() == 0
+        map.isEmpty();
+        // 遍历map
+//        // 第一种方法
+//        Set<Integer> mapSet = map.keySet();
+//        Iterator iterator = mapSet.iterator();
+//        while (iterator.hasNext()) {
+//            System.out.println(iterator.next());
+//        }
+//        // 第二种方法
+//        for (Integer key:
+//                mapSet) {
+//            System.out.println(map.get(key));
+//        }
+//        // 第三种方法
+//        Set<Map.Entry<Integer, String>> set = map.entrySet();
+//        Iterator<Map.Entry<Integer, String>> iterator2 = set.iterator();
+//        while (iterator2.hasNext()) {
+//            Map.Entry<Integer, String> node = iterator2.next();
+//            System.out.println(node.getKey());
+//            System.out.println(node.getValue());
+//        }
+//        // 第四种方法
+//        for (Map.Entry<Integer, String> node:
+//                set) {
+//            System.out.println(node.getKey());
+//            System.out.println(node.getValue());
+//        }
+
+        // 9>.Properties
+        Properties properties = new Properties();
+        properties.setProperty("key", "xwj");
+        String name = properties.getProperty("key");
+    }
+
+    // 31.泛型
+    // >>不使用泛型的缺点：任何对象被添加到集合中都会转换成Object类型，然后取出来则需要再次强制转换成原有类型
+    // >>使用泛型的优点：指定集合存储的数据类型（从集合取出来的元素也不再是Object、调用子类特有的方法还是要强制转换：需要先判断）
+    // >>泛型<T>紧跟在类名的后面
+    public void showPackageCollections() {
+        List<String> list1 = new ArrayList<String>(); // JDK8.x以前
+        List<String> list2 = new ArrayList<>(); // JDK8.x以后
+        // 自定义泛型
+        LRGameOver<String> gameOver = new LRGameOver<>();
+        gameOver.show("xwj");
+        // E - Element元素
+        // K - Key键
+        // N - Number数
+        // T - Type类型
+        // V - Value值
+    }
+    // 泛型
+    class LRGameOver<T> { // T表示一个标识符：可以随便定义、一般选择T/E
+        public void show(T args) {
+
         }
     }
 
-    // 32>.多线程
-    // 耗时的操作：大量占用cpu的任务
-    // 第一种方式
-    class MyThread extends Thread {
-        @Override
-        public void run() {
-            super.run();
+    // 32.Collections集合工具类
+    public void showCollections() {
+        List<String> list = new ArrayList<>();
+        Collections.synchronizedList(list); // 转换成线程安全
+        list.add("xwj");
+        list.add("wy");
+        Collections.sort(list);
+    }
+
+    // 33.IO流（输入输出流）
+    // 1>.流的概念：是指一组有顺序、有起点、有终点的数据集合
+    // 2>.流的特点：有方向、先进先出原则
+    /**
+     * 3>.流的分类
+     * >>按照流的方向：以内存为参考物
+     * 输入流：从连接到数据源的流中读取数据到内存（只能读数据，不能写数据）
+     * 输出流：从连接到目的地的流向硬盘写数据（只能写数据，不能读数据）
+     * >>按照流处理的数据类型不同
+     * 字节流：以字节为单位（一次读取一个字节byte）读写数据...什么类型的文件都可以读取（包括：文本文件、图片、声音、视频）
+     * 字符流：以字符为单位（一次读取一个字符）读写数据...只能读取普通文本（不能读取：图片、声音、视频、word文件）
+     */
+    public void showPackageStream() {
+        // 4>.抽象类
+        // >>所有的流实现close();方法：因为流是一个内存到硬盘之间的通道，用完以后一定要关闭，不然会占用大量资源
+        // >>所有的输出流实现flush();方法：输出流在最终输出以后调用flush();表示通道中剩余未输出的数据强行输出完（清空管道：不然会丢失数据）
+        // a.InputStream字节输入流：抽象类
+        // b.OutputStream字节输出流：抽象类
+        // c.Reader字符输入流：抽象类
+        // d.Writer字符输出流：抽象类
+
+        // 5>.具体类
+        // a.文件流
+        // 1.FileInputStream文件字节输入流（掌握）
+        // 作用：任何类型的文件都可以采用这个流来读
+        // 方式：字节的方式、硬盘 -> 内存...输入操作
+        FileInputStream fis = null;
+//        FileInputStream fis1 = null;
+//        File file = new File("path路径");
+        try {
+            fis = new FileInputStream("文件名"); // 使用给定的文件名创建对象
+//            fis1 = new FileInputStream(file); // 使用File对象创建对象
+
+//            // 这里会抛出异常
+//            fis.read();
+//
+//            // 不推荐try...catch中嵌套try...catch
+//            try {
+//                fis.read();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//            int readData = 0; // 返回读取到的“字节”本身：只要流不关闭，每次调用read方法就顺序的读取数据，直到文件末尾或流被关闭（返回-1）
+//            // 使用循环
+//            // >>硬盘和内存之间的交互太频繁
+//            while (readData = fis.read() != -1) {
+//                System.out.println(readData);
+//            }
+
+            // 最终版
+            int readCount = 0; // 返回读取到的“字节”数量：不是“字节”本身，直到文件末尾或流被关闭（返回-1）
+            // 使用循环
+            byte[] bytes = new byte[1024 * 1024]; // 1M = 1024KB = 1024 * 1024byte
+            // 返回读取到的字节数量
+            while ((readCount = fis.read(bytes)) != -1) {
+                System.out.println(readCount);
+                // 读取多少转换多少
+                // >>读取出来的字节怎么处理：逻辑写在这里
+            }
+
+            // 其它方法
+            System.out.println(fis.available()); // 返回流当中剩余的没有读到的字节数量：可以用于创建byte数组，这样读文件就不需要loop...不适合大文件（byte数组不能太大）
+            System.out.println(fis.skip(2)); // 跳过2个字节不读
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            // 确保流一定关闭
+            if (fis != null) { // 避免空指针异常
+                try {
+                    fis.close(); // 关闭输入流
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
-    }
-    // 第二种方式
-    class YourThread implements Runnable {
-        @Override
-        public void run() {
 
+        // 2.FileOutputStream文件字节输出流（掌握）
+        // 方式：字节的方式、内存 -> 硬盘...输出操作
+        // 作用：任何类型的文件都可以采用这个流来写
+        FileOutputStream fos = null;
+        try {
+//            fos = new FileOutputStream("文件名"); // 使用给定的文件名创建对象：文件不存在会自动创建...先清空原文件再写入：谨慎使用
+            fos = new FileOutputStream("文件名", true); // 以追加的方式在文件末尾写入：不会清空原文件内容（默认会清空）
+            // 开始写
+            String s1 = "我是中国人";
+            byte[] bytes = s1.getBytes();
+            fos.write(bytes); // 将byte数组全部写入
+            fos.write(bytes, 0, 2); // 将byte数组部分写入
+            // 刷新
+            fos.flush();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            // 确保流一定关闭
+            if (fos != null) { // 避免空指针异常
+                try {
+                    fos.close(); // 关闭输入流
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+//            // 如果一边读文件FileInputStream、一边写文件FileOutputStream
+//            // 必须分开try...catch：不然可能会导致无法全部关闭
+//            if (fos != null) {
+//                try {
+//                    fos.close(); // 关闭输入流
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//            if (fis != null) {
+//                try {
+//                    fis.close(); // 关闭输入流
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
         }
-    }
-    public void showThread() {
-        // 创建一个子线程对象
-        MyThread myThread = new MyThread();
-        myThread.start();
+        /**
+         * 拷贝文件
+         * >>从C盘->D盘无法直接拷贝，必须通过C盘->内存->D盘
+         * >>拷贝的过程：一边读文件FileInputStream、一边写文件FileOutputStream
+         */
 
-        YourThread yourThread = new YourThread();
-        Thread t1 = new Thread(yourThread);
-        t1.start();
-    }
-    // 用户线程：在前台运行的线程
-    // 守护线程：在后台运行的线程（周期性的执行某种任务、等待处理某些发生的事件）
-    // 同步线程：多线程共享资源
-    // “生产者/消费者”问题
-    // 死锁
+        // 3.FileReader文件字符输出流
+        // 方式：字符的方式、硬盘 -> 内存...输入操作
+        // 作用：只能读取普通文本（读取文本内容的时候比较方便快捷、word文档不属于普通文件）
+        FileReader reader = null;
+        try {
+            reader = new FileReader("文件名"); // 使用给定的文件名创建对象
+            // 开始读
+            char[] chars = new char[5];
+            int readCount = 0;
+            while ((readCount = reader.read(chars)) != -1) {
+                System.out.println(String.valueOf(chars, 0, readCount));
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            // 确保流一定关闭
+            if (reader != null) { // 避免空指针异常
+                try {
+                    reader.close(); // 关闭输入流
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
-    // 33>.文件类
+        // 4.FileWriter文件字符输入流
+        // 方式：字符的方式、内存 -> 硬盘...输出操作
+        // 作用：只能写入普通文本（写入文本内容的时候比较方便快捷）
+        FileWriter writer = null;
+        try {
+//            writer = new FileWriter("文件名"); // 使用给定的文件名创建对象：文件不存在会自动创建...先清空原文件再写入：谨慎使用
+            writer = new FileWriter("文件名", true); // 以追加的方式在文件末尾写入：不会清空原文件内容（默认会清空）
+            // 开始写
+            String s1 = "我是中国人";
+            char[] chars = {'谢', '吴', '军'};
+            writer.write(chars); // 将char数组全部写入
+            writer.write(chars, 0, 2); // 将char数组部分写入
+            // 可以直接写入字符串
+            writer.write(s1);
+            // 刷新
+            writer.flush();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            // 确保流一定关闭
+            if (writer != null) { // 避免空指针异常
+                try {
+                    writer.close(); // 关闭输入流
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        // b.转换流：将字节流转换成字符流
+        // InputStreamReader
+        // OutputStreamWriter
+
+        // c.缓冲流：自带内部缓冲区的流
+        // >>提高I/O的执行效率、不需要自定义byte[]和char[]
+        // >>当缓冲流执行输出操作时，并不马上将数据写到所连接的输出流中，而是写入缓冲区，当缓冲区写满或关闭流的时候再一次性将缓冲区中数据写入输出流中，这样可以减少实际写请求的次数，提高将数据写入文件的效率
+        // >>当缓冲流执行输入操作时，并不从输入流读取数据，而是从缓冲区中读取数据，当缓冲区中数据读完后，才从输入流中读取成批数据存入缓冲区，这样可以提高读数据的效率
+        // 1.BufferedReader
+        // reader - 节点流
+        // bufferedReader - 包装流、处理流
+        BufferedReader bufferedReader = null;
+        try {
+//            InputStreamReader inputStreamReader = new InputStreamReader(fis);
+//            bufferedReader = new BufferedReader(inputStreamReader);
+            bufferedReader = new BufferedReader(reader);
+            String s2 = null;
+            // 直接读取一行：不包含换行符
+            while ((s2 = bufferedReader.readLine()) != null) {
+                System.out.println(s2);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (bufferedReader != null) {
+                try {
+                    // 节点流不需要再单独关闭
+                    bufferedReader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        // 2.BufferedWriter：带有缓冲的字符输出流
+        BufferedWriter bufferedWriter = null;
+        try {
+            bufferedWriter = new BufferedWriter(writer);
+            bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("文件名", true)));
+            // 直接写入字符串
+            bufferedWriter.write("hello world");
+            // 刷新
+            bufferedWriter.flush();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (bufferedWriter != null) {
+                try {
+                    bufferedWriter.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        // BufferedInputStream
+        // BufferedOutputStream
+
+        // d.数据流：可以将数据连同数据的类型一起写入文件
+        // DataInputStream
+        // DataOutputStream
+
+        // e.标准输出流
+        // PrintWriter
+//        // 1>.PrintStream标准字节输出流（掌握）
+//        // >>标准的字节输出流，默认输出到控制台
+//        PrintStream ps = System.out;
+//        ps.println("hello world"); // 不需要手动关闭
+//        // 改变标准字节输出流的输出方向：不再指向控制台，指向log文件
+//        System.setOut(new PrintStream(new FileOutputStream("log", true))); // 追加日志
+//        System.out.println("hello world");
+
+        // f.对象专属流
+        // ObjectInputStream（掌握）
+        // ObjectOutputStream（掌握）
+    }
+
+    // 34.File文件类
+    // >>File文件类不是流...不能完成文件读写
+    // >>File文件类对象：可能是目录、可能是文件
     public void showPackageFiles() {
         // 1>.创建文件对象
         File file = new File("path路径");
@@ -1917,9 +2469,15 @@ public class CMGameProxy {
         System.out.println(file.getAbsolutePath()); // 返回File对象表示的文件或目录的绝对路径名
         System.out.println(file.length()); // 返回File对象表示的文件或目录的大小（以字节为单位）
         System.out.println(file.lastModified()); // 获取文件或目录最近一次修改时间
-        // 3>.文件或目录测试与检查操作
+         // 3>.文件或目录测试与检查操作
         if (file.exists()) {
             // File对象表示的文件或目录是否存在
+            try {
+                // 以文件形式新建
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         if (file.isDirectory()) {
             // File对象表示的文件或目录是否是目录
@@ -1940,15 +2498,13 @@ public class CMGameProxy {
             // File对象是否表示隐藏文件或目录
         }
         // 4>.目录操作
-        file.mkdir(); // 创建File对象所表示的指定目录
-        file.mkdirs(); // 创建File对象所表示的目录
+        file.mkdir(); // 以目录形式新建
+        file.mkdirs(); // 以多重目录形式新建
         String[] list = file.list(); // 返回当前目录下所有文件和子目录的名称
         File[] listFile = file.listFiles(); // 返回当前目录下所有文件和子目录对应的File对象
-
         FilterFile filterFile = new FilterFile("java"); // 指定要显示文件的类型
         String[] list1 = file.list(filterFile); // 返回当前目录下指定类型文件和子目录的名称
         File[] listFile1 = file.listFiles(filterFile); // 返回当前目录下指定类型文件和子目录对应的File对象
-
         // 5>.文件创建、修改和删除
         try {
             if (file.createNewFile()) {
@@ -1980,151 +2536,152 @@ public class CMGameProxy {
         }
     }
 
-    // 34>.输入输出流
-    public void showPackageStream() {
-        // 1>.流的概念
-        // a、流：是指一组有顺序、有起点、有终点的数据集合（有方向/先进先出原则）
-        // b、输入流：从连接到数据源的流中读取数据（只能读数据，不能写数据）
-        // c、输出流：从连接到目的地的流向其写数据（只能写数据，不能读数据）
-        // 2>.流的分类
-        // a、按照流处理的数据类型不同：
-        // 字节流：以字节为单位读写数据
-        // 字符流：以字符为单位读写数据
-        // 字节流限于处理8位字节
-        // InputStream字节输入流/OutputStream字节输出流：
-        // 1>.是所有字节输入流和字节输出流的顶层父类，都是抽象类，不能实例化
-        // 字符流可以处理Unicode字符集中所有的字符（读取文本类型数据）
-        // Reader字符输入流和Writer字符输出流
-        // 1>.是所有字节输入流和字节输出流的顶层父类，都是抽象类，不能实例化
-        // 3>.文件流
-        // a、文件字节流
-        File file = new File("path路径");
+    // 35.多线程
+    // 1>.什么是进程？什么是线程？
+    // xxx
+    // 2>.多线程机制的目的：提高程序的执行效率
+    // 3>.多线程的原理
+    // >>单核CPU：同一时间点实际上只处理一件事情，多个线程之间频繁切换
+    // >>多核CPU：同一个时间点可以真正实现并发执行
+    // 4>.实现代码
+    // 第一种方式
+    class MyThread extends Thread {
+        @Override
+        public void run() {
+            super.run();
+            // 运行在子线程中
+        }
+    }
+    // 第二种方式
+    class YourThread implements Runnable {
+        boolean isRun = true;
+        @Override
+        public void run() {
+            if (isRun) {
+                // 子线程运行
+            } else {
+                // 保存相关数据
+            }
+        }
+    }
+    public void showThread() {
+        // 创建一个子线程对象
+        MyThread myThread = new MyThread();
+        myThread.run(); // 不会启动线程：不会分配新的分支栈
+        // 启动线程：启动一个子线程，在JVM中开辟一个新的栈空间（任务完成以后代码就结束）
+        myThread.setName("ttt"); // 设置线程的名字
+        System.out.println(myThread.getName()); // 获取线程的名字
+        System.out.println(Thread.currentThread()); // 获取当前线程对象
+        myThread.start();
+        // 中断线程休眠：让休眠的线程异常
+        myThread.interrupt();
+        // 线程优先级
+        // >>线程优先级高一些只是抢到cpu时间片的概率更高一些
+        System.out.println("最高优先级：" + Thread.MAX_PRIORITY); // 10
+        System.out.println("默认优先级：" + Thread.NORM_PRIORITY); // 5
+        System.out.println("最低优先级：" + Thread.MIN_PRIORITY); // 1
+        System.out.println("当前线程优先级：" + Thread.currentThread().getPriority());
+        myThread.setPriority(10); // 设置myThread线程优先级
+
+        YourThread yourThread = new YourThread();
+        Thread t1 = new Thread(yourThread);
+        t1.start();
+        // 终止线程
+        yourThread.isRun = false;
+        // 合并线程
         try {
-            // 文件输入字节流
-            // 需要处理两个异常：FileNotFoundException/IOException
-            FileInputStream fis = new FileInputStream("文件名"); // 使用给定的文件名创建对象
-            FileInputStream fis1 = new FileInputStream(file); // 使用File对象创建对象
-            fis.read(); // FileInputStream是顺序读取文件：只要流不关闭，每次调用read方法就顺序的读取数据，直到文件末尾或流被关闭
-            fis.close(); // 关闭输入流
-            // 文件输出字节流
-            // 需要处理一个异常：IOException
-            FileOutputStream fos = new FileOutputStream("文件名"); // 使用给定的文件名创建对象
-            FileOutputStream fos1 = new FileOutputStream(file); // 使用File对象创建对象
-            fos.write(1); // FileOutputStream是顺序向文件写数据：只要流不关闭，每次调用write方法就顺序的向文件写内容，直到流被关闭
-            fos.close(); // 关闭输出流
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+            t1.join(); // 线程yourThread合并到当前线程：当前线程阻塞，线程yourThread执行直到结束
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        // b、文件字符流（读写的数据单元不同）
+        // 创建线程对象
+        Thread hisThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // 子线程运行
+                try {
+                    // 毫秒
+                    // 让当前线程进入阻塞状态：放弃占有cpu时间片，让给其它线程使用
+                    Thread.sleep(1000 * 2); // 休眠2s
+                    Thread.yield(); // 当前线程暂停，回到就绪状态...让给其它线程
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        hisThread.start();
+    }
+    // 5>.生命周期
+    // >>新建状态 ---调用start方法---> 就绪状态 ---JVM调度---> 运行状态 ---run方法运行结束---> 死亡状态
+    // >>新建状态 ---调用start方法---> 就绪状态 ---JVM调度---> 运行状态 ---遇到阻塞事件---> 阻塞状态
+    // 6>.线程同步机制：解决线程安全问题
+    /**
+     * >>什么时候数据在多线程并发的环境下会存在安全问题？
+     *  多线程并发
+     *  共享数据
+     *  有修改数据的行为
+     */
+    // >>异步编程：多线程并发
+    // >>同步编程：在线程t1执行的时候，必须等待线程t2线程执行（线程排队执行）
+    public void showSynchronized() {
+        // 1.synchronized
+        // 想要哪些线程同步()内部的数据就必须是哪些线程共享的数据
+        synchronized (this) {
+            // 线程同步代码块
+            // “局部变量 + 常量”不会存在线程安全问题：因为局部变量数据不共享（一个线程一个栈）
+            System.out.println("123");
+        }
+    }
+    // synchronized出现在实例方法中一定锁的是this：不够灵活、无故扩大线程同步范围（降低执行效率）
+    public synchronized void showSynThread() {
+        // 对象锁：在实例方法中使用synchronized、每个对象对应一把锁
+        // 类锁：在静态方法中使用synchronized、多个对象对应一把锁
+    }
+    // 7>.死锁
+    // xxx
+
+    // 36.反射机制
+    // 1>.作用：可以操作字节码文件
+    public void showReflection() {
+        // 2>.获取类的字节码
+        // 第一种方法
+        // >>方法的参数是一个字符串
+        // >>字符串需要一个完整类名
+        // >>完整类名必须带有包名
         try {
-            // 文件输入字符流
-            FileReader fileReader = new FileReader("文件名"); // 使用给定的文件名创建对象
-            FileReader FileReader1 = new FileReader(file); // 使用File对象创建对象
-            fileReader.read();
-            fileReader.close();
-            // 文件输出字符流
-            FileWriter fileWriter = new FileWriter("文件名"); // 使用给定的文件名创建对象
-            FileWriter fileWriter1 = new FileWriter(file); // 使用File对象创建对象
-            fileWriter.write(1);
-            fileWriter.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+            Class c1 = Class.forName("java.lang.String");
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        // 4>.缓冲流
-        // a、概念：增加了内部缓冲区的流
-        // b、特征：提高I/O的执行效率
-        // 1>.当缓冲流执行输出操作时，并不马上将数据写到所连接的输出流中，而是写入缓冲区，当缓冲区写满或关闭流的时候再一次性将缓冲区中数据写入输出流中，这样可以减少实际写请求的次数，提高将数据写入文件的效率
-        // 2>.当缓冲流执行输入操作时，并不从输入流读取数据，而是从缓冲区中读取数据，当缓冲区中数据读完后，才从输入流中读取成批数据存入缓冲区，这样可以提高读数据的效率
-        // c、字节缓冲流
+        // 第二种方式
+        String s1 = "123";
+        Class c2 = s1.getClass();
+        // 第三种方法
+        // >>任何一种类型（包括基本数据类型）都有.class属性
+        Class c3 = String.class;
+        Class c4 = int.class;
+        // 3>.可以使用Class创建对象：调用对象的无参构造方法
         try {
-            // 字节缓冲输入流
-            FileInputStream fis = new FileInputStream("文件名");
-            BufferedInputStream bis = new BufferedInputStream(fis);
-            BufferedInputStream bis1 = new BufferedInputStream(fis, 20);
-            bis.read();
-            bis.close();
-            // 字节缓冲输出流
-            FileOutputStream fos = new FileOutputStream("文件名");
-            BufferedOutputStream bos = new BufferedOutputStream(fos);
-            BufferedOutputStream bos1 = new BufferedOutputStream(fos, 20);
-            bos.write(1);
-            bos.flush(); // 刷新输出流：将缓冲区中的数据强制写入输出流
-            bos.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+            Object obj = c3.newInstance();
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        // d、字符缓冲流
-        try {
-            // 文件输入字符流
-            FileReader fileReader = new FileReader("文件名");
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            BufferedReader bufferedReader1 = new BufferedReader(fileReader, 20);
-            bufferedReader.read();
-            bufferedReader.readLine(); // 读取一个文本行，不包含任何行终止符（遇到\n、\r、\t等认为本行结束，到达流末尾则返回null）
-            bufferedReader.close();
-            // 文件输出字符流
-            FileWriter fileWriter = new FileWriter("文件名");
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            BufferedWriter bufferedWriter1 = new BufferedWriter(fileWriter, 20);
-            bufferedWriter.write(1);
-            bufferedWriter.flush();
-            bufferedWriter.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        // 5>.随机存储文件类
-        // a、引入原因：输入输出流都是顺序访问流（流中的数据必须按照顺序进行读写），而随机存取文件类可以实现对文件的随机读写操作
-        try {
-            // 如果文件不存在则创建该文件
-            // r - 以只读方式打开文件
-            // rw - 以读写方式打开文件
-            RandomAccessFile raf = new RandomAccessFile("文件名", "rw");
-            long startOff = raf.getFilePointer(); // 获取文件的初始文件位置
-            raf.writeDouble(2.4);
-            raf.seek(startOff); // 设置文件的指针为文件的开始位置
-            raf.close(); // 关闭流
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        // 6>.标准流
-        // 标准输入流/标准输出流/标准错误流
-        // 7>.字节流和字符流之间的转换
-        try {
-            // 字节输入流 -> 字符输入流
-            InputStreamReader isr = new InputStreamReader(System.in);
-            BufferedReader bufferedReader = new BufferedReader(isr);
-            // 字节输出流 -> 字符输出流
-            OutputStreamWriter osw = new OutputStreamWriter(System.out);
-            BufferedWriter bufferedWriter = new BufferedWriter(osw);
-            isr.close();
-            bufferedReader.close();
-            osw.close();
-            bufferedWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        // 8>.管道流：xxx
+        // 4>.当前线程获取到类加载器对象默认从类的rootPath下加载资源
+        // >>获取文件（文件必须在src文件下）的绝对路径：无论什么OS
+        String path = Thread.currentThread().getContextClassLoader().getResource("images/线程生命周期.png").getPath();
     }
 
-    // 35>.泛型
-    public void showPackageCollections() {
-        // E - Element元素
-        // K - Key键
-        // N - Number数
-        // T - Type类型
-        // V - Value值
-        // 如果没有泛型：任何对象被添加到集合中都会转换成Object类型，然后取出来则需要再次强制转换成原有类型
+    // 37.Annotation注解
+    // 1>.概念：Annotation注解是一种引用数据类型，编译以后生成xxx.class文件
+    // 2>.格式：MyAnnotation表示注解类型名
+    public @interface MyAnnotation {
+        // 自定义注解
     }
+    // 使用注解
+    // >>注解可以出现在类上、方法上、属性上...任何位置上
+    @MyAnnotation
+    public void showAnnotation() {
 
-    // 36>.Annotation注解
-
-    // 37>.Java Reflection反射机制
+    }
 }
+

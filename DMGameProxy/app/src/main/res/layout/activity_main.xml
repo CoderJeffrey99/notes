@@ -6,13 +6,59 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!--
+    TextView = UILabel
+    // match_parent（fill_parent已废弃）：与父视图一致（父控件决定大小）
+    // wrap_content：与内容一致（内容决定大小）
+    @param android:layout_width 控件宽度
+    @param android:layout_height 控件高度
+    @param android:gravity 内容对齐方式：可以指定多个值
+    @param android:textSize 文字大小：使用sp
+    // @string - 新建colors.xml
+    // res -> values -> colors.xml
+    @param android:textColor 文字颜色
+    // @string - 新建strings.xml
+    // res -> values -> strings.xml
+    @param android:text 文字内容
+    -->
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/text_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:gravity="center|left"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:text="@string/app_name"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <!--
+    Button == UIButton
+    同上
+    @param android:textAllCaps 文字内容禁止进行自动大写转换
+    -->
+    <Button
+        android:id="@+id/login_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textAllCaps="false"
+        app:layout_constraintTop_toBottomOf="@+id/text_view"/>
+
+    <!--
+    EditText == UITextfield
+    @param android:hint 提示语
+    @param android:maxLines 最大行数
+    -->
+    <EditText
+        android:id="@+id/edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/app_name"
+        android:maxLines="1"
+        app:layout_constraintTop_toBottomOf="@+id/login_btn"/>
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

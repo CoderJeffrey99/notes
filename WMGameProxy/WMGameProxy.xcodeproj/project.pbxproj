@@ -128,6 +128,7 @@
 		33A6CA66297F9D1900885D05 /* 面试经验.md in Resources */ = {isa = PBXBuildFile; fileRef = 33A6CA5E297F9D1800885D05 /* 面试经验.md */; };
 		33A8FD7A22D481B4004AECBA /* SyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A8FD7922D481B4004AECBA /* SyTableViewController.m */; };
 		33A8FD7D22D48237004AECBA /* SyCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A8FD7C22D48237004AECBA /* SyCollectionViewController.m */; };
+		33AC456F2ACBA1E400BEDA77 /* push_ios15.png in Resources */ = {isa = PBXBuildFile; fileRef = 33AC456E2ACBA1E400BEDA77 /* push_ios15.png */; };
 		33AD3E38236062830092C389 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AD3E37236062830092C389 /* NSString+Extension.m */; };
 		33ADF8D1240CC5280041F19A /* UIImage+animatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 33ADF8D0240CC5280041F19A /* UIImage+animatedGIF.m */; };
 		33B10E542422300400C6E8C7 /* WMNetworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B10E532422300400C6E8C7 /* WMNetworkViewController.m */; };
@@ -506,6 +507,7 @@
 		33A8FD7922D481B4004AECBA /* SyTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyTableViewController.m; sourceTree = "<group>"; };
 		33A8FD7B22D48237004AECBA /* SyCollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyCollectionViewController.h; sourceTree = "<group>"; };
 		33A8FD7C22D48237004AECBA /* SyCollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyCollectionViewController.m; sourceTree = "<group>"; };
+		33AC456E2ACBA1E400BEDA77 /* push_ios15.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = push_ios15.png; sourceTree = "<group>"; };
 		33AD3E36236062830092C389 /* NSString+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
 		33AD3E37236062830092C389 /* NSString+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
 		33ADF8CF240CC5280041F19A /* UIImage+animatedGIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+animatedGIF.h"; sourceTree = "<group>"; };
@@ -1060,6 +1062,7 @@
 				33E411EE294B1C29009640CB /* 项目中常见的文件(PCH).pdf */,
 				33E411EF294B1C29009640CB /* 线程的生命周期.png */,
 				33E411F2294B1C29009640CB /* 给文件名（类名）加前缀.png */,
+				33AC456E2ACBA1E400BEDA77 /* push_ios15.png */,
 				3393C59429BF37D40082EFCB /* socket通信流程图.png */,
 				330FFC3129D2FBA700F8BD42 /* 消息转发流程.png */,
 				33E411F4294B1C29009640CB /* UIView常见属性和方法.png */,
@@ -1384,6 +1387,7 @@
 				33E412A8294B1C2A009640CB /* 静态库:动态库常见错误.png in Resources */,
 				33E41285294B1C2A009640CB /* 内存警告处理.png in Resources */,
 				33E412B5294B1C2A009640CB /* 部署注意点_00.png in Resources */,
+				33AC456F2ACBA1E400BEDA77 /* push_ios15.png in Resources */,
 				33E41279294B1C2A009640CB /* 时间格式说明符对照统一表.png in Resources */,
 				33E412AE294B1C2A009640CB /* 新建xxx.framework第六步.png in Resources */,
 				33E41270294B1C2A009640CB /* 类的本质和存储细节_2.png in Resources */,
