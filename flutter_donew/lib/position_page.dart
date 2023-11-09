@@ -1718,7 +1718,7 @@ export PUB_HOSTED_URL=https://pub.flutter-io.cn
 // open -e .bash_profile
 // export PATH=/Users/xiewujun/Library/Android/sdk/platform-tools/:$PATH
 // cd /Users/xiewujun/Library/Android/sdk/platform-tools
-// adb connect 127.0.0.1:5555
+// adb connect 127.0.0.1:7555
 
 // 25.flutter项目文件
 /*

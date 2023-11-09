@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">DMGameProxy</string>
+    <string name="left_fragment">Hello left fragment</string>
+    <string name="right_fragment">Hello right fragment</string>
 </resources>

@@ -1,5 +1,21 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+// 顶级构建文件，您可以在其中添加所有子项目/模块通用的配置选项。
+/*
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        // Gradle版本
+        classpath 'com.android.tools.build:gradle:7.0.2'
+    }
+}
+*/
+
 plugins {
-    id 'com.android.application' version '8.1.1' apply false
-    id 'com.android.library' version '8.1.1' apply false
+    // Gradle插件版本
+    id 'com.android.application' version '7.0.2' apply false
+    id 'com.android.library' version '7.0.2' apply false
 }

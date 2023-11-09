@@ -2,8 +2,14 @@ package com.lrgame.goc.cn;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,17 +18,40 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lrgame.goc.cn.adapter.FruitAdapter;
+import com.lrgame.goc.cn.entity.FruitItem;
+import com.lrgame.goc.cn.fragment.RightFragment;
+
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private final static String TAG = "DMGameProxy";
+
+    private String[] fruits = {"Apple", "Banana", "Orange", "Watermelon", "Pear",
+            "Grape", "Pineapple", "Strawberry", "Cherry", "Mango",
+            "Apple", "Banana", "Orange", "Watermelon", "Pear",
+            "Grape", "Pineapple", "Strawberry", "Cherry", "Mango"};
+
+    private List<FruitItem> fruitList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
     }
 
     private void showBaseIdea() {
@@ -106,11 +135,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // @mipmap/ic_launcher
 
         // 4.日志工具
-        Log.v("", ""); // 用于打印那些最为琐碎的、意义最小的日志信息verbose
-        Log.d("", ""); // 打印调试信息debug
-        Log.i("", ""); // 打印比较重要的数据info
-        Log.w("", ""); // 打印警告信息warn
-        Log.e("", ""); // 打印错误信息error
+        Log.v(TAG, ""); // 用于打印那些最为琐碎的、意义最小的日志信息verbose
+        Log.d(TAG, ""); // 打印调试信息debug
+        Log.i(TAG, ""); // 打印比较重要的数据info
+        Log.w(TAG, ""); // 打印警告信息warn
+        Log.e(TAG, ""); // 打印错误信息error：红色
     }
 
     private void showActivity() {
@@ -146,6 +175,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         intent.addCategory("com.lrgame.goc.cn.category.HOME");
         startActivity(intent);
         // 返回数据给上一个activity
+        // registerForActivityResult()
         startActivityForResult(intent, 1);
         // 6>.生命周期
         // p66
@@ -157,8 +187,150 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // 8>.最佳实践
     }
 
-    private void showUserInterface() {
+    private void showBaseUI() {
+        // 6.基础UI开发
+        // 1>.Android实现UI开发的方法：编写xml代码
+        // 2>.TextView
+        TextView textView = findViewById(R.id.text_view);
+        textView.setText("123");
+        Log.v(TAG, textView.getText().toString()); //
+        // 3>.Button
+        Button button = findViewById(R.id.login_btn);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                // 逻辑实现
+//            }
+//        });
+        button.setOnClickListener(this);
+        // 4>.EditText
+        EditText editText = findViewById(R.id.edit_text);
+        Log.v(TAG, editText.getText().toString());
+        // 5>.ImageView
+        ImageView imageView = findViewById(R.id.image_view);
+        imageView.setImageResource(R.drawable.ic_launcher_background);
+        // 6>.ProgressBar
+        // ProgressDialog废弃
+        ProgressBar progressBar = findViewById(R.id.progress_bar);
+        progressBar.setVisibility(View.GONE);
+        // 7>.AlertDialog
+        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+        dialog.setTitle("title");
+        dialog.setMessage("This is Message");
+        //
+        dialog.setCancelable(false);
+        dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // 右边
+            }
+        });
+        dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // 左边
+            }
+        });
+        dialog.show();
+    }
 
+    private void showLayout() {
+        // 7.基本布局
+        // 1>.LinearLayout线性布局
+        // 2>.RelativeLayout相对布局
+        // 3>.FrameLayout帧布局
+        // 4>.百分比布局（废弃）
+    }
+
+    private void showCustomView() {
+        // 8.自定义布局
+        // 1>.新建一个title.xml
+        // 2>.<include layout="@layout/title"/>
+        // 3>.新建class extends 布局
+        // 4>.直接使用：与效果2一致
+    }
+
+    private void showListView() {
+        // 9.ListView：无法实现横向滚动
+        // 1>.简单ListView
+        ListView listView = findViewById(R.id.list_view);
+        /**
+         * 数据只能通过Adapter适配器才可以传给ListView
+         * @param Context context上下文
+         * @param int resource子项布局文件的id：cell的布局
+         * @param object 数据
+         */
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, fruits);
+        listView.setAdapter(adapter);
+        // 2>.定制ListView
+        // 准备阶段
+        // a.我们需要在Activity中添加ListView控件
+        // b.我们需要布局ListView控件子项的UI
+        // c.创建数据model
+        // 实施阶段
+        // a.新建Adapter适配器（自定义）
+        // b.对接数据
+        for (int index = 0; index < 10; index++) {
+            FruitItem item = new FruitItem("123", 0);
+            fruitList.add(item);
+        }
+        FruitAdapter fruitItemAdapter = new FruitAdapter(MainActivity.this, R.layout.listview_fruit_item, fruitList);
+        listView.setAdapter(fruitItemAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+        });
+    }
+
+    private void showRecyclerView() {
+        // 10.RecyclerView
+        // p135
+    }
+
+    private void showFragment() {
+        // 11.碎片
+        // 1>.概念：碎片Fragment是一种可以嵌入在Activity中的UI片段
+        // 2>.直接添加碎片
+        // 3>.动态添加Fragment
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.other_fragment, new RightFragment());
+        transaction.addToBackStack(null); // 4>.在碎片中模拟返回栈：点击Back按钮不会直接退出
+        transaction.commit();
+        // 5>.碎片和活动之间通信
+        // 在activity中获取fragment
+        RightFragment rightFragment = (RightFragment)getSupportFragmentManager().findFragmentById(R.id.other_fragment);
+        // 6.碎片的生命周期
+        // p165
+    }
+
+    private void shouDynamicLoadLayout() {
+        // 12.动态加载布局
+        // 1>.使用限定符：模糊概念
+        // 新建layout-large文件夹 -> 导入相同名称的布局文件：实现不一样
+        // >>与屏幕大小有关
+        // small - 提供给小屏幕设备的资源
+        // normal - 提供给中等屏幕设备的资源
+        // large - 提供给大屏幕设备的资源
+        // xlarge - 提供给超大屏幕设备的资源
+        // >>与分辨率有关
+        // ldpi - 提供给低分辨率设备的资源(120dpi以下)
+        // mdpi - 提供给中等分辨率设备的资源(120dpi~160dpi)
+        // hdpi - 提供给高分辨率设备的资源(160dpi~240dpi)
+        // xhdpi - 提供给超高分辨率设备的资源(240dpi~320dpi)
+        // xxhdpi - 提供给超超高分辨率设备的资源(320dpi~480dpi)
+        // >>与屏幕方向有关
+        // land - 提供给横屏设备的资源
+        // port - 提供给竖屏设备的资源
+        // 2>.使用最小宽度限定符：精确概念（以dp为单位）
+        // layout-sw600dp：屏幕宽度大于这个值的设备就加载这个布局
+    }
+
+    private void showBroadcast() {
+        // 13.广播机制
+        // p183
     }
 
     @Override
@@ -190,6 +362,62 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             break;
         }
     }
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.login_btn) {
+            // 逻辑实现
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // 8.activity的生命周期
     // 1>.概念：Android使用"任务task（一组存放在返回栈中的活动的集合）"管理活动
@@ -253,37 +481,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent2 = new Intent(Intent.ACTION_VIEW);
         intent2.setData(Uri.parse("https://www.baidu.com"));
         startActivity(intent2);
-    }
-
-    private void showUI() {
-        // 10.UI控件：res -> layout -> xxx.xml
-        // 1>.TextView = UILabel
-        TextView textView = findViewById(R.id.text_view);
-        System.out.println(textView.getText().toString());
-        // 2>.Button == UIButton
-        Button loginBtn = findViewById(R.id.login_btn);
-//        // 第一种方式：匿名函数
-//        loginBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                // 点击事件
-//            }
-//        });
-        // 第二种方式：callback
-        loginBtn.setOnClickListener(this);
-        // 3>.EditText == UITextfield
-        EditText editText = findViewById(R.id.edit_text);
-        System.out.println(editText.getText().toString());
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.login_btn: {
-
-            }
-            break;
-        }
     }
 }
 
