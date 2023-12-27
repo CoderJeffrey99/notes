@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // 2>.TextView
         TextView textView = findViewById(R.id.text_view);
         textView.setText("123");
-        Log.v(TAG, textView.getText().toString()); //
+        Log.v(TAG, textView.getText().toString());
         // 3>.Button
         Button button = findViewById(R.id.login_btn);
 //        button.setOnClickListener(new View.OnClickListener() {
@@ -212,17 +212,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // 6>.ProgressBar
         // ProgressDialog废弃
         ProgressBar progressBar = findViewById(R.id.progress_bar);
+        /**
+         * View.VISIBLE控件可见
+         * View.INVISIBLE控件不可见（仍然占据原来的位置）
+         * View.GONE控件不可见（不再占据原来的位置）
+         */
         progressBar.setVisibility(View.GONE);
         // 7>.AlertDialog
         AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
         dialog.setTitle("title");
         dialog.setMessage("This is Message");
-        //
+        // 可否用Back键关闭对话框
         dialog.setCancelable(false);
         dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 // 右边
+                dialogInterface.dismiss();
             }
         });
         dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
