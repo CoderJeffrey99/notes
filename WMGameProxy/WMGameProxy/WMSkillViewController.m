@@ -786,6 +786,7 @@ CNContactPickerDelegate>
     // https://www.jianshu.com/p/52300d0df3e5
     app.statusBarHidden = YES;
     app.statusBarStyle = UIStatusBarStyleLightContent;
+    /* 必须先判断是否可以打开url */
     // 5>.打开其他App
     [app openURL:[NSURL URLWithString:@"https://www.baidu.com"]];
     // 6>.打电话

@@ -52,6 +52,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (actionBar != null) {
             actionBar.hide();
         }
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
     private void showBaseIdea() {

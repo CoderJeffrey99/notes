@@ -7,6 +7,12 @@
 			"path": "flutter_donew"
 		},
 		{
+			"path": "HTGameProxy"
+		},
+		{
+			"path": "TXGameProxy"
+		},
+		{
 			"path": "../document"
 		}
 	],

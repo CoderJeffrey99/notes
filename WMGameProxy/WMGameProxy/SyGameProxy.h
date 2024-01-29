@@ -13,8 +13,8 @@
  1>.建议学习时间：
  上午 9:00-12:00 | 下午 14:00-18:00 | 晚上 19:30-21:30 | 最晚不能超过凌晨两点
  2>.学习内容：
- 基础班( 1个月 )：C语言 + Objective-C
- 就业班( 4个月 )：iOS开发 + swift语言
+ 基础班1个月：C语言 + Objective-C
+ 就业班4个月：iOS开发 + swift语言
  3>.学习方法：
  1).专心听讲：注重听懂、理解
  2).建议准备笔记本：记录重点（不懂的也要记录下来）
@@ -25,21 +25,21 @@
  2.iOS开发简介
  1>.概述：
  1).概念：iOS是一款由苹果公司开发的操作系统
- 2).什么是iOS开发：开发iphone/iPad手机软件开发
- 3).主流操作系统：iOS、Android、黑莓berry、WP、Symbian
+ 2).什么是iOS开发：开发iphone + iPad手机软件开发
+ 3).主流操作系统：iOS、Android、黑莓black berry、WP、Symbian
  4).什么是操作系统：直接运行在硬件上的最基本的系统软件，其他软件必须依赖操作系统才能运行
- 5).iOS(基于UNIX、不开源、AppStore)/Android(基于Linux的虚拟机、开源、GooglePlay)
+ 5).iOS(基于UNIX、不开源、AppStore)、Android(基于Linux的虚拟机、开源、GooglePlay)
  6).系统架构：the Core OS layer核心操作系统层 | the Core Services layer核心服务层 | the Media layer媒体层 | the Cocoa Touch layer界面服务层
  2>.准备：
  1).编程语言：C语言 > Objective-C > swift > C++（可选）
  2).开发工具：Xcode
  3).电脑系统：MacOS
- 4).真机设备：iphone/ipad
- 5).iOS证书：调试证书/发布证书
+ 4).真机设备：iphone + ipad
+ 5).iOS证书：调试证书 = 发布证书
  6).Mac设备：iMac、MacBook Pro、 MacBook Air、Mac Pro、Mac mini
  3>.Apple硬件：
- 1).iPhone - 2007年发布iphone1/2008年发布iphone2(3G)
- 2).iPad - 2010年发布iPad1(大概一年发布一款)
+ 1).iPhone - 2007年发布iphone1、2008年发布iphone2（3G）...大概一年发布一款
+ 2).iPad - 2010年发布iPad1（大概一年发布一款）
  3).ipad mini - 2012年发布iPad mini1
  4).ipod Touch - 没有打电话功能的iphone
  5).Apple TV - 需要翻墙(国内被小米模仿)
@@ -122,7 +122,7 @@
 /*
  7.计算机常识
  1.计算机只能识别0和1，计算机能识别的指令也是由0和1组成，计算机中存储和操作的数据都是由0和1组成
- 2.计算机语言：机器语言(只有0和1：0表示不加电，1表示加电)/汇编语言(符号化机器语言)/高级语言（非常接近自然语言）
+ 2.计算机语言：机器语言（只有0和1：0表示不加电，1表示加电）、汇编语言（符号化机器语言）、高级语言（非常接近自然语言）
  3.程序是一组计算机能够识别和执行的指令
  */
 
@@ -151,7 +151,7 @@
  */
 
 /*
- 9.原码/补码/反码
+ 9.原码、补码、反码
  ！！！有时间可以操作一遍！！！
  1.真值：一个数的十进制表示形式/机器数：一个数的二进制表示形式
  2.原理：计算机内存是由大量开关组成的，分别用0和1来表示每一位开关（每一位成为1bit，每8位成为1字节/byte）

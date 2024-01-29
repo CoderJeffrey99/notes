@@ -363,6 +363,8 @@ static WMGameView *_instance = nil;
     anim2.type = @"cube";
     // 设置动画的起始位置
     anim2.startProgress = 0;
+    // 设置动画持续时间
+    anim2.duration = 5.0;
     // 设置动画的结束位置
     anim2.endProgress = 0.5;
     [view.layer addAnimation:anim2 forKey:nil];

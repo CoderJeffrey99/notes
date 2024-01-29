@@ -9,4 +9,12 @@ donew-frontend-vue - 前端/Vue✔
 
 flutter_donew - flutter✔
 
+HTGameProxy - python
+
+LRGameProxy - oh
+
+TXGameproxy - others
+
 WMGameProxy - iOS✔
+
+XJGameProxy - golang
