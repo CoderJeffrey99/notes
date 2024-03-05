@@ -585,6 +585,9 @@
     WXPoint point;
     [pointValue getValue:&point];
     NSLog(@"%f, %f", point.x, point.y);
+    
+ 
+
 }
 
 // 9.NSNull

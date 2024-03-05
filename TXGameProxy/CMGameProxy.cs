@@ -3,12 +3,10 @@
 // 可以包含多个using语句
 using System;
 
-/*
-C#/C-Sharp概述
-1>.C#是一门简单的、现代的、面向对象的、类型安全的、面向组件的、结构化编程语言
-2>.C#是由“Microsoft微软”开发的、使用“Visual Studio”编写的语言
-3>.C#以.cs后缀：类名和文件名可以不同（如果文件名和类名不同则需要给类创建一个namespace）、严格区分大小写
-*/
+// C#概述
+// 1>.C#（C-Sharp）是一门简单的、现代的、面向对象的、类型安全的、面向组件的、结构化编程语言
+// 2>.C#是由“Microsoft微软”开发的面向对象的编程语言（在.net上运行）
+// 3>.C#以.cs后缀：类名和文件名可以不同（如果文件名和类名不同则需要给类创建一个namespace）...与java有区别、严格区分大小写
 
 // 命名空间：类似于java中的包（类的集合）
 // >>一个文件中可以有多个命名空间：每个命名空间中声明的类的名称不能相同、不同命名空间中声明的类的名称可以相同
@@ -38,7 +36,7 @@ namespace CMGameproxy
              */
 
             // System是命名空间：导入System就可以省略前缀
-            //System.Console.WriteLine("Hello World");
+            // System.Console.WriteLine("Hello World");
             Console.WriteLine("Hello World"); // C#的每条语句必须有";"结尾
 
             // 标识符
@@ -61,6 +59,7 @@ namespace CMGameproxy
             char a7 = 'a';
             // b.对象类型
             Object obj1 = new Object();
+            obj1 = null; // 空对象
             // c.动态类型：类型检查发生在运行时
             dynamic a8 = 20;
             // d.字符串类型
@@ -73,8 +72,7 @@ namespace CMGameproxy
             // bool和Boolean完全一样
             bool s1 = true;
             Boolean s2 = false;
-
-            // 类型转换
+            // f.类型转换
             // 1>.隐式转换：较小范围的数据类型转换为较大范围的数据类型：编译器自动完成、安全、不会导致数据丢失
             byte a12 = 10;
             int a13 = a12;
@@ -191,7 +189,6 @@ namespace CMGameproxy
             // 三元运算符
             int b6 = s1 ? 60 : 100;
 
-
             // 循环语句
             // while循环
             while (s1)
@@ -206,15 +203,14 @@ namespace CMGameproxy
             // for循环
             for (int index = 0; index < 100; index++)
             {
-                //continue; // 结束本次循环，开始再次循环
-                //break; // 跳出循环：开始执行后续语句
-                //return; // 直接结束：后续语句也不再执行
+                // continue; // 结束本次循环，开始再次循环
+                // break; // 跳出循环：开始执行后续语句
+                // return; // 直接结束：后续语句也不再执行
             }
             // foreach循环
             int[] marks = new int[] { 10, 20, 23, 25, 28 };
             foreach (int sum in marks)
             {
-
             }
             // 循环嵌套
             for (int i = 0; i < 100; i++)
@@ -240,6 +236,7 @@ namespace CMGameproxy
             int? b7 = null;
             int? b8 = 45;
             //int b9 = b8; // 类型不一致
+            // null合并运算符
             int b10 = b8 ?? 45;
 
             // 数组
@@ -261,11 +258,9 @@ namespace CMGameproxy
             // 4.遍历数组 
             for (int index = 0; index < array4.Length; index++)
             {
-
             }
             foreach (int index in array4)
             {
-
             }
 
             // 字符串
@@ -292,6 +287,8 @@ namespace CMGameproxy
             // 去掉字符串
             fname.Trim();
             fname.IndexOf('t');
+            // 其他类型的转换
+            // xxx
 
             // C#中的Map（Dictionary）
             Dictionary<string, int> dict = new Dictionary<string, int>();
@@ -313,22 +310,19 @@ namespace CMGameproxy
             // 遍历
             foreach (var key in dict.Keys)
             {
-                
             }
             foreach (var value in dict.Values)
             {
-                
             }
             foreach (KeyValuePair<string, int> item in dict)
             {
-                
             }
 
-
-            // 结构体
+            // 结构体示例
             Person p = new Person("xwj", 18);
             p.GetDetails();
 
+            // 枚举示例
             int today = (int)Days.Mon;
             foreach (Days day in Enum.GetValues(typeof(Days)))
             {
@@ -337,13 +331,11 @@ namespace CMGameproxy
             }
             int b13 = (int)Days.Mon;
 
+            // 类示例
             Car car = new Car();
             car.name = "xwj";
             car.age = 18;
             car.GetPerson();
-
-            // 运算符重载
-            // 第26章
 
             // 异常（程序执行期间出现的问题）处理
             try
@@ -426,10 +418,10 @@ namespace CMGameproxy
     class Car : CMGameProxy
     {
         // 访问权限修饰符
-        // public - 所有对象都可以访问
-        // internal - 同一个程序集的对象可以访问：类的默认访问权限
-        // protected - 该类及其子类可以访问
-        // private - 该类内部可以访问：成员的默认访问权限
+        // public公共访问说明符 - 所有对象都可以访问
+        // internal内部访问指定符 - 同一个程序集的对象可以访问：类的默认访问权限
+        // protected受保护访问指定符 - 该类及其子类可以访问
+        // private私有访问说明符 - 该类内部可以访问：成员的默认访问权限
         public string name; // 成员变量
         public int age;
         public static readonly int height = 180; // 静态变量
@@ -461,12 +453,11 @@ namespace CMGameproxy
         // 成员方法
         public void GetPerson()
         {
-
         }
+
         // 静态方法
         public static void ShowDetails()
         {
-
         }
 
         ~Car()
