@@ -628,7 +628,7 @@ return [[self alloc]initWithName:name];
 ```
 @property (copy, nonatomic) NSMutableArray *array;
 // 不会crash：_array直接赋值还是NSMutableArray
-[_array addObject:@"xwj"];
+[layout addObject:@"xwj"];
 // 会crash：self.array调用setter方法会生成NSArray
 [self.array addObject:@"xwj"];
 ```

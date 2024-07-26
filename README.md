@@ -1,17 +1,19 @@
 # notes
 学习笔记 - 持续更新
 
-CMGameProxy - Java✔
+CMGameProxy - Java
 
-DMGameProxy - 安卓✔
+DMGameProxy - Android
 
-donew-frontend-vue - 前端/Vue✔
+donew-frontend-vue3 - Vue3
 
-flutter_donew - flutter✔
+donew-frontend-vue2 - Vue2
+
+flutter_donew - flutter
 
 HTGameProxy - python
 
-LRGameProxy - oh
+LRGameProxy - harmony
 
 TXGameproxy - others
 

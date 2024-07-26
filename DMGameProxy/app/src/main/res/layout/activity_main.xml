@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+xmlns - xml命名空间
+// 系统自带的控件和属性
+xmlns:android="http://schemas.android.com/apk/res/android"
+// 自定义属性和控件
+xmlns:app="http://schemas.android.com/apk/res-auto"
+// 属性和控件在运行的时候改变
+xmlns:tools="http://schemas.android.com/tools"
+-->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".page.MainActivity">
 
     <!--
     TextView = UILabel
@@ -22,6 +31,13 @@
     // res -> values -> strings.xml
     @param android:text 文字内容
     -->
+    <!--
+    阴影
+    @param android:shadowDx 延x轴偏移量
+    @param android:shadowDy 延y轴偏移量
+    @param android:shadowColor 阴影颜色
+    @param android:shadowRadius 阴影范围
+    -->
     <TextView
         android:id="@+id/text_view"
         android:layout_width="match_parent"
@@ -30,7 +46,14 @@
         android:textSize="24sp"
         android:textColor="@color/black"
         android:text="@string/app_name"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowColor="@color/colorPrimary"
+        android:shadowRadius="1"
         app:layout_constraintTop_toTopOf="parent"/>
+        <!--
+            配合内边距和外边距一起使用无敌
+        -->
 
     <!--
     Button == UIButton
@@ -48,7 +71,7 @@
         app:layout_constraintTop_toBottomOf="@+id/text_view"/>
 
     <!--
-    EditText == UITextfield
+    EditText == UITextField
     @param android:hint 提示语
     @param android:maxLines 最大行数
     -->
@@ -79,12 +102,16 @@
     // invisible控件不可见：仍然占据着原来的位置和大小（控件透明）
     // gone控件不可见：不再占用任何屏幕空间
     @param android:visibility
+    // 设置进度条的最大值
+    @param android:max
     -->
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
+        android:max="100"
+        style="?android:attr/progressBarStyleHorizontal"
         app:layout_constraintTop_toBottomOf="@+id/image_view"/>
 
     <!--
@@ -97,15 +124,15 @@
     layout_marginRight = "10dp"
     layout_marginTop = "10dp"
     layout_marginBottom = "10dp"
-    layout_marginStart = "10dp"
-    layout_marginEnd = "10dp"
+    layout_marginStart = "10dp"...垂直方向无效
+    layout_marginEnd = "10dp"...垂直方向无效
     // 内边距
     layout_paddingLeft = "10dp"
     layout_paddingRight = "10dp"
     layout_paddingTop = "10dp"
     layout_paddingBottom = "10dp"
-    layout_paddingStart = "10dp"
-    layout_paddingEnd = "10dp"
+    layout_paddingStart = "10dp"...垂直方向无效
+    layout_paddingEnd = "10dp"...垂直方向无效
     -->
     <LinearLayout
         android:orientation="horizontal"
@@ -187,7 +214,7 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/button4"
             android:text="@string/app_name"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false" />
 
     </RelativeLayout>
 
@@ -218,13 +245,146 @@
     </FrameLayout>
 
     <!--
+    // 1>.线性布局LinearLayout
+    android:orientation - 布局方向
+    // 不能使用match_parent：因为会独占一行
+    android:gravity - 内容居中
+    android:layout_gravity - 布局居中（水平方向的时候只对垂直方法有作用）
+    // 可以单独指定一个控件android:layout_width="wrap_content"，其它控件独占剩下的区域
+    layout_weight - 等分手机屏幕（必须设置该方向android:layout_width="0sp"才会生效）
+    -->
+    <!--
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/button_1"
+            android:layout_gravity="center"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="button1"/>
+
+        <Button
+            android:id="@+id/button_2"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="button2"/>
+
+        <Button
+            android:id="@+id/button_3"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="button3"/>
+
+        <Button
+            android:id="@+id/button_4"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:text="button4"/>
+
+    </LinearLayout>
+    -->
+
+    <!--
+    // 2>.相对布局RelativeLayout
+    // 可以相对父控件布局"android:layout_alignParentLeft/Right/Top/Bottom"
+    // 可以相对其它控件（通过id获取其它控件）布局"android:layout_below/android:layout_above/android:layout_toLeftOf/android:layout_toRightOf"（可以通过设置padding/margin设置控件间距）
+    -->
+    <!--
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="button1"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="button2"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="button3"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:text="button2"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="button3"/>
+
+    </RelativeLayout>
+    -->
+
+    <!--
+    // 1>.帧布局FrameLayout
+    // 所有的控件都会默认摆放在布局的左上角（会相互覆盖）
+    -->
+    <!--
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="bottom|center"
+            android:textSize="24sp"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/login"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/image_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_launcher_foreground"
+            app:layout_constraintTop_toBottomOf="@+id/edit_text"/>
+
+    </FrameLayout>
+    -->
+
+    <!--
+    4>.百分比布局
+    // 必须添加依赖库
+    implementation 'androidx.percentlayout:percentlayout:1.0.0'
+    -->
+
+    <!--
     1>.引入CustomView
     -->
     <include layout="@layout/title"/>
     <!--
     2>.添加自定义控件：与添加普通控件一样
+    // 自定义属性
+    // 1.修改命名空间
+    xmlns:android="http://schemas.android.com/apk/res/android
     -->
     <com.lrgame.goc.cn.weight.CustomTitleWeight
+        xmlns:DMGameProxy="http://schemas.android.com/apk/res/com.lrgame.goc.cn"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
@@ -271,9 +431,5 @@
         </FrameLayout>
 
     </LinearLayout>
-
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

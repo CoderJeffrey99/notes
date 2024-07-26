@@ -1,24 +1,36 @@
 {
 	"folders": [
 		{
-			"path": "donew-frontend-vue"
+			"name": "douyin-frontend-h5",
+			"path": "douyin-frontend-h5"
 		},
 		{
+			"name": "douyin-frontend-vue2",
+			"path": "douyin-frontend-vue2"
+		},
+		{
+			"name": "douyin-frontend-vue3",
+			"path": "douyin-frontend-vue3"
+		},
+		{
+			"name": "flutter_donew",
 			"path": "flutter_donew"
 		},
 		{
+			"name": "HTGameProxy",
 			"path": "HTGameProxy"
 		},
 		{
-			"path": "TXGameProxy"
+			"name": "TXGameproxy",
+			"path": "TXGameproxy"
 		},
 		{
+			"name": "document",
 			"path": "../document"
 		}
 	],
 	"settings": {
-		"java.compile.nullAnalysis.mode": "automatic",
-		"java.configuration.updateBuildConfiguration": "interactive",
-		"files.autoSave": "afterDelay"
+		"liveServer.settings.multiRootWorkspaceName": "douyin-frontend-h5",
+		"java.configuration.updateBuildConfiguration": "disabled"
 	}
 }

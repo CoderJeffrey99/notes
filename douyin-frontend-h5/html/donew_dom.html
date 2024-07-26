@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            /* 鼠标指针变成手指：表示可以点击 */
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        // 1.事件
+        // 1>.事件三要素：事件源、事件、事件驱动程序
+        // 2>.步骤：获取事件源 -> 绑定事件（js已经定义） -> 书写事件驱动程序
+        // 3>.js是一门以事件驱动为核心的语言
+        /*
+        4>.常见的事件：
+        >>onclick鼠标单击
+        >>ondblclick鼠标双击
+        >>onkeyup按下并释放键盘上的一个键时触发
+        >>onchange文本内容或下拉菜单中的选择发生改变的时候
+        >>onfocus获取焦点：文本框获取鼠标光标
+        >>onblur失去焦点：文本框失去鼠标光标
+        >>onmouseover鼠标悬停：鼠标停留在图片的上方
+        >>onmouseout鼠标移出：鼠标离开图片的区域
+        // 作用于window
+        >>onload网页文档加载事件
+        >>onunload关闭网页
+        */
+        // 5>.需求：点击盒子，弹出对话框
+        // >>什么条件下触发事件：整个页面所有元素加载完毕（文本和图片）的时候调用
+        // >>页面从上往下加载：先加载script -> 再加载div标签（可以防止使用标签在定义标签之前）
+        // >>https://www.cnblogs.com/shidengyun/p/5123377.html
+        window.onload = function () {
+            // a、获取事件源：引发后续事件的标签
+            var div = document.getElementById("box")
+            var divs1 = document.getElementsByTagName("div") // 返回的是Array
+            var divs2 = document.getElementsByClassName("box") // 返回的是Array
+            // b、绑定事件：该方法绑定事件会被层叠
+            // 第一种写法
+            div.onclick = function () {
+                // c、书写事件驱动程序：可以操作标签的属性和样式
+                alert("哈哈哈...")
+                // 操作标签的属性
+                div.className = "lrsdk_box" // 替换原类名
+                // 在原有类名的基础上继续加上类名
+                div.className += "lrsdk_hide" // 不删除原有类名
+                // 操作标签的样式：事件源.style.样式 = "";
+                // >>只能获取行内式的样式：对内嵌式、外链式无效
+                console.log(this.style.width)
+                console.log(typeof(this.style)) // object
+                // >>少量样式的时候使用：大量样式直接使用className
+                // >>可以使用this
+                this.style.width = 200
+                this.style.height = 200
+                // 使用驼峰命名 === background-color
+                this.style.backgroundColor = "red"
+                // 字符串形式
+                this.style.cssText = "width: 100px;height: 100px;background: #000;"
+                // 不透明度opacity：opacity === 1表示不透明、alpha === 0表示不透明、看的见
+                div.style.opacity = 1
+            }
+            // 第二种写法
+            div.onclick = test; // 不能写返回值
+            function test() {
+                // c、书写事件驱动程序：可以操作标签的属性和样式
+                alert("哈哈哈...")
+            }
+            // 6>.注册事件的两种方式
+            // 第一种方式：事件会被层叠
+            div.onclick = function () {
+            
+            }
+            // 移除事件
+            dvi.onclick = null;
+            // 第二种方式：事件监听器（事件不会被层叠）
+            // 适合团队开发
+            // 事件源.addEventListener("事件名", 事件驱动程序);
+            div.addEventListener("click", test)
+            div.removeEventListener("click", test)
+        }
+        
+        // 2.DOM概述
+        // 1>.解析过程：html加载完毕，渲染引擎会在内存中把html文档生成一个dom树，通过getElementById来获取dom树上的元素，然后操作的时候修改该元素的属性
+        // 2>.什么是dom和节点
+        // >>.什么是dom：dom文档对象模型为文档提供了结构化表示，定义了如何通过脚本来访问文档结构（为了能够让js操作html元素而制定的规范）
+        // >>节点：整个html文档就是一个文档节点；每个html标签就是一个元素节点；html标签中的文字就是文字节点；html标签的属性就是属性节点...一切都是节点
+        // 3>.获取节点
+        // a.直接获取
+        var div = document.getElementById("box") // 通过id：标签名不能作为id
+        var divs1 = document.getElementsByTagName("div") // 通过标签名：遍历以后再使用（如果没有获取到则返回[]）
+        var divs2 = document.getElementsByClassName("box") // 通过类名：遍历以后再使用（如果没有获取到则返回[]）
+        // b.访问关系获取：节点的访问关系以属性的方式存在
+        // >>父节点：一个节点只有一个父节点
+        var parentDiv = div.parentNode;
+        // >>兄弟节点
+        // 下一个兄弟节点
+        div.nextSibling; // 在IE6、7、8中指下一个元素节点 | 在firefox、chrome和IE9+表示下一个节点（包含空文档节点和换行节点）
+        div.nextElementSibling // 在firefox、chrome和IE9+表示下一个元素节点
+        var siblingDiv = div.nextElementSibling || div.nextSibling
+        // 上一个兄弟节点
+        div.previousSibling; // 在IE6、7、8中指上一个元素节点 | 在firefox、chrome和IE9+表示上一个节点（包含空文档节点和换行节点）
+        div.previousElementSibling // 在firefox、chrome和IE9+表示上一个元素节点
+        var previousDiv = div.previousElementSibling || div.previousSibling
+        // >>单个子节点
+        // 第一个子节点
+        div.firstChild; // 在IE6、7、8中指第一个子元素节点 | 在firefox、chrome和IE9+表示第一个子节点（包含空文档节点和换行节点）
+        div.firstElementChild // 在firefox、chrome和IE9+表示第一个子元素节点
+        var firstChildDiv = div.firstElementChild || div.firstChild
+        // 最后一个子节点
+        div.lastChild; // 在IE6、7、8中指最后一个子元素节点 | 在firefox、chrome和IE9+表示最后一个子节点（包含空文档节点和换行节点）
+        div.lastElementChild // 在firefox、chrome和IE9+表示最后一个子元素节点
+        var lastChildDiv = div.lastElementChild || div.lastChild
+        // >>所有子节点
+        // 标准属性：返回指定元素子节点的集合：html节点 + 属性节点 + 文本节点 + 换行节点
+        // nodeType = 1元素节点（记住：元素就是标签）
+        // nodeType = 2属性节点
+        // nodeType = 3文本节点
+        div.parentNode
+        // 非标准属性：返回指定元素的子元素集合（在IE6、7、8中包含注释节点）
+        div.children
+        // >>随意获取兄弟节点
+        div.parentNode.children[index]
+        function siblings(element) {
+            var a = []
+           var p = element.parentNode.children
+           for (var index = 0; index < p.length; index++) {
+            if (p[index] !== element) {
+                a.push(p[index])
+            }
+            return a
+           } 
+        }
+        // 4>.节点操作：节点的操作以函数的方式存在
+        // >>创建
+        var newDiv = document.createElement("标签名")
+        // >>插入：在父节点的最后插入一个新节点
+        div.appendChild(newDiv)
+        div.insertBefore(newDiv, "参考节点") // 在参考节点前插入新节点：如果参考节点null则在节点最后插入一个节点
+        // >>删除：必须要指定删除的节点（因为节点自己不能删除自己）
+        div.removeChild(newDiv)
+        div.replaceChild(newDiv, "参考节点")
+        div.parentNode.removeChild(div) // 这样写是可以的
+        // >>复制节点
+        // true深复制：复制节点及其所有子节点
+        // false浅复制：只复制节点本身（不复制子节点）
+        div.cloneNode(true)
+        // 5>.属性操作
+        // >>获取节点：两种方式不能交换使用（赋值和取值最好使用同同一种方式）
+        // 第一种方式：绑定的属性值不会出现在标签上
+        console.log(div.className)
+        console.log(div["className"])
+        // 第二种方式：绑定的属性值会出现在标签上
+        console.log(div.getAttribute("className"))
+        // 设置属性
+        div.setAttribute("className", "lrsdk_sp_box")
+        // 删除属性
+        div.removeAttribute("className")
+        // 排他思想：先干掉所有人，再单独设置自己
+
+        // 3.innerHTML、innerText和textContent
+        console.log(document.getElementById("lrsdk_input_first_box").value) // 我是一个属性
+        // 获取双闭合标签里面的内容：识别标签，不包含本身
+        console.log(document.getElementById("lrsdk_input_second_box").innerHTML) // 我是一个内容
+        // 获取双闭合标签里面的内容：识别标签，包含本身
+        console.log(document.getElementById("lrsdk_input_second_box").outerHTML) // <div class="lrsdk_input_box" id="lrsdk_input_second_box">我是一个内容</div>
+        // 获取双闭合标签里面的内容：不识别标签
+        // outerText与innerText一样：outerText已经被移除
+        console.log(document.getElementById("lrsdk_input_second_box").innerText) // 我是一个内容
+
+        // 4.元素的创建
+        // 第一种创建方式：会覆盖原有内容（底层机制如此：无法兼容修改）
+        document.write("<li>我是document.write创建的<li>")
+        // 第二种创建方式
+        ul.innerHTML = "<li>我是innerHTML创建的<li>" // 会覆盖原有内容
+        ul.innerHTML += "<li>我是innerHTML创建的<li>" // 不会覆盖原有内容
+        // 第三种创建方式
+        document.createElement("li")
+
+        // 5.表格操作
+        // xxx
+
+        // 6.DOM拓展
+        // 1>.获取单个标签：只会获取符合条件的第一个元素
+        document.querySelector(".lrsdk_inner_box")
+        /**
+         * 获取所有符合条件的标签
+         * @param 任意css选择器 = 基础选择器 + 复合选择器
+         * @return 数组
+         */
+        var divs = document.querySelectorAll(".lrsdk_inner_box")
+        // 遍历
+        for (var index = 0; index < divs.length; index++) {
+            divs[index].style.backgroundColor = "red"
+            // html5新增操作类名的方式
+            // >>添加类名
+            divs[index].classList.add("active")
+            // >>删除类名
+            divs[index].classList.remove("active")
+            // >>切换类名
+            divs[index].classList.toggle("active")
+            // >>判断是否包含某个类名
+            console.log(divs[index].classList.contains("active"))
+            // js自定义属性
+            divs[index].index = 100
+        }
+        
+        // 7.BOM概述：浏览器对象模型
+        // 1>.window对象
+        // >>window对象是js的顶级对象
+        // >>所有定义在全局作用域中的变量和函数都会变成window对象的属性和方法
+        // >>window对象下的属性和方法调用的时候可以省略window
+        window.alert("14期威武")
+        console.log(window.div)
+        /**
+         * 打开网页
+         * @param https://www.baidu.com string 跳转的方向
+         * @param _self string 是否打开新窗口
+         * @param 123 string 传入新窗口的参数
+         */
+        window.open("https://www.baidu.com", "_self", "123")
+        // 关闭网页
+        window.close()
+        // a.document：DOM
+        // b.frames：先不讲
+        // c.history：历史记录管理
+        // >>后退
+        history.back()
+        history.go(-1)
+        // >>前进
+        history.forward()
+        history.go(1)
+        // >>刷新
+        history.go(0)
+        // d.location：相当于浏览器地址栏
+        // >>作用：可以将url解析成独立的片段
+        // >>案例：查找不到某页面回到特定页面
+        setTimeout(function () {
+            // scheme://host.domain:port/path/filename
+            location.href = "https://www.baidu.com"
+            console.log(location.hash) // 返回url中#后面的内容（包括#）
+            console.log(location.host) // 返回主机名（包括端口）
+            console.log(location.hostname) // 返回主机名
+            console.log(location.pathname) // url中的路径部分
+            console.log(location.protocol) // 协议
+            console.log(location.search) // 查询字符串
+        }, 1000);
+        // e.navigator：可以获取客户端的一些信息
+        console.log(navigator.userAgent) // UA
+        console.log(navigator.platform) // 浏览器支持的系统
+        // f.screen：先不讲
+
+        // 8.定时器
+        // >>定时器
+        // 1>.setInterval() - 循环定时器（循环执行）
+        // 第一种方式
+        var num = 0;
+        setInterval(function () {
+            alert(num)
+        }, 1000);
+        var timer = setInterval(function () {
+            console.log(num)
+            num++;
+            // 清除定时器
+            if (num === 0) {
+                clearInterval(timer)
+            }
+        }, 1000);
+        alert(typeof(timer));
+        // 第二种方式：使用较少
+        setInterval("test(123)", 1000)
+        function test(a) {
+            console.log(a);
+        }
+        // 2>.setTimeout() - 炸弹定时器（执行一次）
+        setTimeout(function () {
+            console.log(num)
+            num++
+        }, 1000)
+        var timeOut = setTimeout(function () {
+            clearTimeout(timeOut)
+        }, 1000)
+    </script>
+</head>
+<body>
+    <!-- 第三种写法：必须写()、不写会误以为是字符串 -->
+    <div id="box" class="box" onclick="test()"></div>
+    <input type="text" value="我是一个属性" id="lrsdk_input_first_box">
+    <div class="lrsdk_input_box" id="lrsdk_input_second_box">我是一个内容</div>
+    <ul>
+        <li>
+            <a href="javascript:void(0)">首页</a>
+        </li>
+        <li></li>
+        <li></li>
+    </ul>
+</body>
+</html>

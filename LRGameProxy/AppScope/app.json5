@@ -1,6 +1,6 @@
 {
   "app": {
-    "bundleName": "com.example.lrgameproxy",
+    "bundleName": "com.lrgameproxy.goc.sea",
     "vendor": "example",
     "versionCode": 1000000,
     "versionName": "1.0.0",

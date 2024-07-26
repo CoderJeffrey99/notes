@@ -1,0 +1,368 @@
+<!-- 声明文档类型 -->
+<!DOCTYPE html> 
+<!-- 根标签 -->
+<html lang="en">
+<!-- 头标签 -->
+<head>
+    <!-- 
+      13.meta标签
+      ! + tab ==> html5的标签结构
+     -->
+    <!-- 1>.编码格式：utf8通用字符集 -->
+    <meta charset="UTF-8"> 
+    <!-- 2>.关键字 -->
+    <meta name="keywords" content="Java培训，Android培训，iOS培训">
+    <!-- 3>.网页描述 -->
+    <meta name="description" content="Java培训，Android培训，iOS培训">
+    <!-- 4>.作者姓名 -->
+    <meta name="author" content="谢吴军">
+    <!-- 5>.css链接 -->
+    <link rel="stylesheet" href="../css/donew_init.css">
+    <!-- 6>.网页顶部小图标："favicon.ico" -->
+    <link rel="icon" href="../../assets/logo.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 7.网页重定向 -->
+    <meta http-equiv="refresh" content="5; https:www.baidu.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 标题标签 -->
+    <title>Document</title>
+    <!-- 超链接优化写法：让页面所有的超链接都在新窗口打开 -->
+    <base target="_blank">
+</head>
+<!-- 主体标签 -->
+<body>
+    
+    <!-- 
+        1.常用快捷键
+        1>.command+C/V/X/A/S/Z - 复制/粘贴/剪切/全选/保存/撤销一步
+     -->
+
+    <!--  
+        2.认识大前端：利用html + css + js等技术将效果图生成网页
+        1>.大前端 = pc端（网页） + 移动端（Android + iOS + + Harmony + 小程序）
+        2>.用户体验：看着舒服，用起来爽
+        3>.学习态度：养成一种习惯
+     -->
+
+    <!-- 
+        3.认识网页
+        1>.网页是由文字、图片、输入框、音频、视频、超链接组成
+        2>.web标准：W3c组织（万维网联盟）、html结构标准 + css表现标准 + js行为标准
+    -->
+
+    <!-- 
+        4.认识浏览器
+        1>.概述：一个上网的客户端（软件）
+        2>.主流浏览器：IE浏览器、Firefox火狐浏览器、Chrome谷歌浏览器、Safari浏览器
+        3>.浏览器内核（渲染引擎）：决定浏览器如何显示网页内容和页面格式信息
+        4>.兼容性：渲染引擎是兼容性问题出现的根本原因
+     -->
+
+    <!-- 
+        5.认识url
+        // scheme：因特网服务类型：http协议（超文本传输协议）、https协议
+        // host：主机：www
+        // domain：因特网域名（不包括www，比如baidu.com）
+        // :port：端口号（网页默认端口：80）
+        // path：网页所在服务器上的路径
+        // filename：文件名称
+        scheme://host.domain:port/path/filename
+     -->
+
+    <!-- 
+        6.认识html
+        1>.超文本标记语言：后缀名不能决定文件格式，只能决定文件打开的方式
+        2>.标签分类：单标签、双标签
+        3>.开发工具：sublime、VsCode、WebStorm
+     -->
+
+    <!--  
+        7.标签：不区分大小写、推荐使用小写
+        // 单标签
+        1>.注释标签
+        2>.换行标签：<br>换行不会生成空白行
+        3>.水平线标签：<hr>
+        // 双标签
+        1>.段落标签：<p>上下自动生成空白行</p>
+        2>.标题标签：<h1 - h6>h1标签在一个页面最多只能出现一次</h1 - h6>
+        3>.文本标签：<font></font>
+        // 常见属性
+        1>.id属性
+        2>.class类属性
+        3>.lang语言
+        4>.dir文字流向
+    -->
+    <p id="lr_sdk_ios" class="lr_sdk_android" lang="en" dir="rtl">123</p>
+
+    <!-- 8.注释 -->
+    <!-- 单行注释 -->
+    <!-- 
+      多行注释
+     -->
+    
+    <!-- 
+        9.图片标签
+        // 相对路径：从“文件自身”出发
+        // 绝对路径：从”我的电脑“出发（基本不使用）
+        src - 图片来源
+        alt - 替换文本（必写属性）：图片不显示的时候显示的文字
+        title - 提示文本：鼠标放在图片上显示的文字
+        // 图片没有定义宽高：按原始图片比例显示
+        // 图片只设置宽度/高度：图片等比例缩放（不会变形）
+        // 图片设置宽度和高度：图片可能会变形
+        width - 图片宽度
+        height - 图片高度
+     -->
+     <img src="../../assets/logo.png" alt="logo" title="vue" width="100" height="100">
+
+    <!-- 
+        10.超链接
+        href - 跳转的页面、路径（必写属性）
+        title - 提示文本：鼠标放在链接上显示的文字
+        target
+            _self：默认值（在自身页面打开：关闭自身页面，打开链接页面）
+            _blank：打开新页面（自身页面不关闭，打开一个新的链接页面）
+     -->
+      <a href="" title="" target="_blank">百度一下</a>
+      <p>
+        事实上，吴京在社交媒体上晒出了一张与郭帆的合照，并手捧一份“结婚证”，调侃道：“同喜”。这一幽默且出人意料的举动立即引发了网友们的惊讶和娱乐。
+      </p>
+      <p id="top">
+        事实上，吴京在社交媒体上晒出了一张与郭帆的合照，并手捧一份“结婚证”，调侃道：“同喜”。这一幽默且出人意料的举动立即引发了网友们的惊讶和娱乐。
+      </p>
+      <p>
+        事实上，吴京在社交媒体上晒出了一张与郭帆的合照，并手捧一份“结婚证”，调侃道：“同喜”。这一幽默且出人意料的举动立即引发了网友们的惊讶和娱乐。
+      </p>
+      <p>
+        事实上，吴京在社交媒体上晒出了一张与郭帆的合照，并手捧一份“结婚证”，调侃道：“同喜”。这一幽默且出人意料的举动立即引发了网友们的惊讶和娱乐。
+      </p>
+      <p>
+        事实上，吴京在社交媒体上晒出了一张与郭帆的合照，并手捧一份“结婚证”，调侃道：“同喜”。这一幽默且出人意料的举动立即引发了网友们的惊讶和娱乐。
+      </p>
+    <!-- 
+        锚点
+     -->
+     <a href="#top">回到顶部</a>
+    <!-- 
+        空链：链接路径使用js操作
+     -->
+     <a href="#"></a>
+     <!-- 压缩文件的下载 -->
+     <a href="../xxx.zip">下载</a>
+     <!-- 发送邮件 -->
+     <a href="mailto: 15601749931@163.com?subject=lrgame&body=lrsdk">发送邮件</a>
+    
+    <!-- 
+      11.特殊字符
+      &quot; - "
+      &apos; - '
+      &amp; - &
+      &nbsp; - 空格
+      &lt; - 小于号/small
+      &gt; - 大于号/big
+      &copy; - ©
+     -->
+     &lt;&gt;
+
+    <!-- 
+        12.列表
+     -->
+    <!-- 
+      无序列表
+      square 实心方点
+      disc 实心圆点（默认）
+      circle 空心圆点
+     -->
+     <ul type="square">
+        <li>首页</li>
+        <li>视频</li>
+        <li>会员</li>
+        <li>我的</li>
+     </ul>
+    <!-- 
+      有序列表
+      type指定编号类型
+      1
+      A
+      a
+      start指定编号的起点
+     -->
+     <ol type="A" start="3">
+        <li>首页</li>
+        <li>视频</li>
+        <li>会员</li>
+        <li>我的</li>
+     </ol>
+    <!-- 自定义列表 -->
+     <dl>
+        <dt>小米集团</dt>
+        <dd>加入我们</dd>
+        <dd>联系我们</dd>
+        <dd>关于我们</dd>
+     </dl>
+
+    <!-- 
+      13.文本格式化标签：基本不使用（直接可以使用span + css替代）
+     -->
+    <strong>字体加粗</strong>
+    <em>字体倾斜</em>
+    <del>字体删除线</del>
+    <ins>字体下划线</ins>
+    <small>较小的字体</small>
+    <mark>标记文字：显示黄色墨水</mark>
+    <code>程序代码引用</code>
+    <!-- 2^3 -->
+    2<sup>3</sup>
+    <!-- H2O -->
+    H<sub>2</sub>O
+
+     <!-- 
+      14.表格标签
+      border="1" - 边框
+      width="100%" - 宽度：列平分大小、会因为cellpadding被撑开（100%表示窗口多大就会显示多大）
+      height="300" - 高度：thead、tfoot默认自适应、tbody会根据高度撑开（平分）
+      cellspacing="0" - 单元格之间的距离：上下左右、边框和cell之间也会有间隔
+      cellpadding="10" - 内容距边框的距离（默认垂直方向居中、水平方向居左）：当“内容+cellpadding * 2”没有超过cell宽度，左边 == cellpadding，右边不管；当“内容+cellpadding * 2”超过cell宽度，左边 == cellpadding，右边 == cellpadding（宽度会扩大），上下亦然
+      align - 表格整体对齐方式
+      -->
+      <!-- 
+        // 表格的标准结构
+        <table>
+        <thead>
+          <tr>
+            // 表标题：默认垂直方向居中、水平方向居中、粗体
+            <th>挖掘机</th>
+            <th>挖掘机</th>
+            <th>挖掘机</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>挖掘机</td>
+            <td>挖掘机</td>
+            <td>挖掘机</td>
+          </tr>
+          <tr>
+            <td>挖掘机</td>
+            <td>挖掘机</td>
+            <td>挖掘机</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>挖掘机</td>
+            <td>挖掘机</td>
+            <td>挖掘机</td>
+          </tr>
+        </tfoot>
+      </table>
+       -->
+      <!-- <table border="1" width="100%" height="300" cellspacing="0" cellpadding="10" align="center" bgcolor="yellow">
+        // 表格标题
+        <caption>表头</caption>
+        <tr>
+          <th>姓名</th>
+          <th>年龄</th>
+          <th>职业</th>
+        </tr>
+        <tr>
+          <td align="center">张三</td>
+          // 垂直方向：top middle bottom
+          <td valign="top">18</td>
+          // 合并单元格：列合并
+          <td rowspan="2">挖掘机</td>
+        </tr>
+        <tr>
+          // 合并单元格：行合并
+          <td colspan="2">马六</td>
+        </tr>
+      </table> -->
+
+       <!-- 
+        15.表单
+        1>.get请求通过地址栏传输信息，安全性差
+        2>.post通过login.php来处理信息，安全性高
+       -->
+       <form action="login.php" method="post">
+        <!-- 表单信息分组 -->
+        <fieldset>
+            <!-- 分组名称 -->
+            <legend>分组名称</legend>
+            <!-- 
+            文本输入框
+            name - 输入框的名称
+            value - 输入框的内容
+            maxlength - 限制输入字符的长度
+            readonly - 只读：不能编辑
+            disabled - 未激活
+            required - 必填
+            autofocus - 自动获取焦点
+            -->
+          <input type="text" name="username" value="大前端" maxlength="6" placeholder="请输入用户名" readonly disabled required autofocus>
+          <!-- 密码输入框 -->
+          <input type="password">
+          <!-- 
+            单选框
+            checked - 默认选中项
+            将‘name="sex"’设置成一样可以实现单选效果
+            -->
+          <input type="radio" name="sex" checked>男
+          <input type="radio" name="sex">女
+          <!-- 
+            多选框
+            selected - 默认选中
+            -->
+          <input type="checkbox" checked>喝酒
+          <input type="checkbox" checked>抽烟
+          <input type="checkbox">烫头
+          <!-- 普通按钮：不能提交内容，必须与js配合使用 -->
+          <input type="button" value="Login">
+          <!-- 图片按钮 -->
+          <input type="image" src="../../assets/logo.png">
+          <!-- 文件上传框 -->
+          <input type="file">
+          <!-- 重制按钮 -->
+          <input type="reset">
+          <!-- 滑块 -->
+          <input type="range" step="50">
+          <!-- 
+            下拉列表
+            multiple(ma'tipl) - 多选
+            selected - 默认选中
+            -->
+            <select multiple>
+              <!-- 分组 -->
+              <optgroup label="中国">
+                <option selected>北京</option>
+                <option>河北</option>
+                <option>山东</option>
+                <option>安徽</option>
+              </optgroup>
+            </select>
+          <!-- 
+          多行文本框
+          cols(kou'z) - 最大可输入列数：控制输入字符的长度
+          rows - 最大可输入行数：控制输入字符的列数
+          -->
+          <textarea cols="30" rows="10"></textarea>
+        </fieldset>
+       </form>
+
+       <!-- 16.其他标签 -->
+       <!-- 框架：永远不要在html网页中使用框架frame、frameset和iframe（内联框架） -->
+       <!-- html5不再支持frameset框架 -->
+       <iframe src="" frameborder="0"></iframe>
+       <!-- 嵌入多媒体 -->
+       <!-- <embed src="../" align="center" loop="" playcount="5" width="100" height="100"> -->
+       <!-- marquee滚动文本 -->
+       <marquee behavior="滚动类型" direction="滚动方向"></marquee>
+
+       <!-- 
+        17.标签语义化
+        1>.概念：根据内容的结构化（内容语义化）来选择合适的标签（代码语义化）
+        2>.意义：网页结构合理、有利于SEO、方便其他设备解析、便于团队开发维护
+        3>.注意事项：尽量不使用div/span、尽量使用p、样式使用css设置
+        4>.判断标准：去掉css文件以后，网页结构依然很清晰
+        -->
+</body>
+</html>

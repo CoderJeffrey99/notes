@@ -1,0 +1,1393 @@
+ #关于内存：
+ 概述：java程序在运行时，需要内存分配空间；
+ 分类：堆-存储new出来的东西；
+ 栈-存储局部变量
+ 方法区-xxx
+ 本地方法区-系统相关
+ 寄存器-cpu使用
+ /*
+ java中到底是传值还是传址？
+ 1.java中传值也是传址：基本数据类型传的是值，引用数据类型传的是址-错
+ 2.java中是传值非传址：因为地址值也是值(高司令支持)-对
+ */
+
+ #类与对象：
+ 面向对象编程：封装性、继承性、多态
+ 类class：成员变量+方法
+ 构造方法：类中没有构造方法，默认调用无参构造函数；有构造方法，不能
+ 调用无参构造方法、对象不能调用构造方法；不能用void修饰
+ 创建对象：分配内存空间；
+ 垃圾回收机制：java周期性的检测某个实体是否不再被任务对象所引用，释放该
+ 实体占有的内存；
+ 空对象异常：NullPointerException //java不对空对象进行检查
+
+ #成员变量&方法
+ 1.成员变量：事物属性，在类中方法外
+ int age;//实例变量
+ static int age;//类变量
+ 2.常量：final修饰的量
+ final int MAX;
+ 3.方法：事物行为，不调用不执行、不能嵌套
+ 修饰符 返回值类型 方法名(参数类型 参数值) {
+    //方法体
+    return 返回值;
+ }
+ static int sum() {};//类方法、静态方法
+ int sum() {};//实例方法
+ 4.方法重载：
+ 1).一个类中可以有参数个数或者类型不同，方法名相同方法；
+ 2).跟返回值无关，不管返回int、String都算方法重载，只看参数列表；
+ 5.包-文件：package 包名;
+ import语句：可以引入包重的类；
+ 见MyClass.java
+ 注意⚠：1.返回类型为void，直接执行，不支持打印输出；
+ 2.单独调用不推荐；
+ 3.java遵循就近原则；
+ //成员变量和局部变量的区别
+ 成员变量：在类中方法外、属于对象，在堆内存、随着对象的创建而存在/消失、有默认初始化值
+ 局部变量：在方法定义/声明中、属于方法、在栈内存、随着方法的调用而存在/消失、没有默认初始化值
+
+ #匿名对象：调用一次就创造一次
+ Car c = new Car(); //创建对象，对象名为c
+ new Car(); //匿名对象
+ 作用：1.匿名对象可以调用属性，但是没有意义；
+ 2.匿名对象可以调用方法，有意义；
+ 3.可以作为参数传递；
+ 注意⚠：如果对同一方法多次调用，不能使用匿名对象，因为匿名对象调用一次就会创建一次；
+
+ #面向对象的三大特征：
+ 1).封装性：
+ 定义：利用类将数据和基于数据的操作封装起来，数据被保护在类的内部，系统的其他
+ 部分只有通过被授权的操作，才可以与这个类进行交互；
+ 原则：将不需要对外提供的内容隐藏起来、把属性隐藏起来，提供公共方式对外访问；
+ 好处：将数据隔离、便于使用、提高重用性、提高安全性；
+ 2).继承性：
+ 定义：新类可以从其它已有的类中派生：保持了父类中的行为和属性，但增加了新的功能；
+ 3).多态：
+ 定义：指一个程序中可以有同名的不同方法共存的情况，可以利用子类对父类方法的覆盖
+ 和重载在同一个类中定义多个同名的方法来实现；
+ //this
+ 不能出现在类方法中，表示当前类的引用；
+ 可以调用成员方法，也可以调用方法；
+
+ #构造方法：
+ 作用：给对象的数据(数据)进行初始化；
+ 特点：1.方法名和类名一致；
+ 2.没有返回值类型(void都没有)；
+ 3.没有具体返回值；
+ 注意⚠：1.构造方法不需要调用，一创建对象就执行；
+ 2.如果在一个类中没有定义构造方法，系统会默认给一个空参的构造方法；
+ 3.如果定义有参构造函数，系统不会再默认给一个空参的构造方法，需要自己定义；
+ 4.默认调用super()，必须在第一行；
+ 区别：构造方法与setXxx()的不同？
+ 1.构造方法是用来给对象中的属性初始化的，setXxx()是用来修改属性值(在原来
+ 基础上)；
+ //静态：static
+ 1.既可以用对象调用，也可以用类名调用；
+ 2.共性用静态，特性用非静态；
+ 3.静态方法不能访问非静态成员；//静态方法先于对象存在
+ 4.非静态成员方法可以调用静态的成员(方法/变量)；
+ //静态变量(类变量)和成员变量(实例/对象变量)的区别？
+ 1.静态变量属于类，成员变量属于对象；
+ 2.静态变量存储于方法区的静态区，成员变量存储于堆内存；
+ 3.静态变量随着类的加载而加载，成员变量随着对象的创建而存在；
+ 4.静态变量可以通过类名/对象而调用，成员变量只能通过对象名调用；
+ 注意⚠：JVM调用main();
+ //工具类
+ 当一个类中所有的方法都是static的，需要将构造函数私有化；
+
+ #代码块：
+ //局部代码块：在方法中，限制变量生命周期
+ {
+    //代码块
+ }
+ //构造代码块：在执行构造方法之前调用，创建一个对象调用一次
+ 作用：如果每个对象都具有相同的属性/行为，我们可以在构造代码块中执行；
+ //静态代码块：随着类的加载而加载，只执行一次-优先于main()执行？
+ static {
+    //用于加载驱动
+ }
+
+ #继承super：访问权限不能改变
+ 定义：一种由已有的类创建新类的机制；
+ 特点：java不支持多继承、但是支持多层继承；与Objective-C一样
+ 格式：class 子类 extends 父类 {}
+ 在同一个包中：可以继承除private以外的成员变量/方法；
+ 在不同包中：只可以继承protected、public的成员变量/方法；
+ //开发原则：高内聚、低耦合
+ 内聚：自己完成某件事的能力；
+ 耦合：类与类的关系；
+ 注意⚠：1.构造方法不能继承；
+ 2.this可以访问自己的成员变量，也可以访问父类的成员变量；super只会访问
+ 父类的成员变量；
+ 3.子类中所有的构造方法默认都会访问父类的空参的构造方法：super();
+ 4.this("xwj",24);//调用本类其他的构造方法
+ 5.构造函数中有this没super、有super没this；
+ 6.this()/super()[这叫做语句，只能放在构造方法中]必须放在构造函数
+ 的第一行；//区别this.test()/super.test()[这是调用可以放在任何方法中]?
+ 7.如果父类和子类中方法构成重写，子类想要调用父类的方法用super.init();
+
+ #方法重写：
+ 父类中私有方法不能被重写：因为父类私有方法子类根本无法继承；
+ 子类重写父类方法时，访问权限(public>protected>private)不能更低；
+ 父类静态方法，子类也必须通过静态方法进行重写：静态只能覆盖静态；
+ //Override和Overload的区别？
+ //怎么定义一个类？
+ 1.定义属性(private)；
+ 2.定义空参和有参构造方法；
+ 3.setXxx()和getXxx()方法；
+ 4.定义行为(方法)；
+
+ #final：
+ 定义：可以修饰类、方法和变量；
+ final class A {}; //final类不能被继承
+ final void test() {};//final方法不能被重写
+ final int NUM = 20;//final修饰的变量不能改变：常量/全部大写
+ 注意⚠：1.final修饰的引用数据类型，不能改变内存地址值，但是可以修改对象
+ 内部的属性值；//参考swift
+ 2.final修饰的变量必须定义时初始化：final int NUM;//错误
+ 3.final修饰的变量可以构造函数赋值：很少使用
+
+ #多态
+ 定义：同一个接口不同的实现，父类的指针创建子类的对象；
+ //重写：重新实现一遍父类的方法，子类最终执行子类重写以后的方法
+ //重载：在一个类中定义多个同名的方法，要求每个方法具有不同的参数类型和个数；
+ //实现条件
+ 1.有继承关系；
+ 2.有重写；
+ 3.父类的指针指向子类的对象；Animal a = new Cat();
+ 注意⚠：1.成员变量：编译/运行看左边；
+ 2.成员方法：编译看左边，运行看右边；
+ 3.静态成员方法：编译/运行看左边、不存在覆盖的说法；
+ //超人故事？
+ 1.父类引用指向子类对象(自动类型提升，向上转型)
+ 2.强制类型转换(向下转型)
+ 弊端：不能调用子类特有的方法；(必须强转型)
+ 注意⚠：多态多用于参数；
+
+ #abstract：抽象
+ //抽象类：申明某种规则，子类必须强制执行
+ abstract class A {
+    //抽象类可以没有抽象方法
+    public void sleep() {
+        system.out.println("");
+    }
+    //抽象方法必须在抽象类中
+    public abstract int sum();//抽象方法没有方法体
+ }
+ 1.不能被实例化(创建对象)；A a = new A();错误
+ 2.抽象类的子类要么是抽象类、要么重写抽象类中所有的抽象方法；
+ class B extends A {
+     int sum() {
+        return x;
+     }
+ }
+ 3.父类引用指向子类对象：A a = new B();
+ 4.直接创建子类对象：B b = new B();
+ 5.有构造方法，但是不能创建对象；//给子类初始化
+ 注意：abstract不能与哪些关键字共用？
+ private/static/final不能与abstract共用；
+
+ #java回调机制
+ 特点：接口多做为参数、类似iOS中的block；
+ 作用：实现类与类之间的通信；
+ 代码：见cmsdk
+
+ #package包：
+ 定义：相当于文件夹；
+ 作用：将字节码(.class)进行分类存放；
+ 格式：package 包名(一般域名倒过来，;结束)；com.changmeng.www
+ 导入包：1.package 包名->2.import 包名
+ 注意⚠：使用一个类就必须要导入包；
+
+ #常见修饰符：
+ //访问权限
+ public //公有：整个程序
+ protected //保护：本类/同一个包/不同包下子类
+ 默认 //默认：本类/同一个包
+ private //私有：本类可用
+ //状态修饰符
+ static //静态
+ final //最终
+ //抽象修饰符
+ abstract //抽象
+
+ #内部类：内部类B-外嵌类A
+ 概述：java支持在一个类中声明另一个类；
+ 格式：外部类名.内部类名 对象名 = 外部类对象.内部类对象;
+ //外部类访问内部类成员：必须创建对象
+ Outer.Inner oi = new Outer().new Inner();
+ //内部类访问外部类成员：直接访问
+ 注意⚠：1.类的私有成员(成员变量、成员内部类)只能通过public方法调用；
+ 2.静态内部类：外部类名.内部类名 对象名 = 外部类名.内部类对象;
+ 3.成员内部类中不可以定义静态成员；
+ 4.局部内部类：定义在方法中的内部类
+
+ #匿名内部类
+ //接口和类名的子类对象
+ new 接口/类名() {
+    //需要重写的方法
+ }
+ //父类指针指向子类对象
+ 接口名/类名 xxx = new 接口/类名() {
+                    //需要重写的方法
+                  }
+ xxx.print();
+ 应用：1.抽象类不能new对象，利用匿名内部类可以不创建子类；
+ 链式编程：调用方法返回的是对象，还可以继续调用方法；
+
+ #Unicode标准字符集：
+ java语言使用，基本包含了世界上所有语言的"字母"；
+ 可识别65536个字符，前128个为ASCII码；
+
+ #字符串String：
+ String msg = new String();
+ String name = new String();
+ Log.v(TAG,msg+name);//拼接字符串
+ msg.length();//获取字符串长度
+ msg.trim();//去掉字符串空格
+ msg.equals(name);//判断字符串是否相等
+
+ #StringBuffer/StringBuilder：
+ //可变字符序列：StringBuffer
+ 概述：线程安全的可变字符序列，从jdk1.0开始；
+ 与String区别：String是一个不可变字符序列、StringBuffer是一个可变的字符序列
+ 代码：Model_04.java
+ //可变字符序列：StringBuilder
+ 概述：线程不安全的可变字符序列、效率高，从jdk1.5开始；
+
+ #冒泡排序：
+ 原理：将相邻元素两两排序，让较大的数沉底，一共需要(n-1)轮排序；
+ int[] arr = {12,15,34,56,13};
+ int temp;
+ StringBuffer sb = new StringBuffer();
+ sb.append("[");
+ for (int i=0;i<arr.length;i++) {
+    for (int j=0;j<arr.length-1;j++) {
+        if (arr[j]>arr[j+1]) {
+            temp = arr[j+1];
+            arr[j+1] = arr[j];
+            arr[j] = temp;
+        }
+    }
+    for (int k=0;k<arr.length;k++) {
+        if (k==arr.length-1) {
+            sb.append(arr[k]).append("]");
+        } else {
+            sb.append(arr[k]).append(", ");
+        }
+    }
+    System.out.println(sb.toString());
+ }
+
+ #选择排序：
+ 原理：从下标0开始，依次作为待比较的元素，然后遍历数组找到最小的元素与
+ 待比较的元素交换，一共需要(n-1)轮排序；
+ int[] arr = {12,15,34,56,13};
+ int temp;
+ StringBuffer sb = new StringBuffer();
+ sb.append("[");
+ for (int i=0;i<arr.length-1;i++) {
+    for (int j=i+1;j<arr.length;j++) {
+        if (arr[i]>arr[j]) {
+            temp = arr[j];
+            arr[j] = arr[i];
+            arr[j] = temp;
+        }
+    }
+    for (int k=0;k<arr.length;k++) {
+        if (k==arr.length-1) {
+            sb.append(arr[k]).append("]");
+        } else {
+            sb.append(arr[k]).append(", ");
+        }
+    }
+    System.out.println(sb.toString());
+ }
+
+ #二分查找
+
+ //泛型：将运行期的错误转换到编译期、省去强制转换的麻烦、安全机制
+ //增强for循环：简化遍历代码
+ //静态导入：开发不需要
+ //可变参数：就是可以变化的数组
+
+ #其他常见对象：
+ //Pattern
+ Pattern p = Pattern.compile("1[345678]\\d{9}");//获取正则对象
+ Matcher m = p.matcher("我以前用的电话号码186542963201，现在用的电话
+ 号码：18642963201");//获取匹配器
+ boolean b = m.matches();
+ while(m.find()) {
+    System.out.println(m.group());
+ }
+ //System
+ System.gc();//启动垃圾回收
+ System.exit(0);//退出JVM：非0是异常终止
+ long l = System.currentTimeMillis();//以ms为单位的当前时间
+ //BigInteger：可以存很大的数的对象
+ BigInteger i1 = new BigInteger("123444567822938389292");//多用于金融：存放很大的数目
+ BigInteger i1 = new BigInteger("5644358395325935253");
+ //BigDecimal：为了精确运算小树
+ BigDecimal b = new BigDecimal(2.0);//用Double作为参数：开发不用
+ BigDecimal b1 = new BigDecimal("2.0");//用String作为参数：推荐使用
+ BigDecimal b2 = BigDecimal.valueOf(2.0);//推荐使用
+ //Date
+ Date d1 = new Date(); //创建当前时间对象
+ d1.setTime(1000);//设置ms值
+ System.out.println(d1);
+ System.out.println(d1.getTime());//获取当前时间的ms值
+ Date d2 = new Date(0);//根据指定的毫秒值创建时间对象
+ System.out.println(d2);
+ //DateFormat
+ Date date = new Date();
+ System.out.println(date);
+ DateFormat dateFormat = DateFormat.getDateInstance();//返回DateFormat的子类对象
+ System.out.println(dateFormat.format(date));//2018-8-16
+ SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");//特别强大
+ System.out.println(sdf.format(date));//2018年08月16日 14:42:05
+ //String->Date
+ String str = "2012年3月22日 08:30:30";
+ SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+ Date d = sdf1.parse(str);
+ System.out.println(d);
+ //Calendar：抽象类—通过单例创建对象
+ Calendar c = Calendar.getInstance();
+ int year = c.get(Calendar.YEAR);
+ int month = c.get(Calendar.MONTH)+1;
+ int day = c.get(Calendar.DAY_OF_MONTH);
+
+ #java的集合类：
+ 1.数组的弊端：
+ 数组既可以储存引用数据类型、也可以存储基本数据类型；
+ 数组的长度是固定的，不能自动增长；
+ 2.数组和集合的区别？
+ 集合只能存储引用数据类型：对象、集合的长度是可变的；
+ 3.Collection：集合的根接口
+ 代码：见Model_07.java
+ 4.List：存和取的顺序一致、有索引、可以重复
+ 定义：List集合中，每个元素都有其对应的顺序索引，允许加入重复元素；
+ //ArrayList：线程不安全、底层数组实现-synchronizedList(List<T> list)将ArrayList变成线程安全的
+ 特点：灵活插入元素、删除元素，支持自动改变大小
+ 缺点：运行速度比一般数组差些，如果初始容量为4...会2倍扩容浪费时间；
+ List list = new ArrayList();//初始化：默认容量为0
+ List list = new ArrayList(3);//默认容量为3
+ List list = new ArrayList(array);//array为集合
+ list.add("name");//添加元素
+ list.remove(obj);//删除元素
+ list.removeAt(int index);//移除索引为index的数字元素
+ list.contains(obj);//是否存在obj元素，返回bool
+ list.size();//获取list的长度
+ //Vector：跟ArrayList几乎完全一样、线程安全、底层数组实现：现在已经被ArrayList替代
+ 代码：见Model_07.java
+ //LinkedList：链表实现、能够进行队列操作
+ 代码：见Model_07.java
+ 5.Set：存和取的顺序不一致、无索引、不可以重复
+ 定义：set集合中，多个对象之间没有明显的顺序，也不能重复；
+ //HashSet：使用hash算法来存储集合中的元素；
+ //LinkedHashSet：在set集合中唯一可以保证怎么存怎么取
+ //TreeSet：通过二叉树实现-升序排列：比较器Comparator
+ //SortedSet：实现此接口的子类都属于排序的子类；
+ //EnumSet：所有元素都必须是指定枚举类型的枚举类；
+ 代码：见Model_09.java
+ 6.Map：没有继承Collection、用于保存具有"映射关系"的数据
+ //HashMap：类似iOS中NSMutableDictionary；
+ 基础：见Model_09.java
+ 遍历：见Model_10.java
+ //TreeMap：按照key比较
+ 7.迭代器
+ 原理：迭代器对集合进行遍历，而每个集合内部的存储结构都是不同的，所以每一个
+ 集合存和取都是不一样的，那么就需要把这样的方法向上抽取成接口；
+ 注意⚠️：1.怎么删除ArrayList中重复的对象？//需要重写equals()方法
+ 2.Object[] arr = collection.toArray();//集合->数组
+ Collection c = Arrays.asList(arr);//数组->集合：必须元素是引用类型的数组、否则只会将整个数组当成一个对象
+ 3.怎么保证集合中自定义对象的唯一性：重写equals()方法；
+ 在HashSet中怎么保证自定义对象的唯一性：重写equals()、hashCode()方法；
+ 4.HashSet和HashMap什么区别？？？
+ HashSet底层依赖于HashMap、HashMap的keys组成HashSet；
+ 5.HashMap和Hashtable的区别？？？
+ 共同点：都是用hash算法；
+ 不同点：1.Hashtable是jdk1.0、同步的、线程安全、
+ HashMap是jdk1.2、不同步、线程不安全；
+ 2.Hashtable的键值对都不能存null、
+ HashMap的键值对可以存null；
+ 6.Collections：集合工具类、Arrays：数组工具类
+
+ #泛型：JDK1.5以上
+ 定义：将类型参数化，建立数据结构的时候，不必进行强制类型转换；
+ 作用：通过类型参数使我们的程序具有更好的可读性和安全性；
+ 格式：<T> //T代表引用数据类型，比如String、Person类
+ //1.泛型集合
+ ArrayList<T> array = new ArrayList<>();
+ //2.泛型类
+ class A<T> {
+    private T key;
+    public setKey(T key) {
+        this.key = key;
+    }
+    public T getKey() {
+        return key;
+    }
+    //3.泛型方法
+    public void show(T t) {
+        System.out.println(t);
+    }
+
+    public static<E> void print(E e) {  //静态方法的泛型不能和类的泛型一致
+        System.out.println(e);
+    }
+ }
+ //4.泛型接口
+ interface A<T> {
+    public T next();
+ }
+ public class B implements A<T> { //推荐使用
+    public T next() {
+        //实现方法
+    }
+ }
+ public class<T> B implements A<T> { //必须加泛型的声明
+    public T next() {
+        //实现方法
+    }
+ }
+ //5.泛型的通配符：<?>
+ ArrayList<?> array = new ArrayList<Student>();
+ 注意⚠：1.java中的泛型只在编译阶段有效；
+ 2.泛型类型T只能是引用类型(包括自定义类)，不能是基本数据类型；
+ 3.高级泛型：了解
+
+ #JDK1.5的新特性：
+ 1.自动拆装箱
+ 2.泛型
+ 3.增强for循环
+ 4.静态导入
+ 5.可变参数
+
+ #静态导入：导入静态方法
+ import static java.util.Arrays.sort //导入静态方法
+ sort(arr); //直接可用
+ 弊端：开发严重不推荐
+
+ #可变参数：
+ public void print(int... arr) {
+    /*
+    跟swift一样： func print(num:int...)->void {
+        //...
+    }
+    */
+    //...
+ }
+
+ #异常处理：Android需要的特别少
+ 1.基本概念：异常就是java程序在运行中出现的错误
+ //异常对象：也是由类创建的、层层向上抛
+ *Throwable
+    *Error：错误
+    *Exception：异常
+        *RuntimeException：运行时异常
+ 2.JVM默认怎么处理异常：
+ main函数收到异常：
+ a.自己处理该异常，然后继续运行；
+ b.自己没法解决，抛给jvm处理；
+ jvm有一个默认的异常处理机制：将异常进行处理，并且打印异常的名称、信息
+ 打印在控制台，同时停止运行程序；
+ //throws
+ public int div(int a,int b) throws Exception {
+     return a/b;
+  } //throws：用在方法声明后面、表示抛出异常、由方法的调用者处理
+ throw e;//抛出异常：用在方法体内，表示抛出异常
+ //try...catch...
+ try {
+    //检测异常：包含可能发生异常的语句
+ } catch(Exception e) { //父类引用指向子类对象
+    //捕捉异常：可以有多个catch
+    System.exit(0); //退出虚拟机，finally不会执行
+    return; //会先继续执行finally，在执行return
+ } finally {
+    //释放资源：不管是否有异常都要执行
+ }
+ //编译时异常和运行时异常？？？
+ 编译时异常Exception：在准备要做某件事的时候，要提前想到可能会发生什么事；必须处理
+ 运行时异常：编译时不会报错，程序运行起来如果有错误就会报异常；
+ //常见RuntimeException:NO
+ ClassCastException:
+ IndexOutOfBoundsException:数组越界异常
+ NoSuchElementException:
+ NullPointException:空指针异常
+ ArithmeticException:
+ 注意⚠️：Android都是try{} catch(Exception e){};
+ Java EE都是底层往上抛；
+
+ #自定义异常：NO
+
+ #文件操作：File
+ //概述
+ File是文件路径/文件夹路径；
+ 绝对路径：固定的路径，从盘符开始；
+ 相对路径：相对于某个位置，在eclipse下指当前项目；
+ //构造方法
+ File(String filename);
+ //属性
+ public String getName();//获取文件的名称
+ public boolean canRead();//判断文件是否可读
+ public boolean canWrite();//判断文件是否可写入
+ public boolean exits();//判断文件是否存在
+ public long length();//获取文件长度：单位字节
+ public String getAbsolutePath();//获取文件的绝对路径
+ public String getParent();//获取文件的父目录
+ public boolean isFile();//判断是否是一个文件
+ public boolean isDirection();//判断文件是否是一个目录
+ public boolean isHidden();//判断文件是否是隐藏文件
+ public long lastModified();//获取文件的最后修改时间
+ //目录
+ public boolean mkdir();//创建目录
+ public String[] list();//用字符串形式返回目录全部文件
+ public File[] listFiles();//用File对象形式返回目录下全部文件
+ //文件
+ File sFile = new File("c:\\mysso","sso.txt");
+ sFile.createNewFile();//创建
+ sFile.delete;//删除
+
+ #递归：函数自己调用自己、容易栈内存溢出
+ 作用：当不知道循环次数的时候，使用递归；
+ 注意⚠️：1.递归一定要有明确的结束条件，否则会造成死循环；
+ 2.构造函数不能使用递归；
+ 代码：参见NBSDK
+
+ #IO流：用来处理设备之间的数据传输，java对数据的操作是通过流的形式
+ //分类
+ 按流向分类：输入流、输出流
+ 按操作类型分类：
+ 字节流：字节流可以操作任何数据，因为在计算机中任何数据都是以字节的形式存在的；
+ 字符流：字符流只能操作纯字符数据，获取到的是字节，将字节转换成字符，写出的是字符，然后转换成字节；
+ //重要abstract类
+ InputStream：字节输入流
+ OutputStream：字节输出流
+ Reader：字符输入流
+ Writer：字符输出流
+ //书写规范
+ 使用前：导入IO包中的类；
+ 使用时：异常处理；
+ 使用后：释放资源；
+ //字节输入流：FileInputStream读取文件，文件必须存在
+ //字节输出流：FileOutputStream写出文件，文件不用必须存在(路径必须存在)
+ //四种copy：
+ 1.逐个字节copy
+ 2.定义一个大数组，文件多少个字节，数组就多大
+ 3.定义一个小数组，是1024的整数倍
+ 4.带Buffer的copy
+ //flush和close的区别？
+ flush刷新以后可以继续写、close在关闭之前会刷新一次，把缓冲区剩余的字节刷到文件
+ 上去，但是调用之后不能在写；
+ //JDK7.0以前的版本：字节流标准写法
+ public static void main(String[] args) throws IOException {
+    //不捕获异常、直接把异常向上抛出
+    FileInputStream fis = null; //成员变量使用必须init
+    FileOutputStream fos = null;
+    try {
+        fis = new FileInputStream("xwj.txt");
+        fos = new FileOutputStream("cfj.txt");
+        int b;
+        while ((b = fis.read()) != -1) {
+            fos.write(b);
+        }
+    } finally {
+        try {
+            if (fis != null)
+                fis.close();
+        } finally {
+            if (fos != null)
+                fos.close();
+        }
+    }
+ }
+ //字符流：可以直接读写字符的IO流，读取的时候先将字节转换成字符，写出的时候将字符转换成字节(利用
+ 编码表)；FileReader/FileWriter
+ 问题：1.copy纯文本用字节流好还是字符流好？字节流，不用转换
+ 2.字符流是否可以copy非纯文本的文件？不可以，会导致乱码
+ BufferedReader：readLine(); //可以整行读取
+ BufferWriter：newLine(); //写出换行(跨平台)、\r\n只支持windows系统
+ //转换流：利用编码表UTF-8、GBK
+ //LineNumber：LineNumberReader/LineNumberWrite
+
+ #设计模式：
+ //装饰设计模式：Model_15.java
+
+ #多线程：NO
+ 定义：进程是程序的一次动态执行过程，线程是比进程更小的执行单位；
+ 特点：线程中断以后，会重新进入线程队列排队等待CPU资源；
+ start();//启动线程，进入线程队列
+ run();//调度线程
+ sleep();//睡眠
+ isAlive();//调度返回true
+ currentThread();//类方法
+ interrupt();//结束休眠
+
+ #同步线程：NO
+
+ #网络编程：NO
+
+ #GUI：NO
+
+ #JDK新特性：NO
+
+#Android项目：
+ //eclipse
+ 1).新建：
+ Application Name-应用名称
+ Project Name-项目名称
+ Package Name-包名
+ Minimum Required SDK-程序最低兼容的版本
+ Target SDK-不做向前兼容的操作
+ 2).分析：
+ src：Java代码
+ gen：自动生成，永远不要手动去修改
+ assets：存放文件，程序可以动态读取：文件不参与编译
+ bin：编译时自动产生的文件
+ libs：第三方Jar包
+ res：资源文件
+ drawable：存放图片
+ values：存放一下
+ colors-颜色
+ strings-字符串
+ styles-风格
+ layout：布局文件
+ menu：菜单文件
+ AndroidManifest.xml：Android项目的配置文件
+ project.properties：指定编译程序时所使用的SDK版本
+ //AS
+ 默认的项目结构：Android模式->真是的项目结构：Project
+ .gradle/.idea：自动生成，不要自动修改
+ app：项目中代码、资源等内容都放置在这个目录下
+ build：无需关心，编译时自动生成的文件
+ gradle：包含了gradle wrapper的配置文件
+ .gitignore：.git忽略文件
+ build.gradle：项目全局的gradle构建脚本：通常不需要修改
+ gradle.properties：全局的gradle配置文件：这里配置的属性会影响到项目中所有的gradle编译脚本
+ gradlew/gradlew.bat：在命令行界面执行gradle命令的：gradlew：Linux、Mac/gradlew.bat：Windows
+ Xxxx.iml：自动生成：用于标识这是一个IntelliJ IDEA项目，不需要修改
+ local.properties：用于指定本机的Android SDK路径：一般不需要修改，除非路径发生改变
+ settings.gradle：指定项目中所有引入的模版：很少修改
+ //app目录分析：
+ build：跟外层的build目录类似，不过更加复杂，不需多多关心
+ libs：存放第三方jar，该目录下的jar包会自动添加到构建路径里面
+ androidTest：此处是用来编写AndroidTest测试用例，可以对项目进行自动化测试
+ java：存放java代码的地方
+ res：存放资源的地方
+ AndroidManifest.xml：Android项目的配置文件
+ test：用来编写Unit Test测试用例的
+ .gitignore：.git忽略文件
+ app.iml：自动生成，无需关心或者修改
+ build.gradle：App模块的gradle构建脚本
+ proguard-rules.pro：指定项目代码的混淆规则
+ //Android模式：重点掌握
+ AndroidManifest.xml：Android项目的配置文件
+ java：存放java代码的地方
+ androidTest：此处是用来编写AndroidTest测试用例，可以对项目进行自动化测试
+ test：用来编写Unit Test测试用例的
+ res：存放资源的地方
+ build.gradle：项目全局的gradle构建脚本：通常不需要修改
+ build.gradle：App模块的gradle构建脚本
+ gradle-wrapper.properties：NO
+ proguard-rules.pro：指定项目代码的混淆规则
+ gradle.properties：全局的gradle配置文件：这里配置的属性会影响到项目中所有的gradle编译脚本
+ settings.gradle：指定项目中所有引入的模版：很少修改
+ local.properties：用于指定本机的Android SDK路径：一般不需要修改，除非路径发生改变
+
+ #详解build.gradle：NO
+ 概述：AS采用Gradle来构建项目，Gradle是一个先进的项目构建工具，基于Groovy的领域特定语言(DSL)来
+ 声明项目设置，放弃了传统基于xml(Ant、Maven)的各种繁琐配置；
+ //外层build.gradle：一般不需要修改这个文件、除非需要添加全局的项目构建配置
+ //app的build.gradle：详见build.gradle(Module:app)
+
+ #Android程序核心组件：
+ View //界面视图，组织UI控件
+ Intent //意图，支持组件之间的通信
+ Activity //活动：处理用户与UI互动
+ Content Provider //内容提供器：存储共享数据
+ IntentReceiver //接收信息及事件处理
+ Service //后台服务
+ Notification //消息与通知
+
+ #Android四大组件概念：所有组件必须在AndroidManifest.xml中注册
+ 1).活动(Activity)：类似iOS中的VC
+ 特殊：sdk没有main活动；-接触最多
+ #activity的生命周期：
+ 作用：更加合理的管理应用资源；
+ 完整生命周期：onCreate()->onDestroy();
+ 可见生命周期：onStart()->onStop();
+ 前台生命周期：onResume()->onPause();
+ onCreate(); //初始化Activity
+ onStart(); //Activity由不可见变为可见的时候调用
+ onResume(); //Activity准备好和用户进行交互的时候调用：处于运行状态
+ onPause(); //系统准备去启动或者恢复另一个活动的时候调用
+ onStop(); //Activity完全不可见的时候调用
+ onDestroy(); //Activity被销毁之前调用：释放所有系统资源
+ onRestart(); //Activity由停止状态变为运行状态之前调用：重新启动
+ 管理activity：Android使用任务Task(一组存放在栈里的activity集合)来管理activity；
+ #activity状态：
+ 运行状态：可见的activity；
+ 暂停状态：不处于栈顶，可见的activity(对话框)；
+ 停止状态：完全不可见的activity，系统可能会回收；
+ 销毁状态：activity从活动中移除，系统最有可能回收；
+ #体验activity的生命周期：
+ 第一次被创建：onCreate()->onStart()->onResume()；
+ 打开第二个活动：onPause()->onStop()；
+ 关闭第二个活动：onRestart()->onStart()->onResume()；
+ 打开对话框：onPause()；
+ 关闭对话框：onRestart()；
+ 销毁活动：onPause()->onStop()->onDestroy()；
+ #活动被回收了怎么办？
+ 概念：activity被回收以后再次显示，不再执行onRestart()方法，而是执行
+ onCreate()方法，这样临时数据不能被保存；
+ 代码：见FourthActivity.java
+ #销毁当前活动：按一下Back键、finish();
+ #activity的启动模式：
+ 定义：通过给<activity>标签指定android:launchMode属性来选择启动模式；
+ 分类：
+ standard：每次启动该活动都会创建一个新的实例，默认的启动模式；
+ singleTop：如果activity在栈顶直接使用该实例；
+ singleTask：如果activity已经存在直接使用该实例；
+ singleInstance：启用新的返回栈，实现多个程序共享activity；
+
+ 2).广播接收器(Broadcast Receiver)：
+ #定义：一种可以跨进程的通信方式，系统级别的消息通知，应用只接收注册的广播；
+ #广播接收机制：允许App自由的接收广播消息、发送广播消息；
+ #类型：
+ 标准广播：完全异步执行的广播，没有先后顺序-无法截断，效率高；
+ 有序广播：同步执行的广播，有先后顺序-可以截断
+ #注册广播：
+ 动态注册：在代码中注册-必须程序启动才可以接收广播；
+ IntentFilter filter = new IntentFilter("action-name");
+ SMSReceiver receiver = new SMSReceiver();
+ registerReceiver(receiver,filter);
+ unregisterReceiver(receiver);
+ 静态注册：在AndroidManifest.xml中注册；
+ #接收系统广播：
+ 种类：手机开机完成、电池的电量发生变化、网络变化等；
+ 特点：通过监听这些广播可以得到各种系统的状态信息；
+ #发送自定义广播：
+ 特点：可以跨程序通信，A应用发送广播，B应用也可以接受；
+ 1.发送标准广播：
+ //发送com.example.broadcast.MY_BROADCAST标准广播
+ Intent intent = new Intent("com.example.broadcast.MY_BROADCAST");
+ getActivity().sendBroadcast(intent);
+ //创建MyBroadcastReceiver
+ public class MyBroadcastReceiver extends BroadcastReceiver {
+
+     @Override
+     public void onReceive(Context context, Intent intent) {
+         //实现方法
+     }
+  }
+ //注册该广播接收器
+ <receiver
+    android:name=".MyBroadcastReceiver"
+    android:enabled="true">
+        <intent-filter>
+            <action android:name="com.example.broadcast.MY_BROADCAST" />
+        </intent-filter>
+ </receiver>
+ 2.发送有序广播：
+ //发送com.example.broadcast.MY_BROADCAST有序广播
+ Intent intent = new Intent("com.example.broadcast.MY_BROADCAST");
+ getActivity().sendOrderedBroadcast(intent,null);
+ //创建MyBroadcastReceiver
+ public class MyBroadcastReceiver extends BroadcastReceiver {
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        //实现方法
+        abortBroadcast();//拦截广播
+    }
+ }
+ //注册该广播接收器
+ <receiver
+     android:name=".MyBroadcastReceiver"
+     android:enabled="true">
+         <intent-filter
+            android:priority="100"><!--priority越大，优先级越高-->
+             <action android:name="com.example.broadcast.MY_BROADCAST" />
+         </intent-filter>
+ </receiver>
+ #本地广播机制：更高效
+ 定义：发出的广播只能够在应用程序的内部进行传递；
+ 注意：本地广播是无法通过静态注册的方式来接收广播；
+ 代码：LocalActivity.java
+
+ 3).内容提供器(Content Provider)：Android实现跨程序共享数据的标准方式
+ 定义：当系统继承ContentProvider，并重写该类的方法，就可以向其他应用共享数据；
+ 作用：统一数据访问方式，实现App之间共享数据；
+ 代码：见PersonContentProvider.java
+ 内容URI：权限➕路径
+ 权限：包名.provider；
+ 路径：../table01；Cursor //ksr
+ //解析成Uri对象
+ Uri uri = Uri.parse("content://com.htgameproxy.ios/person");
+ 整体思路：获取其他App的URI，然后借助ContentResolver进行CRUD操作；
+ //读取联系人号码：NO
+ //创建自己的内容提供器：p277
+
+ 4).服务(Service)：后台默默运行，退出App仍然可以继续运行；
+ 定义：Service是运行在后台的一段代码，不是进程，也不是线程；
+ 特点：不依赖任何UI，可以运行在自己的进程，也可以运行在其他App的context里面；
+ 与activity区别：不能与用户交互，也不能自己启动；
+ 作用：Android实现程序后台运行的解决方案：比如媒体播放器、定时获取网络服务等；
+ 用法：服务不会主动开启线程，默认运行在UI线程，我们需要在服务的内部手动创建子线程；
+ #生命周期：
+ onCreate(); //创建service-只会调用一次
+ onStart(); //启动服务-可以多次调用
+ onDestroy(); //服务被终止
+ //只有采用Context.bindService()方法启动服务才会调用该方法
+ onBind(); //绑定服务-只会调用一次
+ onUnbind(); //解除绑定
+ 注意：
+ startService();//进程结束service仍然存在，调用stopService()/stopSelf()
+ bindService();//进程结束service也要结束
+ 开发步骤：
+ 1.新建Service，继承Service；
+ 2.在AndroidManifest.xml中注册；
+ #调用关系：
+ Context.startService()->onCreate()->onStart()->Context.stopService()
+ ->onDestroy()；
+ Context.bindService()->onCreate()->onBind()->onUnbind()->onDestroy()；
+ example：见代码
+ #活动和服务进行通信：NO
+
+ #服务的更多技巧：p366
+ 1.使用前台服务：NO
+ 2.使用IntentService：NO
+ 3.后台执行的定时任务：NO
+
+ #Android基础控件：见ThirdActivity.java
+ @BindView(R.id.text) == findViewById(R.id.text)
+ 1).View特征：
+ 所有高级UI组件都继承View；
+ View在屏幕上占据矩形区域，负责渲染&处理发生的事件；
+ 可以设置是否可见、可以设置是否可以获得焦点；
+ Toast //提示框：可以设置位置，见cmsdk
+ TextView //UILabel
+ Button //按钮
+ EditText //文本编辑框
+ CheckBox //复选框
+ RadioButton //单项选择
+ Spinner //下拉列表
+ TimePicker/DatePicker //时间选择器
+ ListView //UITableview
+ ScrollView //滚动视图
+ ImageView //图片视图
+ ImageButton //图片按钮
+ GridView //网格视图
+ ProgressBar //进度条
+ ProgressDialog //进度条对话框：下载
+ AlertDialog //对话框：
+ SeekBar //拖动条
+ ImageSwitcher //图片切换
+ ViewPager //屏幕切换：NO-引导页面
+ WebView //UIWebView
+ Gallery //图片切换：NO
+ TabHost //标签组件
+ Menu //菜单：包含自定义控件
+ ActionBar //NO
+ #控件的可见性：
+ android:visibility="visible" //可见
+ android:visibility="invisible" //透明
+ android:visibility="gone" //不可见
+ 2).ViewGroup特征：
+ ViewGroup对象是android.view.ViewGroup实例；
+ ViewGroup是View的容器；
+ 负责对添加进入ViewGroup的View进行布局；
+ 一个ViewGroup可以加入到另一个ViewGroup；
+ 3).事件处理机制：
+ 作用：通过设置控件的监听器来监听并处理事件；
+ onKeyDown(); //按键按下事件
+ onKeyUp(); //按键弹起事件
+ onTouchEvent(); //触笔点击事件
+ 4).布局方式：
+ 1.LinearLayout：线程布局
+ 定义：组件一行的形式显示出来；
+ 注意：
+ 1).如果LinearLayout的排列方向是horizontal，内部的控件就绝对不能将宽度
+ 指定为match_parent，如果LinearLayout的排列方向是vertical，内部的控件
+ 就不能将高度指定为match_parent；
+ 2).当LinearLayout的排列方向是horizontal时，只有vertical上的对齐方式才
+ 会生效，当LinearLayout的排列方向是vertical时，只有horizontal上的对齐方
+ 式才会生效；
+ 属性：
+ android:orientation="vertical" //指定控件排列方向
+ android:layout_weight="1" //允许使用比例的方式来指定控件的大小
+ android:gravity="center" //指定文字(内容)在控件中的对齐方式
+ android:layout_gravity="center" //指定控件在布局中的对齐方式
+ 2.AbsoluteLayout：绝对布局
+ 定义：不推荐使用-废弃；
+ 属性：android:layout_x="15dp"
+ android:layout_y="50dp"
+ 3.RelativeLayout：相对布局
+ 定义：按照相对某个组件的位置来进行布局；
+ 属性：
+ #相对于兄弟元素：
+ android:layout_below="@id/aaa" //在指定View的下方
+ android:layout_above="@id/xxx" //在指定View的上方
+ android:layout_toLeftOf="@id/bbb" //在指定View的左边
+ android:layout_toRightOf="@id/ccc" //在指定View的右边
+ #相对于父元素：
+ android:layout_alignParentLeft="true" //在父元素内左边
+ android:layout_alignParentRight="true" //在父元素内右边
+ android:layout_alignParentTop="true" //在父元素内顶部
+ android:layout_alignParentBottom="true" //在父元素内底部
+ #对齐方式：
+ android:layout_centerInParent="true" //居中布局
+ android:layout_centerVertical="true" //水平居中布局
+ android:layout_centerHorizontal="true" //垂直居中布局
+ android:layout_alignTop="@id/xxx" //与指定View的上边界一致
+ android:layout_alignBottom="@id/xxx" //与指定View下边界一致
+ android:layout_alignLeft="@id/xxx" //与指定View的左边界一致
+ android:layout_alignRight="@id/xxx" //与指定View的右边界一致
+ #间隔：可以用在LinearLayout！！！
+ android:layout_marginTop="" //离上边最近控件下边缘的距离
+ android:layout_marginBottom="" //离下边最近控件上边缘的距离
+ android:layout_marginLeft="" //离左边最近控件右边缘的距离
+ android:layout_marginRight ="" //离右边最近控件左边缘的距离
+ android:layout_paddingBottom="" //离父元素底边缘的距离
+ android:layout_paddingLeft="" //离父元素左边缘的距离
+ android:layout_paddingRight ="" //离父元素右边缘的距离
+ android:layout_paddingTop="" //离父元素上边缘的距离
+ 4.TableLayout：表格布局
+ 定义：比较常见的布局，按照表格的方式来布局页面；
+ 属性：<TableRow>添加一行</TableRow>
+ 5.FrameLayout：框架布局
+ 定义：默认所有的控件都放置在布局的左上角；
+ 应用：碎片Fragment
+ 6.百分比布局：通过引入库-NO
+ 注意：LinearLayout、AbsoluteLayout、RelativeLayout、FrameLayout均
+ 是ViewGroup子类；TableLayout是LinearLayout子类，Layout可以相互嵌套；
+
+ #单位和尺寸：
+ px&pt：在不同分辨率的手机上不一样
+ dp&sp：dp指定控件大小、sp指定文字大小
+
+ #Bitmap：NO
+
+ #Timer：定时器
+ 参考：https://blog.csdn.net/zyyloveweb/article/details/50946894
+
+ #详解持久化技术：将内存中的瞬时数据保存在存储设备中
+ 1).文件存储：
+ 特点：不对存储的内容进行任何的格式化处理；
+ 适用：文本数据、二进制数据等；
+ 默认路径：/data/data/<package name>/files/...;
+ 操作模式：MODE_PRIVATE：覆盖/MODE_APPEND：追加
+ 代码：见FileActivity.java
+ 2).SharedPreference存储：适合存储配置参数
+ 1.获取SharedPreferences对象；
+ //默认路径：/data/data/<package name>/shared_prefs/...
+ Context.getSharedPreferences(文件名,操作模式);
+ //自动将当前活动的类名作为SharedPreferences的文件名
+ Activity.getPreferences(操作模式);
+ //自动使用当前App的包名作为前缀来命名SharedPreferences文件
+ PreferenceManager.getDefaultSharedPreferences(Context);
+ 2.获取SharedPreferences.Editor对象;
+ SharedPreferences.edit();
+ 3.向SharedPreferences.Editor对象中添加数据;
+ putBoolean();//添加一个布尔型数据
+ putString();//添加一个字符串
+ 4.commit();//提交数据
+ 获取：见FourthActivity.java
+ 应用：记住密码功能-复选框+SharedPreferences/加密算法
+ 3).sd卡：
+ 首先申请权限，然后判断手机是否有sd卡；
+ 4).SQLite数据库：SQLiteOpenHelper
+ 定义：轻量级的嵌入式关系型数据库，体积只有1000byte；
+ 特点：支持标准的SQL语法，也可以通过Android封装好的API进行操作；
+ 代码：见SqliteActivity.java
+
+ #sql语句：
+ //创建表：blob //二进制类型
+ create table if not exists sso (
+ id integer primary key autoincrement,//将id设为主键
+ author text,//文本
+ price real,//浮点型
+ pages integer);//整型
+ //插入
+ insert into sso (author,price,pages) values(?,?,?);
+ //更新
+ update sso set price = ?,pages = ? where author = ?;
+ //删除
+ delete from sso where pages > ?;
+ //查询
+ select * from sso;
+
+ #多线程：
+ 注意⚠️：UI线程不安全，不能更新UI；
+ 代码：见ThreadActivity.java
+
+ #异步消息处理：完美解决子线程更新UI；
+ 1.Handler：
+ //主线程
+ 1.新建Handler；
+ 3.实现handleMessage()方法：比如更新UI
+ //子线程
+ 2.发送Message
+ 代码：见MessageActivity.java
+ 2.AsyncTask：抽象类
+ 原理：封装了基于异步的消息处理机制；
+ 代码：ThreadActivity.java
+
+ #调用摄像头和相册：
+ 1.调用摄像头：见ChoosePicActivity.java
+ 2.从相册中选择照片：ChoosePicActivity.java
+
+ #播放多媒体文件：
+ 1.播放音频：MediaPlayer
+ 2.播放视频：VideoView
+ 代码：见MediaActivity.java
+
+ #基于位置的服务LBS：NO
+
+ #百度地图：NO
+
+ #高德地图：NO
+
+ #腾讯地图：NO
+
+ #网络与通信：
+ 1).WebView：
+ 定义：基于webkit引擎，展示web页面的控件；
+ 功能：提供网页前进后退、放大缩小；
+ //加载本地html页面(放在assets里面)
+ //加载url，利用js与原生App交互
+ //WebViewClient
+ //WebChromeClient
+ 注意️：必须加网络权限
+ 2).网络请求：
+ HttpURLConnection：见WebActivity.java
+ OkHttp.jar：
+ HttpClient：废弃
+ 3).数据解析：
+ //json
+ 1.使用JSONObject：
+ 2.使用GSON.jar
+ //xml
+ 1.Pull解析：
+ 2.SAX解析：
+ 代码：WebActivity.java
+
+ #Android图形技术：NO
+
+ #Android动画技术：NO
+
+ #二维码：NO
+
+ #WebView：NO
+
+ #Notification：
+ 定义：用于在状态栏显示消息通知用户；
+ 场景：可以在活动中创建、也可以在广播接收器和服务中创建，一般在活动进入
+ 后台的时候使用；
+ 思路：在特定状况下创建通知，设置通知属性(样式、位置、跳转)并显示出来；最后
+ 在跳转处让通知消失；
+ 作用：显示接受的消息(微信、QQ消息等)、推送信息(新版本、推送新闻等)、正在进行
+ 的事物(音乐播放器、版本更新时候的下载进度等)；
+ 代码：NotificationActivity.java->LoginActivity.java
+ 注意⚠：Android 3.0以前的废弃；
+ 参考：https://www.cnblogs.com/travellife/p/Android-Notification-xiang-jie.html
+
+ #短信：
+ 1.接收短信：
+ 1).原理：当手机接收到一条短信的时候，系统会发出一条值为android.provider.
+ Telephony.SMS_RECEIVED的广播，这条广播里携带着与短信相关的所有数据。每个应
+ 用程序都可以在广播接收器里对它进行监听，收到广播时再从中解析出短信的内容；
+ 2).作用：获取短信内容用于自身应用程序；
+ 3).代码：p311
+ 2.拦截短信：
+ 1).原理：利用广播的拦截功能；
+ 2).代码：p316
+ 3.发送短信：
+ 1).代码：p320
+
+ #调试Android程序：
+ 前提：必须先勾选USB调试；
+ //Eclipse
+ 1.打断点：Debug As-非Run As(可以点击按钮断开调试)
+ 2.Run As->进入DDMS->Devices窗口：查看所有进程->选中进程，点击按钮：进入调试模式
+ //AS：NO
+
+ #git
+ 定义：开源的分布式版本控制工具；
+ 开发者：Linux操作系统的作者Linus Torvalds；
+ 客户端：SourceTree
+ 安装：NO
+ 配置身份：查看是否配置OK
+ git config --global user.name "Tony"
+ git config --global user.email "tony@gmail.com"
+ 创建代码仓库：git init
+ 添加：git add 文件名
+ 提交：git commit -m "说明.txt"
+ 加入.gitignore-允许用户将指定的文件或目录排除在版本控制之外的机制；
+ 查看状态：git status
+ 查看修改内容：git diff
+ 撤销修改：git checkout
+ git reset HEAD
+ 查看提交内容：git log
+ #git分支：
+ 查看分支：git branch -a
+ 创建分支：git branch 分支名
+ 合并分支：git checkout master->git merge 分支名
+ 删除分支：git branch -D 分支名
+ 解决冲突：git无法帮助你；
+ #与远程版本库协作：NO
+ //.gitignore
+ https://github.com/github/gitignore
+ //忽略UserInterfaceState.xcuserstate的方法：
+ https://www.tuicool.com/articles/JjIZFnI
+
+ #JNI：Java Native Interface
+ 定义：提供若干api实现java与其他语言C/C++的通信；
+
+ #多语言：en/tw/cn
+
+ #Android Studio详解：
+ //优势：
+ 1.基于Gradle的构建支持；
+ 2.Android特定重构和快速修复，丰富的模板代码；
+ 3.直接支持ProGuard和应用签名功能；
+ 4.内置svn、git、Google云支持；
+ 5.支持插件、NDK；
+ //搭建Android开发环境：
+ 1.下载Android Studio；
+ 2.启动AS之前，将bin目录的idea.properties文件中添加一行：
+ disable.android.first.run=true-为了避免重新下载新版本SDK；
+ 3.配置JDK、SDK；
+ 4.新建工程；
+ //简单设置：
+ 1.修改主题：略；
+ 2.导入第三方主题：http://color-themes.com/
+ AS导入jar包：File->import Settings
+ 3.代码字体修改：File->settings->Editor->Color&Fonts->Font
+ 4.修改控制台&侧边栏字体：略
+ 5.关闭as更新：setting->Appearance&Behavior->Updates->去掉勾选；
+ 6.修改快捷键：与eclipse一样；
+ 7.添加api文档悬浮提示：File->settings->Editor->General->去掉勾选；
+ 8.配置代码的自动提示：默认
+ 9.配置代码提示的大小写区分：大小写敏感-File->settings->Editor->General->none；
+ 10.按住Ctrl键的同时单击鼠标就可以查看源码：默认；
+ 11.设置自动导入包：看图；
+ 12.显示代码行数：已设置；
+ 13.禁止自动打开上次的工程：已设置；
+ 14.禁止代码折叠：已设置；
+ 15.修改注释位置：禁用“语句堆一行”；
+ 16.修改新建文件文件头：个人必须改；
+ 17.修改文件编码为UTF-8；
+ //解析AS工程：
+ 1.Android Studio与eclipse的区别：
+ 工作区  project           workspace
+ 项目    module            project
+ 引用    module dependency preference
+ 2.工具栏：
+ AVD Manager：模拟器管理
+ Gradle同步：更改Gradle配置的时候需要点击；
+ SDK Manager：管理SDK版本；
+ DDMS：Dalvik调试监控服务；
+ 3.导入jar：
+ 1).将gson-2.3.jar文件拷贝到工程文件的libs目录下；
+ 2).选中.jar，刷新.gradle；
+ 3).搞定；
+ 4.导入第三方库：jitpack
+ 1).在GitHub上找到Gson，拷贝地址；
+ 2).打开https://jitpack.io/，复制地址；
+ 3).复制：com.github.google:gson:1.7；
+ 4).将maven { url "https://jitpack.io" }复制到根build.gradle中；
+ 5.修改默认Activity继承AppCompatActivity：
+ https://blog.csdn.net/yangliangliang2011/article/details/51333018
+ 6.安装genymotion模拟器：略
+ 7.新建一个module形式的第三方library：
+ 1).新建一个library形式的module，删掉src/main目录里面的所有文件(包括java、res、AndroidManifest.xml)；
+ 2).复制第三方库的AndroidMainfest.xml、res、src到库目录的src/main目录中；
+ 3).将src/main目录下的src目录重命名为java；
+ 4).删除库module中的build.gradle文件的dependencies和release模块；
+ 8.将application的module依赖上library的module：
+ 1.选中app->点击右键->Open Module Settings；
+ 2.选中app->Dependencise->Module Dependency->添加lib->导入；
+ 3.搞定；
+ 9.删除：
+ 1.进入Module Dependency：
+ 删除module：选中lib->删除
+ 删除依赖：选中app->删除
+ 2.返回Project：
+ 右键->delete
+ 10.删除文件：略
+ 11.gradle的概念：
+ 定义：构建工具-以Groovy语言为基础，面向的是Java语言；
+ 查看版本：gradlew -v
+ 12.通过gradle配置第三方jar包：
+ build.gradle文件 == Project Structure图形
+ build.gradle文件：compile 'com.google.code.gson:gson:2.3.1'
+ Project Structure图形：添加Library
+ 原理：在http://bintray.com/bintray/jcenter下载jar；
+ 结果：gson.jar出现在External Libraries中；
+ 13.签名打包：
+ 签名：给App签名，代表自己的版权，以后想要升级也必须使用相同的签名；
+ 多个App可以使用同一个签名；
+ 步骤1：选中app->Build->Generate signed apk...->Create new...
+ 步骤2：通过命令行
+ 1.打开Project Stucture图形化界面；
+ 2.略
+ 14.BuildConfig文件：
+ 定义：IDE自动生成的一个类，类似elipse中即存放在gen目录下R文件；
+ 15.详解build.gradle：见wmdemo
+ 16.工程导入失败原因：
+ 1).导入之前，检查local.properties：是不是你的sdk路径；
+ 2).gradle project sync failed：gradle更新失败；
+ 3).Connection refused:connect：导入项目的gradle版本与AS不一致；
+ 参考：https://blog.csdn.net/eclipsexys/article/details/41142907
+ 4).Gradle DSL method not found:'runProguard()'：
+ 把build.gradle中的runProguard()->minifyEnabled
+ //参考：
+ https://www.cnblogs.com/abao0/archive/2017/06/02/6934023.html
+ https://wenku.baidu.com/view/c44e12bd650e52ea551898b7.html
+ https://blog.csdn.net/qq_35136382/article/details/65628573
+ https://blog.csdn.net/small_mouse0/article/details/58596098
+ https://blog.csdn.net/ta893115871/article/details/46955791/
+ https://blog.csdn.net/xx326664162/article/details/51455313 //利用AS编写、运行java程序
+
+ #样式style&主题theme：
+ 样式：作用于单个View；
+ 主题：作用于整个App&Activity；
+
+ #运行时权限：NO
+ 定义：为了保证系统安全性，如果程序需要访问系统的关键性信息，必须在配置文件中声明权限，否则程序会crash；
+ 作用：保护用户的安全和隐私-Android 6.0会显示出来全部权限、Android 6.0以后加入运行时权限
+ 先判断是否已经授权、已经授权->进入操作、没有授权->弹出框授权->回调->成功->进入操作/失败->提示失败
+ 具体：http://developer.android.com/reference/android/Manifest.permission.html
+
+ #Android中Java包功能描述：
+ android.app //提供高层的程序模型和基本的运行环境
+ android.content //对设备上的数据进行访问和发布的类
+ android.database //通过内容提供者浏览和操作数据库
+ android.graphics //底层的图形库
+ android.location //定位和相关的服务类
+ android.media //管理多种音频、视频的接口
+ android.net //提供帮助网络访问的类
+ android.os //提供系统服务、消息传输、IPC机制
+ android.opengl //提供OpenGL的工具
+ android.provider //提供类访问android内容提供者
+ android.telephone //提供与拨打电话相关的api交互
+ android.view //提供基础的用户界面接口框架
+ android.util //工具类
+ android.webkit //默认浏览器操作接口
+ android.widget //包含各种UI元素在应用程序的屏幕中使用
+
+ #常用类：NO
+
+ #常见概念：
+ //assets
+ 存放原生文件：html页面等、打包以后不压缩
+ //res/raw
+ 生成id
+
+ #常用代码块：
+ //杀掉当前进程
+ android.os.Process.killProcess(android.os.Process.myPid());
+ //获取当前activity的类名
+ getClass().getSimpleName();
+ //资源引用
+ R.drawable.icon/xml：@string/hello_world/@drawable/icon
+ getResources().getString(R.string.click);
+ //获取屏幕宽/高
+ Display display = getWindowManager().getDefaultDisplay();
+ int width = display.getWidth();
+ int height = display.getHeight();
+ //获取应用程序上下文
+ Context context = getApplicationContext();
+ //获取Assets：不参与编译
+ InputStream ins = getResources().getAssets().open("file.txt");
+ //获取raw
+ InputStream ins = getResources().openRawResource(R.raw.file);
+ //包装类
+ String msg = Integer.toString(209);//数字->字符串
+ Integer sInteger = Integer.valueOf(msg);//字符串->对象
+ Integer integer = new Integer(209);//数字->对象
+ int sum = Integer.parseInt(msg);//字符串->数字
+
+ #常见格式：
+ //menu.xml：
+ <?xml version="1.0" encoding="utf-8"?>
+ <menu xmlns:android="http://schemas.android.com/apk/res/android">
+     <item
+         android:id="@+id/add_item"
+         android:title="@string/app_name"/>
+     <item
+         android:id="@+id/remove_item"
+         android:title="@string/app_name"/>
+ </menu>
+ //colors.xml：
+ <?xml version="1.0" encoding="utf-8"?>
+ <resources>
+     <color name="colorPrimary">#3F51B5</color>
+     <color name="colorPrimaryDark">#303F9F</color>
+     <color name="colorAccent">#FF4081</color>
+ </resources>
+ //strings.xml：
+ <resources>
+     <string name="app_name">cmApp</string>
+ </resources>
+ //styles.xml：格式说明见style.xml
+ <resources>
+     <!-- Base application theme. -->
+     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+         <!-- Customize your theme here. -->
+         <item name="colorPrimary">@color/colorPrimary</item>
+         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+         <item name="colorAccent">@color/colorAccent</item>
+         <item name="android:windowNoTitle">true</item>//无标题
+         <item name="android:windowActionBar">false</item>//无ActionBar
+         <item name="android:windowFullscreen">true</item>//全屏即无通知栏
+         <item name="android:windowContentOverlay">@null</item>//是否有遮盖
+     </style>
+ </resources>
+ //Selector：NO
+
+  //final、finally和finalize的区别
+  final可以修饰类，方法和变量；
+  finally写在try...catch语句用于释放资源(关闭数据库、关闭流)；
+  finalize()是一个方法，在垃圾回收的时候调用；
+
+  // 怎么划分包名
+
+
+
+  /*
+  // 定义一个属性
+  ext.age = 18
+
+  // 定义多个属性
+  ext {
+      name = '123'
+      age = 18
+      address = 'xxx'
+  }
+  // 查看所有可执行的任务
+  :tasks
+
+  // Gradle强制刷新依赖
+  ./gradlew --refresh-dependencies assemble
+
+
+  // settings.gradle
+   放在主工程目录下，为了配置子工程
+
+   // build.gradle
+   每个project下都有一个build.gradle
+
+
+   gradle-wrapper
+   通过读取配置文件中gradle版本，为项目自动下载和配置制定版本的gradle
+
+  // 提供在命令行下执行gradle命令的功能
+  gradlew是linux、mac下使用的文件
+  gradlew.bat是window下使用的文件
+
+  // 删除
+  ./你的用户名/.gradle/caches
+  */

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- a.导入jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script>
+        // 1.为什么要学习jquery
+        // 1>.学习js的痛点
+        // >>window.onload方法只能出现一次（如果出现多次后面的事件会覆盖前面的事件）
+        // >>代码容错性差：很难定位代码问题
+        // >>需要兼容不同的浏览器
+        // >>简单功能实现很繁琐
+        // 2>.什么是jQuery：jQuery是js的一个库（学习如何使用jQuery来操作DOM）
+        // >>https://jquery.com
+        // 3>.体验jQuery
+        // b.入口函数
+        $(document).ready(function () {
+            // c.获取元素和绑定事件
+            var jqDiv = $("div"); // 通过标签名获取元素
+            // >>隐式迭代（不需要写for循环）
+            var jqDiv1 = $(".lrsdk_jquery"); // 通过class获取元素
+            var jqDiv2 = $("#lrsdk_jquery"); // 通过id获取元素
+            jqDiv.click(function () {
+                // 事件驱动程序
+                jqDiv.show(); // 显示元素
+                jqDiv.html("明日中秋"); // 设置内容
+                // >>链式编程：返回对象本身
+                jqDiv.show().html("明日中秋");
+            }); // 事件通过方法绑定
+        });
+        // 4>.jQuery2.x开始不再支持IE6、7、8：如果需要兼容老版本最好使用jquery1.x版本
+
+        // 2.入口函数：文档加载完毕执行该函数：图片可能还没有加载
+        $(document).ready(function () {
+            // 第一种写法：文档加载完毕执行该函数：图片可能还没有加载
+        });
+        $(function () {
+            // 第二种写法：文档加载完毕执行该函数：图片可能还没有加载
+        });
+        $(window).ready(function () {
+            // 第三种写法：文档、图片均加载完毕执行该函数
+        });
+        // 注意：jQuery入口函数和js入口函数
+        // >>jQuery入口函数可以出现多次，不存在事件覆盖问题；js入口函数只能出现一次，出现多次会存在事件覆盖的问题
+        // >>jQuery入口函数在文档加载完毕的时候就会执行（不需要等待外部资源加载完毕）；js入口函数是在所有资源（页面文档、外部js文件、外部css文件）均加载完毕的时候才会执行
+        console.log($ === jQuery); // $实际上是一个函数名
+
+        // 3.jQuery对象（使用jquery提供的操作DOM的方法返回的结果）和DOM对象（js操作DOM返回的结果）的相互转换
+        // 1>.DOM对象 -> jQuery对象
+        var div = document.getElementById("box"); // div就是一个DOM对象
+        var jqDiv = $(div);
+        // 1>.jQuery对象 -> DOM对象
+        var jqDiv1 = $(".box"); // jqDiv是一个jQuery对象：jQuery对象是一个数组，数组中包含着原生js中的DOM对象
+        var div1 = jqDiv1[0];
+        var div2 = jqDiv1.get(0);
+
+        // 4.jQuery选择器
+        // 标签选择器
+        var jqDiv2 = $("div");
+        // 类选择器
+        var jqDiv3 = $(".lrsdk_jquery");
+        // id选择器
+        var jqDiv4 = $("#lrsdk_jquery");
+        // 后代选择器
+        var jqDiv4 = $("#lrsdk_jquery .lrsdk_details_jquery");
+        // 子代选择器
+        var jqDiv4 = $("#lrsdk_jquery > .lrsdk_inner_jquery");
+        // 基础过滤选择器
+        var jqDiv5 = $("#lrsdk_jquery > .lrsdk_inner_jquery:odd"); // 获取奇数索引元素
+        var jqDiv6 = $("#lrsdk_jquery > .lrsdk_inner_jquery:even"); // 获取偶数索引元素
+        var jqDiv7 = $("#lrsdk_jquery > .lrsdk_inner_jquery:eq(0)"); // 根据索引获取元素
+        jqDiv2.css("width", 30);
+        // 筛选选择器
+        jqDiv.find("div"); // 从jquery对象的后代中查找
+        jqDiv.children("div"); // 从jquery对象的后代中查找亲儿子：不写参数获取所有的子元素
+        jqDiv.children().eq(0); // 从jquery对象的子代中查找该索引值的元素
+        jqDiv.children().eq(0).next(); // 该元素的下一个兄弟元素
+        jqDiv.children().eq(0).siblings(); // 该元素的所有兄弟元素：不包括自己
+        jqDiv.children().eq(0).parent(); // 获取该元素的父元素  
+    </script>
+</head>
+<body>
+    <div class="lrsdk_jquery" id="lrsdk_jquery">
+        <div class="lrsdk_inner_jquery">
+            <div class="lrsdk_details_jquery">14期威武</div>
+        </div>
+    </div>
+</body>
+</html>

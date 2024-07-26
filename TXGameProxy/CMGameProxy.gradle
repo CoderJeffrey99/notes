@@ -1,38 +1,47 @@
-// 1.Groovy概述
+
+// 1.概述
 // 1>.概述：Groovy是一种基于JVM的动态脚本语言（彻底兼容java）
-// 2>.build配置文件（Groovy脚本文件）：可以写任何符合Groovy语法的代码（也能够写任何Java代码）
-// 3>.参考1：http://www.noobyard.com/article/p-bkoscwth-a.html
-// 4>.参考2：https://www.bootwiki.com/groovy/groovy-closures.html
+// 2>.什么是Gradle：Gradle是一个通用的构建工具（基于Groovy的一门领域特定语言DSL），底层实现是java，通常使用Groovy和Kotlin来编写脚本
+// 3>.构建工具的对比
+// a.Ant - 2000年由Apache推出的纯java编写的构建工具，通过build.xml文件构建项目（构建性能最高）
+// b.Maven - 2004年由Apache推出的构建工具，通过pom.xml文件管理项目（构建性能最低、配置文件编写不够灵活）
+// c.gradle - 2012年由Google推出的权限项目构建工具（构建性能居中，学习成本较高）
+// 4>.输出方法
+println("hello world") // ";"可以省略
+// 5>.参考：https://blog.csdn.net/ethanco/category_10117028.html
 
 // 2.注释
 // 单行注释
-/*
-多行注释
-*/
+/* 多行注释 */
 /**
  * 文档注释
  * @param String name
  */
 
 // 3.数据类型：与java一致
-// 1>.支持java的基本数据类型、可以显示声明、";"可以省略
+// 1>.支持java的基本数据类型、可以显示声明
 int a
 // 2>.使用def声明：进行类型推导
 def a1
+a1 = '123'
+a1 = 123 // 这是对的：使用def定义的变量可以改变其引用的对象类型（变量本身没有固定的类型，只是指向一个对象）
 // 3>.字符串
 // 使用单引号和双引号均可以定义一个字符串常量
 def a2 = '123'
 def a3 = "123"
 // 字符串拼接
-// ${str}
 println("这是你的数字：${a3}") // 这是你的数字：123
 println('这是你的数字：${a3}') // 这是你的数字：${a3}
 
-// 4.集合
+// 4.运算符：与java一致
+// 5.条件语句：与java一致
+// 6.循环语句：与java一致
+
+// 7.列表
 // 默认集合类型ArrayList
 def a4 = [1, 2, 3, 4]
 println("size is ${a4.size()}")
-// 指定集合类型
+// 指定列表类型
 // LinkedList
 def a5 = [1, 2, 3, 4] as LinkedList
 println("a5 is ${a5.getClass().getName()}")
@@ -47,8 +56,7 @@ a5.each {
     // 参数默认是it
     println($it)
 }
-a5.eachWithIndex{ int value, int index ->
-    
+a5.eachWithIndex{int value, int index ->
 }
 // 数组
 def modules = ["123", "xwj", "18"] as String[]
@@ -83,7 +91,7 @@ modules.max()
 modules.min()
 // 不用担忧下标越界：Groovy会自动增长到所需要的下标（中间的元素设置为null）
 
-// 5.Map
+// 8.Map
 def colors = [red: "#FF0000", green: "#00FF00", blue: "#0000FF"]
 println(colors.red)
 println(colors["red"])
@@ -107,7 +115,8 @@ def green = colors.find { key, value ->
     return null
 }
 
-// 6.方法
+// 9.方法
+// def也可以用来定义方法：返回值由编译器推导或不返回任何值
 def max(int a, int b) {
     colors.find { key, value ->
         if (key.equals('green')) {
@@ -117,90 +126,182 @@ def max(int a, int b) {
         return null
     }
 }
-def min(a, b) {
+// 调用方法()可以省略：执行效果一样
+max(2, 3)
+max 2, 3
+// 默认参数：必须位于方法的末尾
+def min(int a, int b, int c = 0) {
 
 }
 
-// 7.闭包：匿名代码块
+// 10.闭包：匿名代码块
 // 1>.定义闭包：闭包可以赋值给一个变量
-def hello = {
+def hello1 = {
     // 可以省略()
     println "hello world"
 }
+def hello2 = { param ->
+    println("running start..." + param)
+}
 // 2>.调用闭包
-hello.call()
-hello()
-// 3>.闭包做为方法参数
+hello1()
+hello1.call()
+hello2("xwj")
+hello2.call("xwj")
+// 3>.闭包作为方法参数
 // 第一种：闭包只有一个参数（如果闭包只有一个参数，默认就是it）
-def customEach(closure) {
+def customEach(Closure closure) {
     // 如果闭包只有一个参数；默认为it
     for (int index in 1..10) {
         // 调用闭包
-        closure(index)
+        closure(index, index + 1)
     }
 }
 // 传入闭包
-customEach({
-    println(it)
+customEach({ index1, index2 ->
+    println(index1 + index2)
 })
 // 最后一个参数是闭包：可以将闭包放在方法外面
-customEach() {
-    println(it)
+customEach() { index1, index2 ->
+    println(index1 + index2)
 }
 // 调用的时候可以省略()
-customEach {
-    println(it)
+customEach { index1, index2 ->
+    println(index1, index2)
 }
-// 第二种：闭包有多个参数
-def eachMap(closure) {
-    def map1 = [red: "#FF0000", green: "#00FF00", blue: "#0000FF"]
-    map1.each {
-        closure(it.key, it.value)
-    }
+// 第二种：闭包有多个参数（最后一个参数是闭包，可以将闭包放在方法外面）
+def eachMap(num1, num2, Closure closure) {
+    def result = closure(num1, num2)
 }
 // 调用闭包
-eachMap {key, value -> 
-    println("key is $key, value is $value")
+eachMap(1, 2) {v1, v2
+    private(v1 + v2)
 }
-// 6>.闭包委托
-// xxx
-// 7>.委托策略
-// xxx
+/*
+写一个自己的android闭包
+class MyAndroidBean {
+    public String namespace
+    public Integer compileSdk
+    public MyDefaultConfig defaultConfig
 
-// 9.类
+    def mydefaultConfig(Closure closure) {
+        MyDefaultConfig config = new MyDefaultConfig()
+        closure.delegate = config
+        closure.call()
+        defaultConfig = config
+    }
+}
+
+def myandroid(Closure closure) { // 添加project参数
+    MyAndroidBean myAndroidBean = new MyAndroidBean()
+    closure.delegate = myAndroidBean
+    closure.call()
+    println("namespace:" + myAndroidBean.namespace)
+    println "compileSdk:" + (myAndroidBean.compileSdk)
+    println "applicationId:" + (myAndroidBean.defaultConfig.applicationId)
+    println "minSdk:" + (myAndroidBean.defaultConfig.minSdk)
+    println "targetSdk:" + (myAndroidBean.defaultConfig.targetSdk)
+}
+myandroid {
+    namespace = "com.heiko.mm"
+    compileSdk = 31
+
+    mydefaultConfig {
+        applicationId = "com.heiko.mm"
+        minSdk = 21
+        targetSdk = 31
+    }
+}
+*/
+
+// 11.类：使用与java几乎一摸一样
+class Person {
+    // Groovy自动搞定setter和getter方法
+    private String name
+    // 创建一个具有隐式getter和setter的属性，属性类型动态推导
+    def age = 18
+
+    private void setName(String name) {
+        this.name = name
+    }
+
+    private void setAge(int age) {
+        this.age = age
+    }
+
+    private String getName() {
+        return name
+    }
+
+    private int getAge() {
+        return age
+    }
+}
 task obj {
     doLast {
         Person p = new Person()
         p.name = "xwj"
-        println("age is $age")
-        def name = p.name ?: "123" // 可空运算符：p.name == null则返回"123"，否则返回p.name
-        def name1 = p?.name // 安全导航导航符：p == null不会抛出异常，整个表达式为null
-    }
-}
-class Person {
-    // Groovy自动搞定setter和getter方法
-    private String name
-
-    // 定义了getter方法就可以使用age属性
-    // 但是无法使用setter方法
-    public int getAge() {
-        12
+        def name1 = p.name ?: "123" // 可空运算符：p.name == null则返回"123"，否则返回p.name
+        def name2 = p?.name // 安全导航符：p == null不会抛出异常，整个表达式为null
     }
 }
 
-// 10.断言
-// // 1>.Groovy断言是一项语言功能，一直处于开启状态
-// // 2>.若假设的条件不为真，就会抛出java.lang.AssertionError异常
-// // 3>.单元测试的首选方式
+// 12.断言
+// 1>.Groovy断言是一项语言功能，一直处于开启状态
+// 2>.若假设的条件为false，就会抛出java.lang.AssertionError异常，不再执行下面的代码
+// 3>.单元测试的首选方式：一直属于开启状态
 // assert 1 == 2 : "1不等于2"
 // assert 1 == 2  // 可以不给消息提示
 
-// 11.运行须知
-// 1>.安装Gradle才可以使用gradle、./gradle、gradlew命令
-// 2>.build.gradle是Gradle的默认构建脚本文件，在执行Gradle命令的时候会默认找在当前目录下的build.gradle文件
-// 3>.指定加载执行文件：gradle -b groovy-basic.gradle operator // 执行groovy-basic.gradle里的operator任务
-task test {
+// 13.任务task
+// 1>.定义task
+// 第一种方式
+task hello {
+    doFirst {
+    }
     doLast {
-        // 代码
+
     }
 }
+// 继承于任务hello
+// 在Test分组
+task hello1(type:hello, group: 'Test') {
+    // 执行期
+    doFirst {
+        println("第二个输出")
+    }
+    doLast {
+        println("第三个输出")
+    }
+    // 配置期
+    println("第一个输出")
+}
+task hello1(type:hello) {
+    group 'Test'
+}
+// 第二种方式
+tasks.create("hello") {
+    doFirst {
+    }
+    doLast {
+
+    }
+}
+// 2>.执行task
+// ./gradlew hello1
+// 3>.为已经定义的task添加逻辑
+def task = tasks.findByPath('hello1')
+if(helloTask != null){
+   // 通过doLast为已存在Task添加逻辑，也可以使用doFirst为Task的最开始添加逻辑
+   helloTask.doLast {
+      println('the mseeage is add by doLast method')
+   }
+}
+// 4>.为多个task指定执行顺序
+// a>.dependsOn可以指定其依赖的任务，从而可以确定任务执行的顺序
+// taskB.dependsOn(taskA) // 正在执行的任务B需要任务A的支持（耦合性太强）
+// b>.mustRunAfter
+// taskB.mustRunAfter(taskA) // 任务A将在任务B之前执行（只有两个任务都执行的情况下才会生效，只执行任务B不会影响任务A）
+
+// 14.上传到Maven仓库 
+// https://blog.csdn.net/EthanCo/article/details/124277333

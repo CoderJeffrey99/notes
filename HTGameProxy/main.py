@@ -1,330 +1,369 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# # 导入模块
+# import time, calendar
+import time
+import calendar
 # 在VSCode中使用py
 # https://zhuanlan.zhihu.com/p/639597093
 
+# 1.py概述
+# 1>.概念：py是一种通用的、解释型、交互式、面向对象的高级编程语言（脚本语言）
+# 2>.py为什么这么流行：简单易学、生态丰富（想做什么功能基本都有现成的代码）、免费开源、跨平台、数据科学和人工智能的首选语言
+# 3>.发布：py3.0在2008年发布（py3.0和py2.0不兼容）
+# 4>.特点：py由解释器在运行时处理（不需要编译程序）、py支持面向对象
+# 5>.查看py版本：$python3 --version | $python3 -V
+# 6>.运行py程序：$python3 xxx.py
+# 7>.py不适合找工作：大多数的企业都不用py来开发应用（运行速度太慢，远不如C++）
+# 8>.py不适合做为你的主语言：学习py基础来编写py脚本实现自动化办公
+# 9>.py内容：基础语法 + 常用类库 + py处理表格 + py处理pdf
 
-# # 1.概述
-# # 1>.概念：py是一种通用的、解释型、交互式、面向对象的高级编程语言（脚本语言）
-# # 2>.py为什么这么流行：简单易学、生态丰富（想做什么功能基本都有现成的代码）、免费开源、跨平台、数据科学和人工智能的首选语言
-# # 3>.发布：py3.0在2008年发布（py3.0不与py2.0向后兼容）
-# # 4>.特点：py由解释器在运行时处理（不需要编译程序）、py支持面向对象
-# # 5>.运行py：$python xxx.py
-# # 6>.py不适合找工作：大多数的企业都不用py来开发应用（运行速度太慢，远不如C++）
-# # 7>.py不适合做为你的主语言：学习py基础来编写py脚本实现自动化办公
-# # 8>.py内容：基础语法 + 常用类库 + py处理表格 + py处理pdf
+# 2.怎么在macOS环境下安装py开发环境
+# 1>.访问https://www.python.org/downloads/macos
+# 2>下载适合macOS的py安装包
+# 3>.安装py安装包
+# 4>.验证安装结果：$python3 -V
+# 5>.更新pip（可选）：$pip install --upgrade pip
 
-# # 2.怎么在macOS环境下安装py开发环境
-# # 1>.访问https://www.python.org/downloads/macos
-# # 2>下载适合macOS的py安装包
-# # 3>.安装py安装包
-# # 4>.验证安装结果：python3 -V
-# # 5>.更新pip（可选）：pip install --upgrade pip
+# 3.标识符：用于标识变量、函数、类、模块和其它对象的名称
+# 1>.概念：包含“数字、字母、_”，不允许使用$、@（严格区分大小写）
+# 2>.规范
+# >>类名首字母大写：其它标识符都是小写字母开头
+# >>用单个前导下划线表示私有：py中没有真正的私有属性和方法，这只是一种约定
+# >>用两个前导下划线表示"名称修饰"：py会在名称前添加_className前缀
+# >>用两个前导下划线和两个尾随下划线：表示该标识符是py的特殊名称
+def __init__():
+    # py不使用{}来控制代码块：而是使用线条缩进替代{}、同一个代码块中的代码必须缩进相同的数量
+    _myObj = 10
+    __myObj = 100
 
-# # 3.标识符：用于标识变量、函数、类、模块和其它对象的名称
-# # 1>.概念：包含“数字、字母、_”，不允许使用$、@，严格区分大小写
-# # 2>.规范
-# # >>类名首字母大写：其它标识符都是小写字母开头
-# # >>用单个前导下划线表示私有：与dart语言类似
-# # >>用两个前导下划线表示强大的私有标识符
-# # >>如果标识符也以两个尾随下划线结尾：标识符是语言定义的特殊名称
+# 4.关键字：保留字、关键字不能作为标识符、关键字全部小写
+s1 = 'hello world'
+s2 = "hello world"
+# 多行字符串
+s3 = '''
+hello world
+good game
+'''
+# 使用\表示该行继续
+s4 = s1 + \
+s2 + \
+s3
+# 输出语句
+print(s1)
+print('hello world')
 
-# # 4.关键字：保留字、关键字不能作为标识符、关键字全部小写
-# s1 = 'hello world'
-# s2 = "hello world"
-# # 多行字符串
-# s3 = '''
-# hello world
-# good game
-# '''
-# # 输出语句
-# print('hello world')
+# 5.注释：py没有多行注释
+# 单行注释
+# a1 = 10; a2 = 20; a3 = 30; # py支持多个语言在一行
 
-# # 5.注释：python没有多行注释
-# # 单行注释
-# a1 = 10; a2 = 20; a3 = 30; # python支持多个语言在一行
+# 6.数据类型
+# 1>.py变量不需要显式声明：当你给变量赋值的时，声明会自动发生
+s5 = 'John'
+# 2>.多重分配：py允许同时为多个变量分配单个值
+a4 = a5 = a6 = 1
+# 多个对象分配给多个变量
+a7, a8, a9 = 1, 2, 'John'
+# 3>.py有5种数据类型：Number数字、String字符串、List列表、Tuple元组、Dictionary字典
+# a.Number数字：int有符号整数、float浮点数实数值、complex复数
+# >>int有符号整数
+a10 = 10
+a11 = -10
+# >>float浮点数实数值
+a12 = 3.14
+a13 = -3.14
+# >>complex复数
+a14 = 4 - 36j
+# b.String字符串
+# >>字符串基础
+s6 = 'Hello World'
+s7 = 'XWJ'
+s8 = 'a' # 字符类型表示长度为1的字符串
+print(s5); # Hello World
+print(s5[0]) # H
+print(s5[2:5]) # [2, 5) -> llo
+print(s5[2:]) # llo World
+print(s5 * 2) # Hello WorldHello World
+print(s4 + s5) # Hello WorldXWJ
+# 常见方法
 
-# # 6.数据类型
-# # 1>.py变量不需要显式声明：当你给变量赋值的时，声明会自动发生
-# s4 = 'John'
-# # 2>.多重分配：py允许同时为多个变量分配单个值
-# a4 = a5 = a6 = 1
-# # 多个对象分配给多个变量
-# a7, a8, a9 = 1, 2, 'John'
-# # 3>.py有5种数据类型：Number数字、String字符串、List列表、Tuple元组、Dictionary字典
-# # a.Number数字：int有符号整数、float浮点数实数值、complex复数
-# # >>int有符号整数
-# a10 = 10
-# a11 = -10
-# # >>float浮点数实数值
-# a12 = 3.14
-# a13 = -3.14
-# # >>complex复数
-# a14 = 4 - 36j
-# # b.String字符串
-# # >>字符串基础
-# s5 = 'Hello World'
-# s6 = 'XWJ'
-# s7 = 'a' # 字符类型表示长度为1的字符串
-# print(s5); # Hello World
-# print(s5[0]) # H
-# print(s5[2:5]) # [2, 5) -> llo
-# print(s5[2:]) # llo World
-# print(s5 * 2) # Hello WorldHello World
-# print(s4 + s5) # Hello WorldXWJ
-# # >>转义字符
-# # \' -> '
-# # \" -> "
-# # \n -> 换行
-# # >>字符串格式化
-# # %s -> 字符串
-# # %d -> 整数
-# # %u -> 无符号整数
-# # %f -> 浮点数
-# print('My name is %s and weight is %d kg' % (s1, a1))
-# # c.List列表：数据类型可以不同、可以更新数据
-# list = ['abc', 11, 'joke', 15]
-# list[1] = 'xwj' # 更新列表
-# del list[1] # 删除一个列表元素
-# tempList = [123, 'hello']
-# print(list) # ['abc', 11, 'joke', 15]
-# print(list[0]) # abc
-# print(list[1:3]) # [1, 3) -> [11, 'joke']
-# print(list[2:]) # ['joke', 15]
-# print(tempList * 2) # ['abc', 11, 'joke', 15, 'abc', 11, 'joke', 15]
-# print(list + tempList) # ['abc', 11, 'joke', 15, 123, 'hello']
-# print(len(list)) # 返回列表长度
-# print(max(list)) # 返回列表元素的最大值
-# print(max(list)) # 返回列表元素的最大值
-# print(min(list)) # 返回列表元素的最小值
-# list.append('a') # 在列表末尾追加元素
-# print(list.count('a')) # 统计某个元素在列表中出现的次数
-# print(list.index('a')) # 返回某个元素第一次出现的时候的索引值
-# list.insert(1, 'a') # 将元素插入到列表
-# list.remove('a') # 删除列表中第一个元素
-# list.reverse() # 列表反转
-# # d.Tuple元组：：数据类型可以不同、不可以更新数据
-# tuple = ('abc', 11, 'joke', 15)
-# tempTuple = (123, 'hello')
-# print(tuple) # ('abc', 11, 'joke', 15)
-# print(tuple[0]) # abc
-# print(tuple[1:3]) # [1, 3) -> (11, 'joke')
-# print(tuple[2:]) # ('joke', 15)
-# print(tempTuple * 2) # ('abc', 11, 'joke', 15, 'abc', 11, 'joke', 15)
-# print(tuple + tempTuple) # ('abc', 11, 'joke', 15, 123, 'hello')
-# # tuple[0] = 'xwj' # 无效
-# # e.Dictionary字典：key&value均可以是任意类型
-# dict = {
-#     'key': 'value',
-#     1: 'xwj',
-#     2: 'cfj',
-#     'key1': 3
-# }
-# dict['key2'] = 4
-# print(dict['key']) # value
-# print(dict[2]) # cfj
-# print(dict) # {'key': 'value', 1: 'xwj', 2: 'cfj', 'key1': 3}
-# print(dict.keys()) # ['key', 1, 2, 'key1']
-# print(dict.values()) #['value', 'xwj', 'cfj', 3]
-# # 4>.数据类型转换
-# s9 = 'xwj'
-# print(int(s7)) # 将s7转换成一个整数
-# print(float(s7)) # 将s7转换成一个浮点数
-# print(complex(s7)) # 将s7转换成一个复数
-# print(str(s7)) # 将s7转换成一个字符串
-# print(tuple(s7)) # 将s7转换成一个元组
-# print(list(s7)) # 将s7转换成一个列表
-# s10 = (('key', 'value'), (1, 'xwj'), ('key1', 3))
-# print(dict(s10)) # 将s8转换成一个字典：s8必须是一个序列(key, value)元组
+# >>转义字符
+# \' -> '
+# \" -> "
+# \n -> 换行
+# >>字符串格式化
+# %s -> 字符串
+# %d -> 整数
+# %u -> 无符号整数
+# %f -> 浮点数
+print('My name is %s and weight is %d kg' % (s4, a4))
+# c.List列表：数据类型可以不同、可以更新数据
+list = ['abc', 11, 'joke', 15]
+list[1] = 'xwj' # 更新列表
+del list[1] # 删除一个列表元素
+tempList = [123, 'hello']
+print(list) # ['abc', 11, 'joke', 15]
+print(list[0]) # abc
+print(list[1:3]) # [1, 3) -> [11, 'joke']
+print(list[2:]) # ['joke', 15]
+print(tempList * 2) # ['abc', 11, 'joke', 15, 'abc', 11, 'joke', 15]
+print(list + tempList) # ['abc', 11, 'joke', 15, 123, 'hello']
+print(len(list)) # 返回列表长度
+print(max(list)) # 返回列表元素的最大值
+print(max(list)) # 返回列表元素的最大值
+print(min(list)) # 返回列表元素的最小值
+list.append('a') # 在列表末尾追加元素
+print(list.count('a')) # 统计某个元素在列表中出现的次数
+print(list.index('a')) # 返回某个元素第一次出现的时候的索引值
+list.insert(1, 'a') # 将元素插入到列表
+list.remove('a') # 删除列表中第一个元素
+list.pop() # 移除列表中的一个元素（默认最后一个元素）：返回该元素的值
+list.reverse() # 列表反转
+# d.Tuple元组：：数据类型可以不同、不可以更新数据
+tuple1 = () # 空元组
+tuple2 = (123,) # 只要一个元素也必须包含,
+tuple3 = ('abc', 11, 'joke', 15)
+tempTuple = (123, 'hello')
+print(tuple3) # ('abc', 11, 'joke', 15)
+print(tuple3[0]) # abc
+print(tuple3[1:3]) # [1, 3) -> (11, 'joke')
+print(tuple3[2:]) # ('joke', 15)
+print(tempTuple * 2) # ('abc', 11, 'joke', 15, 'abc', 11, 'joke', 15)
+print(tuple3 + tempTuple) # ('abc', 11, 'joke', 15, 123, 'hello')
+len(tuple3) #计算元素个数
+max(tuple3) # 返回元组中元素的最大值
+min(tuple3) # 返回元组中元素的最小值
+tuple(list) # list -> tuple
+# tuple3[0] = 'xwj' # 无效
+# e.Dictionary字典：key必须是不可变的数据类型（字符串、数字、元组）、value可以是任意类型
+dict = {
+    'key': 'value',
+    1: 'xwj',
+    2: 'cfj',
+    'key1': 3
+}
+dict['key2'] = 4
+print(dict['key']) # value
+print(dict[2]) # cfj
+print(dict) # {'key': 'value', 1: 'xwj', 2: 'cfj', 'key1': 3}
+print(dict.keys()) # ['key', 1, 2, 'key1']
+print(dict.values()) #['value', 'xwj', 'cfj', 3]
+print(len(dict)) # 计算dict元素个数（key的个数）
+del dict["key"] # 删除某一个元素
+dict.clear() # 清空dict
+del dict # 删除dict：在使用就会报错
+# 4>.数据类型转换
+s9 = 'xwj'
+print(int(s7)) # 将s7转换成一个整数
+print(float(s7)) # 将s7转换成一个浮点数
+print(complex(s7)) # 将s7转换成一个复数
+print(str(s7)) # 将s7转换成一个字符串
+print(tuple(s7)) # 将s7转换成一个元组
+print(list(s7)) # 将s7转换成一个列表
+s10 = (('key', 'value'), (1, 'xwj'), ('key1', 3))
+print(dict(s10)) # 将s8转换成一个字典：s8必须是一个序列(key, value)元组
 
-# # 7.运算符
-# # 1>.算术运算符
-# a15 = 9
-# a16 = 4
-# print(a15 + a16) # 13
-# print(a15 - a16) # 5
-# print(a15 * a16) # 36
-# print(a15 / a16) # 2.25
-# print(a15 % a16) # 1
-# print(a15 ** a16) # a15^a16 = 81 * 81 = 6561
-# print(a15 // a16) # 整除 -> 2
-# # 2>.比较运算符：True和False
-# # == != > < >= <=
-# # 3>.赋值运算符
-# a15 = a16
-# a15 += a16 # a15 = a15 + a16
-# a15 -= a16 # a15 = a15 - a16
-# a15 *= a16 # a15 = a15 * a16
-# a15 /= a16 # a15 = a15 / a16
-# a15 %= a16 # a15 = a15 % a16
-# a15 **= a16 # a15 = a15 ** a16
-# a15 //= a16 # a15 = a15 // a16
-# # 4>.位运算符
-# a17 = 60
-# a18 = 13
-# print(a17 & a18) # 12...按位与运算
-# print(a17 | a18) # 61...按位或运算
-# print(a17 ^ a18) # 49...按位异或运算
-# print(~a17) # -61...按位取反运算
-# print(a17 << 2) # 240...左移动运算符
-# print(a17 >> 2) # 15...右移动运算符
-# # 5>.逻辑运算符：and、or、not
-# # py规定“任何非零值和非空值”假定为true、“任何零值和空值”假定为false
-# print(a17 and a18) # a17为False则返回False，否则返回a18
-# print(a17 or a18) # a17为True则返回a17，否则返回a18
-# print(not a17) # a17为False则返回True，否则返回False
-# # 6>.成员运算符：in、not in
-# print(a17 in list) # 在指定的序列中找到值则返回True，否则返回False
-# print(a17 not in list) # 在指定的序列中找不到则返回True，否则返回False
-# # 7>.身份运算符：is、is not
-# print(a17 is a18); # 判断两个标识符是否引用自同一个对象
-# print(a17 is not a18) # 判断两个标识符是否引用自不同对象
+# 7.运算符
+# 1>.算术运算符
+a15 = 9
+a16 = 4
+print(a15 + a16) # 13
+print(a15 - a16) # 5
+print(a15 * a16) # 36
+print(a15 / a16) # 2.25
+print(a15 % a16) # 1
+print(a15 ** a16) # a15^a16 = 81 * 81 = 6561
+print(a15 // a16) # 整除 -> 2
+# 2>.比较运算符：True和False
+# == != > < >= <=
+# 3>.赋值运算符
+a15 = a16
+a15 += a16 # a15 = a15 + a16
+a15 -= a16 # a15 = a15 - a16
+a15 *= a16 # a15 = a15 * a16
+a15 /= a16 # a15 = a15 / a16
+a15 %= a16 # a15 = a15 % a16
+a15 **= a16 # a15 = a15 ** a16
+a15 //= a16 # a15 = a15 // a16
+# 4>.位运算符
+a17 = 60
+a18 = 13
+print(a17 & a18) # 12...按位与运算
+print(a17 | a18) # 61...按位或运算
+print(a17 ^ a18) # 49...按位异或运算
+print(~a17) # -61...按位取反运算
+print(a17 << 2) # 240...左移动运算符
+print(a17 >> 2) # 15...右移动运算符
+# 5>.逻辑运算符：and、or、not
+# py规定“任何非零值和非空值”假定为true、“任何零值和空值”假定为false
+print(a17 and a18) # a17为False则返回False，否则返回a18
+print(a17 or a18) # a17为True则返回a17，否则返回a18
+print(not a17) # a17为False则返回True，否则返回False
+# 6>.成员运算符：in、not in
+print(a17 in list) # 在指定的序列中找到值则返回True，否则返回False
+print(a17 not in list) # 在指定的序列中找不到则返回True，否则返回False
+# 7>.身份运算符：is、is not
+print(a17 is a18); # 判断两个标识符是否引用自同一个对象
+print(a17 is not a18) # 判断两个标识符是否引用自不同对象
 
-# # 8.条件控制
-# # 1>.py规定“任何非零值和非空值”假定为true、“任何零值和空值”假定为false
-# # 2>.py不支持switch语句
-# # 第一种方式
-# # py不使用{}来限定代码块：而是使用“线条缩进”表示（缩进的空格数可变：同一个代码块中所有的语句必须缩进相同的数量）
-# # 在py中，所有用相同数量的空格缩进的连续行将组成一个代码块
-# if a17:
-#     # py允许使用"行连续字符\"来表示该行应该继续
-#     s11 = "我的名字：" + \
-#     "谢吴军"
-#     print(a17)
-#     print(s11)
-# # 第二种方式
-# if a17:
-#     print(a17)
-# else:
-#     print('错误')
-# # 第三种方式
-# if a17:
-#     print(a17)
-# elif a18:
-#     print(a18)
-# else:
-#     print('错误')
-# # if嵌套
-# if a17:
-#     print(a17)
-#     if a18:
-#         print(a18)
-#     else:
-#         print('错误')
-# else:
-#     print('错误')
+# 8.条件控制
+# 1>.py规定“任何非零值和非空值”假定为true、“任何零值和空值”假定为false
+# 2>.py不支持switch语句
+# 第一种方式
+# py不使用{}来限定代码块：而是使用“线条缩进”表示（缩进的空格数可变：同一个代码块中所有的语句必须缩进相同的数量）
+# 在py中，所有用相同数量的空格缩进的连续行将组成一个代码块
+if a17:
+    # py允许使用"行连续字符\"来表示该行应该继续
+    s11 = "我的名字：" + \
+    "谢吴军"
+    print(a17)
+    print(s11)
+# 第二种方式
+if a17:
+    print(a17)
+else:
+    print('错误')
+# 第三种方式
+if a17:
+    print(a17)
+elif a18:
+    print(a18)
+else:
+    print('错误')
+# if嵌套
+if a17:
+    print(a17)
+    if a18:
+        print(a18)
+    else:
+        print('错误')
+else:
+    print('错误')
 
-# # 9.循环语句
-# # 1>.while循环
-# # a、基本格式
-# count = 0
-# while (count < 9):
+# 9.循环语句：py不支持do...while()循环
+# 1>.while循环
+# a、基本格式
+count = 0
+while (count < 9):
+    print(count)
+    count = count + 1
+# 条件为false的时候调用
+else:
+    print('end')
+# b、死循环
+# loopCount = 0
+# while loopCount == 0:
 #     print(count)
-#     count = count + 1
-# # 条件为false的时候调用
-# else:
-#     print('end')
-# # b、死循环
-# # loopCount = 0
-# # while loopCount == 0:
-# #     print(count)
-# # c、只有一行语句的时候可以写在一行
-# while (count < 9): count = count + 1
-# # 2>.for循环
-# # range(5) -> 生成“0 ~ (n - 1)”的迭代器
-# for num in list(range(5)):
-#     # 0, 1, 2, 3, 4
-#     print(num)
-# # [1, 10)
-# for num in range(1, 10):
-#     # 1, 2, 3, 4, 5, 6, 7, 8, 9
-#     print(num)
-#     # # 跳出循环
-#     # break
-#     # # 跳出本次循环，开始下次循环
-#     # continue
-#     # # 空操作：执行时没有任何反应
-#     # pass
-# # for循环结束的时候调用
-# else:
-#     print('end')
-# fruits = ['apple', 'banana', 'mango']
-# # 遍历value
-# for fruit in fruits:
-#     print(fruit)
-# # 遍历index
-# # len(fruits) -> 列表的长度
-# for index in range(len(fruits)):
-#     print(fruits[index])
-# # 3>.嵌套循环
-# # for循环和while循环可以相互嵌套
-# for fruit in fruits:
-#     for index in range(len(fruits)):
-#         print(fruits[index])
-# # 4>.迭代器和生成器
-# # 生成一个迭代器（一个可以记住遍历的位置的对象）
-# # >>迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束...迭代器只能往前不会后退
-# it = iter(list)
-# # 输出迭代器的下一个元素
-# print(next(it))
-# # 遍历迭代器
-# for index in it:
-#     print(index)
+# c、只有一行语句的时候可以写在一行
+while (count < 9): count = count + 1
+# 2>.for循环
+# range(5) -> 生成“0 ~ (n - 1)”的迭代器
+for num in list(range(5)):
+    # 0, 1, 2, 3, 4
+    print(num)
+# [1, 10)
+for num in range(1, 10):
+    # 1, 2, 3, 4, 5, 6, 7, 8, 9
+    print(num)
+    # # 跳出循环
+    # break
+    # # 跳出本次循环，开始下次循环
+    # continue
+    # # 空操作：执行时没有任何反应
+    # pass
+# for循环结束的时候调用
+else:
+    print('end')
+fruits = ['apple', 'banana', 'mango']
+# 遍历value
+for fruit in fruits:
+    print(fruit)
+# 遍历index
+# len(fruits) -> 列表的长度
+for index in range(len(fruits)):
+    print(fruits[index])
+# 3>.嵌套循环
+# for循环和while循环可以相互嵌套
+for fruit in fruits:
+    for index in range(len(fruits)):
+        print(fruits[index])
+# 4>.迭代器和生成器
+# 生成一个迭代器（一个可以记住遍历的位置的对象）
+# >>迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束...迭代器只能往前不会后退
+it = iter(list)
+# 输出迭代器的下一个元素
+print(next(it))
+# 遍历迭代器
+for index in it:
+    print(index)
 
-# ### 接下来：12.Python3元组
+# 10.日期和时间处理
+ticks = time.time() # 返回1970-01-01 12:00以来的当前系统时间
+local_time = time.localtime(ticks)
+print(calendar.month(2016, 2))
 
+# 11.函数：可重用的代码块
+## >>普通函数
+def show(s):
+    print("hello world")
+    print(s)
+    return s
+## >>匿名函数：只能写一行
+lambda arg1, arg2: arg1 + arg2
 
+# 12.模块
+# 在name.py文件中
 
+# 13.文件输入输出
 
+# 14.异常处理
+# #1>.什么是异常：在执行程序期间遇到py无法应付的情况时就会发生异常，导致中断程序指令（必须立即处理异常，否则程序会终止并退出）
+# class NetworkError(RuntimeError):
+#     def __init__(self, arg):
+#         self.args = arg
+# try:
+#     # 可能发生异常的代码
+#     # 引发Exception
+#     raise NetworkError("Bad hostname")
+# except NetworkError:
+#     # 处理异常
+# finally:
+#     # 必须执行的代码
 
+# 15.面向对象
+# 1>.创建class
+class Employee:
+    # 类变量：所有实例共享
+    empCount = 0
+    # 内置对象
+    __dict__ # 包含类名称的字典
+    __doc__ # 类文档字符串
+    __name__ # 类名
+    __module__ # 定位类的模块名称
 
+    def __init__(self, name, salary):
+        self.name = name
+        self.salary = salary
+        Employee.empCount = 1
 
+    # 除第一个参数是self以外：py会将自我属性自动添加到方法参数列表中
+    def displayEmployee(self):
+        print("%s 的薪水 %d" % (self.name, self.salary))
+        print(Employee.__dict__)
+        print(Employee.__name__)
+        
+e = Employee("xwj", "50000")
+e.displayEmployee()
+e.name = "cfj"
+e.salary = 8500
+del e.salary # 删除salary
+# 2>.垃圾回收（销毁对象）：py会自动删除不需要的对象以释放内存空间（py定期回收不再使用的内存块的过程称为垃圾回收）
+# xxx
+# 3>.继承
+class worker (Employee):
+    # 方法重写
+    def displayEmployee(self):
+        print("hw")
 
+    
 
 
 
@@ -366,103 +405,97 @@
 
 
 
-# import sys
-
-# print('hello world')
-
-# age = input('请输入你的年龄：')
-# age = input(age)
-# if age > 18:
-#     print('你太老...')
-# else:
-#     print('你还年轻...')
-
-# def show(args):
-#     if not isinstance(args, int):
-#         print('args is not int')
-#         return
-#     print('show')
-# show('123')
-
-# for index in sys.argv:
-#     print(index)
-# print('python路径：', sys.path)
-
-# # 元组中只包含一个元素时：需要在元素后面添加','
-# tup = (1, 2, 3, 4, 5)
-# tup[0] = 10 # 元组的值不能修改
-# print(type(tup))
-
-# # 4.Python基础
-# # Python简介
-# # 变量：定义变量、关键字、命名规则
-# # 基本数据类型：类型转换
-# # 运算符和表达式
-# # 语句：选择语句、循环语句、跳转语句
-# # 基本数据结构：字符串、列表、元组、集合、字典
-# # 函数：函数定义、参数传递、作用域、lambda表达式、常用内置函数
-
-# # 5.面向对象编程
-# # 面向对象概述
-# # 类和对象
-# # 三大特性：封装、继承、多态
-# # 设计思想
-# # 设计原则
-
-# # 6.py核心
-# # 模块、包、异常处理
-# # 迭代、生成器
-# # Lambda表达式、高阶函数
-# # 闭包、装饰器
-
-# # 7.算法
-# # 数据结构：链表操作
-# # 二叉树
-# # 查找排序算法
-
-# # 8.Linux
-# # Linux使用
-# # 文件IO
-
-# # 9.网络编程
-# # 网络基础
-# # TCP编程
-# # UDP编程
-# # 套接字属性
-# # 广播、http协议
-# # struct模块
-# # HTTPServer 3.0
-
-# # 10.多线程
-# # 多任务编程、fork多进程
-# # 网络聊天室、multiprocessing进程
-# # 进程间通信、同步互斥、threading线程
-# # IO模型、协程编程
-# # 多进程并发、ftp文件服务器
-# # 多进程并发、HTTPServer 2.0
-# # 正则表达式、re模块
-
-# # 11.数据库
-# # 数据库基础、数据表设计、数据库数据表创建
-# # 数据类型、高级查询、增删改查
-# # git使用
-# # 外键、索引、事务、关联关系
-# # 子查询、数据库优化
-# # PyMYSQL使用：持久化层的实现
-# # Python工具使用
-# # web与服务器
-# # MVC和MTV模式
-# # Django介绍
-# # Django中的应用：应用的url路由配置、模板的设置、模板的加载方式、url()中的name参数
-# # 模版中的语法、模型、ORM、创建和使用模型、配置数据库
-# # 编写Models
-
-# # 12.web技术
-# # html基础
-# # css基础
-# # js基础
-
-# # 11：Python3列表
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # ### 面试题
 
@@ -473,8 +506,6 @@
 # - Python 面试题整理：https://github.com/taizilongxu/interview_python（高星）
 # - Python 面试题整理：https://github.com/kenwoodjw/python_interview_question
 # - 机器学习面试题：https://geektutu.com/post/qa-ml.html
-
-
 
 # ### 其他
 
@@ -523,7 +554,6 @@
 #   然后，<http://stackoverflow.com> 和 <http://Google.com> 是很好用的。
 
 #   然后，坚持下去。
-
 
 #   一定要保持兴趣，太复杂的跳过，就像小学数学，小学英语，都是由简入深。
 
@@ -592,8 +622,6 @@
 # Q: 如何用python完成一个任务(比如写网站)?
 
 # A: google: python 写网站, 或者 google: python web development.
-
-
 
 # ### *知乎问答*：你是如何自学 Python 的？[点击打开链接](http://www.zhihu.com/question/20702054)  作者:@成增存
 

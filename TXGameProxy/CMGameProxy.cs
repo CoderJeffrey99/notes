@@ -1,16 +1,21 @@
-// https://github.com/Y-Dian/LearnXinYminutes/blob/master/learncsharp-cn.cs
 // 任何c#语言的第一句都是这个：using关键字表示导入System这个namespace
-// 可以包含多个using语句
+// 可以包含多个using语句：每个using语句以;结尾
 using System;
+using System.Collections.Generic;
 
-// C#概述
-// 1>.C#（C-Sharp）是一门简单的、现代的、面向对象的、类型安全的、面向组件的、结构化编程语言
-// 2>.C#是由“Microsoft微软”开发的面向对象的编程语言（在.net上运行）
-// 3>.C#以.cs后缀：类名和文件名可以不同（如果文件名和类名不同则需要给类创建一个namespace）...与java有区别、严格区分大小写
+// c#概述
+// 1>.c#（c-Sharp）是一门简单的、现代的、面向对象的、类型安全的、面向组件的、结构化编程语言
+// 2>.c#是由“Microsoft微软”开发的面向对象的编程语言（在.net上运行）
+// 3>.c#以.cs后缀：类名和文件名可以不同（如果文件名和类名不同则需要给类创建一个namespace）...与java有区别
+// 4>.怎么在Linux和MacOS上编写c#：Mono是.Net框架的开源版本，包含c#编译器，可以运行于多种操作系统上
+// 5>.参考
+// >>https://blog.csdn.net/m0_61490399/article/details/125562919
+// >>https://xiaoy.blog.csdn.net/article/details/118298538?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7EPaidSort-1-118298538-blog-124342343.235%5Ev43%5Epc_blog_bottom_relevance_base1&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7EPaidSort-1-118298538-blog-124342343.235%5Ev43%5Epc_blog_bottom_relevance_base1&utm_relevant_index=1
+// >>https://blog.csdn.net/qingtian_111?type=blog
 
 // 命名空间：类似于java中的包（类的集合）
 // >>一个文件中可以有多个命名空间：每个命名空间中声明的类的名称不能相同、不同命名空间中声明的类的名称可以相同
-// >>C#命名规则：命名空间、类、方法、接口首字母必须大写
+// >>命名规则：命名空间、类、方法、接口首字母必须大写
 // >>我们一般考虑在namespace内部创建类
 namespace CMGameproxy
 {
@@ -37,7 +42,7 @@ namespace CMGameproxy
 
             // System是命名空间：导入System就可以省略前缀
             // System.Console.WriteLine("Hello World");
-            Console.WriteLine("Hello World"); // C#的每条语句必须有";"结尾
+            Console.WriteLine("Hello World"); // 每条语句必须有";"结尾
 
             // 标识符
             // 由“数字、字母、_、@”表示，数字不能开头（严格区分大小写）
@@ -72,7 +77,9 @@ namespace CMGameproxy
             // bool和Boolean完全一样
             bool s1 = true;
             Boolean s2 = false;
-            // f.类型转换
+            // f.指针类型：存储另一种类型的内存地址
+            int *s3;
+            // g.类型转换
             // 1>.隐式转换：较小范围的数据类型转换为较大范围的数据类型：编译器自动完成、安全、不会导致数据丢失
             byte a12 = 10;
             int a13 = a12;
@@ -81,7 +88,7 @@ namespace CMGameproxy
 
             // 常量
             // 1>.概念：程序运行过程中其值不会改变的量，用于存储数据
-            // C#使用const修饰常量
+            // 使用const修饰常量
             const string a15 = "taobao";
             const int a16 = 10;
             const double PI = 3.14;
@@ -145,23 +152,19 @@ namespace CMGameproxy
             // if语句
             if (s1)
             {
-
             }
             // if...else语句
             if (s1)
             {
-
             }
             else
             {
-
             }
             // if嵌套
             if (s1)
             {
                 if (s2)
                 {
-
                 }
             }
             // switch语句
@@ -170,18 +173,15 @@ namespace CMGameproxy
             {
                 case 1:
                     {
-
                     }
                     break;
                 case 2:
                     {
-
                     }
                     break;
                 case 3:
                 case 4:
                     {
-
                     }
                     break;
                 default: break;
@@ -193,12 +193,10 @@ namespace CMGameproxy
             // while循环
             while (s1)
             {
-
             }
             // do...while
             do
             {
-
             } while (s1);
             // for循环
             for (int index = 0; index < 100; index++)
@@ -231,7 +229,29 @@ namespace CMGameproxy
             {
             }*/
 
-            // 可空类型：类似swift中的可选类型
+            // 方法
+            /*
+            访问修饰符 返回值类型 方法名(参数1, 参数2, 参数3) {
+            }
+            */
+            // 值传递：形参的值发生改变时，不会影响实参的值（默认都是值传递）
+            public string GetDetails1(int s1, int s2)
+            {
+                return "";
+            }
+            // 引用传递：当形参的值发生改变时，同时会改变实参的值（使用ref关键字可以让值传递->引用传递）
+            public string GetDetails2(ref int s1, int s2)
+            {
+                return "";
+            }
+            // 输出参数：可以返回多个值
+            // 调用该方法传入参数s1 = 2;以后输出s1 = 10;
+            public string GetDetails(out int s1)
+            {
+                s1 = 10;
+            }
+
+            // 可空类型Nullable：类似swift中的可选类型
             // 1>.概念：可以为其分配正常范围的值以及null
             int? b7 = null;
             int? b8 = 45;
@@ -247,11 +267,11 @@ namespace CMGameproxy
             array1[0] = 10;
             array1[1] = 20;
             // >>第二种方式
-            int[] array2 = { 10, 20, 23, 25, 28 };
+            int[] array2 = {10, 20, 23, 25, 28};
             // >>第三种方式
-            int[] array3 = new int[5] { 10, 20, 23, 25, 28 };
+            int[] array3 = new int[5] {10, 20, 23, 25, 28};
             // >>第四种方式
-            int[] array4 = new int[] { 10, 20, 23, 25, 28 };
+            int[] array4 = new int[] {10, 20, 23, 25, 28};
             int[] score = array4;
             // 3.访问数组元素
             int b11 = array4[2];
@@ -287,10 +307,8 @@ namespace CMGameproxy
             // 去掉字符串
             fname.Trim();
             fname.IndexOf('t');
-            // 其他类型的转换
-            // xxx
 
-            // C#中的Map（Dictionary）
+            // Map（Dictionary）
             Dictionary<string, int> dict = new Dictionary<string, int>();
             // 添加键值对
             dict["key1"] = 123;
@@ -333,7 +351,7 @@ namespace CMGameproxy
 
             // 类示例
             Car car = new Car();
-            car.name = "xwj";
+            car.Name = "xwj";
             car.age = 18;
             car.GetPerson();
 
@@ -341,6 +359,7 @@ namespace CMGameproxy
             try
             {
                 // 引起异常的语句
+                showTemp(0);
             }
             catch (Exception e)
             {
@@ -351,36 +370,32 @@ namespace CMGameproxy
             {
                 // 必须执行的语句
             }
+            
+            void showTemp(int num) {
+                if (num == 0) {
+                    throw new TempZeroException("除数不能为零");
+                }
+            }
 
-            // 抽象类和接口
+            // 预处理指令：用来在编译开始之前给编译器指示预处理信息
+            #define DEBUG
+            #define RELEASE
+            #if DEBUG
+                Console.WriteLine("Debug mode");
+            #elif RELEASE
+                Console.WriteLine("Release mode");
+            #else
+                Console.WriteLine("Other mode");
+            #endif
 
-            // C#文件操作
+            // 泛型
+            // LRGameTest t = new LRGameTest<string>();
+            // t.setItem(1, 'xwj');
+            // t.getItem(1);
 
-            // C#集合
-            // 1>.动态数组ArrayList
-            // 2>.哈希表Hashtable
-            // 3>.排序列表SortedList
-            // 4>.堆栈Stack
-            // 5>.队列Queue
-            // 6>.点阵列BitArray
-
-            // C#泛型
+            // 反射Reflection
 
             // 多线程Thread
-        }
-
-        // 方法
-        /*
-        访问修饰符 returnType methodName(参数1, 参数2, 参数3) {
-
-        }
-        */
-        // 值传递：形参的值发生改变时，不会影响实参的值（默认都是值传递）
-        // 引用传递：当形参的值发生改变时，同时会改变实参的值（使用ref关键字可以让值传递->引用传递）
-        // 输出参数：可以返回多个值
-        public string GetDetails(ref int s1, int s2)
-        {
-            return "";
         }
     }
 
@@ -408,12 +423,19 @@ namespace CMGameproxy
 
         // 不可以定义析构函数
     }
-
+    
+    // 自定义异常类
+    class TempZeroException: Exception {
+        public TempZeroException(string msg) {
+            Console.WriteLine(msg);
+        }
+    }
+    
     // 枚举：值类型
     // 默认情况下：第一个枚举符号的值是0
     enum Days { Sun, Mon, Tue, Wed, Thu, Fri, Sat };
 
-    // C#不支持多继承：可以实现interface实现多继承
+    // c#不支持多继承：可以实现interface实现多继承
     // >>继承使用":"
     class Car : CMGameProxy
     {
@@ -422,23 +444,23 @@ namespace CMGameproxy
         // internal内部访问指定符 - 同一个程序集的对象可以访问：类的默认访问权限
         // protected受保护访问指定符 - 该类及其子类可以访问
         // private私有访问说明符 - 该类内部可以访问：成员的默认访问权限
-        public string name; // 成员变量
+        private string name = ""; // 成员变量
         public int age;
         public static readonly int height = 180; // 静态变量
-
-        // 支持setting和getting方法
-        // 不支持setting和getting方法的语言我们可以手动创建setting和getting方法
-        public void SetName(string name)
+        
+        // 访问器
+        public string Name
         {
-            this.name = name;
+            get
+            {
+                return name;
+            }
+            set
+            {
+                name = value;
+            }
         }
-
-        public string GetName()
-        {
-            return this.name;
-        }
-
-
+        
         // 构造方法：与java完全一致
         public Car()
         {
@@ -464,6 +486,24 @@ namespace CMGameproxy
         {
             // 析构函数：结束程序之前释放资源（比如关闭文件、释放内存）
             // 析构函数不能继承或重载
+        }
+    }
+
+    // 抽象类和接口
+    interface LRGame {
+        // 接口可以定义“属性”和”方法“
+    }
+
+    // 泛型
+    public LRGameTest<T> {
+        private T[] array;
+
+        public void setItem(int index, T value) {
+            array[index] = value;
+        }
+
+        public T getItem(int index) {
+
         }
     }
 }

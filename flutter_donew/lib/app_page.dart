@@ -116,7 +116,7 @@ class _AppPageState extends State<AppPage> {
               label: "职位"
           ),
           BottomNavigationBarItem(
-            // 普通icon
+              // 普通icon
               icon: Image.asset(
                 'assets/bottom_navigation_bar/tab_position_normal.png',
                 width: 30,

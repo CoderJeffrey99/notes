@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+    指定给哪个控件自定义属性
+    -->
+    <declare-styleable name="com.lrgame.goc.cn.weight.CustomTitleWeight">
+        <!--
+        指定属性的名称和数据类型
+        -->
+        <attr name="destitle" format="string"/>
+    </declare-styleable>
+</resources>

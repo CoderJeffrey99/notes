@@ -1121,9 +1121,9 @@ class _PositionPageState extends State<PositionPage> {
         ),
       ),
       // 一般直接放置一个布局
-      body: Column(
+      body: const Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Text(
               '账号',
               style: TextStyle(
@@ -1379,7 +1379,7 @@ class _PositionPageState extends State<PositionPage> {
   // 弹性布局Flex
   // 允许子控件按照一定比例来分配父控件空间
   // 可以使用Flex的地方基本都可以使用Row、Column
-  final _flex = Flex(
+  final _flex = const Flex(
     // Axis.horizontal - Row
     // Axis.vertical - Column
       direction: Axis.vertical
@@ -1480,7 +1480,7 @@ class _PositionPageState extends State<PositionPage> {
 
   // 流式布局Wrap
   // 自动换行
-  final _wrap = Wrap(
+  final _wrap = const Wrap(
     // 子控件水平之间的距离
     spacing: 10,
     // 子控件竖直之间的距离
@@ -1497,7 +1497,7 @@ class _PositionPageState extends State<PositionPage> {
     */
     alignment: WrapAlignment.spaceEvenly,
     runAlignment: WrapAlignment.center,
-    children: const [
+    children: [
       Text('第一行'),
       Divider(),
       Text('第二行'),

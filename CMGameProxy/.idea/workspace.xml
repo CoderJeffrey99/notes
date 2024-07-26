@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9b4acb97-9ea9-4fcf-8070-3641101e5873" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/cm/game/sdk/CMGameProxy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../DMGameProxy/app/src/main/res/drawable/android_learning_route_001.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../DMGameProxy/app/src/main/res/drawable/android_learning_route_002.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../DMGameProxy/app/src/main/res/drawable/look_up_jdk.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMGameProxy.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CMGameProxy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/线程生命周期.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/集合Collection.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/集合Map.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DMGameProxy/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DMGameProxy/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DMGameProxy/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../DMGameProxy/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DMGameProxy/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DMGameProxy/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DMGameProxy/app/src/main/java/com/lrgame/goc/cn/HomeActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DMGameProxy/app/src/main/java/com/lrgame/goc/cn/MainActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DMGameProxy/app/src/main/java/com/lrgame/goc/cn/adapter/FruitAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../DMGameProxy/app/src/main/java/com/lrgame/goc/cn/adapter/FruitAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DMGameProxy/app/src/main/java/com/lrgame/goc/cn/fragment/LeftFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../DMGameProxy/app/src/main/java/com/lrgame/goc/cn/fragment/LeftFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DMGameProxy/app/src/main/java/com/lrgame/goc/cn/weight/CustomTitleWeight.java" beforeDir="false" afterPath="$PROJECT_DIR$/../DMGameProxy/app/src/main/java/com/lrgame/goc/cn/weight/CustomTitleWeight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DMGameProxy/app/src/main/res/layout-large/activity_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DMGameProxy/app/src/main/res/layout-large/activity_home.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DMGameProxy/app/src/main/res/layout/activity_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DMGameProxy/app/src/main/res/layout/activity_home.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DMGameProxy/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DMGameProxy/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DMGameProxy/app/src/main/res/values-night/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DMGameProxy/app/src/main/res/values-night/themes.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DMGameProxy/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DMGameProxy/app/src/main/res/values/colors.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DMGameProxy/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DMGameProxy/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DMGameProxy/app/src/main/res/values/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DMGameProxy/app/src/main/res/values/themes.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DMGameProxy/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../DMGameProxy/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DMGameProxy/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../DMGameProxy/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HTGameProxy/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../HTGameProxy/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LRGameProxy/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../LRGameProxy/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LRGameProxy/AppScope/app.json5" beforeDir="false" afterPath="$PROJECT_DIR$/../LRGameProxy/AppScope/app.json5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LRGameProxy/AppScope/resources/base/media/app_icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/../LRGameProxy/AppScope/resources/base/media/app_icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LRGameProxy/build-profile.json5" beforeDir="false" afterPath="$PROJECT_DIR$/../LRGameProxy/build-profile.json5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LRGameProxy/entry/build-profile.json5" beforeDir="false" afterPath="$PROJECT_DIR$/../LRGameProxy/entry/build-profile.json5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LRGameProxy/entry/hvigorfile.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../LRGameProxy/entry/hvigorfile.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LRGameProxy/entry/src/main/ets/entryability/EntryAbility.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LRGameProxy/entry/src/main/ets/pages/Index.ets" beforeDir="false" afterPath="$PROJECT_DIR$/../LRGameProxy/entry/src/main/ets/pages/Index.ets" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LRGameProxy/entry/src/main/module.json5" beforeDir="false" afterPath="$PROJECT_DIR$/../LRGameProxy/entry/src/main/module.json5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LRGameProxy/entry/src/main/resources/base/media/icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LRGameProxy/entry/src/ohosTest/ets/test/Ability.test.ets" beforeDir="false" afterPath="$PROJECT_DIR$/../LRGameProxy/entry/src/ohosTest/ets/test/Ability.test.ets" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LRGameProxy/entry/src/ohosTest/ets/test/List.test.ets" beforeDir="false" afterPath="$PROJECT_DIR$/../LRGameProxy/entry/src/ohosTest/ets/test/List.test.ets" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LRGameProxy/entry/src/ohosTest/ets/testability/TestAbility.ets" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LRGameProxy/entry/src/ohosTest/ets/testability/pages/Index.ets" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LRGameProxy/entry/src/ohosTest/ets/testrunner/OpenHarmonyTestRunner.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LRGameProxy/entry/src/ohosTest/module.json5" beforeDir="false" afterPath="$PROJECT_DIR$/../LRGameProxy/entry/src/ohosTest/module.json5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LRGameProxy/entry/src/ohosTest/resources/base/element/color.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LRGameProxy/entry/src/ohosTest/resources/base/element/string.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LRGameProxy/entry/src/ohosTest/resources/base/media/icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LRGameProxy/entry/src/ohosTest/resources/base/profile/test_pages.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LRGameProxy/hvigor/hvigor-config.json5" beforeDir="false" afterPath="$PROJECT_DIR$/../LRGameProxy/hvigor/hvigor-config.json5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LRGameProxy/hvigor/hvigor-wrapper.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LRGameProxy/hvigorfile.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../LRGameProxy/hvigorfile.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LRGameProxy/hvigorw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LRGameProxy/hvigorw.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LRGameProxy/oh-package-lock.json5" beforeDir="false" afterPath="$PROJECT_DIR$/../LRGameProxy/oh-package-lock.json5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LRGameProxy/oh-package.json5" beforeDir="false" afterPath="$PROJECT_DIR$/../LRGameProxy/oh-package.json5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TXGameProxy/CMGameProxy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../TXGameProxy/CMGameProxy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TXGameProxy/CMGameProxy.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../TXGameProxy/CMGameProxy.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TXGameProxy/CMGameProxy.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../TXGameProxy/CMGameProxy.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TXGameProxy/编程语言tips.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WMGameProxy/WMGameProxy/SyGameProxy.h" beforeDir="false" afterPath="$PROJECT_DIR$/../WMGameProxy/WMGameProxy/SyGameProxy.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WMGameProxy/WMGameProxy/WMMemoryManager.m" beforeDir="false" afterPath="$PROJECT_DIR$/../WMGameProxy/WMGameProxy/WMMemoryManager.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WMGameProxy/WMGameProxy/iOS面试题.md" beforeDir="false" afterPath="$PROJECT_DIR$/../WMGameProxy/WMGameProxy/iOS面试题.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flutter_donew/lib/app_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../flutter_donew/lib/app_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flutter_donew/lib/position_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../flutter_donew/lib/position_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flutter_donew/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../flutter_donew/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../note.code-workspace" beforeDir="false" afterPath="$PROJECT_DIR$/../note.code-workspace" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2hvU6aJKj0MZa1rXJ9p7MQoYK7e" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;/Users/xiewujun/Desktop/Github/DyBase/notes/CMGameProxy/lrsdk/src/main/java/cm/game/sdk/Main.java&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="CMGameProxy" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="CMGameProxy" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9b4acb97-9ea9-4fcf-8070-3641101e5873" name="Changes" comment="" />
+      <created>1718473870467</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1718473870467</updated>
+      <workItem from="1718473871724" duration="95000" />
+      <workItem from="1721100371450" duration="1357000" />
+      <workItem from="1721201904074" duration="1967000" />
+      <workItem from="1721203924640" duration="431000" />
+      <workItem from="1721266527097" duration="584000" />
+      <workItem from="1721270133538" duration="2779000" />
+      <workItem from="1721352283646" duration="6544000" />
+      <workItem from="1721612567719" duration="45000" />
+      <workItem from="1721617293648" duration="101000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

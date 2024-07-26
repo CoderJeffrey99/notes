@@ -71,6 +71,13 @@ public class FruitAdapter extends ArrayAdapter<FruitItem> {
             viewHolder.fruitImageView.setImageResource(fruitList.get(position).getImageId());
             viewHolder.fruitTextView.setText(fruitList.get(position).getName());
         }
+
+//        if (viewHolder.fruitImageView != null) {
+//            viewHolder.fruitImageView.setImageResource(fruitList.get(position).getImageId());
+//        }
+//        if (viewHolder.fruitTextView != null) {
+//            viewHolder.fruitTextView.setText(fruitList.get(position).getText());
+//        }
         return view;
     }
 
