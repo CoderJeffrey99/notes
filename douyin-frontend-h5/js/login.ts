@@ -1,3 +1,8 @@
+// Cocos2d-x使用c++和Lua
+// Cocos Creator是对Cocos2d-x的封装：Cocos2d-x只支持纯代码编辑，Cocos Creator支持可视化，脚本化
+// Cocos Creator3.x = Cocos2d-x + h5游戏引擎 + Cocos Creator3D
+// Cocos Creator面向组件编程
+
 // 1.概述
 // 1>.TypeScript是JavaScript的超集，支持ECMAScript6.x标准
 // 2>.TypeScript是Microsoft开发的开源的编程语言
@@ -6,14 +11,7 @@
 // 5>.$tsc CMGameProxy.ts # 转换为JavaScript代码
 // 6>.$node CMGameProxy.js # 执行CMGameProxy.js
 var msg: string = 'hello world' // 可以不以;结尾
-console.log(msg) // 严格区分大小写
-
-/*
-Cocos2d-x使用c++和Lua
-Cocos Creator是对Cocos2d-x的封装：Cocos2d-x只支持纯代码编辑，Cocos Creator支持可视化，脚本化
-Cocos Creator3.x = Cocos2d-x + h5游戏引擎 + Cocos Creator3D
-Cocos Creator面向组件编程
- */
+console.log(msg) // 严格区分大小
 
 // 2.注释
 // 1>.支持单行注释
@@ -477,7 +475,7 @@ abstract class Person1 {
 
     }
     // 抽象方法
-    abstract say()
+    abstract say(): void
 }
 class Person2 extends Person1 {
     

@@ -5,9 +5,11 @@ CMGameProxy - Java
 
 DMGameProxy - Android
 
+donew-frontend-vue2 - Vue2
+
 donew-frontend-vue3 - Vue3
 
-donew-frontend-vue2 - Vue2
+DyActivityPage - Cocos
 
 flutter_donew - flutter
 
