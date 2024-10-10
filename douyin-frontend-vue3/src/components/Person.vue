@@ -3,7 +3,7 @@
         // vue2 - optionsAPI选项式api
         // 功能A和功能B...各种api都是分开的
         name: 'Person',
-        // // 数据
+        // 数据
         data() {
             return {
                 name: '谢吴军',
