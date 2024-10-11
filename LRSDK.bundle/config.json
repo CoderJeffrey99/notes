@@ -1,0 +1,60 @@
+{
+    "modules": [{
+            "id": 1,
+            "params": {
+                "app_id": "16",
+                "app_key": "d719f7396d9b0a22db415fe62378aaa0",
+                "google_client_id": "368551813981-nj0sf91mbac44vtttgt39eicaj0nq0hk.apps.googleusercontent.com"
+            }
+        },
+        {
+            "id": 2,
+            "params": {
+                "vendors": [{
+                            "id": 1,
+                            "dev_key": "obwkoX5XsBQavguQBcbpLF",
+                            "apple_id": "6504556871"
+                    },
+                    {
+                        "id": 2,
+                        "app_id": "50a759bcae4c4e389cc53f4f7ba9d4eb",
+                        "server_url": "https://dldl-saclient.lrgameglobal.com",
+                        "timezone": "Asia/Bangkok"
+                    },
+                    {
+                        "id": 3,
+                        "event_name_prefix": "F_"
+                    },
+                    {
+                        "id": 5,
+                        "app_id": "2024062401",
+                        "app_key": "cc944505a3ad0167781f84adf377a528"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 3,
+            "params": {
+                "app_id": "lrgame_platform_df99aad9a42abd30b78a9d192cc6d193",
+                "app_key": "LRGAME_app_389d2969a4b74a45b213ae9c4e82b86c",
+                "app_domain": "lrgame.aihelp.net",
+                "entrance_id": "E001"
+            }
+        },
+        {
+            "id": 4
+        },
+        {
+            "id": 5,
+            "params": {
+                "platforms": [{
+                    "id": 1,
+                    "app_key": "480507974528164",
+                    "app_secret": "24c9f6590b59265d4ff9ef11454e30a3",
+                    "display_name": "Soul Land: New World"
+                }]
+            }
+        }
+    ]
+}
