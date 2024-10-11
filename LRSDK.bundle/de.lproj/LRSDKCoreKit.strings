@@ -1,0 +1,14 @@
+/*
+  LRSDKCoreKit.strings
+  SDKDemo
+
+  Created by 周帮飞 on 2021/7/20.
+  Copyright © 2021 上海灵刃网络科技有限公司. All rights reserved.
+*/
+
+"buy" = "Kaufen";
+"notice" = "Tipp";
+"confirm" = "Bestätigen";
+"cancel" = "Abbrechen";
+"update" = "Aktualisieren";
+"update_now" = "Jetzt aktualisieren";
