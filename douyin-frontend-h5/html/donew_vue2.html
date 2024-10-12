@@ -1,61 +1,13 @@
-
-
-
-
-
-
-
-！！！查看js语法：这样写这么转换到以下方式！！！
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 
     Vue概述
-    1.概念：Vue是一套用于构建用户界面的渐进式（可以自底而上逐层应用：简单应用（只需引入核心库）、复杂应用（可以引入各式各样的vue插件））javascript框架
+    1.概念：Vue是一套用于构建用户界面的渐进式（可以自底而上逐层应用：简单应用（只需引入核心库）、复杂应用（可以引入各式各样的Vue插件））javascript框架
     2.作者：尤雨溪
-    3.时间点：2013年发布Vue、2015年发布Vue1.0、2016年发布Vue2.0、2020年发布Vue3.0
+    3.时间点：2013年发布Vue、2015年发布Vue1.0、2016年发布Vue2.0（2023年12月31日停止更新）、2020年发布Vue3.0
     4.地位：生态完善，已然成为国内前端工程师必备技能
     5.特点：
     a>.采用组件化模式：提高代码复用率、让代码更好维护
@@ -66,10 +18,7 @@
     >>公司项目：使用脚手架...怎么制作脚手架
     7.怎么制作vue相关库...想要做什么功能，可以来vue官网或github上找一些框架...unpkg/cdnjs
     8.vue不支持ie8及以下版本
-    9.2023-12-31：vue2.0停止更新
      -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
         .basic {
@@ -84,18 +33,53 @@
         }
     </style>
     <!-- 
-    // Vue.js安装
-    // 1>.下载到本地：推荐使用
+    Vue.js安装
+    1.下载到本地：推荐使用
     开发版本vue.js：包含完整的警告和调试模式
     生产模式vue.min.js：压缩版本（删除警告） 
     下载‘Live Server插件’ -> 导入vue.js -> Open with Live Server -> 检查代码 -> 切换到Network -> 按住Shift键强制刷新 -> 报错找不打favicon.ico（导入一个favicon.ico资源文件）
     -->
     <script src="../js/vue_base/vue.js"></script>
-    <!-- 2>.使用CDN：不推荐 -->
+    <!-- 2.使用CDN：不推荐（国内不稳定） -->
     <script src="https://cdn.staticfile.net/vue/2.2.2/vue.min.js"></script>
     <!-- 
-    3>.npm安装：合适构建大型应用
+    3.npm安装：合适构建大型应用
+    1.配置Vue开发环境
+    1>.登录https://nodejs.org/en下载Node.js
+    2>.查看安装结果
+    $node -v
+    # npm是随同Node.js安装的包管理工具
+    $npm -v
+    3>.全局安装@vue/cli
+    $npm install -g @vue/cli
+    $vue --version
+    4>.创建Vue项目
+    $vue create xxx
+    5>.运行Vue项目
+    $npm run serve
+    6>.打包Vue项目
+    // 在Vue项目下生成一个dist目录：修改dist目录下css和js的路径就可以使用看到html效果
+    $npm run build
      -->
+
+    <!-- 
+    Vue.js目录结构
+    douyin-frontend-vue
+        build -- 项目构建（webpack）相关代码
+        node_modules -- npm加载的项目依赖模块
+        public
+            favicon.icon -- 图标
+            index.html -- 首页入口文件
+        src
+            assets -- 静态文件：图片、字体
+            components -- 组件文件
+            router -- 路由文件
+            store -- 数仓文件
+            views -- 页面
+            App.vue -- 项目入口文件：也可以直接在这里写组件（这样就不需要components文件）
+            main.js -- 项目的核心文件
+            package.json -- 项目配置文件
+    -->
 </head>
 <body>
     <!-- 下载Vue.js devtools -->
@@ -105,10 +89,13 @@
     // 如果写两个一样的Vue模版，第二个Vue模版无效
     // 如果写两个一样的Vue实例，第二个Vue实例无效
      -->
-    <div id="root">
+     <div id="root">
         <!-- 内部代码依旧遵循html规范：没有配置的数据写在这里会报错（可以写js表达式） -->
         <!-- 插值语法：万能拼接 -->
         <h1>hello {{ name }}</h1>
+        <h2>hello {{ name.replace('a', 'b') }}</h2>
+        <!-- 输出html代码 -->
+        <div v-html="message"></div>
         <!-- 
         属性绑定：给tag属性绑定value
         // 这样写不行
@@ -307,6 +294,7 @@
                 // this就是Vue实例（箭头函数没有自己的this（望外找），如果data写成箭头函数则this就是window实例...被Vue管理的函数不能使用箭头函数）
                 return {
                     name: 'xwj',
+                    message: '<h2>菜鸟教程<h2>',
                     study: {
                         name: '百度',
                         url: 'https://www.baidu.com'
@@ -534,46 +522,3 @@
     </script>
 </body>
 </html>
-<!-- 
-1.配置Vue开发环境
-1>.登录https://nodejs.org/en下载Node.js
-2>.查看安装结果
-$node -v
-# npm是随同Node.js安装的包管理工具
-$npm -v
-3>.全局安装@vue/cli
-$npm install -g @vue/cli
-$vue --version
-4>.创建Vue项目
-$vue create xxx
-5>.运行Vue项目
-$npm run serve
-6>.打包Vue项目
-// 在Vue项目下生成一个dist目录：修改dist目录下css和js的路径就可以使用看到html效果
-    
-$npm run build
- -->
-<!-- 
-2.Vue.js概述
-1>.Vue.js是一套构建用户界面的渐进式框架
-2>.Vue.js只关注视图层，采用自底向上增量开发的设计
-3>.Vue.js的目标是通过尽可能简单的api实现响应的数据绑定和组合的视图组件
- -->
-<!-- 
-3.Vue.js目录结构
-douyin-frontend-vue
-    build -- 项目构建（webpack）相关代码
-    node_modules -- npm加载的项目依赖模块
-    public
-        favicon.icon -- 图标
-        index.html -- 首页入口文件
-    src
-        assets -- 静态文件
-        components -- 组件文件
-        router -- 路由文件
-        store -- 数仓文件
-        views -- 页面
-        App.vue -- 项目入口文件
-        main.ts -- 项目的核心文件
-    package.json -- 项目配置文件
- -->
