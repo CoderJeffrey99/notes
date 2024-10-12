@@ -1,3 +1,53 @@
+
+
+
+
+
+
+
+！！！查看js语法：这样写这么转换到以下方式！！！
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,6 +66,7 @@
     >>公司项目：使用脚手架...怎么制作脚手架
     7.怎么制作vue相关库...想要做什么功能，可以来vue官网或github上找一些框架...unpkg/cdnjs
     8.vue不支持ie8及以下版本
+    9.2023-12-31：vue2.0停止更新
      -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,12 +84,18 @@
         }
     </style>
     <!-- 
+    // Vue.js安装
+    // 1>.下载到本地：推荐使用
     开发版本vue.js：包含完整的警告和调试模式
     生产模式vue.min.js：压缩版本（删除警告） 
-    // 下载‘Live Server插件’ -> 导入vue.js -> Open with Live Server -> 检查代码 -> 
-    // 切换到Network -> 按住Shift键强制刷新 -> 报错找不打favicon.ico（导入一个favicon.ico资源文件）
+    下载‘Live Server插件’ -> 导入vue.js -> Open with Live Server -> 检查代码 -> 切换到Network -> 按住Shift键强制刷新 -> 报错找不打favicon.ico（导入一个favicon.ico资源文件）
     -->
     <script src="../js/vue_base/vue.js"></script>
+    <!-- 2>.使用CDN：不推荐 -->
+    <script src="https://cdn.staticfile.net/vue/2.2.2/vue.min.js"></script>
+    <!-- 
+    3>.npm安装：合适构建大型应用
+     -->
 </head>
 <body>
     <!-- 下载Vue.js devtools -->
@@ -492,6 +549,8 @@ $vue create xxx
 5>.运行Vue项目
 $npm run serve
 6>.打包Vue项目
+// 在Vue项目下生成一个dist目录：修改dist目录下css和js的路径就可以使用看到html效果
+    
 $npm run build
  -->
 <!-- 
