@@ -68,6 +68,35 @@ export default class EntryAbility extends UIAbility {
 // 3.工程目录结构
 /*
 LRGameProxy
-
+  .hvigor -- 自动生成
+  .idea -- 自动生成
+  AppScope
+    resources --
+    app.json5 -- 应用全局配置信息
+  // apk aab ipa hap
+  entry -- HarmonyOS工程模块（编译构建生成一个hap包）
+    src
+      main
+        ets
+          entryability -- 应用/服务的入口
+          entrybackupability -- 应用提供扩展的备份恢复能力
+          pages -- 应用/服务页面
+        resources -- 存放资源文件（图形、多媒体、字符串、布局文件）
+        module.json5 -- 模块配置文件
+      mock
+      ohosTest
+      test
+    build-profile.json5 -- 当前的模块信息、编译信息配置项
+    hvigorfile.ts -- 模块级编译构建任务脚本
+    obfuscation-rules.txt -- 混淆规则文件：在release模式下开启代码混淆进行编译会对代码进行编译、混淆和压缩处理
+    oh-package.json5 -- 描述包名、版本、入口文件（类型声明文件）和依赖项
+  oh_modules -- 用于存放三方库依赖信息
+  build-profile.json5 -- 工程级配置项：signingConfigs
+  hvigorfile.ts -- 工程级编译构建任务脚本
+  oh-package.json5 -- 描述全局配置
  */
+
+// 4.构建页面
+// 1>.点击pages -> New -> ArkTS File...这样方式必须手动配置route（entry -> resources -> base -> profile -> main_pages.json）
+// 2>.点击pages -> New -> Page -> Empty Page...自动配置route
 

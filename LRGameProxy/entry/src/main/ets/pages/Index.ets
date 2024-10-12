@@ -1,10 +1,14 @@
+// 装饰器
 @Entry
 @Component
+// 自定义组件
 struct Index {
+  // 装饰器
   @State message: string = 'Hello World';
 
   build() {
     RelativeContainer() {
+      // 内置组件
       Text(this.message)
         .id('HelloWorld')
         .fontSize(50)
@@ -18,6 +22,11 @@ struct Index {
           .fontSize(30)
           .fontWeight(FontWeight.Bold)
       }
+      // 事件方法
+      .onClick(() => {
+
+      })
+      // 属性方法
       .type(ButtonType.Capsule)
       .margin({
         top: 20
