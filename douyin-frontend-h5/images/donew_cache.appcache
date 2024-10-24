@@ -1,0 +1,17 @@
+CACHE MANIFEST # 顶行写此句
+
+# 下面是要缓存的文件
+# 1>.指定我们需要缓存的静态资源：比如imaga/css/js...需要换行
+CACHE:
+    images/img1.jpg
+    images/img2.jpg
+    images/img3.jpg
+
+# 2>.指定我们需要在线访问的资源：可以使用通配符、需要换行
+NETWORK:
+    images/img1.jpg
+    images/img2.jpg
+
+# 3>.当前页面无法访问时退出的页面：当被缓存的文件找不到时的备用资源、需要换行
+FALLBACK:
+    404.html

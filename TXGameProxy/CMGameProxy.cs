@@ -9,6 +9,7 @@ using System.Collections.Generic;
 // 3>.c#以.cs后缀：类名和文件名可以不同（如果文件名和类名不同则需要给类创建一个namespace）...与java有区别
 // 4>.怎么在Linux和MacOS上编写c#：Mono是.Net框架的开源版本，包含c#编译器，可以运行于多种操作系统上
 // 5>.参考
+// GetName a1 = new GetName(f1);
 // >>https://blog.csdn.net/m0_61490399/article/details/125562919
 // >>https://xiaoy.blog.csdn.net/article/details/118298538?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7EPaidSort-1-118298538-blog-124342343.235%5Ev43%5Epc_blog_bottom_relevance_base1&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7EPaidSort-1-118298538-blog-124342343.235%5Ev43%5Epc_blog_bottom_relevance_base1&utm_relevant_index=1
 // >>https://blog.csdn.net/qingtian_111?type=blog
@@ -310,6 +311,10 @@ namespace CMGameproxy
 
             // Map（Dictionary）
             Dictionary<string, int> dict = new Dictionary<string, int>();
+            Dictionary<string, int> dict1 = {
+                "key1": "value1"
+            }
+            
             // 添加键值对
             dict["key1"] = 123;
             dict.Add("key2", 456);
@@ -347,7 +352,6 @@ namespace CMGameproxy
                 // 遍历枚举
                 today = (int)day;
             }
-            int b13 = (int)Days.Mon;
 
             // 类示例
             Car car = new Car();
@@ -361,7 +365,7 @@ namespace CMGameproxy
                 // 引起异常的语句
                 showTemp(0);
             }
-            catch (Exception e)
+            catch (TempZeroException e)
             {
                 // 异常处理
                 throw e; // 抛出异常

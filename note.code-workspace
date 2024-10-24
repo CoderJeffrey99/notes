@@ -30,7 +30,7 @@
 		}
 	],
 	"settings": {
-		"liveServer.settings.multiRootWorkspaceName": "douyin-frontend-h5",
+		"liveServer.settings.multiRootWorkspaceName": "document",
 		"java.configuration.updateBuildConfiguration": "disabled"
 	}
 }

@@ -139,7 +139,6 @@
 		33E4125C294B1C2A009640CB /* Zapfino.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33E411E4294B1C29009640CB /* Zapfino.ttf */; };
 		33E4125D294B1C2A009640CB /* UIApplication.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E411E5294B1C29009640CB /* UIApplication.png */; };
 		33E4125E294B1C2A009640CB /* 远程推送过程.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E411E6294B1C29009640CB /* 远程推送过程.png */; };
-		33E4125F294B1C2A009640CB /* 静态库:动态库链接方式.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E411E7294B1C29009640CB /* 静态库:动态库链接方式.png */; };
 		33E41260294B1C2A009640CB /* UIScrollView的常见属性.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E411E8294B1C29009640CB /* UIScrollView的常见属性.png */; };
 		33E41261294B1C2A009640CB /* 类的本质和存储细节_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E411E9294B1C29009640CB /* 类的本质和存储细节_1.png */; };
 		33E41262294B1C2A009640CB /* RunLoop运行模式.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E411EA294B1C29009640CB /* RunLoop运行模式.png */; };
@@ -522,7 +521,6 @@
 		33E411E4294B1C29009640CB /* Zapfino.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zapfino.ttf; sourceTree = "<group>"; };
 		33E411E5294B1C29009640CB /* UIApplication.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIApplication.png; sourceTree = "<group>"; };
 		33E411E6294B1C29009640CB /* 远程推送过程.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "远程推送过程.png"; sourceTree = "<group>"; };
-		33E411E7294B1C29009640CB /* 静态库:动态库链接方式.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "静态库:动态库链接方式.png"; sourceTree = "<group>"; };
 		33E411E8294B1C29009640CB /* UIScrollView的常见属性.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIScrollView的常见属性.png"; sourceTree = "<group>"; };
 		33E411E9294B1C29009640CB /* 类的本质和存储细节_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "类的本质和存储细节_1.png"; sourceTree = "<group>"; };
 		33E411EA294B1C29009640CB /* RunLoop运行模式.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RunLoop运行模式.png"; sourceTree = "<group>"; };
@@ -1049,7 +1047,6 @@
 				33E411E5294B1C29009640CB /* UIApplication.png */,
 				33E411E2294B1C29009640CB /* 自动布局的核心公式.png */,
 				33E411E6294B1C29009640CB /* 远程推送过程.png */,
-				33E411E7294B1C29009640CB /* 静态库:动态库链接方式.png */,
 				33E411E8294B1C29009640CB /* UIScrollView的常见属性.png */,
 				33E411E9294B1C29009640CB /* 类的本质和存储细节_1.png */,
 				33E411F8294B1C29009640CB /* 类的本质和存储细节_2.png */,
@@ -1345,7 +1342,6 @@
 				33E4125B294B1C2A009640CB /* 设备参数.png in Resources */,
 				33E41293294B1C2A009640CB /* info.plist简介.png in Resources */,
 				33E4127D294B1C2A009640CB /* 创建App.png in Resources */,
-				33E4125F294B1C2A009640CB /* 静态库:动态库链接方式.png in Resources */,
 				3327112D29BDD33D00053BE2 /* TCP建立连接.png in Resources */,
 				33E4126D294B1C2A009640CB /* 填写App的基本信息.png in Resources */,
 				33E4128E294B1C2A009640CB /* Safe Area.png in Resources */,

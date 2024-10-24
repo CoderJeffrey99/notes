@@ -765,3 +765,10 @@ class Benz extends Car {}
 class Bmw extends Car {}
 class Audi extends Car {}
 let bmw = Car.create(CarType.bmw)
+
+
+
+let list: string[] = [];
+list.every(() => {
+    
+})
