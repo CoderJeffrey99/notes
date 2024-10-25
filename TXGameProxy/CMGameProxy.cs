@@ -394,6 +394,8 @@ namespace CMGameproxy
             // t.setItem(1, 'xwj');
             // t.getItem(1);
 
+            // 委托
+
             // 反射Reflection
 
             // 多线程Thread

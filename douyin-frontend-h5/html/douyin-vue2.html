@@ -16,6 +16,7 @@
             background-color: red;
         }
     </style>
+    <div id="app"></div>
     <!-- vue基础 vue-cli vue-router vuex element-ui vue3 -->
     <!-- 
         1.vue概述
@@ -100,11 +101,12 @@
         // 如果写两个一样的vue实例，第二个vue实例无效 
      -->
     <div id="root">
+        <!-- 4.模版语法 -->
         <!-- 内部代码依旧遵循html规范：没有配置的数据写在这里会报错（可以写js表达式） -->
-        <!-- 插值语法：万能拼接 -->
+        <!-- 1>.插值语法：万能拼接 -->
         <h1>hello {{ name }}</h1>
         <h2>hello {{ name.replace('a', 'b') }}</h2>
-        <!-- 指令语法 -->
+        <!-- 2>.指令语法 -->
         <!-- 输出html代码 -->
         <div v-html="message"></div>
         <!-- 
@@ -118,17 +120,21 @@
         <!-- 简写 -->
         <a :href="study.url">点我去百度一下</a>
         <!-- 单向数据绑定：数据驱动UI...数据只能从data流向页面 -->
-        <input type="text" v-bind:value="name">
-        <input type="text" :value="name">
+        <label for="box">123</label>
+        <input type="text" v-bind:value="name" id="box">
+        <input type="text" :value="name" id="box">
         <!-- 双向数据绑定：v-model指令只能应用于表单类元素（input|select...拥有value属性） -->
-        <input type="text" v-model:value="name">
-        <input type="text" v-model="name">
-        <!-- Vue中的数据代理 -->
+        <input type="text" v-model:value="name" id="box">
+        <input type="text" v-model="name" id="box">
+
+        <!-- 7.vue中的数据代理 -->
         <h2>学校名称：{{ name }}</h2>
         <h2>学校地址：{{ address }}</h2>
+
         <!-- 
-            事件处理
+            8.事件处理
          -->
+        <!-- 1>.点击事件@click -->
         <h2>欢迎来到{{ name }}旅行</h2>
         <!-- 
             如果不想传递参数可以省略()...默认传入event
@@ -137,16 +143,21 @@
         <button v-on:click="showInfo1">点我提示信息</button>
         <!-- 如果需要传入自定义参数就必须给event占一个位置，不然event参数会丢失 -->
         <button @click="showInfo2(66, $event)">点我提示信息（简写）</button>
-        <!-- 事件修饰符 -->
-         <!-- 1>.prevent 阻止默认事件（超链接的跳转...修饰符可以连续写） -->
+        <!-- 2>.事件修饰符 -->
+        <!-- a.prevent 阻止默认事件（超链接的跳转...修饰符可以连续写） -->
         <a href="https://www.baidu.com" @click.prevent.stop="showInfo1">点我提示信息</a>
-        <!-- 2>.stop 阻止事件冒泡（点击子元素父元素也响应事件称为事件冒泡） -->
+        <!-- b.stop 阻止事件冒泡（点击子元素父元素也响应事件称为事件冒泡） -->
         <!-- 
-            事件捕获：div -> button
-            事件冒泡：button -> div
+        js事件流：
+            1.捕获：div -> button
+            2.冒泡：button -> div
          -->
-        <div @click="showInfo1">
-            <button @click.stop="showInfo1">点我提示信息</button>
+        <div @click.stop="showInfo1">
+            <button @click="showInfo1">点我提示信息</button>
+        </div>
+        <!-- c.once 事件只触发一次 -->
+        <div @click.once="showInfo1">
+            <button @click="showInfo1">点我提示信息</button>
         </div>
         <!-- 3>.capture 捕获阶段就可以处理事件-->
         <div @click.capture="showInfo1">
@@ -158,21 +169,22 @@
         </div>
         <!-- 
             passive 事件的默认行为（超链接的跳转...）立即执行，无需等待事件回调完成
-            1>.默认先执行事件，在再执行默认行为
-            2>.事件执行事件过长会导致网页卡顿以至不再执行默认事件...不是所有的事件都这样，移动端使用较多
+            1>.默认：监听到鼠标滚轮滚动 -> 先执行事件showInfo1() -> 再执行默认行为(滚动条滚动)
+            2>.事件showInfo1()执行时间过长（内部在循环或者下载）会导致网页卡顿以至不再执行默认事件(滚动条滚动)...不是所有的事件都这样（@scroll事件则不会这样），移动端使用较多
          -->
         <!-- 
-            @scroll="showInfo1" 滚动条的滚动事件
+        3>.滚动事件
+            @scroll="showInfo1" 滚动条的滚动事件（通过鼠标滚动、按下键盘上下键滚动）
             @wheel="showInfo1" 鼠标滚轮的滚动事件（滚动条结束还可以滚动鼠标执行事件）
          -->
-        <ul @scroll="showInfo1" @wheel.passive="showInfo1">
+         <ul @scroll="showInfo1" @wheel.passive="showInfo1">
             <li>1</li>
             <li>1</li>
             <li>1</li>
             <li>1</li>
         </ul>
         <!-- 
-            键盘事件
+        4>.键盘事件
             @keydown 键盘按下触发事件
             @keyup 键盘按下又抬起触发事件（常用）
             // 键盘常见按键的别名（其它按键只能使用key值绑定：key = CapsLock ==> caps-lock）
@@ -185,21 +197,27 @@
             下down
             左left
             右right
-         -->
-        <!-- 
-            系统修饰键ctrl alt shift meta
+            // 系统修饰键（用法特殊）：ctrl alt shift meta
             1>.配合keyup使用：按下修饰键的同时，再按下其他键，随后释放其它键，事件才会触发
             2>.配合keydown使用：正常触发事件
          -->
         <input type="text" placeholder="按下回车提示输出" @keydown.enter="showInfo1">
-         <!-- 计算属性 -->
-        <h2>{{ fullName }}</h2>
-         <!-- 绑定class样式：不变的class样式正常写，变化的class样式需要绑定 -->
-         <!-- a>.字符串写法：样式的类名不确定，需要动态绑定 -->
+
+        <!-- 9.计算属性 -->
+        姓：<input type="text" v-model="firstName" placeholder="请输入姓"><br>
+        名：<input type="text" v-model="lastName" placeholder="请输入名"><br>
+        <!--  vue不推荐这样写：模版中代码过于复杂 -->
+        姓名：<span>{{firstName.slice(0, 3).trim()}}-{lastName}</span>
+        <!-- method：每次执行都会调用一次 -->
+        姓名：<span>{{ fullName() }}</span>
+        <!-- 计算属性：p19 -->
+         
+        <!-- 绑定class样式：不变的class样式正常写，变化的class样式需要绑定 -->
+        <!-- a>.字符串写法：样式的类名不确定，需要动态绑定 -->
         <div class="basic" :class="mode" id="demo" @click="changeMode">{{ name }}</div>
-         <!-- b>.数组写法：样式的类名不确定，个数也不确定，需要动态绑定 -->
+        <!-- b>.数组写法：样式的类名不确定，个数也不确定，需要动态绑定 -->
         <div class="basic" :class="modes" @click="changeMode">{{ name }}</div>
-         <!-- c>.对象写法：样式的类名确定，个数也确定，需要动态决定是否绑定 -->
+        <!-- c>.对象写法：样式的类名确定，个数也确定，需要动态决定是否绑定 -->
         <div class="basic" :class="modeObj" @click="changeMode">{{ name }}</div>
         <!-- 
             绑定style样式
@@ -256,23 +274,23 @@
             <li v-for="(number, index) in 10" :key="index">
                 {{ number }} - {{ index }}
             </li>
-            <!-- 
-                面试题：v-for中key的作用和原理
-                初始化数据 -> 虚拟DOM -> 真实DOM（用户填写）-> 数据更新 -> 新虚拟DOM -> 虚拟DOM对比算法
-             -->
-            <!-- 列表过滤 -->
-            <!-- 需要收集用户输入的数据  -->
-            <input type="text" placeholder="请输入姓名" v-model="keyword">
-            <button @click="sortType = 2">年龄升序</button>
-            <button @click="sortType = 1">年龄降序</button>
-            <button @click="sortType = 0">原顺序</button>
-            <ul>
-                <!-- :key="index"必须保证不破坏filterPersons的顺序...节点没有复用，效率低（如果有输入节点会报错） -->
-                <li v-for="(p, index) in filterPersons" :key="p.id">
-                    {{ p.name }}
-                </li>
-            </ul>
         </ul> 
+        <!-- 
+        面试题：v-for中key的作用和原理
+        初始化数据 -> 虚拟DOM -> 真实DOM（用户填写）-> 数据更新 -> 新虚拟DOM -> 虚拟DOM对比算法
+         -->
+        <!-- 列表过滤 -->
+        <!-- 需要收集用户输入的数据  -->
+        <input type="text" placeholder="请输入姓名" v-model="keyword">
+        <button @click="sortType = 2">年龄升序</button>
+        <button @click="sortType = 1">年龄降序</button>
+        <button @click="sortType = 0">原顺序</button>
+        <ul>
+            <!-- :key="index"必须保证不破坏filterPersons的顺序...节点没有复用，效率低（如果有输入节点会报错） -->
+            <li v-for="(p, index) in filterPersons" :key="p.id">
+                {{ p.name }}
+            </li>
+        </ul>
     </div>
     <!-- 
         3>.准备一个写脚本文件的地方
@@ -367,23 +385,34 @@
                         color: 'red'
                     },
                     keyword: '',
-                    sortType: 0
+                    sortType: 0,
+                    firstName: 'xie',
+                    lastName: 'wujun'
                 }
             },
-            // 事件处理：只有放在data中的数据才会被数据代理
+            // 8.事件处理
             methods: {
                 // showInfo: (event) => {
-                //     // this就是window实例：所有被Vue管理的函数尽量不要写箭头函数
+                //     // this就是window实例：所有被vue管理的函数尽量不要写箭头函数
                 //     console.log(this)
                 // },
                 showInfo1(event) {
                     // this就是Vue实例vm
                     console.log(this)
-                    // 键盘按键都有一个code，通过event.keyCode获取
+                    // 键盘按键都有一个码code，通过event.keyCode获取
                 },
                 showInfo2(value, event) {
                     console.log(value)
                     console.log(event.target.innerText)
+                },
+                // 前提：只读不改才可以简写
+                // // 第一种方式
+                // fullName: function() {
+                //     return this.name + '-' + this.address
+                // }
+                // 第二种方式
+                fullName() {
+                    return (this.firstName + '-' + this.lastName).slice(0, 3).trim();
                 },
                 changeMode() {
                     // // 这样写可以实现效果：但是不是vue的写法，vue不让直接操作dom
@@ -392,7 +421,7 @@
                     this.modes.shift('happy')
                 }
             },
-            // 计算属性（有缓存机制：效率更高、本身不存在：需要其他的属性计算得到）
+            // 9.计算属性（有缓存机制：效率更高、本身不存在：需要其他的属性计算得到）
             // method可以替代计算属性，但是method每次执行都会调用一次
             // 底层原理：通过Object.defineProperty()方法提供的getter和setter
             computed: {
@@ -407,15 +436,6 @@
                     set(value) {
                         console.log('set被调用了')
                     }
-                },
-                // 前提：只读不改才可以简写
-                // // 第一种方式
-                // fullName: function() {
-                //     return this.name + '-' + this.address
-                // }
-                // 第二种方式
-                fullName() {
-                    return this.name + '-' + this.address
                 },
                 // 计算属性和watch都可以实现的逻辑我们优先使用计算属性
                 // 只要计算属性内部的属于data数据发生改变都会重新执行计算属性
@@ -477,7 +497,7 @@
 
         // 这样也可以指定容器：与el: '#root'一样
         vm.$mount('#root')
-        // MVVM
+        // 5.MVVM
         // M - 模型model - data中的数据
         // V - 视图view - 模版
         // VM - 视图模型viewModel - vue实例
@@ -486,23 +506,17 @@
         2.vm（Vue实例）上所有的属性和Vue原型上所有的属性都可以在Vue模版上直接使用
         */
 
-        // // 监视属性第二种方式
-        // vm.$watch('isShow', {
-        //     // 初始化该属性的时候就立即调用handler()方法一次
-        //     immediate: true,
-        //     // 当isShow属性发生改变的时候调用
-        //     handler(newValue, oldValue) {
-        // }})
-
-        // Object.defineProperty()方法
+        // 6.回顾Object.defineProperty()方法
         let number1 = 18
         let person = {
             name: 'xwj',
-            sex: '男'
+            sex: '男',
+            // // 这样写虽然可以把number1赋值给age...但是后续number1改变person.age不会改变
+            // age: number1
         }
-
-        // 这样加属性无法被遍历
+        // 给对象添加属性：这样添加属性无法被遍历（age属性默认不参与遍历）
         Object.defineProperty(person, 'age', {
+            // 属性值
             value:18,
             // 添加该配置项属性可以被遍历，默认为false
             enumerable: true,
@@ -523,9 +537,9 @@
             // }
         })
 
-        // vue中的数据代理
+        // 7.vue中的数据代理：只有放在data中的数据才会被数据代理
         // 1>.概念：通过一个对象代理对另一个对象中属性进行操作
-        // 通过此处代码我们可以生成一个vm对象（这个对象包含一个_data属性：里面有data内部所有数据...vm._data.name）
+        // 通过此处代码我们可以生成一个vm1对象（这个对象包含一个_data属性：里面有data内部所有数据...vm._data.name ==> vm._data = data）
         // 根据“数据代理Object.defineProperty()方法”把data对象中所有属性添加到vm对象上...更加方便的操作data中数据...vm.name
         // 为每一个添加到vm对象上的属性都指定一个getter/setter，在getter/setter内部去操作data中对应的属性
         const vm1 = new Vue({
@@ -536,8 +550,15 @@
                 }
             }
         })
+        console.log(vm1);
 
-        // 11章
+        // // 监视属性第二种方式
+        // vm.$watch('isShow', {
+        //     // 初始化该属性的时候就立即调用handler()方法一次
+        //     immediate: true,
+        //     // 当isShow属性发生改变的时候调用
+        //     handler(newValue, oldValue) {
+        // }})
     </script>
 </body>
 </html>
