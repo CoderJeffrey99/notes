@@ -59,7 +59,7 @@ namespace CMGameproxy
             long a4 = 10L;
             float a5 = 10.3F;
             double a6 = 10.3;
-            char a7 = 'a';
+            char a7 = 'a'; // ''表示char
             // b.对象类型
             Object obj1 = new Object();
             obj1 = null; // 空对象
@@ -394,11 +394,24 @@ namespace CMGameproxy
             // t.setItem(1, 'xwj');
             // t.getItem(1);
 
-            // 委托
+            // 委托delegate
+            public delegate string GetVersion(int code, string name);
+            GetVersion f1 = new GetVersion(GetVersion1);
+            f1 += GetVersion2;
+            f1(10, "xwj");
+            f1.Invoke(12, "cfj");
 
             // 反射Reflection
 
-            // 多线程Thread
+            // 异步编程
+        }
+
+        public string GetVersion1(int code, string name) {
+
+        }
+
+        public string GetVersion2(int code, string name) {
+            
         }
     }
 
