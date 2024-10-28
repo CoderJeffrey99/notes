@@ -58,7 +58,7 @@ export default class EntryAbility extends UIAbility {
 // a.huawei AppGallery Connect为开发者提供全球化、全场景、一站式应用与服务分发能力
 // b.huawei AppGallery Connect作为开发者统一提交HarmonyOS生态应用和元服务的入口：证书管理、项目管理、版本管理
 
-// 2.harmony赋能套件
+
 
 // 2.快速开始
 // 1>.安装DevEco Studio：登录https://developer.huawei.com/consumer/cn/deveco-studio（一体化：无需再安装HarmonyOS SDK、Node.js、Hvigor、OHPM、模拟器平台）
