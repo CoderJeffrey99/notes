@@ -9,8 +9,6 @@ donew-frontend-vue2 - Vue2
 
 donew-frontend-vue3 - Vue3
 
-DyActivityPage - Cocos
-
 flutter_donew - flutter
 
 HTGameProxy - python
