@@ -107,7 +107,7 @@
          colors[1] = "yellow"
          console.log(colors[1])
          // 7>.预解析
-         // 原理：js的解析器在页面加载的时候，首先检查页面的语法错误，把变量声明提升起来、函数整体提升起来
+         // 原理：js解析器在页面加载的时候，首先检查页面的语法错误，把变量声明提升起来、函数整体提升起来
          // 作用：查看语法错误、变量声明提升和函数整体提升
          // 变量声明提升：只会提升变量名，不提升变量值（全局变量会提升至全局最顶层、局部变量会提升到函数内部最顶层）
          /*
@@ -484,7 +484,7 @@
          var array06 = array04.concat(array05);
          // 2.数组截取：原数组不变
          array06 = array04.slice(3); // 从3(0开始算)开始截取
-         array08 = array04.slice(1, 2); // 从1到2（包括左边不包括右边）
+         array08 = array04.slice(1, 2); // [1, 2)
          array08 = array04.slice(-3); // xxx
          array08 = array04.slice(2, 1); // xxx
          // 3.数组截取：原数组改变
@@ -570,9 +570,7 @@
          var separatorString02 = array07.join(""); // 以""连接
          var separatorString03 = array07.join("&"); // 用&连接
          alert(typeof(separatorString01));
-         // 9>.伪数组
-         // xxx
-        
+
          // 16、函数
          // 1>.概念：完成特定功能的可以重复执行的代码块
          // 2>.格式：function 函数名(参数名1, 参数名2) { // 程序代码块：参数不需要数据类型 }
