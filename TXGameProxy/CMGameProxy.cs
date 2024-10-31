@@ -8,8 +8,6 @@ using System.Collections.Generic;
 // 2>.c#是由“Microsoft微软”开发的面向对象的编程语言（在.net上运行）
 // 3>.c#以.cs后缀：类名和文件名可以不同（如果文件名和类名不同则需要给类创建一个namespace）...与java有区别
 // 4>.怎么在Linux和MacOS上编写c#：Mono是.Net框架的开源版本，包含c#编译器，可以运行于多种操作系统上
-// 5>.参考
-// https://learn.microsoft.com/zh-cn/dotnet
 
 // 命名空间：类似于java中的包（类的集合）
 // >>一个文件中可以有多个命名空间：每个命名空间中声明的类的名称不能相同、不同命名空间中声明的类的名称可以相同
@@ -45,7 +43,6 @@ namespace CMGameproxy
             // 标识符
             // 由“数字、字母、_、@”表示，数字不能开头（严格区分大小写）
             // 约定：方法、接口首字母大写
-
             // 关键字：不能使用关键字做为标识符、“@关键字”可以做为标识符
 
             // 变量
@@ -300,6 +297,8 @@ namespace CMGameproxy
                 // fname是否包含test字符串
             }
             // 连接字符串
+            Console.WriteLine(String.Format("你是{0}{1}", fname, lname));
+            // 数组 -> 字符串
             String[] strings = new string[] { "xie", "wu", "jun" };
             String.Join(",", strings);
             // 去掉字符串
@@ -311,7 +310,6 @@ namespace CMGameproxy
             Dictionary<string, int> dict1 = {
                 "key1": "value1"
             }
-            
             // 添加键值对
             dict["key1"] = 123;
             dict.Add("key2", 456);
@@ -407,11 +405,9 @@ namespace CMGameproxy
         }
 
         public string GetVersion1(int code, string name) {
-
         }
 
         public string GetVersion2(int code, string name) {
-            
         }
     }
 

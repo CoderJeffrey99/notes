@@ -101,7 +101,7 @@
         // 如果写两个一样的vue实例，第二个vue实例无效 
      -->
     <div id="root">
-        <!-- 4.模版语法 -->
+        <!-- 5.模版语法 -->
         <!-- 内部代码依旧遵循html规范：没有配置的数据写在这里会报错（可以写js表达式） -->
         <!-- 1>.插值语法：万能拼接 -->
         <h1>hello {{ name }}</h1>
@@ -210,8 +210,32 @@
         姓名：<span>{{firstName.slice(0, 3).trim()}}-{lastName}</span>
         <!-- method：每次执行都会调用一次 -->
         姓名：<span>{{ fullName() }}</span>
-        <!-- 计算属性：p19 -->
-         
+        <!-- 计算属性p18 -->
+        姓名：<span>{{ fullName }}</span> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <!-- 绑定class样式：不变的class样式正常写，变化的class样式需要绑定 -->
         <!-- a>.字符串写法：样式的类名不确定，需要动态绑定 -->
         <div class="basic" :class="mode" id="demo" @click="changeMode">{{ name }}</div>
@@ -292,6 +316,10 @@
             </li>
         </ul>
     </div>
+
+
+
+
     <!-- 
         3>.准备一个写脚本文件的地方
      -->
@@ -390,7 +418,7 @@
                     lastName: 'wujun'
                 }
             },
-            // 8.事件处理
+            // 9.事件处理
             methods: {
                 // showInfo: (event) => {
                 //     // this就是window实例：所有被vue管理的函数尽量不要写箭头函数
@@ -421,18 +449,19 @@
                     this.modes.shift('happy')
                 }
             },
-            // 9.计算属性（有缓存机制：效率更高、本身不存在：需要其他的属性计算得到）
+            // 10.计算属性（有缓存机制：效率更高、本身不存在（不在vm._data上）：需要其他的属性计算得到）
             // method可以替代计算属性，但是method每次执行都会调用一次
             // 底层原理：通过Object.defineProperty()方法提供的getter和setter
             computed: {
                 fullName: {
-                    // 当读取fullName的时候，get就会被调用，返回值做为fullName的值（1.初次读取fullName的时候get就会被调用、2.当fullName依赖的数据发生改变的时候get就会被调用）
+                    // 当读取fullName的时候，get就会被调用，返回值做为fullName的值（1.初次读取fullName的时候get就会被调用、2.当fullName所依赖的数据发生改变的时候get就会被调用）
                     // 此处写成箭头函数以后this就是window（被vue管理的函数都不要写成箭头函数）
                     get() {
+                        // return name + '-' + address; // 错误
                         // 此处的this就是vm
                         return this.name + '-' + this.address
                     },
-                    // 想要修改计算属性必须在set方法内部修改fullName依赖的数据
+                    // 想要修改计算属性必须在set方法内部修改fullName依赖的数据（如果确定修改计算属性则需要写该方法，不然可以不写）
                     set(value) {
                         console.log('set被调用了')
                     }
@@ -497,7 +526,7 @@
 
         // 这样也可以指定容器：与el: '#root'一样
         vm.$mount('#root')
-        // 5.MVVM
+        // 6.MVVM
         // M - 模型model - data中的数据
         // V - 视图view - 模版
         // VM - 视图模型viewModel - vue实例
@@ -506,7 +535,7 @@
         2.vm（Vue实例）上所有的属性和Vue原型上所有的属性都可以在Vue模版上直接使用
         */
 
-        // 6.回顾Object.defineProperty()方法
+        // 7.回顾Object.defineProperty()方法
         let number1 = 18
         let person = {
             name: 'xwj',
@@ -537,7 +566,7 @@
             // }
         })
 
-        // 7.vue中的数据代理：只有放在data中的数据才会被数据代理
+        // 8.vue中的数据代理：只有放在data中的数据才会被数据代理
         // 1>.概念：通过一个对象代理对另一个对象中属性进行操作
         // 通过此处代码我们可以生成一个vm1对象（这个对象包含一个_data属性：里面有data内部所有数据...vm._data.name ==> vm._data = data）
         // 根据“数据代理Object.defineProperty()方法”把data对象中所有属性添加到vm对象上...更加方便的操作data中数据...vm.name
@@ -552,13 +581,14 @@
         })
         console.log(vm1);
 
-        // // 监视属性第二种方式
-        // vm.$watch('isShow', {
-        //     // 初始化该属性的时候就立即调用handler()方法一次
-        //     immediate: true,
-        //     // 当isShow属性发生改变的时候调用
-        //     handler(newValue, oldValue) {
-        // }})
+        // 监视属性
+        // 第二种方式
+        vm.$watch('isShow', {
+            // 初始化该属性的时候就立即调用handler()方法一次
+            immediate: true,
+            // 当isShow属性发生改变的时候调用
+            handler(newValue, oldValue) {
+        }})
     </script>
 </body>
 </html>

@@ -4,13 +4,13 @@
 // 自定义组件
 struct Index {
   // 装饰器
-  @State message: string = 'Hello World';
+  @State message: string = 'Hello';
 
   build() {
     RelativeContainer() {
       // 内置组件
       Text(this.message)
-        .id('HelloWorld')
+        .id('Hello')
         .fontSize(50)
         .fontWeight(FontWeight.Bold)
         .alignRules({

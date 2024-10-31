@@ -1,9 +1,4 @@
-// Cocos2d-x使用c++和Lua
-// Cocos Creator是对Cocos2d-x的封装：Cocos2d-x只支持纯代码编辑，Cocos Creator支持可视化，脚本化
-// Cocos Creator3.x = Cocos2d-x + h5游戏引擎 + Cocos Creator3D
-// Cocos Creator面向组件编程
-
-// 1.概述
+// 1.ts概述
 // 1>.TypeScript是JavaScript的超集，支持ECMAScript6.x标准
 // 2>.TypeScript是Microsoft开发的开源的编程语言
 // 3>.TypeScript设计目标是开发大型项目：可以编译成纯JavaScript（运行在任何浏览器上）
@@ -47,7 +42,7 @@ let isFlag: boolean = false
 let array: string[] = ['xwj', 'wy', 'xst'] // 推荐使用
 let array1: Array<string> = ['xwj', 'wy', 'xst']
 let array2 = new Array('xwj', 'wy', 'xst')
-let array3; // array2是any类型
+let array3; // array3是any类型
 array3[0] = 'xwj' // init根据第一个元素类型来推断数组的类型...string
 // 遍历数组
 for (let index = 0; index < array.length; index++) {
@@ -79,10 +74,10 @@ array.unshift() // 向数组的开头添加元素：返回新数组长度
 array1.shift() // 删除数组的第一个元素：返回删除的元素
 // 6>.元组：表示已知元素类型和数量的数组
 // 数组中一般存储的都是数据类型相同的元素，数据类型不同的元素使用元组
-let tuple1: [string, number]
+let tuple1: [string, number];
 // tuple1 = [1, 'xwj'] // 报错
 tuple1 = ['xwj', 18]
-// let tuple2 = []
+// let tuple2 = [];
 // tuple2[0] = '123'
 // tuple2[1] = 123
 // // 访问元组
@@ -92,20 +87,15 @@ tuple1 = ['xwj', 18]
 // console.log(tuple2.pop()) // 向元组最后移除元素：返回被移除的元素
 // tuple2.length // 元组中元素个数
 // 更新元组
-tuple1[1] = 2
+tuple1[1] = 2;
 // 解构元组
-var [b, c] = tuple1
+var [b, c] = tuple1;
 console.log(b) // 1
 console.log(c) // xwj
 let tuple2: [number, ...string[]];
-// 7>.Map
-let dict: {[key: string]: string} = {
-    'key1': "value1",
-    'key2': "value2"
-}
-// Map是ES6引入的一种数据结构
+// 7>.Map：Map是ES6引入的一种数据结构
 // 创建Map
-let map = new Map([
+let map = new Map<string, string>([
     ['key1', 'value1'],
     ['key2', 'value2']
 ])
@@ -444,7 +434,6 @@ num3.toPrecision(2) // 17
 // Number -> number
 num3.valueOf()
 // 2>.String包装类
-// string和String有什么不同？？？
 let name4 = new String('xwj')
 name4 = 'xwj'
 name4.length // 字符串的长度
@@ -463,7 +452,7 @@ name5.slice()
 name5.split("&", 4) // 按照&分割字符串组成字符数组（保留字符数组元素个数4）
 name5.substring(1, 2)
 
-// 12.接口：无法转换成js
+// 10.接口：无法转换成js
 interface PersonCallback {
     name: string;
     age: number;
@@ -529,7 +518,7 @@ var Person = (function () {
 // 创建对象
 var p1 = new Person2('')
 p1.name = 'xwj' // 在外部实际调用的是getter/setter
-p1.say
+p1.say();
 if (p1 instanceof Person2) {
     // 判断p1是否是Person类的对象
 }
@@ -560,7 +549,7 @@ class Student extends Person2 implements StudentCallback {
     } 
 }
 
-// 14.对象
+// 12.对象
 var obj3 = {
     key1: 'xwj',
     key2: function () {
@@ -572,7 +561,7 @@ obj3.key2 = function () {
     console.log('xwj')
 }
 
-// 15.泛型
+// 13.泛型
 // 1>.泛型函数
 // T - type
 // U - 第二个参数
@@ -614,7 +603,7 @@ function test20<T = string>(args: T): void {
     console.log(args)
 }
 
-// 16.命名空间
+// 14.命名空间
 /*
 我们一般把一个文件中新建一个namespace，其它文件引用如下：
 /// <reference path = "文件名.ts" />
@@ -641,7 +630,7 @@ namespace Doyin {
 var d1 = new Doyin.Doyin1.Doyin2()
 d1.show()
 
-// 17.模块
+// 15.模块
 // 使用export导出
 // export class Douyin {
 
@@ -649,7 +638,7 @@ d1.show()
 // 使用import导入
 // import { Douyin } from '../相对路径'
 
-// 18.声明文件
+// 16.声明文件
 /*
 ts文件怎么调用js文件：
 1.直接引用：可以调用类和方法，无法使用ts特性（类型检查...）
@@ -662,7 +651,8 @@ declare module xxx {
 }
 */
 
-// 19.单例模式
+// 17.设计模式
+// 1>.单例模式
 // 第一种方式
 // class ModuleManager {
 //     static instance = new ModuleManager()
@@ -689,8 +679,7 @@ class ModuleManager {
     }
 }
 ModuleManager.getInstance()
-
-// 20.代理模式
+// 2>.代理模式
 interface IPerson1 {
     calculation(num1: number, num2: number): number
 }
@@ -717,8 +706,7 @@ class Npc2 implements IPerson1 {
 let p3 = new Person3()
 p3.personCallback = new Npc2()
 p3.getNum(3, 4)
-
-// 21.观察者模式
+// 3>.观察者模式
 interface IObserver {
     nameChanged(newValue: string)
 }
@@ -747,8 +735,7 @@ class Npc3 implements IObserver {
 let p4 = new Person4()
 p4.observers.push(new Npc3)
 p4.name = 'xwj'
-
-// 21.工厂模式
+// 4>.工厂模式
 enum CarType {
     benz,
     bmw,
@@ -781,10 +768,3 @@ class Benz extends Car {}
 class Bmw extends Car {}
 class Audi extends Car {}
 let bmw = Car.create(CarType.bmw)
-
-
-
-let list: string[] = [];
-list.every(() => {
-    
-})

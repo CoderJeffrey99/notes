@@ -99,6 +99,3 @@ LRGameProxy
 // 4.构建页面
 // 1>.点击pages -> New -> ArkTS File...这样方式必须手动配置route（entry -> resources -> base -> profile -> main_pages.json）
 // 2>.点击pages -> New -> Page -> Empty Page...自动配置route
-
-// 学习路径2 -> 预览器的使用
-
