@@ -97,6 +97,7 @@ tuple1[1] = 2
 var [b, c] = tuple1
 console.log(b) // 1
 console.log(c) // xwj
+let tuple2: [number, ...string[]];
 // 7>.Map
 let dict: {[key: string]: string} = {
     'key1': "value1",
@@ -180,6 +181,22 @@ let array5: number[] | string[]
 // 14>.unknown：可以用来标记在编程阶段还不清楚类型的变量
 let m1: unknown = 4
 m1 = '123'
+// 15>.object
+// >>object不能存原始类型
+// >>Object除null/undefined都可以存
+// a>.Function
+let func: (a: string, b: number) => string;
+func = function (a: string, b: number): string {
+    return a + b;
+}
+// 简写
+func = function (a, b) {
+    return a + b;
+}
+// 与188行的=>含义不同
+func = (a, b) => {
+    return a + b;
+}
 
 // 4.变量
 // 1.变量声明
@@ -246,7 +263,6 @@ console.log(typeof num1) // number
 console.log(typeof(num2)) // number
 // instanceof运算符
 // >>用于判断对象是否为指定的类型
-// XXX
 
 // 6.条件语句
 // 1>.if语句
