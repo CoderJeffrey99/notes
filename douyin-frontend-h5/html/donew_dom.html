@@ -15,33 +15,31 @@
     </style>
     <script>
         // 1.事件
-        // 1>.事件三要素：事件源、事件、事件驱动程序
-        // 2>.步骤：获取事件源 -> 绑定事件（js已经定义） -> 书写事件驱动程序
-        // 3>.js是一门以事件驱动为核心的语言
-        /*
-        4>.常见的事件：
-        >>onclick鼠标单击
-        >>ondblclick鼠标双击
-        >>onkeyup按下并释放键盘上的一个键时触发
-        >>onchange文本内容或下拉菜单中的选择发生改变的时候
-        >>onfocus获取焦点：文本框获取鼠标光标
-        >>onblur失去焦点：文本框失去鼠标光标
-        >>onmouseover鼠标悬停：鼠标停留在图片的上方
-        >>onmouseout鼠标移出：鼠标离开图片的区域
-        // 作用于window
-        >>onload网页文档加载事件
-        >>onunload关闭网页
-        */
-        // 5>.需求：点击盒子，弹出对话框
+        // 1>.概述：js是一门以事件驱动为核心的语言
         // >>什么条件下触发事件：整个页面所有元素加载完毕（文本和图片）的时候调用
         // >>页面从上往下加载：先加载script -> 再加载div标签（可以防止使用标签在定义标签之前）
-        // >>https://www.cnblogs.com/shidengyun/p/5123377.html
         window.onload = function () {
+            // 2>.事件三要素：获取事件源 -> 绑定事件 -> 书写事件驱动程序
             // a、获取事件源：引发后续事件的标签
             var div = document.getElementById("box")
             var divs1 = document.getElementsByTagName("div") // 返回的是Array
             var divs2 = document.getElementsByClassName("box") // 返回的是Array
             // b、绑定事件：该方法绑定事件会被层叠
+            /*
+            常见的事件：
+            >>onclick鼠标单击
+            >>ondblclick鼠标双击
+            >>onkeyup按下并释放键盘上的一个键时触发
+            >>onchange文本内容或下拉菜单中的选择发生改变的时候
+            >>onfocus获取焦点：文本框获取鼠标光标
+            >>onblur失去焦点：文本框失去鼠标光标
+            >>onmouseover鼠标悬停：鼠标停留在图片的上方
+            >>onmouseout鼠标移出：鼠标离开图片的区域
+            >>onsubmit表单提交事件
+            // 作用于window
+            >>onload网页文档加载事件
+            >>onunload关闭网页
+            */
             // 第一种写法
             div.onclick = function () {
                 // c、书写事件驱动程序：可以操作标签的属性和样式
@@ -71,13 +69,13 @@
                 // c、书写事件驱动程序：可以操作标签的属性和样式
                 alert("哈哈哈...")
             }
-            // 6>.注册事件的两种方式
+            // 3>.注册事件的两种方式
             // 第一种方式：事件会被层叠
             div.onclick = function () {
             
             }
             // 移除事件
-            dvi.onclick = null;
+            div.onclick = null;
             // 第二种方式：事件监听器（事件不会被层叠）
             // 适合团队开发
             // 事件源.addEventListener("事件名", 事件驱动程序);
@@ -88,7 +86,7 @@
         // 2.DOM概述
         // 1>.解析过程：html加载完毕，渲染引擎会在内存中把html文档生成一个dom树，通过getElementById来获取dom树上的元素，然后操作的时候修改该元素的属性
         // 2>.什么是dom和节点
-        // >>.什么是dom：dom文档对象模型为文档提供了结构化表示，定义了如何通过脚本来访问文档结构（为了能够让js操作html元素而制定的规范）
+        // >>.什么是dom：文档对象模型为html文档提供了结构化表示，定义了如何通过脚本来访问html文档结构（为了能够让js操作html元素而制定的规范）
         // >>节点：整个html文档就是一个文档节点；每个html标签就是一个元素节点；html标签中的文字就是文字节点；html标签的属性就是属性节点...一切都是节点
         // 3>.获取节点
         // a.直接获取
@@ -121,19 +119,18 @@
         // nodeType = 1元素节点（记住：元素就是标签）
         // nodeType = 2属性节点
         // nodeType = 3文本节点
-        div.parentNode
+        div.childNodes
         // 非标准属性：返回指定元素的子元素集合（在IE6、7、8中包含注释节点）
         div.children
         // >>随意获取兄弟节点
-        div.parentNode.children[index]
         function siblings(element) {
-            var a = []
-           var p = element.parentNode.children
-           for (var index = 0; index < p.length; index++) {
-            if (p[index] !== element) {
-                a.push(p[index])
+           var elements = [];
+           var childElements = element.parentNode.children;
+           for (var index = 0; index < childElements.length; index++) {
+            if (childElements[index] !== element) {
+                elements.push(childElements[index])
             }
-            return a
+            return elements;
            } 
         }
         // 4>.节点操作：节点的操作以函数的方式存在
@@ -174,9 +171,9 @@
 
         // 3.innerHTML、innerText和textContent
         console.log(document.getElementById("lrsdk_input_first_box").value) // 我是一个属性
-        // 获取双闭合标签里面的内容：识别标签，不包含本身
-        console.log(document.getElementById("lrsdk_input_second_box").innerHTML) // 我是一个内容
         // 获取双闭合标签里面的内容：识别标签，包含本身
+        console.log(document.getElementById("lrsdk_input_second_box").innerHTML) // 我是一个内容
+        // 获取双闭合标签里面的内容：识别标签，不包含本身
         console.log(document.getElementById("lrsdk_input_second_box").outerHTML) // <div class="lrsdk_input_box" id="lrsdk_input_second_box">我是一个内容</div>
         // 获取双闭合标签里面的内容：不识别标签
         // outerText与innerText一样：outerText已经被移除
