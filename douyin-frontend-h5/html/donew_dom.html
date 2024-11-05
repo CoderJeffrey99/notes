@@ -137,8 +137,17 @@
            } 
         }
         // 4>.节点操作：节点的操作以函数的方式存在
-        // >>创建
+        // >>创建：也可以直接获取节点
         var newDiv = document.createElement("标签名")
+        /*
+        // 第一种创建方式：会覆盖原有内容（底层机制如此：无法兼容修改）
+        document.write("<li>我是document.write创建的<li>")
+        // 第二种创建方式
+        ul.innerHTML = "<li>我是innerHTML创建的<li>" // 会覆盖原有内容
+        ul.innerHTML += "<li>我是innerHTML创建的<li>" // 不会覆盖原有内容
+        // 第三种创建方式
+        document.createElement("li")
+        */
         // >>插入：在父节点的最后插入一个新节点
         div.appendChild(newDiv)
         div.insertBefore(newDiv, "参考节点") // 在参考节点前插入新节点：如果参考节点null则在节点最后插入一个节点
@@ -173,19 +182,7 @@
         // outerText与innerText一样：outerText已经被移除
         console.log(document.getElementById("lrsdk_input_second_box").innerText) // 我是一个内容
 
-        // 4.元素的创建
-        // 第一种创建方式：会覆盖原有内容（底层机制如此：无法兼容修改）
-        document.write("<li>我是document.write创建的<li>")
-        // 第二种创建方式
-        ul.innerHTML = "<li>我是innerHTML创建的<li>" // 会覆盖原有内容
-        ul.innerHTML += "<li>我是innerHTML创建的<li>" // 不会覆盖原有内容
-        // 第三种创建方式
-        document.createElement("li")
-
-        // 5.表格操作
-        // xxx
-
-        // 6.DOM拓展
+        // 3.DOM拓展
         // 1>.获取单个标签：只会获取符合条件的第一个元素
         document.querySelector(".lrsdk_inner_box")
         /**

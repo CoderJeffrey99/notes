@@ -1,10 +1,28 @@
+
 // 1.ts概述
 // 1>.TypeScript是JavaScript的超集，支持ECMAScript6.x标准
 // 2>.TypeScript是Microsoft开发的开源的编程语言
-// 3>.TypeScript设计目标是开发大型项目：可以编译成纯JavaScript（运行在任何浏览器上）
+// 3>.TypeScript设计目标是开发大型项目：可以编译成纯JavaScript（运行在任何浏览器上：浏览器不认识TypeScript）
 // 4>.通常我们使用.ts作为TypeScript代码文件的后缀名
-// 5>.$tsc CMGameProxy.ts # 转换为JavaScript代码
+// 5>.$tsc CMGameProxy.ts # 转换为JavaScript代码...必须安装ts环境（$npm i typescript -g | $tsc -v）
+// tsc -w 监听
 // 6>.$node CMGameProxy.js # 执行CMGameProxy.js
+
+
+
+// npm i ts-node -g
+// npm init -y 生成package.json文件
+// npm i @types/node -D
+// 可以直接执行ts ts-node xxx.ts
+
+
+// Object 任意类型
+// object 非原始类型（number string boolean...只支持引用类型）
+
+// 定义对象的类型使用interface
+// 重名interface会合并...索引签名可以定义所有的属性
+
+
 var msg: string = 'hello world' // 可以不以;结尾
 console.log(msg) // 严格区分大小
 
@@ -93,7 +111,10 @@ var [b, c] = tuple1;
 console.log(b) // 1
 console.log(c) // xwj
 let tuple2: [number, ...string[]];
-// 7>.Map：Map是ES6引入的一种数据结构
+let tuple3: [number, string?];
+let tuple4: readonly [number, ...string[]];
+// 7>.Map
+// Map是ES6引入的一种数据结构
 // 创建Map
 let map = new Map<string, string>([
     ['key1', 'value1'],
@@ -187,6 +208,23 @@ func = function (a, b) {
 func = (a, b) => {
     return a + b;
 }
+// 交叉类型：只对interface有效
+// as断言
+
+// 属性key重名问题
+// for in 取不到symnol
+
+let a12: symbol = Symbol(1); // 唯一的
+let a13: symbol = Symbol(1); // 唯一的
+a12 === a13; // false
+Symbol.for('xxx') === Symbol.for('xxx') // true
+
+let ob1 = {
+    [a12]: 111,
+    [a13]: 222
+}
+Object.getOwnPropertySymbols(obj1) // 只能取到symbol
+Reflect.ownKeys(obj1); // 
 
 // 4.变量
 // 1.变量声明
@@ -335,7 +373,7 @@ function test4(a1, s1) {
 }
 */
 let s2 = test4(1, 'xwj')
-// 2>.可选参数
+// 2>.可选参数：interface也可以作为函数参数
 // a.默认情况下，形参和实参必须相等（可选参数除外）
 function test5(a1: number, a2?: number) {
     // 可选参数必须跟在必需参数后面
@@ -454,9 +492,15 @@ name5.substring(1, 2)
 
 // 10.接口：无法转换成js
 interface PersonCallback {
-    name: string;
-    age: number;
-    sayHi(): string
+    // 无法修改
+    readonly name: string;
+    // 支持可选
+    age?: number;
+    // ts可以定义this的类型：js不行
+    // 调用传参的时候可以无视这个形参
+    sayHi(this: PersonCallback): string;
+    // 索引签名
+    [key: string]: any
 }
 // 变量可以实现接口
 var customer: PersonCallback = {
@@ -531,10 +575,12 @@ class Student extends Person2 implements StudentCallback {
     age: number
     studentNo: number
     /*
+    readonly
     public默认 任何地方都可以访问
     protected 自身/子类可以访问
     private 当前类中可以访问
     */
+   
     public score: string
 
     // 重写父类方法
@@ -594,16 +640,43 @@ class Box<T> {
 interface LengthWise {
     length: number
 }
+// 这是格式:也可以直接跟Number
 function test19<T extends LengthWise>(args: T): void {
     console.log(args.length)
 }
 test19('xwj')
+
+let obj4 = {
+    name: '',
+    sex: 1
+}
+function test111<T extends object, K extends keyof T>(obj: T, key: K) {
+    return obj[key];
+}
+test111(obj4, 'name');
+
+interface Data {
+    name: string,
+    age: number,
+    sex: string
+}
+
+type Options<T extends object> = {
+    [Key in keyof T]?:[Key]
+}
+
+
 // 5>.给泛型设置一个默认值
 function test20<T = string>(args: T): void {
     console.log(args)
 }
 
-// 14.命名空间
+
+type A<T> = string | T;
+let a14: A<Number> = 1;
+
+// 16.命名空间:所有变量和方法必须导出才可以使用
+
 /*
 我们一般把一个文件中新建一个namespace，其它文件引用如下：
 /// <reference path = "文件名.ts" />
@@ -630,8 +703,13 @@ namespace Doyin {
 var d1 = new Doyin.Doyin1.Doyin2()
 d1.show()
 
-// 15.模块
-// 使用export导出
+// 17.模块
+// 1>.默认导出
+// export default + 任意类型
+// 一个module只能有一个默认导出
+// 使用import导入
+// import obj from './test'
+// 2>.分别导出
 // export class Douyin {
 
 // }
@@ -651,8 +729,50 @@ declare module xxx {
 }
 */
 
-// 17.设计模式
-// 1>.单例模式
+// 生成器
+function *gen() {
+    yield Promise.resolve(''); // 可以跟同步和异步
+}
+const gen1 = gen();
+gen1.next();
+
+// 迭代器
+
+// 声明文件
+
+// Mixins混入
+
+// 装饰器Decorator
+// 不破坏原有类的结构给类新增属性和方法
+// 类装饰器 方法装饰器 参数装饰器 属性装饰器
+
+// webpack构建ts + vue3
+// 1.tsc --init  # 生成tsconfig.json
+// 'include': [
+//     'src/**/**'
+// ]
+// 2.npm init -y  # 生成package.json
+// 3.新建webpack.config.js
+// 4.新建index.html/main.ts/App.vue/shim.d.ts
+
+// 发布订阅模式
+
+// set map weakSet weakMap
+
+// proxy代理接口
+// Reflect
+
+// 类型守卫
+// 1.类型收缩：typeof 数组/函数 => object
+// instanceOf
+
+// 遍历对象的属性不要使用for in 因为会遍历原型上的属性：可以使用Object.keys(data).forEach(key => {})
+
+// 协变
+// 逆变
+// 双向协变
+
+// 19.单例模式
 // 第一种方式
 // class ModuleManager {
 //     static instance = new ModuleManager()
@@ -767,4 +887,20 @@ class Car {
 class Benz extends Car {}
 class Bmw extends Car {}
 class Audi extends Car {}
+
 let bmw = Car.create(CarType.bmw)
+
+
+
+
+
+let list: string[] = [];
+list.every(() => {
+    
+})
+
+
+// tsconfig.json
+// $ tsc --init
+// es2015 === es6
+
