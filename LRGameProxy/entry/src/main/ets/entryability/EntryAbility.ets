@@ -50,11 +50,14 @@ export default class EntryAbility extends UIAbility {
 // a.一次开发，多端部署（多设备工程管理、多目标构建、一体化打包）
 // b.可分可合，自由流转（元服务是支持可分可合，自由流转的轻量化程序实体、自由流转（跨端迁移和多端协同））
 // c.统一生态，原生智能（支持业界主流跨平台开发框架；react native、flutter、weex、Taro、uni-app）
-// 3.高效开发与测试
+// 3.harmonyOS应用形态
+// a.App：需要安装
+// b.元服务：轻量级、免安装、自由流转
+// 4.高效开发与测试
 // a.开发框架：ArkUI框架
 // b.集成开发环境：DevEco Studio
 // c.测试工具：专项测试套件、测试工具平台
-// 4.上架分发
+// 5.上架分发
 // a.huawei AppGallery Connect为开发者提供全球化、全场景、一站式应用与服务分发能力
 // b.huawei AppGallery Connect作为开发者统一提交HarmonyOS生态应用和元服务的入口：证书管理、项目管理、版本管理
 
@@ -71,9 +74,9 @@ LRGameProxy
   .hvigor -- 自动生成
   .idea -- 自动生成
   AppScope
-    resources --
+    resources -- xxx
     app.json5 -- 应用全局配置信息
-  // apk aab ipa hap
+  // apk aab ipa hap - huawei app package
   entry -- HarmonyOS工程模块（编译构建生成一个hap包）
     src
       main
@@ -82,6 +85,7 @@ LRGameProxy
           entrybackupability -- 应用提供扩展的备份恢复能力
           pages -- 应用/服务页面
         resources -- 存放资源文件（图形、多媒体、字符串、布局文件）
+          自定义限定词目录（可以适配多设备）
         module.json5 -- 模块配置文件
       mock
       ohosTest

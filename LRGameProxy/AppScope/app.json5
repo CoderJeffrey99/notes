@@ -2,7 +2,9 @@
   "app": {
     "bundleName": "com.lrgame.org",
     "vendor": "example",
-    "versionCode": 1000000,
+    // 开发者使用：每次更新都必须+
+    "versionCode": 100,
+    // UI显示：给用户看的
     "versionName": "1.0.0",
     "icon": "$media:app_icon",
     "label": "$string:app_name"
