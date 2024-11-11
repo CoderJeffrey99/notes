@@ -1,51 +1,83 @@
+// 1.概述
+// 1>.概念：typeScript是Microsoft开发的开源的编程语言
+// 2>.特点：javaScript的超集（完全兼容），支持ECMAScript6.x标准，文件后缀名是.ts
+// 3>.目的：开发大型项目（typeScript可以编译成纯javaScript（运行在任何浏览器上：浏览器不认识typeScript））
 
-// 1.ts概述
-// 1>.TypeScript是JavaScript的超集，支持ECMAScript6.x标准
-// 2>.TypeScript是Microsoft开发的开源的编程语言
-// 3>.TypeScript设计目标是开发大型项目：可以编译成纯JavaScript（运行在任何浏览器上：浏览器不认识TypeScript）
-// 4>.通常我们使用.ts作为TypeScript代码文件的后缀名
-// 5>.$tsc CMGameProxy.ts # 转换为JavaScript代码...必须安装ts环境（$npm i typescript -g | $tsc -v）
-// tsc -w 监听
-// 6>.$node CMGameProxy.js # 执行CMGameProxy.js
-
-
-
-// npm i ts-node -g
-// npm init -y 生成package.json文件
-// npm i @types/node -D
-// 可以直接执行ts ts-node xxx.ts
-
-
-// Object 任意类型
-// object 非原始类型（number string boolean...只支持引用类型）
-
-// 定义对象的类型使用interface
-// 重名interface会合并...索引签名可以定义所有的属性
-
-
-var msg: string = 'hello world' // 可以不以;结尾
-console.log(msg) // 严格区分大小
-
-// 2.注释
-// 1>.支持单行注释
+// 2.运行ts
 /*
-2>.支持多行注释
-*/
+1>.第一种方式
+// 安装ts环境
+$npm i typescript -g
+$tsc -v
+// 转换为JavaScript代码
+$tsc CMGameProxy.ts
+// 执行CMGameProxy.js
+$node CMGameProxy.js
+ */
+/*
+2>.第二种方式
+// 安装ts环境
+$npm i typescript -g
+$tsc -v
+$npm i ts-node -g
+// 生成package.json文件
+$npm init -y
+$npm i @types/node -D
+// 直接执行ts
+$ts-node xxx.ts
+ */
 
-// 3.数据类型
-// 1>.any类型
-// >>可以赋值任意类型的value
-// >>编译期：typeScript编译器不会对该变量进行检查
-// >>运行期：javascript引擎（如果尝试执行无效操作：调用未定义的函数、访问不存在的对象...）会抛出运行时错误
-let name1: any
-name1 = 'xwj'
-name1 = 18
-// 2>.number数字类型
-// >>表示整数和分数
+// 3.注释
+// 单行注释 - //
+// 多行注释 - /* 多行注释 */
+/**
+ * 文档注释
+ * @param {string} name - 姓名
+ * @returns {number} - 年龄
+ */
+
+// 4.变量
+// 1>.先声明再赋值
+var wukong1: string // 可以不以;结尾、严格区分大小
+wukong1 = 'wukong';
+// wukong1 = 123 // 报错：ts是强类型语言
+// 2>.声明并赋值
+var wukong2: string = 'wukong';
+// 3>.类型推断
+var wukong3 = 'wukong';
+// 4>.任意类型any
+var wukong4;
+
+// 5.常量：程序运行过程中不变的量
+// 定义一个数值常量
+const PI: number = 3.14;
+// 定义一个对象常量
+const person = {
+   name: "xwj",
+   age: 18
+}
+// // 报错：不能修改
+// person = {
+//    name: "123"
+// }
+// 可以修改对象常量的属性
+person.name = "cfj";
+console.log(person.name);
+// 定义一个数组常量
+const colors: string[] = ["red", "blue", "yellow"];
+// // 报错：不能修改
+// colors = ["yellow", "purple"];
+// 可以修改数组常量的元素
+colors[1] = "yellow";
+console.log(colors[1]);
+
+// 6.数据类型
+// number、string、boolean、null、undefined、bigint、symbol object(非原始类型：Array、Function、Error)｜元组、Map、Enum、联合类型、any、never、unknown✔
+// 1>.number数字类型：表示整数、分数
 let age: number = 100
 let height: number = 180.56
 let money_count = -1000.59
-// 3>.string字符串
+// 2>.string字符串
 let name2 = 'xwj' // 可以使用‘’表示字符串类型：同下
 let name3 = "wy" // 可以使用“”表示字符串类型：同上
 let words = `${name2} love ${name3}` // 使用``模版字符串定义内嵌表达式
@@ -54,47 +86,107 @@ let details = `
 可以使用‘’表示字符串类型：同下
 可以使用‘’表示字符串类型：同下
 `
-// 4>.boolean布尔类型
-let isFlag: boolean = false
-// 5>.数组
-let array: string[] = ['xwj', 'wy', 'xst'] // 推荐使用
-let array1: Array<string> = ['xwj', 'wy', 'xst']
-let array2 = new Array('xwj', 'wy', 'xst')
-let array3; // array3是any类型
-array3[0] = 'xwj' // init根据第一个元素类型来推断数组的类型...string
-// 遍历数组
-for (let index = 0; index < array.length; index++) {
-    const element = array[index];
+// 3>.boolean布尔类型：任何数据类型都可以转换成布尔类型：false、0、""、NaN、undefined、null都是false（其他对象都转换成true）
+let isFlag: boolean = false;
+// 4>.undefined：未init的变量
+let obj1: undefined = undefined; // undefined类型只能赋值undefined
+// obj1 = 5; // 报错
+let value1; // value1的数据类型是any、value1的值是undefined
+// 5>.void：一般用于函数返回值
+function test(): void {
+    console.log('hello world');
 }
-for (const key in array) {
+// 6>.null
+let obj2 = null; // 空对象引用
+console.log(typeof obj2); // 类型验证：返回object
+// 7>.enum枚举：实质还是number
+enum Colors {
+    // 如果不指定数字则从0开始
+    red,
+    // 如果指定数字则从指定数字开始
+    yellow = 10,
+    blue
+}
+let color: Colors = Colors.red;
+// // 8>.never其它类型
+// let x1: never
+// let x2: number
+// // x1 = 123 // 报错：数字类型不能赋值给never类型
+// x1 = (
+//     () => {
+//         throw new Error('exception')
+//     }
+// )()
+// x2 = x1 // never类型可以赋值给数字类型
+// // 抛出异常的函数返回值可以是never
+// function test1(): never {
+//     throw new Error('exception')
+// }
+// // 无法执行完毕的函数返回值是never
+// function test2(): never {
+//     while (true) {
+        
+//     }
+// }
+// 9>.any类型
+// >>可以赋值任意类型的value
+// >>编译期：typeScript编译器不会对该变量进行检查
+// >>运行期：javascript引擎（如果尝试执行无效操作：调用未定义的函数、访问不存在的对象...）会抛出运行时错误
+let name1: any;
+name1 = 'xwj';
+name1 = 18;
+// 10>.unknown：可以用来标记在编程阶段还不清楚类型的变量
+// 与any类型的区别：xxx
+let m1: unknown = 4;
+m1 = '123';
+// 11>.联合类型：给变量设置多种类型
+var name6: number | string;
+name6 = 12;
+name6 = 'xwj';
+// name6 = true; // 报错：只能赋值指定类型，赋值其它类型报错
+// 联合类型作为函数参数
+function test1(param: string | string[]) {
+}
+// 联合类型作为数组类型
+let array: number[] | string[];
+// 12>.数组
+let array1: string[] = ['xwj', 'wy', 'xst'] // 推荐使用
+let array2: Array<string> = ['xwj', 'wy', 'xst']
+let array3 = new Array('xwj', 'wy', 'xst')
+let array4; // array4是any类型
+array4[0] = 'xwj' // init根据第一个元素类型来推断数组的类型...string
+// 遍历数组
+for (let index = 0; index < array1.length; index++) {
+    const element = array1[index];
+}
+for (const key in array1) {
 }
 // 多维数组
-var array4: string[][] = [
+var array5: string[][] = [
     ['xwj', 'wy', 'xst'],
     ['xwj', 'wy', 'xst']
 ]
 // 数组作为函数参数
 function test9(sites: string[]) {
-    
 }
 // 数组作为函数返回值
 function test10(): string[] {
-    return new Array('xwj', 'wy')
+    return new Array('xwj', 'wy');
 }
-array1.concat(array1) // 连接两个或更多数组：返回新数组
-array1.indexOf('xwj') // 返回指定元素的索引：不存在返回-1
-array1.lastIndexOf('xwj') // 返回指定元素的索引（从后向前）：不存在返回-1
-array1.join("&") // array -> string
-array1.push('cfj') // 向数组的末尾添加元素：返回新数组长度
-array1.pop() // 删除数组的最后一个元素：返回删除的元素
-array1.reverse() // 反转数组
-array.unshift() // 向数组的开头添加元素：返回新数组长度
-array1.shift() // 删除数组的第一个元素：返回删除的元素
-// 6>.元组：表示已知元素类型和数量的数组
+array2.concat(array1) // 连接两个或更多数组：返回新数组
+array2.indexOf('xwj') // 返回指定元素的索引：不存在返回-1
+array2.lastIndexOf('xwj') // 返回指定元素的索引（从后向前）：不存在返回-1
+array2.join("&") // array -> string
+array2.push('cfj') // 向数组的末尾添加元素：返回新数组长度
+array2.pop() // 删除数组的最后一个元素：返回删除的元素
+array2.reverse() // 反转数组
+array2.unshift() // 向数组的开头添加元素：返回新数组长度
+array2.shift() // 删除数组的第一个元素：返回删除的元素
+// 13>.元组：表示已知元素类型和数量的数组
 // 数组中一般存储的都是数据类型相同的元素，数据类型不同的元素使用元组
 let tuple1: [string, number];
-// tuple1 = [1, 'xwj'] // 报错
-tuple1 = ['xwj', 18]
+// tuple1 = [1, 'xwj']; // 报错
+tuple1 = ['xwj', 18];
 // let tuple2 = [];
 // tuple2[0] = '123'
 // tuple2[1] = 123
@@ -110,11 +202,10 @@ tuple1[1] = 2;
 var [b, c] = tuple1;
 console.log(b) // 1
 console.log(c) // xwj
-let tuple2: [number, ...string[]];
-let tuple3: [number, string?];
-let tuple4: readonly [number, ...string[]];
-// 7>.Map
-// Map是ES6引入的一种数据结构
+let tuple3: [number, ...string[]];
+let tuple4: [number, string?];
+let tuple5: readonly [number, ...string[]];
+// 14>.Map：es6引入的一种数据结构
 // 创建Map
 let map = new Map<string, string>([
     ['key1', 'value1'],
@@ -126,131 +217,50 @@ map.get('key3') // 返回value...kye3不存在返回undefined
 if (map.has('key3')) {
     // 判断map中是否包含key3对应的value
 }
-map.size // 返回key/value的数量
-map.delete('key3') // 删除元素
+map.size; // 返回key/value的数量
+map.delete('key3'); // 删除元素
 // map.clear() // 移除所有元素
-map.keys()
+map.keys();
 // 遍历map
 Array.from(map.keys()).forEach((key) => {
-
 })
 map.forEach((value, key, map) => {
-
 })
-// 8>.enum枚举：实质还是number
-enum Colors {
-    // 如果不指定数字则从0开始
-    red,
-    // 如果指定数字则从指定数字开始
-    yellow = 10,
-    blue
-}
-let color: Colors = Colors.red
-// 9>.void
-function test(): void {
-    console.log('hello world')
-}
-// 10>.null
-let obj = null // 空对象引用
-typeof obj // 类型验证：返回object
-// 类型别名
-type newObj = object
-let obj1: newObj
-// 11>.undefined
-let obj2; // 未init的变量
-// 12>.never其它类型
-let x1: never
-let x2: number
-// x1 = 123 // 报错：数字类型不能赋值给never类型
-x1 = (
-    () => {
-        throw new Error('exception')
-    }
-)()
-x2 = x1 // never类型可以赋值给数字类型
-// 抛出异常的函数返回值可以是never
-function test1(): never {
-    throw new Error('exception')
-}
-// 无法执行完毕的函数返回值是never
-function test2(): never {
-    while (true) {
-        
-    }
-}
-// 13>.联合类型：给变量设置多种类型
-var name6: number | string
-name6 = 12
-name6 = 'xwj'
-// name6 = true // 报错：只能赋值指定类型，赋值其它类型报错
-// 联合类型作为函数参数
-function test11(param: string | string[]) {
-    
-}
-// 联合类型作为数组类型
-let array5: number[] | string[]
-// 14>.unknown：可以用来标记在编程阶段还不清楚类型的变量
-let m1: unknown = 4
-m1 = '123'
 // 15>.object
-// >>object不能存原始类型
-// >>Object除null/undefined都可以存
-// a>.Function
+// a>.object可以存非原始类型（除number string boolean...只支持引用类型）
+// b>.Object除null/undefined都可以存
+// c>.Function
 let func: (a: string, b: number) => string;
 func = function (a: string, b: number): string {
     return a + b;
 }
-// 简写
-func = function (a, b) {
+// 简写：可以省略返回值类型（可以推导）、一般不能省略形参数据类型
+func = function (a: string, b: number) {
     return a + b;
 }
-// 与188行的=>含义不同
-func = (a, b) => {
+func = (a: string, b: number) => {
     return a + b;
 }
-// 交叉类型：只对interface有效
-// as断言
+// 16>.交叉类型：只对interface有效
+// a>.使用interface类型定义对象
+// xxx
+// b>.重名interface会合并：索引签名可以定义所有的属性
+// xxx
+// c>.类型断言：告诉编译器某个变量的实际类型（在某些情况下，编译器无法准确的推断变量的类型，或者我们知道变量的类型比编译器更准确）
+// 注意：类型断言不会进行实际的类型转换和数据检查（仅仅是告诉编译器把某个变量视为某个类型，如果不能确保真的是这个类型运行的时候可能会报错）
+let value2: any = '123';
+(<string>value2).trim();
+(value2 as string).trim();
+// 17>.Symbol类型
+let a1: symbol = Symbol(1); // 唯一的
+let a2: symbol = Symbol(1); // 唯一的
+console.log(a1 === a2); // false
+console.log(Symbol.for('xxx') === Symbol.for('xxx')); // true
+// 18>.类型别名
+type newObj = object;
+let obj5: newObj;
 
-// 属性key重名问题
-// for in 取不到symnol
-
-let a12: symbol = Symbol(1); // 唯一的
-let a13: symbol = Symbol(1); // 唯一的
-a12 === a13; // false
-Symbol.for('xxx') === Symbol.for('xxx') // true
-
-let ob1 = {
-    [a12]: 111,
-    [a13]: 222
-}
-Object.getOwnPropertySymbols(obj1) // 只能取到symbol
-Reflect.ownKeys(obj1); // 
-
-// 4.变量
-// 1.变量声明
-// 1>.先声明再赋值
-var wukong1: string;
-wukong1 = 'wukong'
-// wukong1 = 123 // 报错：ts是强类型语言
-// 2>.声明并赋值
-var wukong2: string = 'wukong'
-// 3>.类型推断
-var wukong3 = 'wukong'
-// 4>.任意类型any
-var wukong4;
-// 2.作用域
-var y1 = '123' // 全局变量
-class Test3 {
-    y2 = '123' // 类的实例变量
-    static y3 = '123' // 类的静态变量
-
-    test4(): void {
-        var y4 = '123' // 局部变量
-    }
-}
-console.log(Test3.y3)
-
-// 5.运算符
+// 7.运算符
 // 1>.算术运算符
 var num1: number = 9
 var num2: number = 2
@@ -259,82 +269,89 @@ console.log(num1 - num2) // 7
 console.log(num1 * num2) // 18
 console.log(num1 / num2) // 4.5
 console.log(num1 % num2) // 1
+// 2>.自增自减运算符
 console.log(++num1) // 10
 console.log(num1++) // 10
 console.log(--num1) // 10
 console.log(num1--) // 10
-// 2>.关系运算符
-// 结果为true/false
+// 3>.关系运算符：结果为true/false
 console.log(num1 == num2) // false
 console.log(num1 != num2) // true
 console.log(num1 > num2) // true
 console.log(num1 < num2) // false
 console.log(num1 >= num2) // true
 console.log(num1 <= num2) // false
-// 3>.逻辑运算符
-// 结果为true/false
+// 4>.逻辑运算符：结果为true/false
 console.log((num1 == num2) && (num1 != num2)) // false
 console.log((num1 == num2) || (num1 != num2)) // true
 console.log(!(num1 == num2)) // true
-// 4>.位运算符
-// XXX
-// 5>.赋值运算符
+// 5>.位运算符
+// xxx
+// 6>.赋值运算符
 num1 = num2;
 num1 += num2; // num1 = num1 + num2
 num1 -= num2; // num1 = num1 - mun2
 num1 *= num2; // num1 = num1 * num2
 num1 /= num2; // num1 = num1 / num2
-// 6>.三元运算符
-var msg1 = (num1 > num2) ? '123' : '456'
-// 7>.typeof
+// 7>.三元运算符
+var msg = (num1 > num2) ? '123' : '456'
+// 8>.typeof
 console.log(typeof num1) // number
 console.log(typeof(num2)) // number
-// instanceof运算符
-// >>用于判断对象是否为指定的类型
+// 9>.instanceof运算符：用于判断对象是否为指定class的实例（指定class子类的实例）
+class Person {
+    constructor() {
+    }
+}
+class Customer extends Person {
+    constructor() {
+        super()
+    }
+}
+let p2 = new Person()
+let c1 = new Customer();
+console.log(p2 instanceof Person) // true
+console.log(c1 instanceof Customer) // true
+console.log(p2 instanceof Customer) // false
+console.log(c1 instanceof Person) // true
 
-// 6.条件语句
+// 8.条件语句
 // 1>.if语句
 if (num1 > num2) {
-    
 }
 // 2>.if...else语句
 if (num1 > num2) {
-    
 } else {
-
 }
 // 3>.if...else if...else语句
 if (num1 > num2) {
-    
 } else if (num1 === num2) {
-
 } else {
-
 }
 // 4>.switch语句
-// num1可以是任意类型：number string boolean object（Array Map） class interface enum
-// 底层是===
+// a>.num1可以是任意类型：number string boolean object（Array Map） class enum
+// b>.底层：===
 switch (num1) {
     case 1: {
-
     }
         break;
     case 2:
     case 3:
     case 4: {
-
     }
         break;
-    default:
+    default: {
+    }
         break;
 }
 
-// 7.循环语句
+// 9.循环语句
 // 1>.for循环
 for (let index = 0; index < array1.length; index++) {
     const element = array1[index];
 }
 // 2>.for...in
+// 使用for...in遍历对象会遍历原型上的属性（不推荐：可以使用Object.keys(data).forEach(key => {})）
 for (let element in array1) {
     // element表示数组index
     // 1, 2, 3, 4...
@@ -361,54 +378,54 @@ do {
 // do {
 // } while (true);
 
-// 8.函数
+// 10.函数
 // 1>.定义函数
-function test4(a1: number, s1: string): string {
+function test2(a1: number, s1: string): string {
     return a1 + s1
 }
 /*
 js代码
-function test4(a1, s1) {
+function test2(a1, s1) {
     return a1 + s1
 }
 */
-let s2 = test4(1, 'xwj')
+let s = test2(1, 'xwj')
 // 2>.可选参数：interface也可以作为函数参数
 // a.默认情况下，形参和实参必须相等（可选参数除外）
-function test5(a1: number, a2?: number) {
+function test3(a1: number, a2?: number) {
     // 可选参数必须跟在必需参数后面
 }
-test5(1)
-test5(1, 2)
+test3(1)
+test3(1, 2)
 // 3>.默认参数
-function test6(s1: string, s2: string = 'xwj') {
+function test4(s1: string, s2: string = 'xwj') {
     
 }
-test6('wy')
-test6('wy', 'cfj')
+test4('wy')
+test4('wy', 'cfj')
 // 4>.剩余参数
 // ...s2表示剩余参数组成的array
 // 0 ~ (s2.length - 1)
-function test7(s1: string, ...s2: string[]) {
+function test5(s1: string, ...s2: string[]) {
     
 }
-test7('xwj', 'x1', 'x2', 'x3')
+test5('xwj', 'x1', 'x2', 'x3')
 // 5>.匿名函数
-var msg2 = function () {
+var msg1 = function () {
     
 }
-msg2()
-var msg3 = function (a1: number, a2: number): number {
+msg1()
+var msg2 = function (a1: number, a2: number): number {
     // 直接调用
     (function () {
     
     })()    
     return a1 * a2
 }
-msg3(1, 2)
+msg2(1, 2)
 // 6>.使用构造函数
-var msg4 = new Function('a', 'b', 'return a * b')
-msg4(1, 2)
+var msg3 = new Function('a', 'b', 'return a * b')
+msg3(1, 2)
 // 7>.递归函数：自己调用自己
 // function test8() {
     // 必须有结束条件
@@ -417,21 +434,21 @@ msg4(1, 2)
 // 8>.箭头函数
 // 1>.支持函数体有多行
 // 2>.不能用作构造函数：主要用来替代匿名函数
-var msg5 = (s1: string) => console.log(s1)
-msg5('xwj')
+var msg4 = (s1: string) => console.log(s1)
+msg4('xwj')
 // 我们可以不指定参数类型
 // 单个参数()可以省略
-var msg6 = (s1) => {
+var msg5 = (s1) => {
     if (typeof(s1) == 'number') {
         
     } else if (typeof(s1) == 'string') {
 
     }
 }
-msg6(1)
-msg6('xwj')
+msg5(1)
+msg5('xwj')
 // 9>.无参可以直接使用()
-var msg7 = () => {
+var msg6 = () => {
 }
 // 10>.函数作为参数：回调函数（传入函数名 === 整个函数）
 function lrTest(func: Function) {
@@ -440,15 +457,14 @@ function lrTest(func: Function) {
     func();
  }
  lrTest(function () {
-    
  });
  function lrShow() {
-    
  }
  lrTest(lrShow);
-// 重载：函数名称相同，参数不同（类型不同、数量不同、顺序不同），与返回值无关...js不支持重载？？？
+// 11>.重载：函数名称相同，参数不同（类型不同、数量不同、顺序不同），与返回值无关
 
-// 9.Number包装类
+// 10.包装类
+// 1>.Number包装类
 var num1 = Number(123)
 var num2 = Number('xwj') // 返回NaN
 Number.MAX_VALUE // 最大值
@@ -488,9 +504,11 @@ name5.valueOf() // String -> string
 // 切割字符串：自行百度slice()和substring(1, 2)的区别
 name5.slice()
 name5.split("&", 4) // 按照&分割字符串组成字符数组（保留字符数组元素个数4）
-name5.substring(1, 2)
+name5.substring(1, 2);
+// 3>.Boolean包装类
+let isFlag1 = new Boolean(true);
 
-// 10.接口：无法转换成js
+// 11.接口interface：无法转换成js
 interface PersonCallback {
     // 无法修改
     readonly name: string;
@@ -500,7 +518,7 @@ interface PersonCallback {
     // 调用传参的时候可以无视这个形参
     sayHi(this: PersonCallback): string;
     // 索引签名
-    [key: string]: any
+    [key: string]: any;
 }
 // 变量可以实现接口
 var customer: PersonCallback = {
@@ -515,19 +533,18 @@ interface StudentCallback extends PersonCallback {
     studentNo: number
 }
 
-// 13.类
+// 12.类class
 // 1>.抽象类：本身不能被实例化为对象，可以被继承
 abstract class Person1 {
     _name: string = '' // 如果不想外部直接调用该属性需要这样写（这属于一个约定俗称的方式，因为这样写外部依旧可以直接调用）
     // 成员方法和函数的区别：不需要加function关键字
     run() {
-
     }
     // 抽象方法
     abstract say(): void
 }
+// 2>.继承
 class Person2 extends Person1 {
-    
     get name() {
         return this._name
     }
@@ -556,12 +573,12 @@ var Person = (function () {
     Person.prototype.show = function () {
         console.log('我的名字是' + this.name)
     }
-    return Person
+    return Person;
 }())
 */
 // 创建对象
-var p1 = new Person2('')
-p1.name = 'xwj' // 在外部实际调用的是getter/setter
+var p1 = new Person2('');
+p1.name = 'xwj'; // 在外部实际调用的是getter/setter
 p1.say();
 if (p1 instanceof Person2) {
     // 判断p1是否是Person类的对象
@@ -580,7 +597,6 @@ class Student extends Person2 implements StudentCallback {
     protected 自身/子类可以访问
     private 当前类中可以访问
     */
-   
     public score: string
 
     // 重写父类方法
@@ -595,7 +611,7 @@ class Student extends Person2 implements StudentCallback {
     } 
 }
 
-// 12.对象
+// 13.对象
 var obj3 = {
     key1: 'xwj',
     key2: function () {
@@ -607,7 +623,7 @@ obj3.key2 = function () {
     console.log('xwj')
 }
 
-// 13.泛型
+// 14.泛型
 // 1>.泛型函数
 // T - type
 // U - 第二个参数
@@ -641,46 +657,34 @@ interface LengthWise {
     length: number
 }
 // 这是格式:也可以直接跟Number
-function test19<T extends LengthWise>(args: T): void {
+function test15<T extends LengthWise>(args: T): void {
     console.log(args.length)
 }
-test19('xwj')
-
+test15('xwj')
 let obj4 = {
     name: '',
     sex: 1
 }
-function test111<T extends object, K extends keyof T>(obj: T, key: K) {
+function test16<T extends object, K extends keyof T>(obj: T, key: K) {
     return obj[key];
 }
-test111(obj4, 'name');
-
+test16(obj4, 'name');
 interface Data {
     name: string,
     age: number,
     sex: string
 }
-
 type Options<T extends object> = {
     [Key in keyof T]?:[Key]
 }
-
-
 // 5>.给泛型设置一个默认值
 function test20<T = string>(args: T): void {
     console.log(args)
 }
-
-
 type A<T> = string | T;
 let a14: A<Number> = 1;
 
-// 16.命名空间:所有变量和方法必须导出才可以使用
-
-/*
-我们一般把一个文件中新建一个namespace，其它文件引用如下：
-/// <reference path = "文件名.ts" />
-*/
+// 15.命名空间namespace：所有变量和方法必须导出才可以使用
 namespace Doyin {
     // 想要外部调用必须使用export
     export interface test {
@@ -703,24 +707,27 @@ namespace Doyin {
 var d1 = new Doyin.Doyin1.Doyin2()
 d1.show()
 
-// 17.模块
-// 1>.默认导出
-// export default + 任意类型
-// 一个module只能有一个默认导出
-// 使用import导入
-// import obj from './test'
-// 2>.分别导出
-// export class Douyin {
-
-// }
-// 使用import导入
-// import { Douyin } from '../相对路径'
-
-// 16.声明文件
+// 16.模块
 /*
-ts文件怎么调用js文件：
-1.直接引用：可以调用类和方法，无法使用ts特性（类型检查...）
-2.引用声明文件（描述js库和模块信息）
+1>.默认导出
+// 一个module只能有一个默认导出
+export default + 任意类型
+// 使用import导入
+import obj from './test'
+2>.分别导出
+export class Douyin {
+
+}
+// 使用import导入
+import { Douyin } from '../相对路径'
+ */
+// 
+
+// 17.声明文件
+/*
+// ts文件怎么调用js文件：
+1>.直接引用：可以调用类和方法，无法使用ts特性（类型检查...）
+2.>引用声明文件（描述js库和模块信息）
 Douyin.d.ts
 declare module xxx {
     export class Douyin {
@@ -729,76 +736,34 @@ declare module xxx {
 }
 */
 
-// 生成器
-function *gen() {
-    yield Promise.resolve(''); // 可以跟同步和异步
+// 18.设计模式
+// 1>.单例模式
+// a>.第一种方式
+class ModuleManager1 {
+    static instance = new ModuleManager1();
+
+    private constructor() {
+
+    }
 }
-const gen1 = gen();
-gen1.next();
-
-// 迭代器
-
-// 声明文件
-
-// Mixins混入
-
-// 装饰器Decorator
-// 不破坏原有类的结构给类新增属性和方法
-// 类装饰器 方法装饰器 参数装饰器 属性装饰器
-
-// webpack构建ts + vue3
-// 1.tsc --init  # 生成tsconfig.json
-// 'include': [
-//     'src/**/**'
-// ]
-// 2.npm init -y  # 生成package.json
-// 3.新建webpack.config.js
-// 4.新建index.html/main.ts/App.vue/shim.d.ts
-
-// 发布订阅模式
-
-// set map weakSet weakMap
-
-// proxy代理接口
-// Reflect
-
-// 类型守卫
-// 1.类型收缩：typeof 数组/函数 => object
-// instanceOf
-
-// 遍历对象的属性不要使用for in 因为会遍历原型上的属性：可以使用Object.keys(data).forEach(key => {})
-
-// 协变
-// 逆变
-// 双向协变
-
-// 19.单例模式
-// 第一种方式
-// class ModuleManager {
-//     static instance = new ModuleManager()
-
-//     private constructor() {
-
-//     }
-// }
-// ModuleManager.instance
-// 第二种方式：推荐
-class ModuleManager {
-    private static instance: ModuleManager
+ModuleManager1.instance;
+// b>.第二种方式：推荐
+class ModuleManager2 {
+    private static instance: ModuleManager2;
 
     private constructor() {
 
     }
 
-    static getInstance(): ModuleManager {
+    static getInstance(): ModuleManager2 {
         // lazy加载
-        if (!ModuleManager.instance) {
-            ModuleManager.instance = new ModuleManager()
+        if (!ModuleManager2.instance) {
+            ModuleManager2.instance = new ModuleManager2();
         }
-        return ModuleManager.instance
+        return ModuleManager2.instance;
     }
 }
-ModuleManager.getInstance()
+ModuleManager2.getInstance();
 // 2>.代理模式
 interface IPerson1 {
     calculation(num1: number, num2: number): number
@@ -815,8 +780,6 @@ class Npc1 implements IPerson1 {
     calculation(num1: number, num2: number): number {
         return num1 - num2
     }
-
-    
 }
 class Npc2 implements IPerson1 {
     calculation(num1: number, num2: number): number {
@@ -887,21 +850,20 @@ class Car {
 class Benz extends Car {}
 class Bmw extends Car {}
 class Audi extends Car {}
-
 let bmw = Car.create(CarType.bmw)
 
+// 异步
 
+// promise
 
-
-
-let list: string[] = [];
-list.every(() => {
-    
-})
-
-
-// tsconfig.json
-// $ tsc --init
-// es2015 === es6
-
-
+// tsconfig.json...$ tsc --init
+// 生成器
+// 迭代器
+// Mixins混入
+// 装饰器Decorator（类装饰器、方法装饰器、参数装饰器、属性装饰器）：不破坏原有类的结构给类新增属性和方法
+// 发布订阅模式
+// proxy代理接口
+// Reflect
+// 协变
+// 逆变
+// 双向协变
