@@ -139,7 +139,7 @@ namespace CMGameproxy
             Object obj = new Object();
             if (obj is Car)
             {
-                // 9.as强制转换：转换失败也不会抛出异常
+                // 9.as强制转换：转换失败不会抛出异常、会导致结果为null、只能用于引用类型之间的强制转换
                 Car c1 = obj as Car;
             }
 

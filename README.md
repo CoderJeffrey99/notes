@@ -5,6 +5,8 @@ CMGameProxy - Java
 
 DMGameProxy - Android
 
+douyin-frontend-h5 - web
+
 donew-frontend-vue2 - Vue2
 
 donew-frontend-vue3 - Vue3

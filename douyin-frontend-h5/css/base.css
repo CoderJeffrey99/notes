@@ -11,7 +11,7 @@ html {
     /* 去掉手机点击背景色 */
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-
+/* 去掉默认的margin和padding */
 html,
 body,
 div,
@@ -56,7 +56,6 @@ section {
     margin: 0;
     padding: 0;
 }
-
 /* 让标题适应多个系统应用 */
 h1,
 h2,
@@ -68,14 +67,12 @@ h6 {
     font-weight: normal;
     font-size: 100%;
 }
-
 /* 宋体，Unicode，统一码 */
 body {
     font: 12px/150% Arial, Verdana, "\5b8b\4f53";
     color: #666;
     background: #fff
 }
-
 /* fieldset组合表单中的相关元素 */
 fieldset,
 img,
@@ -86,51 +83,42 @@ button {
     margin: 0;
     outline-style: none;
 }
-
 /* 清除列表风格：li元素会继承 */
 ul, 
 ol {
     list-style: none;				
 }
-
 input {
     padding-top: 0;
     padding-bottom: 0;
     font-family: "SimSun", "宋体";
 }
-
 input,
 select {
     vertical-align: middle;
 }
-
 input,
 select,
 textarea {
     font-size: 100%;
 }
-
 textarea {
     resize: none;
 }
-
 /* 防止多行文本框拖动 */
 img {
     border: 0;
     /* 去掉图片低测默认的3像素空白缝隙 */
     vertical-align: middle;
 }
-
 /* 合并外边线 */
 table {
     border-collapse: collapse;
     border-spacing: 0;
 }
-
 a {
     text-decoration: none;
 }
-
 /* 让链接在hover状态下显示下划线 */
 /* a:hover {
     text-decoration: underline;
@@ -141,13 +129,11 @@ a:focus,
 *:focus {
     outline: none;
 }
-
 /* 对齐方式 */
 caption,
 th {
     text-align: left;
 }
-
 /* 格式化标签 */
 strong,
 ins,
@@ -155,11 +141,9 @@ em {
     font-style: normal;
     text-decoration: none;
 }
-
 del {
     text-decoration: line-through;
 }
-
 /* 统一上标和下标 */
 sub,
 sup {
@@ -168,7 +152,6 @@ sup {
     position: relative;
     vertical-align: baseline;
 }
-
 sup {
     top: -0.5em;
 }
@@ -176,7 +159,6 @@ sup {
 sub {
     bottom: -0.25em;
 }
-
 .clearfix:before,
 .clearfix:after {
     /* 插入的内容：伪元素必写元素 */
@@ -184,17 +166,14 @@ sub {
     /* 表格显示类型：有助于清除浮动元素带来的布局问题 */
     display: table;
 }
-
 .clearfix:after {
     clear: both;
     visibility: hidden;
 }
-
 /* 兼容ie6、ie7 */
 .clearfix {
     zoom: 1;
 }
-
 .clear {
     clear: both;
     display: block;
@@ -203,12 +182,10 @@ sub {
     line-height: 0;
     visibility: hidden;
 }
-
 /* 兼容ie */
 iframe {
     display: block;
 }
-
 th {
     text-align: inherit;
 }
@@ -217,7 +194,6 @@ th {
 .hide {
     display: none;
 }
-
 .show {
     display: block;
 }
