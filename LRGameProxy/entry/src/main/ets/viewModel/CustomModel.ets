@@ -1,4 +1,4 @@
-export default class LRDouyinModel {
+export default class CustomModel {
   // 5.ArkTS语言
   // 1>.什么是ArkTS
   // a>.ArkTS是HarmonyOS生态应用开发语言
@@ -29,7 +29,7 @@ export default class LRDouyinModel {
     // 联合类型：Union
     let luckyNum: string | number = 9;
     luckyNum = 'xwj';
-    // 类型别名：Aliases
+    // 类型别名Aliases
     type Matrix = number[][];
     let third_list: Matrix = [
       [],
@@ -108,7 +108,7 @@ export default class LRDouyinModel {
   //   // 接口可以用来约束和规范类的方法
   //   interface xxxx {
   //     // 属性声明
-  //     // // 只有属性的接口可以通过字面量的方式创建对象实例（有方法声明的接口不行）
+  //     // // ？？？只有属性的接口可以通过字面量的方式创建对象实例（有方法声明的接口不行）？？？
   //     // let area: xxx = {width: 100, height: 100};
   //     width: number;
   //     height: number;

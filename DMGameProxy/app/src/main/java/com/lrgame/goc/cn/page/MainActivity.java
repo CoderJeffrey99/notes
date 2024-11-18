@@ -122,6 +122,51 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void showBaseIdea() {
+        // 1.Android Studio介绍
+        // 1>.概念：Android Studio简称AS，是一款由Google推出的用于开发Android应用程序的IDE（集成开发环境：帮助开发人员创建、开发、测试、部署）
+        // 2>.配置Android开发环境：登录官网下载Android Studio -> Create New Project（选择No Activity）-> 使用Java/Kotlin编写源代码、使用xml编写用户界面
+        // 3>.发布：Google Play商店、其它应用程序商店
+        // 4>.IDEA主题下载：https://plugins.jetbrains.com/search?tags=Theme
+        // 5>.详细配置操作：https://www.cnblogs.com/qianguyihao/p/4022844.html
+
+        // 2.jdk介绍
+
+        // 3.Gradle介绍
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         // 1.Android系统
         // 1>.概述
         // a.定义：Android是基于Linux内核，由“谷歌Google”和"开放手机联盟OHA"开发的针对移动设备的操作系统

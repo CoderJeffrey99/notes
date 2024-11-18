@@ -3,18 +3,23 @@ import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
 // 应用/服务的入口
 export default class EntryAbility extends UIAbility {
+  // 1.UIAbility实例完成回调
+  // >.页面初始化操作
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onCreate');
   }
-
+  // UIAbility实例销毁
   onDestroy(): void {
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onDestroy');
   }
 
+  // 2>.WindowStage创建完成回调
+  // >.UI加载、WindowStage事件订阅
   onWindowStageCreate(windowStage: window.WindowStage): void {
     // Main window is created, set main page for this ability
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onWindowStageCreate');
 
+    // UI加载
     windowStage.loadContent('pages/Index', (err) => {
       if (err.code) {
         hilog.error(0x0000, 'testTag', 'Failed to load the content. Cause: %{public}s', JSON.stringify(err) ?? '');
@@ -22,18 +27,58 @@ export default class EntryAbility extends UIAbility {
       }
       hilog.info(0x0000, 'testTag', 'Succeeded in loading the content.');
     });
+
+    // WindowStage事件订阅
+    try {
+      windowStage.on('windowStageEvent', (data) => {
+        let stageEventType: window.WindowStageEventType = data;
+        switch (stageEventType) {
+          case window.WindowStageEventType.SHOWN: {
+            // 切到前台
+          }
+            break;
+          case window.WindowStageEventType.ACTIVE: {
+            // 获焦状态
+          }
+            break;
+          case window.WindowStageEventType.INACTIVE: {
+            // 失焦状态
+          }
+            break;
+          case window.WindowStageEventType.HIDDEN: {
+            // 切到后台
+          }
+            break;
+          case window.WindowStageEventType.RESUMED: {
+            // 前台可交互状态
+          }
+            break;
+          case window.WindowStageEventType.PAUSED: {
+            // 前台不可交互状态
+          }
+            break;
+        }
+      })
+    } catch (exception) {
+      hilog.error(0xFF00, '[EntryAbility]', JSON.stringify(exception));
+    }
+  }
+
+  onNewWant(want: Want, launchParam: AbilityConstant.LaunchParam): void {
   }
 
   onWindowStageDestroy(): void {
     // Main window is destroyed, release UI related resources
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onWindowStageDestroy');
   }
-
+  // UIAbility实例切换到前台
+  // >.申请系统需要的资源
   onForeground(): void {
     // Ability has brought to foreground
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onForeground');
   }
-
+  // UIAbility实例切换到后台
+  // >.释放UI不可见时无用的资源
   onBackground(): void {
     // Ability has back to background
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onBackground');
