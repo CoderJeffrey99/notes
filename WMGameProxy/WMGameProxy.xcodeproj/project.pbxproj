@@ -197,7 +197,6 @@
 		33E4129B294B1C2A009640CB /* AutoLayout.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E41223294B1C29009640CB /* AutoLayout.png */; };
 		33E4129C294B1C2A009640CB /* 苹果账号后台.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E41224294B1C29009640CB /* 苹果账号后台.png */; };
 		33E4129D294B1C2A009640CB /* ProvincesAndCities.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33E41225294B1C29009640CB /* ProvincesAndCities.plist */; };
-		33E4129E294B1C2A009640CB /* 真实文件夹:虚拟文件夹.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E41226294B1C29009640CB /* 真实文件夹:虚拟文件夹.png */; };
 		33E412A0294B1C2A009640CB /* 让项目支持http请求.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E41228294B1C29009640CB /* 让项目支持http请求.png */; };
 		33E412A1294B1C2A009640CB /* iphone设备各种空间尺寸.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E41229294B1C29009640CB /* iphone设备各种空间尺寸.png */; };
 		33E412A2294B1C2A009640CB /* 大神班课程大纲.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E4122A294B1C29009640CB /* 大神班课程大纲.png */; };
@@ -206,7 +205,6 @@
 		33E412A5294B1C2A009640CB /* 单个文件放置多个类 - 多用于model.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E4122D294B1C29009640CB /* 单个文件放置多个类 - 多用于model.png */; };
 		33E412A6294B1C2A009640CB /* iOS学习路线图.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E4122F294B1C29009640CB /* iOS学习路线图.png */; };
 		33E412A7294B1C2A009640CB /* json解析标准版.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E41230294B1C29009640CB /* json解析标准版.png */; };
-		33E412A8294B1C2A009640CB /* 静态库:动态库常见错误.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E41231294B1C29009640CB /* 静态库:动态库常见错误.png */; };
 		33E412A9294B1C2A009640CB /* 关键字.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E41232294B1C29009640CB /* 关键字.png */; };
 		33E412AA294B1C2A009640CB /* 提交AppStore选项参考.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E41233294B1C29009640CB /* 提交AppStore选项参考.png */; };
 		33E412AB294B1C2A009640CB /* 通过Xcode获取UDID.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E41234294B1C29009640CB /* 通过Xcode获取UDID.png */; };
@@ -579,7 +577,6 @@
 		33E41223294B1C29009640CB /* AutoLayout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AutoLayout.png; sourceTree = "<group>"; };
 		33E41224294B1C29009640CB /* 苹果账号后台.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "苹果账号后台.png"; sourceTree = "<group>"; };
 		33E41225294B1C29009640CB /* ProvincesAndCities.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ProvincesAndCities.plist; sourceTree = "<group>"; };
-		33E41226294B1C29009640CB /* 真实文件夹:虚拟文件夹.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "真实文件夹:虚拟文件夹.png"; sourceTree = "<group>"; };
 		33E41228294B1C29009640CB /* 让项目支持http请求.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "让项目支持http请求.png"; sourceTree = "<group>"; };
 		33E41229294B1C29009640CB /* iphone设备各种空间尺寸.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iphone设备各种空间尺寸.png"; sourceTree = "<group>"; };
 		33E4122A294B1C29009640CB /* 大神班课程大纲.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "大神班课程大纲.png"; sourceTree = "<group>"; };
@@ -588,7 +585,6 @@
 		33E4122D294B1C29009640CB /* 单个文件放置多个类 - 多用于model.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "单个文件放置多个类 - 多用于model.png"; sourceTree = "<group>"; };
 		33E4122F294B1C29009640CB /* iOS学习路线图.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iOS学习路线图.png"; sourceTree = "<group>"; };
 		33E41230294B1C29009640CB /* json解析标准版.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "json解析标准版.png"; sourceTree = "<group>"; };
-		33E41231294B1C29009640CB /* 静态库:动态库常见错误.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "静态库:动态库常见错误.png"; sourceTree = "<group>"; };
 		33E41232294B1C29009640CB /* 关键字.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "关键字.png"; sourceTree = "<group>"; };
 		33E41233294B1C29009640CB /* 提交AppStore选项参考.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "提交AppStore选项参考.png"; sourceTree = "<group>"; };
 		33E41234294B1C29009640CB /* 通过Xcode获取UDID.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "通过Xcode获取UDID.png"; sourceTree = "<group>"; };
@@ -1093,7 +1089,6 @@
 				33E41222294B1C29009640CB /* TestFight添加测试人员.png */,
 				33E41223294B1C29009640CB /* AutoLayout.png */,
 				33E41224294B1C29009640CB /* 苹果账号后台.png */,
-				33E41226294B1C29009640CB /* 真实文件夹:虚拟文件夹.png */,
 				33E41228294B1C29009640CB /* 让项目支持http请求.png */,
 				33E41229294B1C29009640CB /* iphone设备各种空间尺寸.png */,
 				33E4122A294B1C29009640CB /* 大神班课程大纲.png */,
@@ -1101,7 +1096,6 @@
 				33E4122D294B1C29009640CB /* 单个文件放置多个类 - 多用于model.png */,
 				33E4122F294B1C29009640CB /* iOS学习路线图.png */,
 				33E41230294B1C29009640CB /* json解析标准版.png */,
-				33E41231294B1C29009640CB /* 静态库:动态库常见错误.png */,
 				33E41232294B1C29009640CB /* 关键字.png */,
 				33E41233294B1C29009640CB /* 提交AppStore选项参考.png */,
 				33E41234294B1C29009640CB /* 通过Xcode获取UDID.png */,
@@ -1365,7 +1359,6 @@
 				33E41282294B1C2A009640CB /* 新建xxx.a第五步.png in Resources */,
 				33E41261294B1C2A009640CB /* 类的本质和存储细节_1.png in Resources */,
 				33E412AF294B1C2A009640CB /* UICollectionView.png in Resources */,
-				33E4129E294B1C2A009640CB /* 真实文件夹:虚拟文件夹.png in Resources */,
 				33E412C7294B1C2A009640CB /* 常见bug_00.png in Resources */,
 				33E4125D294B1C2A009640CB /* UIApplication.png in Resources */,
 				33E412C3294B1C2A009640CB /* C语言的执行流程.png in Resources */,
@@ -1380,7 +1373,6 @@
 				33E4126B294B1C2A009640CB /* 内存中有5块内存空间.png in Resources */,
 				33E41298294B1C2A009640CB /* 新建xxx.a第三步.png in Resources */,
 				33E412A4294B1C2A009640CB /* UITableViewCell样式.png in Resources */,
-				33E412A8294B1C2A009640CB /* 静态库:动态库常见错误.png in Resources */,
 				33E41285294B1C2A009640CB /* 内存警告处理.png in Resources */,
 				33E412B5294B1C2A009640CB /* 部署注意点_00.png in Resources */,
 				33AC456F2ACBA1E400BEDA77 /* push_ios15.png in Resources */,

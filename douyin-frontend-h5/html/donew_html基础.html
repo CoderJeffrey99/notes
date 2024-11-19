@@ -5,7 +5,7 @@
 <!-- 头标签 -->
 <head>
     <!-- 
-      13.meta标签
+      14.meta标签、link标签
       ! + tab ==> html5的标签结构
      -->
     <!-- 1>.编码格式：utf8通用字符集 -->
@@ -112,7 +112,7 @@
         width - 图片宽度
         height - 图片高度
      -->
-     <img src="../../assets/logo.png" alt="logo" title="vue" width="100" height="100">
+    <img src="../../assets/logo.png" alt="logo" title="vue" width="100" height="100">
 
     <!-- 
         10.超链接
@@ -216,7 +216,7 @@
     H<sub>2</sub>O
 
      <!-- 
-      14.表格标签
+      15.表格
       border="1" - 边框
       width="100%" - 宽度：列平分大小、会因为cellpadding被撑开（100%表示窗口多大就会显示多大）
       height="300" - 高度：thead、tfoot默认自适应、tbody会根据高度撑开（平分）
@@ -278,7 +278,7 @@
       </table> -->
 
        <!-- 
-        15.表单
+        16.表单
         1>.get请求通过地址栏传输信息，安全性差
         2>.post通过login.php来处理信息，安全性高
        -->
@@ -347,17 +347,16 @@
         </fieldset>
        </form>
 
-       <!-- 16.其他标签 -->
-       <!-- 框架：永远不要在html网页中使用框架frame、frameset和iframe（内联框架） -->
-       <!-- html5不再支持frameset框架 -->
-       <iframe src="" frameborder="0"></iframe>
-       <!-- 嵌入多媒体 -->
-       <!-- <embed src="../" align="center" loop="" playcount="5" width="100" height="100"> -->
-       <!-- marquee滚动文本 -->
-       <marquee behavior="滚动类型" direction="滚动方向"></marquee>
-
+       <!-- 17.其他标签 -->
        <!-- 
-        17.标签语义化
+       1>.嵌入
+       <embed src="来源" align="center" loop="" playcount="5" width="100" height="100">
+       2>.marquee滚动文本：跑马灯
+       <marquee behavior="滚动类型" direction="滚动方向"></marquee>
+       -->
+       
+       <!-- 
+        18.标签语义化
         1>.概念：根据内容的结构化（内容语义化）来选择合适的标签（代码语义化）
         2>.意义：网页结构合理、有利于SEO、方便其他设备解析、便于团队开发维护
         3>.注意事项：尽量不使用div/span、尽量使用p、样式使用css设置

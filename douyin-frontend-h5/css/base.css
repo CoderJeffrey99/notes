@@ -4,6 +4,7 @@
  * @功能：重设浏览器默认样式、设置通用原子类
  * @来源：在github上获取
  */
+
 /* 防止用户自定义背景颜色对网页的影响，添加让用户可以自定义字体 */
 html {
     background: white;
@@ -11,6 +12,7 @@ html {
     /* 去掉手机点击背景色 */
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+
 /* 去掉默认的margin和padding */
 html,
 body,
@@ -56,6 +58,7 @@ section {
     margin: 0;
     padding: 0;
 }
+
 /* 让标题适应多个系统应用 */
 h1,
 h2,
@@ -67,12 +70,14 @@ h6 {
     font-weight: normal;
     font-size: 100%;
 }
+
 /* 宋体，Unicode，统一码 */
 body {
     font: 12px/150% Arial, Verdana, "\5b8b\4f53";
     color: #666;
     background: #fff
 }
+
 /* fieldset组合表单中的相关元素 */
 fieldset,
 img,
@@ -83,6 +88,7 @@ button {
     margin: 0;
     outline-style: none;
 }
+
 /* 清除列表风格：li元素会继承 */
 ul, 
 ol {
@@ -105,12 +111,14 @@ textarea {
 textarea {
     resize: none;
 }
+
 /* 防止多行文本框拖动 */
 img {
     border: 0;
     /* 去掉图片低测默认的3像素空白缝隙 */
     vertical-align: middle;
 }
+
 /* 合并外边线 */
 table {
     border-collapse: collapse;
@@ -119,21 +127,19 @@ table {
 a {
     text-decoration: none;
 }
-/* 让链接在hover状态下显示下划线 */
-/* a:hover {
-    text-decoration: underline;
-} */
 
 /* 去除 ie6 & ie7 焦点点状线 */
 a:focus,
 *:focus {
     outline: none;
 }
+
 /* 对齐方式 */
 caption,
 th {
     text-align: left;
 }
+
 /* 格式化标签 */
 strong,
 ins,
@@ -144,6 +150,7 @@ em {
 del {
     text-decoration: line-through;
 }
+
 /* 统一上标和下标 */
 sub,
 sup {
@@ -155,7 +162,6 @@ sup {
 sup {
     top: -0.5em;
 }
-
 sub {
     bottom: -0.25em;
 }
@@ -190,7 +196,7 @@ th {
     text-align: inherit;
 }
 
-/* 公共类：可以省略 */
+/* 隐藏、显示元素 */
 .hide {
     display: none;
 }
@@ -198,22 +204,11 @@ th {
     display: block;
 }
 
+/* 浮动 */
 .fl {
     float: left
 }
 
 .fr {
     float: right
-}
-
-.tal {
-    text-align: left
-}
-
-.tac {
-    text-align: center
-}
-
-.tar {
-    text-align: right
 }

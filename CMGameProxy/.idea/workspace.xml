@@ -5,14 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b4acb97-9ea9-4fcf-8070-3641101e5873" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DMGameProxy/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DMGameProxy/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LRGameProxy/entry/obfuscation-rules.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../LRGameProxy/entry/obfuscation-rules.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../douyin-frontend-h5/js/login.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../douyin-frontend-h5/js/login.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,8 +45,8 @@
     &quot;onboarding.tips.debug.path&quot;: &quot;/Users/xiewujun/Desktop/Github/DyBase/notes/CMGameProxy/lrsdk/src/main/java/cm/game/sdk/Main.java&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -85,6 +81,9 @@
       <workItem from="1727016428309" duration="89000" />
       <workItem from="1727167170385" duration="341000" />
       <workItem from="1727167730604" duration="20000" />
+      <workItem from="1731588870709" duration="236000" />
+      <workItem from="1731589124152" duration="1046000" />
+      <workItem from="1731590387055" duration="284000" />
     </task>
     <servers />
   </component>
