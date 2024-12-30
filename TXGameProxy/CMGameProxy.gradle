@@ -57,6 +57,7 @@ a5.each {
     println($it)
 }
 a5.eachWithIndex{int value, int index ->
+
 }
 // 数组
 def modules = ["123", "xwj", "18"] as String[]

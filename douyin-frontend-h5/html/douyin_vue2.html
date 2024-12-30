@@ -17,7 +17,6 @@
         }
     </style>
     <div id="app"></div>
-    <!-- vue基础 vue-cli vue-router vuex element-ui vue3 -->
     <!-- 
         1.vue概述
         1>.概念：vue是一套用于构建用户界面的渐进式（可以自底而上逐层应用：简单应用（只需引入核心库）、复杂应用（可以引入各式各样的Vue插件））javascript框架
@@ -33,6 +32,7 @@
         >>公司项目：使用脚手架...怎么制作脚手架？？？
         7>.怎么制作vue相关库...想要做什么功能，可以来vue官网或github上找一些框架
         8>.vue不支持ie8及以下版本
+        9>.vue常用技术：vue基础 vue-cli vue-router vuex element-ui vue3
      -->
 
     <!-- 
@@ -127,12 +127,12 @@
         <input type="text" v-model:value="name" id="box">
         <input type="text" v-model="name" id="box">
 
-        <!-- 7.vue中的数据代理 -->
+        <!-- 8.vue中的数据代理 -->
         <h2>学校名称：{{ name }}</h2>
         <h2>学校地址：{{ address }}</h2>
 
         <!-- 
-            8.事件处理
+            9.事件处理
          -->
         <!-- 1>.点击事件@click -->
         <h2>欢迎来到{{ name }}旅行</h2>
@@ -203,54 +203,31 @@
          -->
         <input type="text" placeholder="按下回车提示输出" @keydown.enter="showInfo1">
 
-        <!-- 9.计算属性 -->
+        <!-- 10.计算属性 -->
         姓：<input type="text" v-model="firstName" placeholder="请输入姓"><br>
-        名：<input type="text" v-model="lastName" placeholder="请输入名"><br>
         <!--  vue不推荐这样写：模版中代码过于复杂 -->
         姓名：<span>{{firstName.slice(0, 3).trim()}}-{lastName}</span>
         <!-- method：每次执行都会调用一次 -->
         姓名：<span>{{ fullName() }}</span>
-        <!-- 计算属性p18 -->
+        <!-- 计算属性 -->
         姓名：<span>{{ fullName }}</span> 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <!-- 绑定class样式：不变的class样式正常写，变化的class样式需要绑定 -->
+        <!-- 12.绑定class样式：不变的class样式正常写，变化的class样式需要绑定 -->
         <!-- a>.字符串写法：样式的类名不确定，需要动态绑定 -->
         <div class="basic" :class="mode" id="demo" @click="changeMode">{{ name }}</div>
         <!-- b>.数组写法：样式的类名不确定，个数也不确定，需要动态绑定 -->
         <div class="basic" :class="modes" @click="changeMode">{{ name }}</div>
         <!-- c>.对象写法：样式的类名确定，个数也确定，需要动态决定是否绑定 -->
         <div class="basic" :class="modeObj" @click="changeMode">{{ name }}</div>
-        <!-- 
-            绑定style样式
-            a>.使用:style表示""里面必须是表达式
-         -->
+
+        <!-- 13.绑定style样式：使用:style表示"必须是表达式" -->
+         <!-- a>.对象写法 -->
         <div class="basic" :style="styleObj">{{ name }}</div>
+        <!-- b>.对象写法（不常用） -->
         <div class="basic" :style="[styleObj, styleObj1]">{{ name }}</div>
         <div class="basic" :style="Styles">{{ name }}</div>
-        <!-- 条件渲染 -->
+
+        <!-- 14.条件渲染 -->
         <!-- 隐藏/显示：不会移除节点（适合切换频率较高的场景、元素一定可以获取到） -->
         <h2 v-show="true">hello {{ name }}</h2>
         <!-- 添加/移除：直接移除节点（适合切换频率较低的场景、元素可能无法获取到） -->
@@ -272,7 +249,16 @@
             <div>Angular</div>
             <div>Angular</div>
         </template>
-        <!-- 列表渲染 -->
+        <!-- div包含元素会破坏html结构 -->
+        <!-- 
+        <div v-if="false">
+            <div>Angular</div>
+            <div>Angular</div>
+            <div>Angular</div>
+        </div> 
+        -->
+
+        <!-- 15.列表渲染：必须绑定一个key...每个item的key必须不一样（可以使用index（使用index如果数据打乱就会出错）、也可以使用自定义的primaryKey） -->
         <ul>
             <!-- 第一种写法：可以把in换成of -->
             <li v-for="p in persons" :key="p.id">
@@ -286,12 +272,12 @@
             <li v-for="(value, key) in car" :key="key">
                 {{ value }} - {{ key }}
             </li>
-            <!-- 可以遍历字符串 -->
+            <!-- 可以遍历字符串（使用很少） -->
             <li v-for="(char, index) in name" :key="index">
                 {{ char }} - {{ index }}
             </li>
             <!-- 
-                遍历指定次数
+                遍历指定次数（使用很少）
                 number从1开始
                 index从0开始
              -->
@@ -303,8 +289,9 @@
         面试题：v-for中key的作用和原理
         初始化数据 -> 虚拟DOM -> 真实DOM（用户填写）-> 数据更新 -> 新虚拟DOM -> 虚拟DOM对比算法
          -->
-        <!-- 列表过滤 -->
-        <!-- 需要收集用户输入的数据  -->
+
+        <!-- 16.列表过滤 -->
+        <!-- 需要收集用户输入的数据 -->
         <input type="text" placeholder="请输入姓名" v-model="keyword">
         <button @click="sortType = 2">年龄升序</button>
         <button @click="sortType = 1">年龄降序</button>
@@ -315,11 +302,10 @@
                 {{ p.name }}
             </li>
         </ul>
+        <!-- 17.列表排序：同上 -->
+
+        <!--  -->
     </div>
-
-
-
-
     <!-- 
         3>.准备一个写脚本文件的地方
      -->
@@ -368,6 +354,7 @@
                         basic,
                         happy
                     ],
+                    // 对象写法key不可乱写
                     modeObj: {
                         basic: false,
                         happy: true
@@ -387,6 +374,7 @@
                     ],
                     persons: [
                         {
+                            // 就算题干不说明也必须有一个primaryKey
                             id: '001',
                             name: '马冬梅',
                             age: 18
@@ -433,23 +421,24 @@
                     console.log(value)
                     console.log(event.target.innerText)
                 },
-                // 前提：只读不改才可以简写
-                // // 第一种方式
-                // fullName: function() {
-                //     return this.name + '-' + this.address
-                // }
-                // 第二种方式
-                fullName() {
-                    return (this.firstName + '-' + this.lastName).slice(0, 3).trim();
-                },
                 changeMode() {
                     // // 这样写可以实现效果：但是不是vue的写法，vue不让直接操作dom
                     // document.getElementById("demo").className = 'basic'
                     this.mode = 'basic'
                     this.modes.shift('happy')
-                }
+                    this.modeObj.happy = false
+                },
+                // p34
+                // 18.vue监测数据的原理
+                updatedMei() {
+                    // a>.可以
+                    // this.persons[0].name = '周冬雨';
+                    // this.persons[0].age = 19;
+                    // b>.无效
+                    this.persons[0] = {id: '002', name: '周冬雨', age: 19};
+                },
             },
-            // 10.计算属性（有缓存机制：效率更高、本身不存在（不在vm._data上）：需要其他的属性计算得到）
+            // 10.计算属性（有缓存机制（复用）：效率更高、本身不存在（不在vm._data上）：要通过已有的属性计算得来）
             // method可以替代计算属性，但是method每次执行都会调用一次
             // 底层原理：通过Object.defineProperty()方法提供的getter和setter
             computed: {
@@ -466,8 +455,44 @@
                         console.log('set被调用了')
                     }
                 },
+                /*
+                // 简写：只读不改才可以简写
+                a>.完整版
+                fullName: {
+                    // 当读取fullName的时候，get就会被调用，返回值做为fullName的值（1.初次读取fullName的时候get就会被调用、2.当fullName所依赖的数据发生改变的时候get就会被调用）
+                    // 此处写成箭头函数以后this就是window（被vue管理的函数都不要写成箭头函数）
+                    get() {
+                        // return name + '-' + address; // 错误
+                        // 此处的this就是vm
+                        return this.name + '-' + this.address
+                    },
+                    // 想要修改计算属性必须在set方法内部修改fullName依赖的数据（如果确定修改计算属性则需要写该方法，不然可以不写）
+                    set(value) {
+                        console.log('set被调用了')
+                    }
+                }
+                b>.第一步：删除setter
+                fullName: {
+                    // 当读取fullName的时候，get就会被调用，返回值做为fullName的值（1.初次读取fullName的时候get就会被调用、2.当fullName所依赖的数据发生改变的时候get就会被调用）
+                    // 此处写成箭头函数以后this就是window（被vue管理的函数都不要写成箭头函数）
+                    get() {
+                        // return name + '-' + address; // 错误
+                        // 此处的this就是vm
+                        return this.name + '-' + this.address
+                    }
+                }
+                c>.第二步：getter写到外面
+                fullName: function() {
+                    return this.name + '-' + this.address
+                }
+                d>.第三步：！！！使用的时候还是当属性使用：不能写成fullName()！！！
+                fullName() {
+                    return this.name + '-' + this.address;
+                }
+                */
                 // 计算属性和watch都可以实现的逻辑我们优先使用计算属性
                 // 只要计算属性内部的属于data数据发生改变都会重新执行计算属性
+                // ！！！内部的任何属性发生改变都会重新计算属性！！！
                 filterPersons() {
                     // 不改变原数组
                     const newFilterPersons = this.persons.filters((p) => {
@@ -482,8 +507,10 @@
                     return newFilterPersons
                 }
             },
-            // 监视属性：监视的属性必须存在（属性或者计算属性）
+            // 11.监视属性：监视的属性必须存在（属性或者计算属性）
             // 计算属性能实现的逻辑watch都可以实现
+            // 第一种方式：开始就知道监视某个属性
+            // watch默认不监视对象内部值的改变：配置deep:true可以监视对象内部值的改变
             watch: {
                 isShow: {
                     // 初始化该属性的时候就立即调用handler()方法一次
@@ -499,15 +526,19 @@
 
                     }
                 },
+                // 深度监视
                 // numbers: {
                 //     // 监视多级结构中所有属性的变化（默认为false）
                 //     deep: true,
                 //     handler(newValue, oldValue) {
                 //     }
                 // }
-                // 简写：只有handler的情况下可以简写
+                // 简写：配置项只有handler（没有deep和immediate）的情况下可以简写
                 numbers(newValue, oldValue) {
-
+                    // 所有不被vm管理的函数（定时器回调函数、ajax回调函数、Promise回调函数...）都要写成箭头函数（这样this才指向vm或组件化对象）
+                    setInterval(() => {
+                        
+                    }, 1000)
                 },
                 // // 这样写比较麻烦：可以直接使用计算属性
                 // keyword(value) {
@@ -515,13 +546,14 @@
                 //         return p.name.indexOf(this.keyword) !== -1
                 //     })
                 // }
+                /*
+                // computed和watch的区别：
+                1>.computed可以完成的功能使用watch也可以完成，反之则不一定（watch可以进行异步操作）
+                2>.所有被vm管理的函数最好写成普通函数（这样this才指向vm或组件化对象）
+                3>.所有不被vm管理的函数（定时器回调函数、ajax回调函数、Promise回调函数...）都要写成箭头函数（这样this才指向vm或组件化对象）
+                */
             }
-            /*
-            computed和watch的区别：
-            1>.computed可以完成的功能使用watch也可以完成，反之则不一定（watch可以进行异步操作）
-            2>.所有被vm管理的函数最好写成普通函数（这样this才指向vm或组件化对象）
-            3>.所有不被vm管理的函数（定时器回调函数、ajax回调函数、Promise回调函数...）都要写成箭头函数（这样this才指向vm或组件化对象）
-            */
+            
         });
 
         // 这样也可以指定容器：与el: '#root'一样
@@ -581,14 +613,15 @@
         })
         console.log(vm1);
 
-        // 监视属性
-        // 第二种方式
+        // 11.监视属性
+        // 第二种方式：后续才知道监视某个属性
         vm.$watch('isShow', {
             // 初始化该属性的时候就立即调用handler()方法一次
             immediate: true,
             // 当isShow属性发生改变的时候调用
             handler(newValue, oldValue) {
-        }})
+            }
+        })
     </script>
 </body>
 </html>

@@ -1,235 +1,119 @@
 <!DOCTYPE html>
-<html lang="en" manifest="../../assets/donew_cache.appcache">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- 
+        1.html5概述
+        1>.html5简称h5：html4的升级版本（广义的概念：代表着浏览器技术发现的一个阶段）
+        2>.结构html5 + 样式css3 + 行为js（地理定位、web存储、拖拽）
+     -->
+
+    <!-- 
+        2.条件注释：只有ie浏览器可以识别
+        1>.ie8以下的浏览器默认不支持h5标签 - 需要引入html5shiv.js文件
+        2>.l - less小于、t - than比、e - equal等于、g - great更大
+      -->
+    <!-- [if lte ie 8] -->
+     <script>
+        var element = document.getElementById('box');
+        element.oninput = function () {
+            // 当用户输入的时候触发
+        }
+        element.oninvalid = function () {
+            // 当验证不通过的时候触发
+        }
+
+        // 7.DOM拓展
+        // var element1 = document.getElementById('box');
+        var element2 = document.querySelector('#box'); // 只会获取符合条件的第一个元素
+        var elements = document.querySelectorAll('div.box'); // 获取所有符合条件的标签（返回一个数组）
+        element2.classList.add('active'); // 添加类名
+        element2.classList.remove('active'); // 删除类名
+        element2.classList.contains('active'); // 包含类名
+        element2.classList.toggle('active'); // 切换类名
+
+        // 8.自定义属性
+        var element3 = document.querySelector('.dy_game');
+        console.log(element3.className);
+        // 获取属性必须通过特定方式
+        console.log(element3.dataset['name']);
+        // my-name -----> myName
+        console.log(element3.dataset['myName']);
+        // 设置属性
+        element3.dataset['name'] = 'cfj';
+     </script>
+    <!-- [endif] -->
+
     <style>
-        form {
-            /* 与屏幕（父元素）一样宽：但是最大宽度640px，最小宽度320px */
+        div {
             width: 100%;
-            max-width: 640px;
-            min-width: 320px;
+            /* 最小宽度 */
+            min-width: none;
+            /* 最大宽度 */
+            max-width: 100px;
         }
     </style>
-    <!-- 
-        条件注释：只有IE浏览器能够识别
-        l -> less -> 更小
-        t -> than -> 比
-        e -> equal -> 等于
-        g -> great -> 更大
-     -->
-    <!-- [if lte ie 8] -->
-    <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
-    <!-- [endif] -->
 </head>
 <body>
-    <!-- 
-        1.什么是html5
-        1>.html5简称h5：是html4的升级版本（广义的概念：代表浏览器发展的一个阶段）
-        2>.结构：html5、样式：css3、行为：js API增强
-     -->
+     <!-- 3.html5新增的有语义的标签 -->
+     <header>页眉</header>
+     <nav>导航</nav>
+     <section>
+         区块
+         <aside>侧边栏</aside>
+         <article>文章</article>
+     </section>
+     <footer>页脚</footer>
+ 
+     <!-- 4.表单 -->
+     <form action="" oninput="当用户输入的时候触发" oninvalid="当验证不通过的时候触发" id="dy_input">
+         <legend>表单属性</legend>
+         <label for="">
+             <input type="text" list="dy_car">
+         </label>
+         <label for="">
+             email: <input type="email" name="email" id="">
+             <input type="email" name="email" id="">
+         </label>
+     </form>
 
-    <!-- 
-        2.html5的网页布局：新增有语义的html5标签
-        >>IE8.x以下的浏览器不支持html5标签：引入html5shiv.js
-     -->
-    <header>页眉</header>
-    <nav>导航</nav>
-    <section>
-    <aside>侧边栏</aside>
-    <article>文章</article>
-    <aside>侧边栏</aside>
-    </section>
-    <footer>页脚</footer>
-    <dialog>对话</dialog>
-    
-    <!-- 
-        3.表单
-     -->
-    <form action="">
-    <!--
-        label标签：xxx
-    -->
-    <label for="">
-    邮箱：<input type="email" name="lrsdk_email">
-    <input type="button" name="lrsdk_commit">提交
-    </label>
-    </form>
-    <!-- 智能列表 -->
-    <input type="text" list="lrsdk_car">
-    <datalist id="lrsdk_car">
-    <option>宝马</option>
-    <option>宝马</option>
-    <option>宝马</option>
-    <option>宝马</option>
-    </datalist>
-    <label for="">
-    <!-- output标签：向外展示内容 -->
-    推荐人：<output>谢吴军</output>
-    </label>
-    <label for="#">
-    <!-- meter标签：度量器 -->
-    度量器：<meter value="50" max="100" min="0" low="30"></meter>
-    </label>
-    <label for="">
-    <!-- progress标签：进度条 -->
-    进度条：<progress value="50" max="100" min="0"></progress>
-    </label>
+     <!-- 5.数据列表标签 -->
+     <datalist id="dy_car">
+         <option value="">宝马1</option>
+         <option value="">宝马2</option>
+         <option value="">宝马3</option>
+         <option value="">宝马4</option>
+     </datalist>
 
-    <!-- 
-        3.多媒体
-        >>以前：在网页上播放多媒体必须依赖第三方插件：mediaplay、快播、falsh插件
-        >>html5：提供了视频和音频audio标签
-     -->
+     <!-- 6.多媒体：h5之前在网页上播放多媒体必须依赖第三方插件（mediaplay、快播、flash插件） -->
      <!-- 
-        >>音频标签
+        1>.audio音频标签
+        controls - 控制条
         autoplay - 自动播放
-        controls - 进度条
       -->
-    <!-- <audio src="../xxx.mp3" autoplay controls></audio> -->
-    <audio autoplay controls>
-        <source src="../xxx.mp3">
-        <source src="../xxx.ogg">
-        <source src="../xxx.wav">
-        抱歉，我的浏览器不支持audio标签...
-    </audio>
-    <!-- 
-        >>视频标签
-     -->
+     <audio src="../images/xxx.mp3" controls autoplay></audio>
+     <audio controls>
+        <source src="../images/xxx.mp3">
+        <source src="../images/xxx.ogg">
+        <source src="../images/xxx.wav">
+        该浏览器不支持audio音频标签
+     </audio>
      <!-- 
-        <video src="../xxx.mp4" autoplay controls></video>
-        >>播放play
-        >>暂停pause
-        https://www.bootcss.com
-     -->
-     <video autoplay controls>
-        <source src="../xxx.mp4">
-        <source src="../xxx.ogg">
-        <source src="../xxx.webm">
-        抱歉，我的浏览器不支持video标签...
-     </video>
-     <!-- 
-        多媒体控制条
-        >>video.ontimeupdate = function() {
-            // 当前时间更新的时候触发
-        }
-     -->
-     <figure>
-        <figcaption>视频案例</figcaption>
-        <div class="play">
-            <video src="../xxx.mp4"></video>
-            <!-- 控制条 -->
-            <!-- 播放暂停 -->
-            <a href="#" class="switch"></a>
-        </div>
-     </figure>
+        2>.video音频标签
+        controls - 控制条
+        autoplay - 自动播放
+      -->
+    <video src="../images/xxx.mp4" controls autoplay></video>
+    <video controls>
+        <source src="../images/xxx.mp4">
+        <source src="../images/xxx.ogg">
+        <source src="../images/xxx.webm">
+        该浏览器不支持video标签
+    </video>
 
-     <!-- 4.html5拓展 -->
-     <div class="lrsdk_inner_box" data-name="xwj" data-my-name="wangwang">
-        html5中自定义属性不能随便取名：必须以”data-“开头
-     </div>
-
-     <!-- 
-        5.拖拽
-        >>通过为元素增加draggable = "true"来设置此元素进行拖拽操作
-     -->
-     <div class="lr_box" draggable="true"></div>
-
-     <script>
-        var div = document.querySelector(".lrsdk_inner_box");
-        // 获取原有属性的值
-        console.log(div.className);
-        // 获取自定义属性的值
-        console.log(div.dataset["name"]); // data-name
-        console.log(div.dataset["myName"]); // data-my-name
-        // 设置自定义属性的值
-        div.dataset["name"] = "cfj"; // data-name
-        div.dataset["myName"] = "miaomiao"; // data-my-name
-
-        var dragBox = document.querySelector(".box");
-        dragBox.ondragstart = function () {
-            // 拖拽开始
-        }
-        dragBox.ondragleave = function () {
-            // 拖拽离开：鼠标拖拽离开被拖拽的元素
-        }
-        dragBox.ondragend = function () {
-            // 拖拽结束
-        }
-        dragBox.ondragover = function () {
-            // 当拖拽元素在目标元素上触发：连续触发
-        }
-        dragBox.ondrag = function () {
-            // 拖拽事件
-        }
-        dragBox.ondrop = function () {
-            // 当在目标元素上松开鼠标时触发
-        }
-
-        // 6.全屏：h5允许用户自定义网页中任何一个元素全屏显示
-        dragBox.requestFullscreen(); // 开启全屏显示
-        // 1>.兼容写法
-        if (dragBox.requestFullscreen()) {
-            dragBox.requestFullscreen();
-        } else if (dragBox.webkitRequestFullscreen()) {
-            dragBox.webkitRequestFullscreen();
-        } else if (dragBox.mozRequestFullscreen()) {
-            dragBox.mozRequestFullscreen();
-        }
-        dragBox.cancelFullscreen(); // 关闭全屏显示
-
-        // 7.Web存储
-        // >>传统方式：使用document.cookie来存储数据：存储大小只有4K
-        // 1>.存储大小5M、当窗口关闭的时候数据销毁：同一窗口下数据共享、只能存储字符串（可以转换）、内存
-        window.sessionStorage.setItem("key", "123");
-        window.sessionStorage.getItem("key");
-        window.sessionStorage.removeItem("key");
-        window.sessionStorage.clear();
-        // 2>.存储大小20M、永久生效：除非手动删除、不同一窗口下数据共享、只能存储字符串（可以转换）、硬盘
-        window.localStorage;
-
-        // 8.网络状态
-        window.addEventListener("online", function () {
-            // 网络连接已建立
-        });
-        window.addEventListener("offline", function () {
-            // 网络连接已断开
-        });
-
-        // 9.应用缓存：h5允许我们可以轻松构建一个离线（无网络状态）应用：只需要创建一个cache manifest文件
-        // >>可配置需要缓存的资源
-        // >>网络无连接应用仍然可用
-        // >>本地读取缓存资源：提升访问速度，增强用户体验
-        // >>减少请求：缓解服务器负担
-        // 缓存清单：新建xxx.appcache文件 -> 需要应用缓存的页面：根元素html添加manifest="../../assets/donew_cache.appcache"
-
-        // 10.地理定位：基于位置服务LBS
-        // >>获取地理信息方式：ip地址、GPS、wifi...浏览器会以最优的方式获取用户地理信息
-        // >>保护用户隐私的机制：必须先得到用户允许才可以获取用户的位置信息
-        if (window.navigator.geolocation) {
-            // 获取用户地理信息
-            // >>successCallback - 当获取用户位置成功的回调函数
-            // >>errorCallback - 当获取用户位置失败的回调函数
-            console.log(navigator.geolocation.getCurrentPosition(successCallback, errorCallback));
-
-        } else {
-            // 浏览器不支持地理定位
-        }
-
-        function successCallback(position) {
-            // coords坐标
-            // 纬度
-            position.coords.latitude;
-            // 经度
-            position.coords.longitude;
-            // 获取用户位置成功
-        }
-        function errorCallback(error) {
-            // 获取用户位置失败
-        }
-
-        // SQL数据库
-     </script>
+    <!-- 8.自定义属性：必须以data-开头 -->
+    <div class="dy_game" data-name="xwj" data-my-name="ah"></div>
 </body>
 </html>
