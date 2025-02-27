@@ -44,7 +44,7 @@
         生产模式vue.min.js：压缩版本（删除警告） 
         下载‘Live Server插件’ -> 导入vue.js -> Open with Live Server -> 检查代码 -> 切换到Network -> 按住Shift键强制刷新 -> 报错找不打favicon.ico（导入一个favicon.ico资源文件） 
      -->
-     <script src="../js/vue_base/vue.js"></script>
+     <script src="../../js/vue.js"></script>
     <!-- 
         2>.使用CDN：不推荐（国内不稳定）
         // 生产版本
@@ -211,31 +211,7 @@
         <!-- method：每次执行都会调用一次 -->
         姓名：<span>{{ fullName() }}</span>
         <!-- 计算属性p18 -->
-        姓名：<span>{{ fullName }}</span> 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        姓名：<span>{{ fullName }}</span>
         <!-- 绑定class样式：不变的class样式正常写，变化的class样式需要绑定 -->
         <!-- a>.字符串写法：样式的类名不确定，需要动态绑定 -->
         <div class="basic" :class="mode" id="demo" @click="changeMode">{{ name }}</div>

@@ -27,6 +27,12 @@
 		{
 			"name": "document",
 			"path": "../document"
+		},
+		{
+			"path": "../dl-web-sa"
+		},
+		{
+			"path": "../dl-web-vote"
 		}
 	],
 	"settings": {

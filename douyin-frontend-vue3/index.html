@@ -1,44 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="">
   <head>
-    <!-- 编码格式 -->
     <meta charset="UTF-8">
-    <!-- 图标 -->
     <link rel="icon" href="/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 标题 -->
     <title>Vite App</title>
   </head>
-  <!-- 在vite项目中，index.html是项目的入口文件，在项目最外层 -->
   <body>
     <div id="app"></div>
-    <!-- 加载index.html会解析该语句指向main.ts -->
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
-
-<!-- 
-vue3兼容vue2
-2020年vue.js发布3.0版本
-创建vue3.0项目方法
-1.基于vue-cli创建
-vue --version
-npm install -g @vue/cli
-vue create xxx
-...入口文件是main.js/main.ts
-2.基于vite创建（推荐）
-// vite是新一代前端构建工具
-轻量快速的热重载：极速的服务启动
-支持ts/jsx/css
-按需编程：不再等待整个应用编译完成
-webpack在前端属于非常老的构建工具，很多脚手架都是基于webpack
-但是现在Vue3.0新提出一个vite构建
-webpack构建和vite构建有什么不用？
-vue.js官网 - https://cn.vuejs.org
-npm create vue@latest
-// 安装所有依赖
-npm i
-// ts文件不认识.jpg和.txt -- 需要借助env.d.ts文件（该文件内部vue官方已经把前端需要使用的常见文件声明）
-...入口文件是index.html
-停止脚手架Ctrl + C
- -->
