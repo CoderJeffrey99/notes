@@ -1,6 +1,10 @@
 {
 	"folders": [
 		{
+			"name": "douyin-backend-golang",
+			"path": "douyin-backend-golang"
+		},
+		{
 			"name": "douyin-frontend-h5",
 			"path": "douyin-frontend-h5"
 		},
@@ -29,10 +33,15 @@
 			"path": "../document"
 		},
 		{
+			"name": "dl-web-sa",
 			"path": "../dl-web-sa"
 		},
 		{
+			"name": "dl-web-vote",
 			"path": "../dl-web-vote"
+		},
+		{
+			"path": "../soulland"
 		}
 	],
 	"settings": {
