@@ -1,5 +1,5 @@
 // package语句位于源文件的首行
-package cm.game.sdk;
+package org.cm.game;
 
 // import语句位于package语句和类定义之间
 // 同一个包下的xxx.java文件不需要import
@@ -80,7 +80,6 @@ public class CMGameProxy { // 类名尽量不要相同
          * eclipse：IBM公司花费4000万美元利用java开发的IDE
          * MyEclipse：付费IDE
          * IntelliJ IDEA：付费IDE
-         *
          */
 
         // 3.Java开发环境搭建
@@ -183,9 +182,9 @@ public class CMGameProxy { // 类名尽量不要相同
 
         // 10.注释：用于解释说明程序的文字
         // 1>.单行注释：可以嵌套
-        /**
-         * 2>.多行注释：不可以嵌套
-         */
+        /*
+        2>.多行注释：不可以嵌套
+        */
         // CMGameProxy必须是public
         // javadoc -d 指定文件目录 -version -author -CMGameProxy.java
         /**
