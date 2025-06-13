@@ -210,8 +210,9 @@
         姓名：<span>{{firstName.slice(0, 3).trim()}}-{lastName}</span>
         <!-- method：每次执行都会调用一次 -->
         姓名：<span>{{ fullName() }}</span>
-        <!-- 计算属性p18 -->
+        <!-- 计算属性 -->
         姓名：<span>{{ fullName }}</span>
+
         <!-- 绑定class样式：不变的class样式正常写，变化的class样式需要绑定 -->
         <!-- a>.字符串写法：样式的类名不确定，需要动态绑定 -->
         <div class="basic" :class="mode" id="demo" @click="changeMode">{{ name }}</div>
@@ -226,6 +227,7 @@
         <div class="basic" :style="styleObj">{{ name }}</div>
         <div class="basic" :style="[styleObj, styleObj1]">{{ name }}</div>
         <div class="basic" :style="Styles">{{ name }}</div>
+
         <!-- 条件渲染 -->
         <!-- 隐藏/显示：不会移除节点（适合切换频率较高的场景、元素一定可以获取到） -->
         <h2 v-show="true">hello {{ name }}</h2>
@@ -248,6 +250,7 @@
             <div>Angular</div>
             <div>Angular</div>
         </template>
+
         <!-- 列表渲染 -->
         <ul>
             <!-- 第一种写法：可以把in换成of -->
@@ -292,10 +295,7 @@
             </li>
         </ul>
     </div>
-
-
-
-
+    
     <!-- 
         3>.准备一个写脚本文件的地方
      -->
@@ -496,7 +496,7 @@
             computed和watch的区别：
             1>.computed可以完成的功能使用watch也可以完成，反之则不一定（watch可以进行异步操作）
             2>.所有被vm管理的函数最好写成普通函数（这样this才指向vm或组件化对象）
-            3>.所有不被vm管理的函数（定时器回调函数、ajax回调函数、Promise回调函数...）都要写成箭头函数（这样this才指向vm或组件化对象）
+            3>.所有不被vm管理的函数（定时器回调函数、ajax回调函数、Promise回调函数...）都要写成箭头函数
             */
         });
 
@@ -564,7 +564,9 @@
             immediate: true,
             // 当isShow属性发生改变的时候调用
             handler(newValue, oldValue) {
-        }})
+
+            }
+        })
     </script>
 </body>
 </html>

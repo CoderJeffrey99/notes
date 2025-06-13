@@ -45,15 +45,13 @@ xmlns:tools="http://schemas.android.com/tools"
         android:gravity="center|left"
         android:textSize="24sp"
         android:textColor="@color/black"
-        android:text="@string/app_name"
+        android:text="@string/add"
         android:shadowDx="1"
         android:shadowDy="1"
         android:shadowColor="@color/colorPrimary"
         android:shadowRadius="1"
         app:layout_constraintTop_toTopOf="parent"/>
-        <!--
-            配合内边距和外边距一起使用无敌
-        -->
+
 
     <!--
     Button == UIButton
@@ -92,7 +90,7 @@ xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/image_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/async_message"
         app:layout_constraintTop_toBottomOf="@+id/edit_text"/>
 
     <!--
@@ -212,11 +210,13 @@ xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/button5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/button4"
+            android:layout_alignLeft="@id/button4"
             android:text="@string/app_name"
             android:textAllCaps="false" />
 
     </RelativeLayout>
+
+
 
     <!--
     FrameLayout帧布局

@@ -226,6 +226,7 @@ Array.from(map.keys()).forEach((key) => {
 })
 map.forEach((value, key, map) => {
 })
+
 // 15>.object
 // a>.object可以存非原始类型（除number string boolean...只支持引用类型）
 // b>.Object除null/undefined都可以存
@@ -450,6 +451,7 @@ msg5('xwj')
 // 9>.无参可以直接使用()
 var msg6 = () => {
 }
+
 // 10>.函数作为参数：回调函数（传入函数名 === 整个函数）
 function lrTest(func: Function) {
     // 执行传入的函数：函数作为参数可以传递代码块（！！！这点是变量无法做到的！！！）

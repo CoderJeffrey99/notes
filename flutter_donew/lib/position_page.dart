@@ -1687,7 +1687,7 @@ class FutureDonew {
 3>.下载flutterSDK（以后flutter升级直接可以用命令行）
 4>.将下载完成的flutterSDK放在某个位置（例如：/Applications/flutter）
 二、开始配置环境变量
-1>.vim ~/.bash_profile
+1>.vim ~/.bash_profile（.zshrc）
 2>.写入以下语句
 '''
 // 配置环境变量

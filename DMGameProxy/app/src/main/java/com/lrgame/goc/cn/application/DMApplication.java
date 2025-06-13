@@ -14,6 +14,7 @@ public class DMApplication extends Application {
         sContext = getApplicationContext();
     }
 
+    // 全局获取Context
     public static Context getContext() {
         return sContext;
     }

@@ -1,13 +1,13 @@
 package com.lrgame.goc.cn.page;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-        import androidx.recyclerview.widget.LinearLayoutManager;
-        import androidx.recyclerview.widget.RecyclerView;
-
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Notification;
@@ -26,6 +26,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteCursorDriver;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQuery;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -37,9 +38,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
+import android.view.Window;
 import android.widget.Toast;
 import android.widget.VideoView;
 
@@ -63,6 +66,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -91,53 +95,33 @@ public class HomeActivity extends AppCompatActivity {
     private MediaPlayer player; // 音频
     private VideoView videoView; // 视频
 
+    private static final int TAKE_PHOTO = 0;
+    private static final int CROP_PHOTO = 1;
+
     // API17以后，js只能调用加@JavascriptInterface的java方法
     @SuppressLint({"Range", "JavascriptInterface"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_home);
-
-        showBroadcast();
-
-        showAuthority();
-
-        showContentProvider();
-
-        showMedia();
-
-        showSensor();
-
-        showGit();
-
-        showSaveData();
-
-        showThread();
-
-        showNotification();
-
-        showService();
-
-        showRecyclerView();
-
-        showRequest();
     }
 
     private void showBroadcast() {
-        // 15.详解广播机制（！！！区别发送广播和接收广播！！！）
+        // 详解广播机制（！！！区别发送广播和接收广播！！！）
         // 1.广播机制概述
         // a>.每个App都可以对自己感兴趣的广播进行注册（只会接收到自己所关心的广播内容）
         // b>.广播可能来自系统，也可能来自其他App（跨进程通信方式）
-        // 2.广播的类型
+        // 2.类型
         // a>.标准广播：一种完全异步执行的广播，在广播发出之后，所有的广播接收器（Broadcast Receiver）几乎都会在同一时刻接收到这条广播消息，因此它们之间没有任何先后顺序，这种广播的效率会比较高，但同时也意味着它是无法被截断的
         // b>.有序广播：一种同步执行的广播，在广播发出之后，同一时刻只会有一个Broadcast Receiver能够收到这条广播消息，当这个Broadcast receiver中的逻辑执行完毕后，广播才会继续传递。Broadcast receiver是有先后顺序的，优先级高的Broadcast receiver就可以先收到广播消息，前面的Broadcast receiver还可以截断正在传递的广播，这样后面的Broadcast receiver就无法收到广播消息
         // 3.接收系统广播
         // a>.常见的内置系统级别广播
         // b>.动态注册（程序启动的以后才可以监听/监听网络变化）
-        // 3>.添加相应action（指明需要注册的广播）
+        // 添加相应action（指明需要注册的广播）
         intentFilter = new IntentFilter();
         intentFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
-        networkChangeReceiver = new NetworkChangeReceiver();
+        networkChangeReceiver = new HomeActivity.NetworkChangeReceiver();
         // 4.注册广播
         registerReceiver(networkChangeReceiver, intentFilter);
         // c.静态注册（程序未启动就可以监听/监听开机启动）
@@ -219,7 +203,7 @@ public class HomeActivity extends AppCompatActivity {
         // b>.接收广播（无法通过静态注册接收广播：因为静态注册是为了让程序在未启动的情况下也能接收广播，而发送本地广播时，我们的程序肯定是已启动）
         // 2>.添加相应action（指明需要注册的广播）
         intentFilter.addAction("android.intent.action.LOCAL_BROADCAST");
-        LocalReceiver localReceiver = new LocalReceiver();
+        HomeActivity.LocalReceiver localReceiver = new HomeActivity.LocalReceiver();
         localBroadcastManager.registerReceiver(localReceiver, intentFilter);
         // 销毁广播：位于onDestroy()方法中
         localBroadcastManager.unregisterReceiver(localReceiver);
@@ -228,185 +212,32 @@ public class HomeActivity extends AppCompatActivity {
         // 2>.其他的程序无法将广播发送到我们程序的内部，因此不需要担心会有安全漏洞的隐患
         // 3>.发送本地广播比发送系统全局广播将会更加高效
     }
-
-    private void showAuthority() {
-        // 16.权限机制
-        // 1.概念：应用程序申明权限以后用户在安装该应用程序的时候就会在安装界面看到提醒（Android 6.0以前）
-        // 2.导致的问题：一些应用程序滥用权限而用户只能选择安装或不安装（二选一的窘状）
-        // 3.解决问题：Android 6.0以后引入"运行时权限功能（用户不需要在安装软件的时候一次性授权所有的权限，可以在软件的使用过程中再对某一项权限进行授权）"，这样我就算用户拒绝某一个权限还可以使用该应用程序的其它功能（而不是无法安装）
-        // 4.权限分类
-        // >>普通权限：不会直接威胁到用户的安全和隐私的权限/系统自动授权/查看网络连接、开机启动/只需要在AndroidManifest.xml文件中添加一下权限声明
-        // >>危险权限：可能会触及用户隐私或者对设备安全性造成影响的权限/用户手动点击授权/获取设备联系人信息、定位设备的地理位置/每个危险权限都属于一个权限组，我们在进行运行时权限处理时使用的是权限名，用户一旦同意授权了，那么该权限所对应的权限组中所有的其他权限也会同时被授权
-        // 5.在程序运行时申请权限
-        // a、Android 6.0之前
-        // 第一步：申请权限
-        // <!--拨打电话-->
-        // <uses-permission android:name="android.permission.CALL_PHONE"/>
-        // 第二步：拨打电话
-        try {
-            // 打开拨号界面（不需要声明权限）
-            //Intent intent = new Intent(Intent.ACTION_DIAL);
-            // 直接拨打电话（必须声明权限）
-            Intent intent = new Intent(Intent.ACTION_CALL);
-            intent.setData(Uri.parse("tel:10086"));
-            startActivity(intent);
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        }
-        // b、Android 6.0之后
-        // 核心：在程序运行过程中由用户授权我们去执行某些危险操作，程序不可以擅自做主去执行这些危险操作
-        // 1>.判断是否已经授权
-        if (ContextCompat.checkSelfPermission(HomeActivity.this,
-                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            // 未授权：向用户申请授权
-            // requestCode请求码：必须唯一
-            // 执行完该方法以后系统会弹出权限申请对话框：用户点击同意或不同意都会回调onRequestPermissionsResult()方法
-            ActivityCompat.requestPermissions(HomeActivity.this,
-                    new String[] {Manifest.permission.CALL_PHONE}, 1);
-        } else {
-            // 已授权：直接后续操作
-            // 如果已经同意：直接后续操作，还可以在Settings里面关闭权限
-            try {
-                // 打开拨号界面（不需要声明权限）
-                //Intent intent = new Intent(Intent.ACTION_DIAL);
-                // 直接拨打电话（必须声明权限）
-                Intent intent = new Intent(Intent.ACTION_CALL);
-                intent.setData(Uri.parse("tel:10086"));
-                startActivity(intent);
-            } catch (SecurityException e) {
-                e.printStackTrace();
+    // 1>.新建一个类（广播接收器）：继承BroadcastReceiver
+    class NetworkChangeReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            /*
+            2>.重写onReceive()方法（监听对象发生变化就会执行该方法）
+            ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            if (networkInfo != null && networkInfo.isAvailable()) {
+                Toast.makeText(context, "network is available", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(context, "network is unavailable", Toast.LENGTH_SHORT).show();
             }
+            */
+        }
+    }
+    // 1>.新建一个类（本地广播接收器）：继承BroadcastReceiver
+    class LocalReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
         }
     }
 
-    private void showContentProvider() {
-        // 17.内容提供器：跨程序共享数据
-        // 1.概念："内容提供器Content Provider"主要用于在不同的应用程序之间实现数据共享的功能，它提供了一套完整的机制，允许一个程序访问另一个程序中的数据，同时还能保证被访数据的安全性
-        // 2.特点：使用"内容提供器Content Provider"是Android实现跨程序共享数据的标准方式
-        // 3.系统现有的"内容提供器Content Provider"
-        // a、查询query
-        Cursor cursor = null;
-        try {
-            // uri = content://包名.provider/表名...指定查询某个应用程序下的某一张表
-            // projection - 指定查询的列名
-            // selection - 指定where的约束条件
-            // selectionArgs - 为where中的占位符提供具体的值
-            // sortOrder - 指定查询结果的排序方式
-            cursor = getContentResolver().query(Uri.parse("content://com.lrgame.goc.cn.provider/table"), null, null, null, null);
-            if (cursor != null) {
-                while (cursor.moveToNext()) {
-                    @SuppressLint("Range")
-                    String column1 = cursor.getString(cursor.getColumnIndex("column1"));
-                }
-                cursor.close();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        // b、添加insert
-        ContentValues values1 = new ContentValues();
-        values1.put("column1", "123");
-        getContentResolver().insert(Uri.parse("content://com.lrgame.goc.cn.provider/table"), values1);
-        // c、更新update（约束更新条件）
-        values1.put("column1", "");
-        getContentResolver().update(Uri.parse("content://com.lrgame.goc.cn.provider/table"), values1, "column1 = ?", new String[] {"123"});
-        // d、删除delete
-        getContentResolver().delete(Uri.parse("content://com.lrgame.goc.cn.provider/table"), "column1 = ?", new String[] {"123"});
-    }
-
-    private void showMedia() {
-        // 18.多媒体
-        player = new MediaPlayer();
-        try {
-            File file = new File(Environment.getExternalStorageDirectory(),
-                    "music.mp3");
-            player.setDataSource(file.getPath()); // 指定音频路径
-            player.prepare(); // 进入准备状态
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-//        // init
-//        videoView = findViewById(R.id.video);
-//        File file = new File(Environment.getExternalStorageDirectory(),
-//                "music.3gp");
-//        videoView.setVideoPath(file.getPath()); // 指定视频路径
-
-        // 是否正在播放
-        if (!player.isPlaying()) {
-            player.start(); // 开始播放
-        }
-
-        if (!videoView.isPlaying()) {
-            videoView.start();
-        }
-
-        if (player.isPlaying()) {
-            player.pause();
-        }
-
-        if (videoView.isPlaying()) {
-            videoView.pause(); // 暂时播放
-        }
-
-        if (player.isPlaying()) {
-            player.stop();// 重置成刚刚创建的状态：音频重头开始播放
-            // 必须再次init
-            try {
-                File file1 = new File(Environment.getExternalStorageDirectory(),
-                        "music.mp3");
-                player.setDataSource(file1.getPath()); // 指定音频路径
-                player.prepare(); // 进入准备状态
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        if (videoView.isPlaying()) {
-            videoView.resume(); // 重新播放
-        }
-    }
-
-    private void showSensor() {
-        // 19.传感器
-        // 获取管理传感器实例
-        SensorManager sensorManager = (SensorManager)getSystemService
-                (Context.SENSOR_SERVICE);
-        // 获取光照传感器
-        Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
-        // 对传感器输出的信号进行监听
-        SensorEventListener listener = new SensorEventListener() {
-            @Override
-            public void onSensorChanged(SensorEvent sensorEvent) {
-                // 当传感器监测到的数值发生变化
-            }
-
-            @Override
-            public void onAccuracyChanged(Sensor sensor, int i) {
-                // 当传感器的精度发生变化
-            }
-        };
-        /**
-         * 注册传感器
-         * SensorEventListener实例
-         * Sensor实例
-         * 传感器输出信息的更新速率
-         */
-        sensorManager.registerListener(listener,sensor,
-                SensorManager.SENSOR_DELAY_GAME);
-        // 销毁：位于onDestroy()方法中
-        if (sensorManager != null) {
-            sensorManager.unregisterListener(listener);
-        }
-    }
-
-    private void showGit() {
-        // 20.git
-    }
-
-    @SuppressLint("Range")
     private void showSaveData() {
-        // 21.数据持久化
+        // 数据持久化
         // 1.概述：将内存中瞬时数据保存在存储设备中
         // 2.方案
         // a>.文件存储（存储简单的文本数据、二进制数据）
@@ -512,7 +343,7 @@ public class HomeActivity extends AppCompatActivity {
         Cursor cursor = read_db.query("Book", null, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             do {
-                cursor.getString(cursor.getColumnIndex("name"));
+//                cursor.getString(cursor.getColumnIndex("name"));
             } while (cursor.moveToNext());
             cursor.close();
         }
@@ -522,29 +353,27 @@ public class HomeActivity extends AppCompatActivity {
         // xxx
 
         // 5>.升级数据库：如果已经有创建成功的数据表，我们想再创建一张新的数据表则不会成功，因为不会调用onCreate方法
-        // 解决办法：1、卸载App｜2、升级数据库
+        // 解决办法：卸载App、升级数据库
     }
-
     private void initDatabase() {
-        MyDataBaseHelper db_Helper = new MyDataBaseHelper(this,"book_db.db",null,1);
-        SQLiteDatabase sql_db = db_Helper.getWritableDatabase();// 创建数据库
-        ContentValues values = new ContentValues();
-        values.put("name","xwj");
-        sql_db.insert("book_db",null, values);
-
-        SQLiteDatabase db = DMApplication.getContext().openOrCreateDatabase(
-                "book_db.db", MODE_PRIVATE, new SQLiteDatabase.CursorFactory() {
-                    @Override
-                    public Cursor newCursor(SQLiteDatabase sqLiteDatabase, SQLiteCursorDriver sqLiteCursorDriver, String s, SQLiteQuery sqLiteQuery) {
-                        return null;
-                    }
-                });
-
-        db.execSQL("");// 非查询语句
-        db.close();
+//        MyDataBaseHelper db_Helper = new MyDataBaseHelper(this,"book_db.db",null,1);
+//        SQLiteDatabase sql_db = db_Helper.getWritableDatabase();// 创建数据库
+//        ContentValues values = new ContentValues();
+//        values.put("name","xwj");
+//        sql_db.insert("book_db",null, values);
+//
+//        SQLiteDatabase db = DMApplication.getContext().openOrCreateDatabase(
+//                "book_db.db", MODE_PRIVATE, new SQLiteDatabase.CursorFactory() {
+//                    @Override
+//                    public Cursor newCursor(SQLiteDatabase sqLiteDatabase, SQLiteCursorDriver sqLiteCursorDriver, String s, SQLiteQuery sqLiteQuery) {
+//                        return null;
+//                    }
+//                });
+//        // 非查询语句
+//        db.execSQL("");
+//        db.close();
         // 查询语句：游标Cursors
     }
-
     private void createDatabase() {
         SQLiteDatabase db = DMApplication.getContext().openOrCreateDatabase(
                 "book_db.db", MODE_PRIVATE, new SQLiteDatabase.CursorFactory() {
@@ -554,34 +383,31 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 });
     }
-
     public boolean deleteDatabase(String name) {
         if (DMApplication.getContext().deleteDatabase(name)) {
             return true;
         }
         return false;
     }
-
     private void userTransaction() {
-        SQLiteDatabase db = DMApplication.getContext().openOrCreateDatabase(
-                "book_db.db", MODE_PRIVATE, new SQLiteDatabase.CursorFactory() {
-                    @Override
-                    public Cursor newCursor(SQLiteDatabase sqLiteDatabase, SQLiteCursorDriver sqLiteCursorDriver, String s, SQLiteQuery sqLiteQuery) {
-                        return null;
-                    }
-                });
-        // 开启事务
-        db.beginTransaction();
-        try {
-            // 数据库操作
-            db.execSQL("");
-            // 提交当前事务：不提交会回滚事务
-            db.setTransactionSuccessful();
-        } finally {
-            db.endTransaction();
-        }
+//        SQLiteDatabase db = DMApplication.getContext().openOrCreateDatabase(
+//                "book_db.db", MODE_PRIVATE, new SQLiteDatabase.CursorFactory() {
+//                    @Override
+//                    public Cursor newCursor(SQLiteDatabase sqLiteDatabase, SQLiteCursorDriver sqLiteCursorDriver, String s, SQLiteQuery sqLiteQuery) {
+//                        return null;
+//                    }
+//                });
+//        // 开启事务
+//        db.beginTransaction();
+//        try {
+//            // 数据库操作
+//            db.execSQL("");
+//            // 提交当前事务：不提交会回滚事务
+//            db.setTransactionSuccessful();
+//        } finally {
+//            db.endTransaction();
+//        }
     }
-
     private void save(Context context,String msg) {
         try {
             out = openFileOutput("data", MODE_PRIVATE);
@@ -599,7 +425,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         }
     }
-
     private String get() {
         StringBuilder content = new StringBuilder();
         try {
@@ -624,75 +449,43 @@ public class HomeActivity extends AppCompatActivity {
         return content.toString();
     }
 
-    public void showThread() {
-        // 22.多线程
-        // 2.启动线程
-        new MyThread().start();
-
-        // 2.启动线程
-        YourThread yourThread = new YourThread();
-        new Thread(yourThread).start();
-
-        // 最常见写法
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                // 处理具体的逻辑
+    private void showContentProvider() {
+        // 内容提供器：跨程序共享数据
+        // 1.概念："内容提供器Content Provider"主要用于在不同的应用程序之间实现数据共享的功能，它提供了一套完整的机制，允许一个程序访问另一个程序中的数据，同时还能保证被访数据的安全性
+        // 2.特点：使用"内容提供器Content Provider"是Android实现跨程序共享数据的标准方式
+        // 3.系统现有的"内容提供器Content Provider"
+        // a、查询query
+        Cursor cursor = null;
+        try {
+            // uri = content://包名.provider/表名...指定查询某个应用程序下的某一张表
+            // projection - 指定查询的列名
+            // selection - 指定where的约束条件
+            // selectionArgs - 为where中的占位符提供具体的值
+            // sortOrder - 指定查询结果的排序方式
+            cursor = getContentResolver().query(Uri.parse("content://com.lrgame.goc.cn.provider/table"), null, null, null, null);
+            if (cursor != null) {
+                while (cursor.moveToNext()) {
+                    @SuppressLint("Range")
+                    String column1 = cursor.getString(cursor.getColumnIndex("column1"));
+                }
+                cursor.close();
             }
-        });
-
-        // 启动任务
-        new DownloadTask().execute();
-    }
-
-    // 1>.新建线程
-    class MyThread extends Thread {
-        @Override
-        public void run() {
-            super.run();
-            // 处理具体的逻辑
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    }
-    // 1>.新建线程
-    class YourThread implements Runnable {
-        @Override
-        public void run() {
-            // 处理具体的逻辑
-        }
-    }
-
-    // Void 传入参数给后台
-    // Integer 进度显示单位
-    // Boolean 反馈执行结果
-    class DownloadTask extends AsyncTask<Void, Integer, Boolean> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            // 后台任务执行之前调用：比如显示进度条
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            // 处理所有的耗时操作，返回处理结果：子线程
-            publishProgress(0);
-            return null;
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
-            // 操作UI界面元素
-        }
-
-        @Override
-        protected void onPostExecute(Boolean aBoolean) {
-            super.onPostExecute(aBoolean);
-            // 后台任务执行完毕调用
-        }
+        // b、添加insert
+        ContentValues values1 = new ContentValues();
+        values1.put("column1", "123");
+        getContentResolver().insert(Uri.parse("content://com.lrgame.goc.cn.provider/table"), values1);
+        // c、更新update（约束更新条件）
+        values1.put("column1", "");
+        getContentResolver().update(Uri.parse("content://com.lrgame.goc.cn.provider/table"), values1, "column1 = ?", new String[] {"123"});
+        // d、删除delete
+        getContentResolver().delete(Uri.parse("content://com.lrgame.goc.cn.provider/table"), "column1 = ?", new String[] {"123"});
     }
 
     private void showNotification() {
-        // 23.通知
+        // 通知
         NotificationManager manager1 = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
         Notification notification = new Notification(R.drawable.ic_launcher_background,null, System.currentTimeMillis());
         Intent intent1 = new Intent(this, MainActivity.class);
@@ -734,8 +527,132 @@ public class HomeActivity extends AppCompatActivity {
         manager2.cancel(1);
     }
 
+    private void showMedia() {
+        // 多媒体
+        player = new MediaPlayer();
+        try {
+            File file = new File(Environment.getExternalStorageDirectory(),
+                    "music.mp3");
+            player.setDataSource(file.getPath()); // 指定音频路径
+            player.prepare(); // 进入准备状态
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+//        // init
+//        videoView = findViewById(R.id.video);
+//        File file = new File(Environment.getExternalStorageDirectory(),
+//                "music.3gp");
+//        // 指定视频路径
+//        videoView.setVideoPath(file.getPath());
+
+        // 是否正在播放
+        if (!player.isPlaying()) {
+            player.start(); // 开始播放
+        }
+
+        if (!videoView.isPlaying()) {
+            videoView.start();
+        }
+
+        if (player.isPlaying()) {
+            player.pause();
+        }
+
+        if (videoView.isPlaying()) {
+            // 暂时播放
+            videoView.pause();
+        }
+
+        if (player.isPlaying()) {
+            // 重置成刚刚创建的状态：音频重头开始播放
+            player.stop();
+            // 必须再次init
+            try {
+                File file1 = new File(Environment.getExternalStorageDirectory(),
+                        "music.mp3");
+                // 指定音频路径
+                player.setDataSource(file1.getPath());
+                // 进入准备状态
+                player.prepare();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (videoView.isPlaying()) {
+            // 重新播放
+            videoView.resume();
+        }
+    }
+
+    public void showPic() {
+        File outputImage = new File(Environment.getExternalStorageDirectory(),
+                "pic.jpg");
+        try {
+            if (outputImage.exists()) {
+                outputImage.delete();
+            }
+            outputImage.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Uri imageUri = Uri.fromFile(outputImage);
+        // 启动相机程序
+        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+        registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode() == TAKE_PHOTO) {
+
+            }
+        }).launch(intent);
+
+        File outputImage1 = new File(Environment.getExternalStorageDirectory(),
+                "out.jpg");
+        try {
+            if (outputImage1.exists()) {
+                outputImage1.delete();
+            }
+            outputImage1.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Uri imageUri1 = Uri.fromFile(outputImage1);
+
+        Intent intent1 = new Intent("android.intent.action.GET_CONTENT");
+        intent1.setType("image/*");
+        intent1.putExtra("crop", true);
+        intent1.putExtra("scale", true);
+        intent1.putExtra(MediaStore.EXTRA_OUTPUT,imageUri1);
+        registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode() == CROP_PHOTO) {
+
+            }
+        }).launch(intent1);
+
+        Intent intent2 = new Intent("com.android.camera.action.CROP");
+        intent2.setDataAndType(imageUri, "image/*");
+        intent2.putExtra("scale", true);
+        intent2.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+        registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode() == CROP_PHOTO) {
+
+            }
+        }).launch(intent2);
+
+        try {
+            Bitmap bitmap = BitmapFactory.decodeStream(
+                    getContentResolver().openInputStream(imageUri)
+            );
+//            // ImageView
+//            picImg.setImageBitmap(bitmap); // 将裁剪后的照片显示出来
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void showService() {
-        // 24.服务
+        // 服务
         // 1.概述
         // 1>.概念：Service服务是Android中实现程序后台运行的解决方案
         // 2>.作用：适合去执行那些不需要和用户交互且要求长期运行的任务
@@ -746,6 +663,20 @@ public class HomeActivity extends AppCompatActivity {
         intent.setClass(this, MyService.class); // 创建MyService继承Service
         startService(intent); // 启动服务
         // 2.Activity和Service进行通信
+        ServiceConnection connection = new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName name, IBinder service) {
+                // 活动和服务成功绑定
+                MyService.DownloadBinder downloadBinder = (MyService.DownloadBinder)service;
+                downloadBinder.startDownload();
+                downloadBinder.getProgress();
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName name) {
+                // 活动和服务的连接断开
+            }
+        };
         // 绑定服务
         bindService(intent, connection, BIND_AUTO_CREATE);
         // 解绑服务
@@ -759,40 +690,72 @@ public class HomeActivity extends AppCompatActivity {
         // 6.服务的最佳实践 - 完整版的下载示例
     }
 
-    private ServiceConnection connection = new ServiceConnection() {
+    public void showThread() {
+        // 多线程
+        // 第一种方式
+        MyThread t1 = new MyThread();
+        t1.start();
+
+        // 第二种方式
+        YourThread yourThread = new YourThread();
+        Thread t2 = new Thread(yourThread);
+        t2.start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // 处理具体的逻辑
+            }
+        });
+
+        // 启动任务
+        new DownloadTask().execute();
+    }
+    class MyThread extends Thread {
         @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            // 活动和服务成功绑定
-            MyService.DownloadBinder downloadBinder = (MyService.DownloadBinder)service;
-            downloadBinder.startDownload();
-            downloadBinder.getProgress();
+        public void run() {
+            super.run();
+            // 处理具体的逻辑
+        }
+    }
+    class YourThread implements Runnable {
+        @Override
+        public void run() {
+            // 处理具体的逻辑
+        }
+    }
+    class DownloadTask extends AsyncTask<Void, Integer, Boolean> {
+        // Void 传入参数给后台
+        // Integer 进度显示单位
+        // Boolean 反馈执行结果
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // 后台任务执行之前调用：比如显示进度条
         }
 
         @Override
-        public void onServiceDisconnected(ComponentName name) {
-            // 活动和服务的连接断开
-
+        protected Boolean doInBackground(Void... params) {
+            // 处理所有的耗时操作，返回处理结果：子线程
+            publishProgress(0);
+            return null;
         }
-    };
 
-    private void showRecyclerView() {
-        // 25>.更强大的滚动控件RecyclerView：必须添加support库
-        initFruit();
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        // LinearLayoutManager
-        LinearLayoutManager manager = new LinearLayoutManager(HomeActivity.this);
-        // GridLayoutManager
-        // StaggeredGridLayoutManager
-        // 第一个参数：指定布局列数
-        // 第二个参数：指定布局的排列方向
-//        StaggeredGridLayoutManager *manager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(manager);
-//        RecyclerViewFruitAdapter adapter = new RecyclerViewFruitAdapter(fruitList);
-//        recyclerView.setAdapter(adapter);
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+            // 操作UI界面元素
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            super.onPostExecute(aBoolean);
+            // 后台任务执行完毕调用
+        }
     }
 
     private void showRequest() {
-        // 26.网络技术
+        // 网络技术
 //        // 1.WebView的用法
 //        WebView webView = findViewById(R.id.web_view);
 //        // 设置属性：让webView支持js脚本
@@ -800,7 +763,7 @@ public class HomeActivity extends AppCompatActivity {
 //        // 当需要从一个网页跳转到另一个网页时，我们希望目标网页仍然在当前WebView中显示，而不是打开系统浏览器
 //        webView.setWebViewClient(new WebViewClient());
 //        webView.loadUrl("https://baidu.com");
-        // 2.使用HTTP协议访问网络（HttpClient在Android 6.0的时候被完全移除）
+        // 2.使用http议访问网络（HttpClient在Android 6.0的时候被完全移除）
         // 官方推荐使用HttpURLConnection
         new Thread(new Runnable() {
             @Override
@@ -964,31 +927,55 @@ public class HomeActivity extends AppCompatActivity {
         List<FruitItem> fruitList = gson.fromJson("json数组", new TypeToken<List<FruitItem>>(){}.getType());
     }
 
-    // 1>.新建一个类（广播接收器）：继承BroadcastReceiver
-    class NetworkChangeReceiver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            /*
-            2>.重写onReceive()方法（监听对象发生变化就会执行该方法）
-            ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-            if (networkInfo != null && networkInfo.isAvailable()) {
-                Toast.makeText(context, "network is available", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(context, "network is unavailable", Toast.LENGTH_SHORT).show();
+    private void showAuthority() {
+        // 权限机制
+        // 1.概念：应用程序申明权限以后用户在安装该应用程序的时候就会在安装界面看到提醒（Android 6.0以前）
+        // 2.导致的问题：一些应用程序滥用权限而用户只能选择安装或不安装（二选一的窘状）
+        // 3.解决问题：Android 6.0以后引入"运行时权限功能（用户不需要在安装软件的时候一次性授权所有的权限，可以在软件的使用过程中再对某一项权限进行授权）"，这样我就算用户拒绝某一个权限还可以使用该应用程序的其它功能（而不是无法安装）
+        // 4.权限分类
+        // >>普通权限：不会直接威胁到用户的安全和隐私的权限/系统自动授权/查看网络连接、开机启动/只需要在AndroidManifest.xml文件中添加一下权限声明
+        // >>危险权限：可能会触及用户隐私或者对设备安全性造成影响的权限/用户手动点击授权/获取设备联系人信息、定位设备的地理位置/每个危险权限都属于一个权限组，我们在进行运行时权限处理时使用的是权限名，用户一旦同意授权了，那么该权限所对应的权限组中所有的其他权限也会同时被授权
+        // 5.在程序运行时申请权限
+        // a、Android 6.0之前
+        // 第一步：申请权限
+        // <!--拨打电话-->
+        // <uses-permission android:name="android.permission.CALL_PHONE"/>
+        // 第二步：拨打电话
+        try {
+            // 打开拨号界面（不需要声明权限）
+            //Intent intent = new Intent(Intent.ACTION_DIAL);
+            // 直接拨打电话（必须声明权限）
+            Intent intent = new Intent(Intent.ACTION_CALL);
+            intent.setData(Uri.parse("tel:10086"));
+            startActivity(intent);
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
+        // b、Android 6.0之后
+        // 核心：在程序运行过程中由用户授权我们去执行某些危险操作，程序不可以擅自做主去执行这些危险操作
+        // 1>.判断是否已经授权
+        if (ContextCompat.checkSelfPermission(HomeActivity.this,
+                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            // 未授权：向用户申请授权
+            // requestCode请求码：必须唯一
+            // 执行完该方法以后系统会弹出权限申请对话框：用户点击同意或不同意都会回调onRequestPermissionsResult()方法
+            ActivityCompat.requestPermissions(HomeActivity.this,
+                    new String[] {Manifest.permission.CALL_PHONE}, 1);
+        } else {
+            // 已授权：直接后续操作
+            // 如果已经同意：直接后续操作，还可以在Settings里面关闭权限
+            try {
+                // 打开拨号界面（不需要声明权限）
+                //Intent intent = new Intent(Intent.ACTION_DIAL);
+                // 直接拨打电话（必须声明权限）
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse("tel:10086"));
+                startActivity(intent);
+            } catch (SecurityException e) {
+                e.printStackTrace();
             }
-            */
         }
     }
-
-    // 1>.新建一个类（本地广播接收器）：继承BroadcastReceiver
-    class LocalReceiver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-
-        }
-    }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -1015,6 +1002,21 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
+    private void showRecyclerView() {
+        // 动控件RecyclerView：必须添加support库
+        initFruit();
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        // LinearLayoutManager
+        LinearLayoutManager manager = new LinearLayoutManager(HomeActivity.this);
+        // GridLayoutManager
+        // StaggeredGridLayoutManager
+        // 第一个参数：指定布局列数
+        // 第二个参数：指定布局的排列方向
+//        StaggeredGridLayoutManager *manager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(manager);
+//        RecyclerViewFruitAdapter adapter = new RecyclerViewFruitAdapter(fruitList);
+//        recyclerView.setAdapter(adapter);
+    }
     private void initFruit() {
         for (int index = 0; index < 20; index++) {
             FruitItem fruit_item = new FruitItem("Apple", R.drawable.mine_icon);
@@ -1022,10 +1024,55 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
+    private void showLocationManager() {
+        // 基于位置的服务
+    }
+
+    private void showSensor() {
+        // 传感器
+        // 获取管理传感器实例
+        SensorManager sensorManager = (SensorManager)getSystemService
+                (Context.SENSOR_SERVICE);
+        // 获取光照传感器
+        Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        // 对传感器输出的信号进行监听
+        SensorEventListener listener = new SensorEventListener() {
+            @Override
+            public void onSensorChanged(SensorEvent sensorEvent) {
+                // 当传感器监测到的数值发生变化
+            }
+
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int i) {
+                // 当传感器的精度发生变化
+            }
+        };
+        /**
+         * 注册传感器
+         * SensorEventListener实例
+         * Sensor实例
+         * 传感器输出信息的更新速率
+         */
+        sensorManager.registerListener(listener,sensor,
+                SensorManager.SENSOR_DELAY_GAME);
+        // 销毁：位于onDestroy()方法中
+        if (sensorManager != null) {
+            sensorManager.unregisterListener(listener);
+        }
+    }
+
+    private void showTest() {
+        // 编写测试用例
+    }
+
+    private void publishApplication() {
+        // 应用发布
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // 5>.取消注册（动态注册的广播必须取消注册）
+        // 5.取消注册（动态注册的广播必须取消注册）
         unregisterReceiver(networkChangeReceiver);
         if (player != null) {
             player.stop();
@@ -1039,12 +1086,14 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        // 按下返回键触发
+        // 按下物理Back键执行该方法
         super.onBackPressed();
         Intent intent = new Intent();
         intent.putExtra("name", "wy");
         setResult(100, intent);
         finish();
+        // https://blog.csdn.net/weixin_44570190/article/details/135995654
+        // https://blog.csdn.net/chen_md/article/details/125201681?spm=1001.2101.3001.6650.4&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-4-125201681-blog-135995654.235%5Ev43%5Epc_blog_bottom_relevance_base2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-4-125201681-blog-135995654.235%5Ev43%5Epc_blog_bottom_relevance_base2&utm_relevant_index=8
     }
 
     @Override

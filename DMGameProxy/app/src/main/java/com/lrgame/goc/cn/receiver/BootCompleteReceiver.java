@@ -19,10 +19,10 @@ public class BootCompleteReceiver extends BroadcastReceiver {
 
         // 不能开线程，不能做耗时操作
         Bundle bundle = intent.getExtras();
-        Object msg[] = (Object[])bundle.get("pdus");
+        Object msg[] = (Object[])bundle.get("obj");
         SmsMessage smsMessage[] = new SmsMessage[msg.length];
 
-        for (int i=0; i<msg.length; i++) {
+        for (int i = 0; i < msg.length; i++) {
             smsMessage[i] = SmsMessage.createFromPdu((byte[]) msg[i]);
         }
 
