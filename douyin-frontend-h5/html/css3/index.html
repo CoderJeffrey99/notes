@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CSS3</title>
     <style>
-        
         /* 1.css3现状：浏览器支持程度差（需要添加私有前缀）、移动端支持优于pc端、应用广泛 */
-         
+
         /* 
         2.属性选择器
         1>.写法
@@ -34,7 +33,7 @@
             background-color: green;
          }
          div[class *= "o"] {
-            background-color: green;
+            background-color: pink;
          }
 
          /*
@@ -107,18 +106,6 @@
              background-color: hsla(0, 50%, 50%, 1);
          }
 
-
-
-
-
-
-
-
-
-
-
-
-
          /* 
          7.文字的凹凸显示
           */
@@ -187,7 +174,7 @@
             }
          }
 
-         /* 
+         /*   
          10.盒子
           */
           div {
@@ -202,11 +189,11 @@
             border-bottom-left-radius: 60px 60px;
             border-bottom-right-radius: 60px 60px;
             /* 
-            水平半径/垂直半径
-            >>上左 上右 下左 下右
+            // 顺时针方向
+            >>水平半径：上左 上右 下右 下左 / 垂直半径：上左 上右 下右 下左 
             */
-            border-radius: 60px 60px 60px 60px/120px 120px 120px 120px;
-            border-radius: 60px/120px;
+            border-radius: 60px 60px 60px 60px / 120px 120px 120px 120px;
+            border-radius: 60px / 120px;
             border-radius: 60px;
             /* 
             边框阴影
@@ -264,12 +251,16 @@
             url(../../assets/logo.png) no-repeat right top,
             url(../../assets/logo.png) no-repeat right bottom,
             url(../../assets/logo.png) no-repeat left bottom;
-            /* 渐变 */
+            /* 渐变：本质是一个背景图片 */
             /* 
             >>线性渐变
-            方向 起始颜色 终止颜色
+            方向（默认方向：从上到下） 起始颜色 终止颜色
              */
             background-image: linear-gradient(to right, yellow, green);
+            /* 重复渐变 */
+            background-image: repeating-linear-gradient(to right, yellow, green);
+            background-image: linear-gradient(to right top yellow, green);
+            /* 角度 */
             background-image: linear-gradient(180deg, yellow, green);
             background-image: linear-gradient(
                yellow 0%,
@@ -433,6 +424,17 @@
             使用字体
              */
             font-family: "webfont";
+            /* 文本阴影 none没有阴影 */
+            text-shadow: 3px 3px red;
+            /* 文本换行 */
+            white-space: pre-wrap;
+            /* 文本修饰 */
+            /* text-decoration: overline dashed red; */
+            text-decoration-line: overline;
+            text-decoration-style: dashed;
+            text-decoration-color: red;
+            /* 文本描边：只能是webkit浏览器支持 */
+            -webkit-text-stroke: red 3px;
          }
     </style>
 </head>

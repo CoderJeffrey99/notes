@@ -7,8 +7,7 @@
     "deviceTypes": [
       "phone",
       "tablet",
-      "2in1",
-      "car"
+      "2in1"
     ],
     "deliveryWithInstall": true,
     "installationFree": false,
@@ -20,7 +19,6 @@
         "description": "$string:EntryAbility_desc",
         "icon": "$media:layered_image",
         "label": "$string:EntryAbility_label",
-        "launchType": "singleton",
         "startWindowIcon": "$media:startIcon",
         "startWindowBackground": "$color:start_window_background",
         "exported": true,
@@ -49,11 +47,6 @@
           }
         ],
       }
-    ],
-    // 添加权限
-    "requestPermissions": [
-      // http请求：必须添加网络管理权限
-      {"name":  "ohos.permission.INTERNET"}
     ]
   }
 }

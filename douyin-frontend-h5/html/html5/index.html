@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>html5</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="render" content="webkit">
     <style>
         form {
             /* 与屏幕（父元素）一样宽：但是最大宽度640px，最小宽度320px */
@@ -43,11 +45,12 @@
     </section>
     <footer>页脚</footer>
     <dialog>对话</dialog>
-    
+
     <!-- 
         3.表单
+        表单控件不验证
      -->
-    <form action="">
+    <form action="" novalidate>
     <!--
         label标签：xxx
     -->
@@ -59,10 +62,10 @@
     <!-- 智能列表 -->
     <input type="text" list="lrsdk_car">
     <datalist id="lrsdk_car">
-    <option>宝马</option>
-    <option>宝马</option>
-    <option>宝马</option>
-    <option>宝马</option>
+        <option>宝马</option>
+        <option>宝马</option>
+        <option>宝马</option>
+        <option>宝马</option>
     </datalist>
     <label for="">
     <!-- output标签：向外展示内容 -->
@@ -101,9 +104,13 @@
         <video src="../xxx.mp4" autoplay controls></video>
         >>播放play
         >>暂停pause
+        muted静音
+        autoplay自动播放（必须设置muted静音）
         https://www.bootcss.com
+        poster自定义封面图片：宽高比和视频保持一致
+        preload预加载
      -->
-     <video autoplay controls>
+     <video autoplay controls muted autoplay loop poster="" preload="">
         <source src="../xxx.mp4">
         <source src="../xxx.ogg">
         <source src="../xxx.webm">
@@ -125,8 +132,13 @@
         </div>
      </figure>
 
-     <!-- 4.html5拓展 -->
-     <div class="lrsdk_inner_box" data-name="xwj" data-my-name="wangwang">
+     <!-- 4.html5拓展
+      hidden - 隐藏不占位
+       -->
+     <div class="lrsdk_inner_box" data-name="xwj" data-my-name="wangwang" 
+        contenteditable="是否可以编辑" 
+        draggable="是否可以拖动" 
+        hidden>
         html5中自定义属性不能随便取名：必须以”data-“开头
      </div>
 

@@ -21,6 +21,10 @@
 			"path": "douyin-frontend-vue3"
 		},
 		{
+			"name": "dl-web-sa-recall",
+			"path": "../dl-web-sa-recall"
+		},
+		{
 			"name": "flutter_donew",
 			"path": "flutter_donew"
 		},
@@ -33,16 +37,16 @@
 			"path": "../dl-web-sa"
 		},
 		{
-			"name": "Putgo",
-			"path": "../Putgo"
-		},
-		{
 			"name": "dl-web-vote",
 			"path": "../dl-web-vote"
 		},
 		{
 			"name": "dl-web-sdk",
 			"path": "../dl-web-sdk"
+		},
+		{
+			"name": "putgo",
+			"path": "../putgo"
 		},
 		{
 			"name": "soulland",
