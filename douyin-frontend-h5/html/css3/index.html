@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CSS3</title>
+    <!-- 媒体查询 -->
+    <link rel="stylesheet" media="条件" href="xxx.css">
     <style>
         /* 1.css3现状：浏览器支持程度差（需要添加私有前缀）、移动端支持优于pc端、应用广泛 */
 
@@ -147,6 +149,7 @@
 
          /* 定义动画 */
          @keyframes move1 {
+            /* 第一帧 */
             from {
                transform: translateX(0px);
             }
@@ -318,17 +321,19 @@
             transform: translateZ(300px);
             /* 
             透视：加给变换的父盒子（暂时写在此处） 
-            >>设置的是用户的眼睛距离平面的距离
+            >>设置的是用户的眼睛距离平面的距离（不能写负数）
             >>透视效果只是视觉上的呈现：并不是真正的3D
             */
             perspective: 500px;
+            /* 设置透视点（默认在开启3D空间区域的正中心）：设置观察者的位置 */
+            perspective-origin: 102px 102px;
             /*
             写在父元素上：让子元素保持3D效果（真正的3D效果）
             >>preserve-3d - 让子盒子位于3D空间
             >>flat - 让子盒子被扁平化
             // 可以让不同子盒子分别旋转呈现3D效果
              */
-            transform-style: flat;
+            transform-style: preserve-3d;
             /* 
             动画
             >>可以通过设置多个节点来精确控制一个或一组动画来实现复杂的动画效果
@@ -377,8 +382,25 @@
             column-width: 5px; /* 列宽度 */
          }
 
-         /* 11.伸缩布局 */
+         /* 11.多列布局、伸缩盒模型 */
+         /* 我们想要设置多列图片，但是图片会超过该列的宽度，我们需要把img设置成width:100% */
          div {
+            /* 多列布局 */
+            /* 指定列数 */
+            column-count: 5;
+            /* 指定每一列的宽度：会自动计算列数 */
+            column-width: 220px;
+            /* 复合属性听小的 */
+            columns: 3 220px;
+            /* 列间距 */
+            column-gap: 20px;
+            /* 每列边框样式 */
+            column-rule: 2px dashed red;
+            /* 是否横跨多列 */
+            column-span: none;
+
+            
+            /* 伸缩盒模型 */
             /* 设置伸缩布局 */
             display: flex;
             /* 
@@ -389,19 +411,24 @@
             >>column-reverse
              */
             flex-direction: column-reverse;
+            /* 主轴换行 */
+            flex-wrap: wrap;
             /* 
             主轴的对齐方式
             >>flex-start起点对齐
             >>flex-end终点对齐
             >>center中间对齐
             >>stretch拉伸
-            >>
              */
             justify-content: stretch;
             /* 侧轴对齐方式 */
             align-items: flex-start;
             /* 伸缩比例 */
             flex: 4;
+            /* 所有的伸缩项目：剩下部分一人一份（拉伸）、默认是auto */
+            flex-grow: 1;
+            /* 压缩（最低保证内容可以呈现）：不能设置换行、默认是1 */
+            flex-shrink: 1;
          }
 
          /* 
@@ -436,6 +463,46 @@
             /* 文本描边：只能是webkit浏览器支持 */
             -webkit-text-stroke: red 3px;
          }
+
+         /* 这些属性放在后面：只有在打印机或打印预览才应用的样式 */
+         @media print {
+            h1 {
+               background: transparent;
+            }
+         }
+         /* 这些属性放在后面：只有在屏幕上才应用的样式 */
+         @media screen {
+            
+         }
+         @media all {
+            
+         }
+
+         @media (width: 800px) {
+            h1 {
+               background-color: red;
+            }
+         }
+         /* 视口<800px */
+         @media (max-width: 800px) {
+            h1 {
+               background-color: red;
+            }
+         }
+         /* 视口>800px */
+         @media (min-width: 800px) {
+            h1 {
+               background-color: red;
+            }
+         }
+         /* 屏幕>800px */
+         /* @media (device-width: 800px) {
+            h1 {
+               background-color: red;
+            }
+         } */
+         /* small.css middle.css large.css huge.css 768 800 992 1000 1200 1500 */
+         /* BFC - 块级格式上下文 元素的特异功能、默认是关闭的、开启BFC margin塌陷 防止浮动的盒子盖在上面 不会让浮动的不成开 */
     </style>
 </head>
 <body>

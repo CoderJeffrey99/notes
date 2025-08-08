@@ -33,20 +33,16 @@
 			"path": "../document"
 		},
 		{
+			"name": "dl-web-ko-vip",
+			"path": "../dl-web-ko-vip"
+		},
+		{
 			"name": "dl-web-sa",
 			"path": "../dl-web-sa"
 		},
 		{
 			"name": "dl-web-vote",
 			"path": "../dl-web-vote"
-		},
-		{
-			"name": "dl-web-sdk",
-			"path": "../dl-web-sdk"
-		},
-		{
-			"name": "putgo",
-			"path": "../putgo"
 		},
 		{
 			"name": "soulland",
@@ -58,7 +54,7 @@
 		}
 	],
 	"settings": {
-		"liveServer.settings.multiRootWorkspaceName": "LRWeb",
+		"liveServer.settings.multiRootWorkspaceName": "dl-web-ko-vip",
 		"java.configuration.updateBuildConfiguration": "disabled",
 		"dotnet.preferCSharpExtension": true,
 		"git.ignoreLimitWarning": true
