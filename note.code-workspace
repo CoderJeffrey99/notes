@@ -25,6 +25,10 @@
 			"path": "../dl-web-sa-recall"
 		},
 		{
+			"name": "dl-web-sdk-cli",
+			"path": "../dl-web-sdk-cli"
+		},
+		{
 			"name": "flutter_donew",
 			"path": "flutter_donew"
 		},
