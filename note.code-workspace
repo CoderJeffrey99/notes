@@ -5,14 +5,6 @@
 			"path": "douyin-backend-golang"
 		},
 		{
-			"name": "douyin_backend_java",
-			"path": "douyin_backend_java"
-		},
-		{
-			"name": "douyin-frontend-h5",
-			"path": "douyin-frontend-h5"
-		},
-		{
 			"name": "douyin-frontend-vue2",
 			"path": "douyin-frontend-vue2"
 		},
@@ -22,11 +14,11 @@
 		},
 		{
 			"name": "dl-web-sa-recall",
-			"path": "../dl-web-sa-recall"
+			"path": "../../gitee/dl-web-sa-recall"
 		},
 		{
 			"name": "dl-web-sdk-cli",
-			"path": "../dl-web-sdk-cli"
+			"path": "../../gitee/dl-web-sdk-cli"
 		},
 		{
 			"name": "flutter_donew",
@@ -38,29 +30,30 @@
 		},
 		{
 			"name": "dl-web-ko-vip",
-			"path": "../dl-web-ko-vip"
+			"path": "../../gitee/dl-web-ko-vip"
 		},
 		{
 			"name": "dl-web-sa",
-			"path": "../dl-web-sa"
+			"path": "../../gitee/dl-web-sa"
 		},
 		{
 			"name": "dl-web-vote",
-			"path": "../dl-web-vote"
+			"path": "../../gitee/dl-web-vote"
 		},
 		{
 			"name": "soulland",
-			"path": "../soulland"
+			"path": "../../gitlab/soulland"
 		},
 		{
-			"name": "pc",
-			"path": "../../svn/pc"
+			"path": "../../../svn/pc"
 		}
 	],
 	"settings": {
-		"liveServer.settings.multiRootWorkspaceName": "dl-web-ko-vip",
+		"liveServer.settings.multiRootWorkspaceName": "document",
 		"java.configuration.updateBuildConfiguration": "disabled",
 		"dotnet.preferCSharpExtension": true,
-		"git.ignoreLimitWarning": true
+		"git.ignoreLimitWarning": true,
+		"liveServer.settings.port": 5501,
+		"dotnet.defaultSolution": "disable"
 	}
 }
