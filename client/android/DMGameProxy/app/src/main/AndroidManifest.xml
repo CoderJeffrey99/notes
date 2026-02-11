@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?><manifest xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools">
+
+<!-- Android系统为了保护用户设备的安全和隐私:如果程序需要进行一些对用户来说比较敏感的操作，就必须在配置文件中声明权限，否则程序将会直接崩溃 -->
+<!-- 访问系统的网络状态 -->
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<!-- 监听系统开机广播 -->
+<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+<!-- 拨打电话 -->
+<!--    <uses-permission android:name="android.permission.CALL_PHONE" />-->
+<!-- 手机振动 -->
+<uses-permission android:name="android.permission.VIBRATE" />
+<!-- 访问SD卡：Android 4.4系统之前需要 -->
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<!-- 访问网络 -->
+<uses-permission android:name="android.permission.INTERNET" />
+
+<!--
+    // 当前App设置
+    @param android:icon App的icon
+    @param android:label App的名称
+    // 作用于所有activity
+    android:theme="@style/Theme.DMGameProxy"
+    -->
+<application
+    android:allowBackup="true"
+    android:dataExtractionRules="@xml/data_extraction_rules"
+    android:fullBackupContent="@xml/backup_rules"
+    android:icon="@mipmap/ic_launcher"
+    android:label="@string/app_name"
+    android:roundIcon="@mipmap/ic_launcher_round"
+    android:supportsRtl="true"
+    android:theme="@style/Theme.DMGameProxy"
+    tools:targetApi="31">
+    <!-- 注册activity -->
+    <activity
+        android:name="com.lrgame.goc.cn.page.MainActivity"
+        android:launchMode="standard"
+        android:exported="true">
+        <intent-filter>
+            <!-- 表示项目主活动：打开App首先启动该活动 -->
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+    <activity
+        android:name="com.lrgame.goc.cn.page.HomeActivity"
+        android:launchMode="standard"
+        android:exported="true">
+        <intent-filter>
+            <!--
+                只能指定一个action：可以自定义：包名.ACTION_类名大写
+                -->
+            <action android:name="com.lrgame.goc.cn.ACTION_HOME" />
+            <!--
+                可以指定多个category：可以自定义：包名.category.HOME
+                -->
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="com.lrgame.goc.cn.category.HOME" />
+        </intent-filter>
+    </activity>
+
+    <activity android:name=".page.FirstActivity"
+        android:exported="true">
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW"/>
+            <category android:name="android.intent.category.DEFAULT"/>
+            <category android:name="com.lrgame.goc.cn.category.FIRST"/>
+        </intent-filter>
+
+    </activity>
+
+    <!--
+    注册service服务
+    @param android:name service服务名称
+    @param android:exported 是否允许除了当前程序之外的其他程序访问这个服务
+    @param android:enabled 是否启用这个服务
+     -->
+    <service
+        android:name="com.lrgame.goc.cn.service.MyService"
+        android:exported="true"
+        android:enabled="true" />
+
+    <!--
+        provider内容提供器
+        @param android:name provider内容提供器名称
+        @param android:authorities 属性值必须要和刚才FileProvider.getUriForFile()方法中的第二个参数一致
+         -->
+    <provider
+        android:name="com.lrgame.goc.cn.content.MyContentProvider"
+        android:authorities="com.lrgame.goc.cn.provider"
+        android:exported="true"
+        android:enabled="true" />
+
+    <provider
+        android:name="androidx.core.content.FileProvider"
+        android:authorities="com.lrgame.goc.cn.provider"
+        android:exported="false"
+        android:grantUriPermissions="true">
+        <!--
+            指定Uri的共享路径
+            -->
+        <meta-data
+            android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/file_path" />
+    </provider>
+
+    <!--
+        注册Broadcast Receiver：所有静态广播接收器都必须在这里进行注册
+        @param android:enabled 是否启用该广播接收器
+        @param android:exported 是否允许该广播接收器接收本程序以外的广播
+        -->
+    <receiver
+        android:name="com.lrgame.goc.cn.receiver.BootCompleteReceiver"
+        android:enabled="true"
+        android:exported="true">
+        <intent-filter>
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+        </intent-filter>
+    </receiver>
+    <receiver
+        android:name="com.lrgame.goc.cn.receiver.BootCompleteReceiver"
+        android:enabled="true"
+        android:exported="true">
+        <intent-filter>
+            <action android:name="android.intent.action.MY_BROADCAST" />
+        </intent-filter>
+    </receiver>
+</application>
+</manifest>

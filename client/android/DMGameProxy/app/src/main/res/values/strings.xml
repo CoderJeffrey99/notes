@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">DMGameProxy</string>
+    <string name="login">登录</string>
+    <string name="add">Add</string>
+    <string name="remove">Remove</string>
+    <string name="edit_text">请输入账户</string>
+    <string name="back">返回</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="left_fragment">Hello left fragment</string>
+    <string name="right_fragment">Hello right fragment</string>
+</resources>
